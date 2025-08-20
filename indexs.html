@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quicktoolspk — Free Online Image & PDF Tools (Compress, Convert, Optimize)</title>
+  <meta name="description" content="Quicktoolspk offers fast, free online tools for images and PDFs: JPG/PNG/WebP converters, compressors, PDF merge/split/convert, and more. 100% browser-based and privacy friendly." />
+  <link rel="canonical" href="https://www.quicktoolspk.com/" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Quicktoolspk — Free Online Image & PDF Tools" />
+  <meta property="og:description" content="Convert and compress images & PDFs in your browser. No sign-up, no upload delays." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.quicktoolspk.com/" />
+  <meta property="og:image" content="https://www.quicktoolspk.com/assets/og-cover.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Quicktoolspk — Free Online Image & PDF Tools" />
+  <meta name="twitter:description" content="Compress, convert, and optimize images & PDFs online. Fast and private." />
+  <meta name="twitter:image" content="https://www.quicktoolspk.com/assets/og-cover.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Quicktoolspk",
+    "url": "https://www.quicktoolspk.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.quicktoolspk.com/search?q={query}",
+      "query-input": "required name=query"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { brand: { 50:'#eaf5ff',100:'#d5eaff',200:'#acd5ff',300:'#85c2ff',400:'#4da3ff',500:'#1f8bff',600:'#1472db',700:'#125db5',800:'#0f4a8f',900:'#0b3566'} } } } }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    .glass{background:linear-gradient(180deg,rgba(2,6,23,.7),rgba(2,6,23,.5));backdrop-filter:saturate(150%) blur(10px)}
+    .shadow-soft{box-shadow:0 10px 35px rgba(2,6,23,.45)}
+    .card{background:linear-gradient(180deg,rgba(15,23,42,1),rgba(15,23,42,.9));border:1px solid rgba(148,163,184,.15)}
+    .ad{border:1px dashed rgba(148,163,184,.25)}
+    .tool-icon{width:40px;height:40px}
+  </style>
+
+  <!-- (Optional) Google AdSense: fill IDs below, or remove -->
+  <script>
+    window.ADSENSE = { enabled:true, client:'ca-pub-REPLACE_ME', slots:{ hero:'REPLACE_ME', inline1:'REPLACE_ME', sidebar:'REPLACE_ME' } };
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-REPLACE_ME" crossorigin="anonymous"></script>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 glass border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <a href="#" class="flex items-center gap-2 hover:opacity-90">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-brand-400"><path d="M12 2l3.5 6.5L22 9l-5 4.9L18.5 21 12 17.8 5.5 21 7 13.9 2 9l6.5-.5L12 2z"/></svg>
+        <span class="font-extrabold text-lg">Quicktoolspk</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+        <a href="#tools" class="hover:text-white">Tools</a>
+        <a href="#image-tools" class="hover:text-white">Image</a>
+        <a href="#pdf-tools" class="hover:text-white">PDF</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" class="px-3 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm">Toggle Theme</button>
+        <button id="menuBtn" class="md:hidden p-2 rounded-xl border border-slate-700 hover:bg-slate-800" aria-label="Open Menu">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-800">
+      <nav class="max-w-7xl mx-auto px-4 py-3 grid gap-2 text-slate-300">
+        <a href="#tools" class="hover:text-white">Tools</a>
+        <a href="#image-tools" class="hover:text-white">Image</a>
+        <a href="#pdf-tools" class="hover:text-white">PDF</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true" style="background:radial-gradient(600px 300px at 20% 10%, rgba(79,70,229,.35), transparent), radial-gradient(700px 400px at 90% 30%, rgba(14,165,233,.25), transparent)"></div>
+    <div class="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">Convert & Compress <span class="text-brand-400">Images</span> and <span class="text-brand-400">PDFs</span> — Fast & Free</h1>
+          <p class="mt-4 text-slate-300 text-base sm:text-lg">All tools run in your browser for speed and privacy. No sign‑up required.</p>
+          <!-- Search -->
+          <div class="mt-6 bg-slate-800/80 border border-slate-700 rounded-2xl p-2 flex items-center shadow-soft">
+            <svg class="w-5 h-5 mx-2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="toolSearch" class="w-full bg-transparent outline-none p-2 text-slate-100 placeholder:text-slate-400" placeholder="Search tools: JPG to PDF, Compress PDF, PNG to JPG…" />
+          </div>
+          <div class="mt-4 text-sm text-slate-400">Popular: <button data-quick="jpg to pdf" class="px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700">JPG→PDF</button> <button data-quick="compress jpg" class="px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700">Compress JPG</button> <button data-quick="pdf to jpg" class="px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700">PDF→JPG</button></div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#image-tools" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold">Explore Image Tools</a>
+            <a href="#pdf-tools" class="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800">Explore PDF Tools</a>
+          </div>
+        </div>
+        <div class="card rounded-3xl p-4 sm:p-6 shadow-soft">
+          <!-- Ad / Promo space -->
+          <ins class="adsbygoogle ad block w-full min-h-[120px] rounded-2xl"></ins>
+          <div class="text-center text-xs text-slate-500 mt-1">Advertisement</div>
+          <!-- Feature highlight -->
+          <ul class="grid grid-cols-2 gap-3 mt-4 text-slate-300 text-sm">
+            <li class="flex items-center gap-2"><span class="inline-flex tool-icon items-center justify-center rounded-xl bg-slate-800 border border-slate-700">⚡</span> Super fast</li>
+            <li class="flex items-center gap-2"><span class="inline-flex tool-icon items-center justify-center rounded-xl bg-slate-800 border border-slate-700">🛡️</span> Private (client‑side)</li>
+            <li class="flex items-center gap-2"><span class="inline-flex tool-icon items-center justify-center rounded-xl bg-slate-800 border border-slate-700">📦</span> No sign‑up</li>
+            <li class="flex items-center gap-2"><span class="inline-flex tool-icon items-center justify-center rounded-xl bg-slate-800 border border-slate-700">💸</span> Free forever</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section id="tools" class="max-w-7xl mx-auto px-4 py-10">
+    <div class="flex flex-wrap items-center gap-3">
+      <button class="tab px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 font-semibold" data-filter="all">All Tools</button>
+      <button class="tab px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800" data-filter="image">Image</button>
+      <button class="tab px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800" data-filter="pdf">PDF</button>
+      <button class="tab px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800" data-filter="other">Other</button>
+    </div>
+
+    <!-- Featured grid -->
+    <div id="grid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <!-- TOOL CARD TEMPLATE EXAMPLES -->
+      <a href="/tools/jpg-to-pdf.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image pdf jpg to pdf convert">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🖼️</div>
+          <div>
+            <h3 class="font-semibold">JPG to PDF</h3>
+            <p class="text-sm text-slate-400">Convert JPG/JPEG/PNG to a single compact PDF</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/compress-jpg.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image compress jpg image size reduce optimize">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🗜️</div>
+          <div>
+            <h3 class="font-semibold">Compress JPG</h3>
+            <p class="text-sm text-slate-400">Shrink image size with adjustable quality</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/png-to-jpg.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image png to jpg convert">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🧰</div>
+          <div>
+            <h3 class="font-semibold">PNG to JPG</h3>
+            <p class="text-sm text-slate-400">Fast conversion with quality control</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/pdf-to-jpg.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="pdf to image pdf to jpg convert">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">📄</div>
+          <div>
+            <h3 class="font-semibold">PDF to JPG</h3>
+            <p class="text-sm text-slate-400">Export each PDF page as a crisp image</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/compress-pdf.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="pdf compress reduce size optimize">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">📦</div>
+          <div>
+            <h3 class="font-semibold">Compress PDF</h3>
+            <p class="text-sm text-slate-400">Optimize PDFs for email & web</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/merge-pdf.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="pdf merge combine join">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">➕</div>
+          <div>
+            <h3 class="font-semibold">Merge PDF</h3>
+            <p class="text-sm text-slate-400">Combine multiple PDFs into one</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/split-pdf.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="pdf split pages extract">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">➗</div>
+          <div>
+            <h3 class="font-semibold">Split PDF</h3>
+            <p class="text-sm text-slate-400">Extract or break PDFs by page range</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/jpg-to-png.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image convert jpg to png">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🔄</div>
+          <div>
+            <h3 class="font-semibold">JPG to PNG</h3>
+            <p class="text-sm text-slate-400">Preserve transparency & quality</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- Inline Ad Card -->
+      <div class="card rounded-2xl p-4 flex items-center justify-center min-h-[140px]">
+        <div class="w-full">
+          <ins class="adsbygoogle ad block w-full min-h-[120px] rounded-xl"></ins>
+          <div class="text-center text-xs text-slate-500 mt-1">Advertisement</div>
+        </div>
+      </div>
+
+      <a href="/tools/webp-to-jpg.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image webp to jpg convert">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🧩</div>
+          <div>
+            <h3 class="font-semibold">WebP to JPG</h3>
+            <p class="text-sm text-slate-400">Convert modern images for compatibility</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/resize-image.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image resize dimensions scale">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">📐</div>
+          <div>
+            <h3 class="font-semibold">Resize Image</h3>
+            <p class="text-sm text-slate-400">Exact width/height with preview</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/rotate-image.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image rotate flip">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">↻</div>
+          <div>
+            <h3 class="font-semibold">Rotate / Flip Image</h3>
+            <p class="text-sm text-slate-400">Fix orientation instantly</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="/tools/remove-metadata.html" class="tool card rounded-2xl p-4 hover:translate-y-[-2px] transition" data-tags="image privacy exif remove metadata">
+        <div class="flex items-start gap-3">
+          <div class="tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center">🧹</div>
+          <div>
+            <h3 class="font-semibold">Remove EXIF</h3>
+            <p class="text-sm text-slate-400">Strip geotags & camera data</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Image tools section -->
+  <section id="image-tools" class="max-w-7xl mx-auto px-4 py-10">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl sm:text-2xl font-bold">Image Tools</h2>
+      <a href="#tools" class="text-sm text-brand-400 hover:underline">View all</a>
+    </div>
+    <p class="text-slate-400 mt-1">Format conversion, compression, resizing, and quick edits for images.</p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4" id="imageGrid"></div>
+  </section>
+
+  <!-- PDF tools section -->
+  <section id="pdf-tools" class="max-w-7xl mx-auto px-4 py-10">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl sm:text-2xl font-bold">PDF Tools</h2>
+      <a href="#tools" class="text-sm text-brand-400 hover:underline">View all</a>
+    </div>
+    <p class="text-slate-400 mt-1">Conversion, compression, and page management for PDFs.</p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4" id="pdfGrid"></div>
+  </section>
+
+  <!-- Sidebar promo / newsletter -->
+  <section class="max-w-7xl mx-auto px-4 py-10">
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 card rounded-3xl p-6">
+        <h3 class="text-lg font-semibold">Why Quicktoolspk?</h3>
+        <ul class="mt-3 grid sm:grid-cols-2 gap-2 text-slate-300 text-sm">
+          <li>• Privacy‑friendly: processing happens in your browser.</li>
+          <li>• Lightning‑fast: no upload bottlenecks.</li>
+          <li>• Mobile‑first design: works on any device.</li>
+          <li>• Always free: no sign‑ups or trials.</li>
+        </ul>
+      </div>
+      <div class="card rounded-3xl p-6">
+        <h3 class="text-lg font-semibold">Get updates</h3>
+        <p class="text-slate-400 text-sm">New tools, tips, and improvements — straight to your inbox.</p>
+        <form class="mt-3 flex gap-2">
+          <input type="email" placeholder="you@email.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2" required>
+          <button class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-7xl mx-auto px-4 py-10">
+    <h2 class="text-xl sm:text-2xl font-bold">Frequently Asked Questions</h2>
+    <div class="mt-4 grid gap-3">
+      <details class="card rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Do my files get uploaded?</summary>
+        <p class="mt-2 text-slate-300 text-sm">No. Tools are client‑side and run in your browser unless otherwise noted.</p>
+      </details>
+      <details class="card rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Is Quicktoolspk free?</summary>
+        <p class="mt-2 text-slate-300 text-sm">Yes, all tools are free to use.</p>
+      </details>
+      <details class="card rounded-2xl p-4">
+        <summary class="cursor-pointer font-semibold">Can I use it on mobile?</summary>
+        <p class="mt-2 text-slate-300 text-sm">Absolutely — the UI is responsive and touch‑friendly.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+      <div>
+        <div class="flex items-center gap-2 font-extrabold text-lg"> 
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-brand-400"><path d="M12 2l3.5 6.5L22 9l-5 4.9L18.5 21 12 17.8 5.5 21 7 13.9 2 9l6.5-.5L12 2z"/></svg>
+          Quicktoolspk
+        </div>
+        <p class="text-slate-400 mt-2">Fast, free tools for images and PDFs. Built with love in Pakistan.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Image</h4>
+        <ul class="space-y-1 text-slate-300">
+          <li><a href="/tools/compress-jpg.html" class="hover:underline">Compress JPG</a></li>
+          <li><a href="/tools/png-to-jpg.html" class="hover:underline">PNG to JPG</a></li>
+          <li><a href="/tools/webp-to-jpg.html" class="hover:underline">WebP to JPG</a></li>
+          <li><a href="/tools/resize-image.html" class="hover:underline">Resize Image</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">PDF</h4>
+        <ul class="space-y-1 text-slate-300">
+          <li><a href="/tools/jpg-to-pdf.html" class="hover:underline">JPG to PDF</a></li>
+          <li><a href="/tools/pdf-to-jpg.html" class="hover:underline">PDF to JPG</a></li>
+          <li><a href="/tools/merge-pdf.html" class="hover:underline">Merge PDF</a></li>
+          <li><a href="/tools/compress-pdf.html" class="hover:underline">Compress PDF</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Company</h4>
+        <ul class="space-y-1 text-slate-300">
+          <li><a href="#faq" class="hover:underline">FAQ</a></li>
+          <li><a href="#" class="hover:underline">Privacy</a></li>
+          <li><a href="#" class="hover:underline">Terms</a></li>
+          <li><a href="#" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-slate-500 text-xs pb-8">© <span id="year"></span> Quicktoolspk — All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click',()=> mobileMenu.classList.toggle('hidden'));
+
+    // Theme toggle (light/dark)
+    const themeBtn = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'dark');
+    setTheme(theme);
+    themeBtn.addEventListener('click',()=>{theme = (theme==='dark'?'light':'dark'); setTheme(theme); localStorage.setItem('theme', theme);});
+    function setTheme(t){
+      if(t==='light'){
+        document.documentElement.classList.add('light');
+        document.body.classList.remove('bg-slate-900','text-slate-100');
+        document.body.classList.add('bg-slate-50','text-slate-900');
+      }else{
+        document.documentElement.classList.remove('light');
+        document.body.classList.add('bg-slate-900','text-slate-100');
+        document.body.classList.remove('bg-slate-50','text-slate-900');
+      }
+    }
+
+    // Tool data (you can extend this list)
+    const tools = [
+      {title:'JPG to PDF', href:'/tools/jpg-to-pdf.html', tags:'image pdf convert', cat:'pdf', desc:'Convert images to a single PDF', icon:'🖼️'},
+      {title:'Compress JPG', href:'/tools/compress-jpg.html', tags:'image compress optimize', cat:'image', desc:'Reduce file size with quality control', icon:'🗜️'},
+      {title:'PNG to JPG', href:'/tools/png-to-jpg.html', tags:'image convert', cat:'image', desc:'Fast, high‑quality conversion', icon:'🧰'},
+      {title:'PDF to JPG', href:'/tools/pdf-to-jpg.html', tags:'pdf to image', cat:'pdf', desc:'Export PDF pages to images', icon:'📄'},
+      {title:'Compress PDF', href:'/tools/compress-pdf.html', tags:'pdf compress', cat:'pdf', desc:'Make PDFs smaller for sharing', icon:'📦'},
+      {title:'Merge PDF', href:'/tools/merge-pdf.html', tags:'pdf merge combine', cat:'pdf', desc:'Join multiple PDFs into one', icon:'➕'},
+      {title:'Split PDF', href:'/tools/split-pdf.html', tags:'pdf split pages', cat:'pdf', desc:'Extract ranges or pages', icon:'➗'},
+      {title:'WebP to JPG', href:'/tools/webp-to-jpg.html', tags:'image convert webp', cat:'image', desc:'Compatibility for older apps', icon:'🧩'},
+      {title:'Resize Image', href:'/tools/resize-image.html', tags:'image resize', cat:'image', desc:'Exact dimensions & preview', icon:'📐'},
+      {title:'Rotate / Flip', href:'/tools/rotate-image.html', tags:'image rotate flip', cat:'image', desc:'Fix orientation instantly', icon:'↻'},
+      {title:'Remove EXIF', href:'/tools/remove-metadata.html', tags:'image privacy exif', cat:'image', desc:'Strip camera metadata', icon:'🧹'}
+    ];
+
+    // Render helper
+    function toolCard(t){
+      return `<a href="${t.href}" class="tool card rounded-2xl p-4 hover:-translate-y-0.5 transition" data-tags="${t.tags}" data-cat="${t.cat}">
+        <div class=\"flex items-start gap-3\">
+          <div class=\"tool-icon rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center\">${t.icon}</div>
+          <div>
+            <h3 class=\"font-semibold\">${t.title}</h3>
+            <p class=\"text-sm text-slate-400\">${t.desc}</p>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    // Populate section grids
+    const imageGrid = document.getElementById('imageGrid');
+    const pdfGrid = document.getElementById('pdfGrid');
+    imageGrid.innerHTML = tools.filter(t=>t.cat==='image').map(toolCard).join('');
+    pdfGrid.innerHTML = tools.filter(t=>t.cat==='pdf').map(toolCard).join('');
+
+    // Search + Filter
+    const search = document.getElementById('toolSearch');
+    const quickBtns = document.querySelectorAll('[data-quick]');
+    const tabs = document.querySelectorAll('.tab');
+    const grid = document.getElementById('grid');
+    function filterGrid(){
+      const q = (search.value || '').toLowerCase().trim();
+      const activeTab = document.querySelector('.tab.bg-slate-800, .tab.font-semibold')?.dataset.filter || 'all';
+      const cards = grid.querySelectorAll('.tool');
+      cards.forEach(card=>{
+        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
+        const cat = card.getAttribute('data-cat') || (tags.includes('pdf')?'pdf':'image');
+        const matchQ = !q || tags.includes(q);
+        const matchCat = activeTab==='all' || activeTab===cat;
+        card.style.display = (matchQ && matchCat) ? '' : 'none';
+      });
+    }
+    search.addEventListener('input', filterGrid);
+    quickBtns.forEach(b=> b.addEventListener('click',()=>{ search.value = b.dataset.quick; filterGrid(); window.location.hash = '#tools'; }));
+    tabs.forEach(t=> t.addEventListener('click',()=>{ tabs.forEach(x=>x.classList.remove('bg-slate-800','font-semibold')); t.classList.add('bg-slate-800','font-semibold'); filterGrid(); }));
+    filterGrid();
+
+    // AdSense init
+    (function initAds(){
+      try{
+        const cfg = window.ADSENSE || {}; if(!cfg.enabled) return;
+        const loader = document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');
+        if(loader && cfg.client && cfg.client!=='ca-pub-REPLACE_ME'){
+          const u = new URL(loader.src); u.searchParams.set('client', cfg.client); loader.src = u.toString();
+        }
+        const hero = document.querySelector('section ins.adsbygoogle');
+        hero?.setAttribute('data-ad-client', cfg.client);
+        hero?.setAttribute('data-ad-slot', cfg.slots.hero);
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // Inline ad
+        const inline = document.querySelector('#tools .ad');
+        const inlineIns = inline?.querySelector('ins.adsbygoogle');
+        inlineIns?.setAttribute('data-ad-client', cfg.client);
+        inlineIns?.setAttribute('data-ad-slot', cfg.slots.inline1);
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(e){ console.warn('AdSense init error', e); }
+    })();
+  </script>
+</body>
+</html>
