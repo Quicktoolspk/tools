@@ -38,24 +38,23 @@
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Navigation Bar - UPDATED (removed icons) */
+        /* Navigation Bar */
         .navbar {
-            background: white;
-            border-radius: 16px;
-            padding: 15px 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .nav-brand {
@@ -65,51 +64,61 @@
         }
 
         .nav-brand .logo {
-            font-size: 2rem;
-            color: var(--primary);
+            font-size: 2.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .nav-brand .brand-name {
+        .brand-name {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--primary);
+            font-size: 1.8rem;
         }
 
         .nav-menu {
             display: flex;
-            gap: 25px;
             list-style: none;
+            gap: 25px;
         }
 
         .nav-menu a {
+            color: white;
             text-decoration: none;
-            color: var(--dark);
             font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 10px;
             transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 8px;
         }
 
         .nav-menu a:hover, .nav-menu a.active {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        /* Removed icon styles from navigation */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--primary);
         }
 
-        /* Header styling */
-        header {
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        /* Page header styling */
+        .page-header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border-radius: 20px;
@@ -119,7 +128,7 @@
             overflow: hidden;
         }
         
-        header::before {
+        .page-header::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -130,33 +139,19 @@
             transform: rotate(30deg);
         }
         
-        header h1 {
-            font-size: 2.8rem;
+        .page-header h1 {
+            font-size: 2.4rem;
             margin-bottom: 15px;
-            font-weight: 800;
+            font-weight: 700;
             position: relative;
-            font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            line-height: 1.2;
         }
         
-        header .tagline {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 15px;
-            opacity: 0.95;
-            position: relative;
-            font-weight: 500;
-        }
-        
-        header .sub-heading {
+        .page-header p {
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
-            opacity: 0.85;
+            opacity: 0.9;
             position: relative;
-            font-weight: 300;
-            letter-spacing: 0.5px;
         }
 
         .main-content {
@@ -630,8 +625,6 @@
             margin-bottom: 10px;
             font-weight: 500;
             font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
         .stat-value {
@@ -722,38 +715,44 @@
             flex-shrink: 0;
         }
 
-        /* Footer Styling */
-        .footer {
-            background: white;
-            border-radius: 16px;
-            padding: 40px 30px;
+        /* Footer styling */
+        .main-footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px 0 20px;
             margin-top: 60px;
-            box-shadow: var(--card-shadow);
         }
 
         .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
         }
 
-        .footer-column h3 {
-            font-size: 1.2rem;
+        .footer-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
             margin-bottom: 20px;
-            color: var(--primary);
             position: relative;
             padding-bottom: 10px;
         }
 
-        .footer-column h3::after {
+        .footer-section h3::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
             height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
+            background: var(--accent);
         }
 
         .footer-links {
@@ -765,58 +764,49 @@
         }
 
         .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            color: var(--gray);
             transition: var(--transition);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
         .footer-links a:hover {
-            color: var(--primary);
+            color: white;
             transform: translateX(5px);
         }
 
-        .footer-links a i {
-            font-size: 0.9rem;
-            color: var(--primary);
-        }
-
         .footer-bottom {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--light-gray);
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px;
             text-align: center;
-            color: var(--gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer-bottom p {
-            margin-bottom: 5px;
-        }
-
-        .social-links {
+        .social-icons {
             display: flex;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 20px;
+            justify-content: center;
         }
 
-        .social-links a {
-            display: inline-flex;
+        .social-icons a {
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: var(--light);
-            color: var(--primary);
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             transition: var(--transition);
-            text-decoration: none;
         }
 
-        .social-links a:hover {
-            background: var(--primary);
-            color: white;
+        .social-icons a:hover {
+            background: var(--accent);
             transform: translateY(-3px);
         }
 
@@ -929,6 +919,7 @@
             color: var(--primary);
             border: 1px solid var(--light-gray);
             transition: all 0.3s ease;
+            display: none; /* Hidden by default */
         }
         
         .qt-badge:hover {
@@ -941,59 +932,32 @@
             font-size: 1.2rem;
         }
 
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            header h1 {
-                font-size: 2.4rem;
-            }
-            
-            header .tagline {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px;
-            }
-            
-            .nav-brand {
-                margin-bottom: 15px;
-            }
-            
+        /* Responsive styles */
+        @media (max-width: 992px) {
             .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
                 flex-direction: column;
-                gap: 10px;
+                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
                 width: 100%;
-                display: none;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                z-index: 999;
             }
-            
+
             .nav-menu.active {
-                display: flex;
+                left: 0;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
             }
-            
-            header h1 {
+
+            .page-header h1 {
                 font-size: 2rem;
-                line-height: 1.3;
-            }
-            
-            header .tagline {
-                font-size: 1.1rem;
-            }
-            
-            header .sub-heading {
-                font-size: 1rem;
             }
             
             .converter-card {
@@ -1035,39 +999,65 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .brand-name {
+                font-size: 1.5rem;
+            }
+            
+            .nav-brand .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 1.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .format-options {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation Bar - UPDATED (no icons) -->
-        <nav class="navbar">
-            <div class="nav-brand">
-                <div class="logo">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="brand-name">QuickToolsPK</div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
             </div>
-            
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Image Tools</a></li>
-                <li><a href="#">Document Tools</a></li>
-                <li><a href="#">Developer Tools</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+            <div class="brand-name">QuickToolsPK</div>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Image Tools</a></li>
+            <li><a href="#">Document Tools</a></li>
+            <li><a href="#">Developer Tools</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
-        <!-- Header -->
-        <header>
+    <div class="container">
+        <div class="page-header">
             <h1>Image Format Converter</h1>
-            <p class="tagline">Convert, Compress & Optimize Your Images</p>
-            <p class="sub-heading">Free Online Image Converter</p>
-        </header>
+            <p>Convert, compress and optimize your images between JPG, PNG, WEBP formats with adjustable quality settings</p>
+        </div>
 
         <div class="main-content">
             <div>
@@ -1146,16 +1136,16 @@
 
                         <div class="stats-container" id="stats-container" style="display: none;">
                             <div class="stat-box">
-                                <h4>Size Reduction</h4>
                                 <div class="stat-value" id="size-reduction">0%</div>
+                                <div class="stat-label">Size Reduction</div>
                             </div>
                             <div class="stat-box">
-                                <h4>Quality Score</h4>
                                 <div class="stat-value" id="quality-score">80%</div>
+                                <div class="stat-label">Quality Score</div>
                             </div>
                             <div class="stat-box savings">
-                                <h4>Faster Loading</h4>
                                 <div class="stat-value" id="time-saved">0ms</div>
+                                <div class="stat-label">Faster Loading</div>
                             </div>
                         </div>
 
@@ -1214,55 +1204,47 @@
                 </div>
             </div>
         </div>
-
-        <!-- Footer Section -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>QuickToolsPK</h3>
-                    <p>Your all-in-one utility toolkit for everyday tasks. Free, fast, and easy to use online tools.</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Image Converter</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> PDF Tools</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Text Utilities</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Code Formatters</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Calculators</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Connect With Us</h3>
-                    <p>Follow us on social media for updates and new tool announcements.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>QuickToolsPK</h3>
+                <p>Your all-in-one utility toolkit for everyday tasks. Free, fast, and easy to use online tools.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2023 QuickToolsPK. All rights reserved.</p>
-                <p>Your images are processed entirely in your browser and are never uploaded to any server.</p>
+            <div class="footer-section">
+                <h3>Popular Tools</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-image"></i> Image Converter</a></li>
+                    <li><a href="#"><i class="fas fa-compress-arrows-alt"></i> PDF Compressor</a></li>
+                    <li><a href="#"><i class="fas fa-code"></i> Code Formatter</a></li>
+                    <li><a href="#"><i class="fas fa-calculator"></i> Calculator</a></li>
+                </ul>
             </div>
-        </footer>
-    </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> All Tools</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 QuickToolsPK. All rights reserved.</p>
+            <p>Your privacy is important to us - your files are processed entirely in your browser and never uploaded to any server.</p>
+        </div>
+    </footer>
     
     <div class="qt-badge">
         <i class="fas fa-tools"></i>
@@ -1276,7 +1258,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Elements for image converter
             const fileInput = document.getElementById('file-input');
             const selectFileBtn = document.getElementById('select-file-btn');
             const uploadArea = document.getElementById('upload-area');
@@ -1300,8 +1301,6 @@
             const sizeReduction = document.getElementById('size-reduction');
             const qualityScore = document.getElementById('quality-score');
             const timeSaved = document.getElementById('time-saved');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const navMenu = document.getElementById('nav-menu');
             
             let convertedImageData = null;
             let originalImageData = null;
@@ -1318,7 +1317,6 @@
             qualitySlider.addEventListener('change', convertImage);
             downloadBtn.addEventListener('click', downloadImage);
             convertAnotherBtn.addEventListener('click', resetConverter);
-            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
             
             // Format option click handlers
             formatOptions.forEach(option => {
@@ -1530,20 +1528,6 @@
                 setTimeout(() => {
                     toast.classList.remove('show');
                 }, 3000);
-            }
-            
-            function toggleMobileMenu() {
-                navMenu.classList.toggle('active');
-                
-                // Change icon based on menu state
-                const icon = mobileMenuBtn.querySelector('i');
-                if (navMenu.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
             }
             
             // Initialize quality value display
