@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --primary: #4361ee;
@@ -40,16 +39,81 @@
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-brand .logo {
+            font-size: 2.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
         }
 
-        /* Header styling to match QuickToolsPK */
-        header {
+        /* Page header styling */
+        .page-header {
             text-align: center;
             padding: 30px 20px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -61,7 +125,7 @@
             overflow: hidden;
         }
         
-        header::before {
+        .page-header::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -72,55 +136,14 @@
             transform: rotate(30deg);
         }
         
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            font-size: 2.8rem;
-            margin-right: 15px;
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            width: 70px;
-            height: 70px;
-            border-radius: 16px;
-            line-height: 70px;
-            text-align: center;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-        
-        .brand-text {
-            text-align: left;
-        }
-                
-        .brand-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.4rem;
-            font-weight: 800;
-            line-height: 1;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .brand-tagline {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-        
-        header h1 {
+        .page-header h1 {
             font-size: 2.4rem;
             margin-bottom: 15px;
             font-weight: 700;
             position: relative;
         }
         
-        header p {
+        .page-header p {
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
@@ -140,7 +163,7 @@
             }
         }
 
-        /* Card styling to match QuickToolsPK */
+        /* Card styling */
         .converter-card {
             background: white;
             border-radius: var(--border-radius);
@@ -166,20 +189,19 @@
             transform: translateY(-5px);
         }
         
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-dark);
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 18px;
             display: flex;
             align-items: center;
             gap: 10px;
+            margin: -35px -35px 25px -35px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
         }
 
-        .card-title i {
-            color: var(--primary);
-        }
-
-        /* Upload Area Styling */
         .upload-area {
             border: 2px dashed var(--light-gray);
             border-radius: var(--border-radius);
@@ -203,7 +225,7 @@
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
         }
         
-        .upload-area i {
+        .upload-icon {
             font-size: 3.8rem;
             color: var(--primary);
             margin-bottom: 20px;
@@ -216,7 +238,7 @@
             transition: all 0.3s;
         }
         
-        .upload-area:hover i {
+        .upload-area:hover .upload-icon {
             transform: scale(1.05);
             background: rgba(67, 97, 238, 0.15);
         }
@@ -235,7 +257,7 @@
             font-size: 1.05rem;
         }
 
-        /* Button styling to match */
+        /* Button styling */
         .btn {
             padding: 18px 25px;
             border: none;
@@ -297,26 +319,7 @@
             display: none;
         }
 
-        .browse-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            box-shadow: var(--button-shadow);
-        }
-        
-        .browse-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.35);
-        }
-
-        .compression-options {
+        .settings-panel {
             margin: 35px 0;
             padding: 30px;
             background: var(--light);
@@ -324,7 +327,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
         }
         
-        .compression-options h3 {
+        .settings-panel h3 {
             margin-bottom: 20px;
             color: var(--dark);
             display: flex;
@@ -333,16 +336,20 @@
             font-size: 1.4rem;
         }
         
-        .compression-options h3 i {
+        .settings-panel h3 i {
             color: var(--primary);
             font-size: 1.6rem;
         }
 
-        .option-title {
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+        .setting-group {
+            margin-bottom: 20px;
+        }
+
+        .setting-group label {
             display: block;
-            color: var(--primary-dark);
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
         }
 
         .slider-container {
@@ -688,12 +695,99 @@
             font-size: 1.2rem;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 0;
+        /* Footer styling */
+        .main-footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px 0 20px;
             margin-top: 60px;
-            color: var(--gray);
-            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
         }
 
         /* Loading animation */
@@ -786,22 +880,31 @@
             font-size: 1.2rem;
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            .brand {
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
                 flex-direction: column;
+                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+                width: 100%;
                 text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                z-index: 999;
             }
-            
-            .brand-text {
-                text-align: center;
-                margin-top: 15px;
+
+            .nav-menu.active {
+                left: 0;
             }
-            
-            .brand-name {
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
                 font-size: 2rem;
             }
             
@@ -813,91 +916,137 @@
                 padding: 40px 15px;
             }
             
-            .upload-area i {
+            .upload-icon {
                 font-size: 3.2rem;
                 width: 80px;
                 height: 80px;
                 line-height: 80px;
             }
             
-            .compression-options {
-                padding: 25px;
-            }
-            
-            .instructions {
+            .settings-panel {
                 padding: 25px;
             }
             
             .steps {
                 grid-template-columns: 1fr;
             }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .brand-name {
+                font-size: 1.5rem;
+            }
+            
+            .nav-brand .logo {
+                width: 40px;
+                height: 40px;
+                font-size: 1.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="brand">
-                <div class="logo">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="brand-text">
-                    <div class="brand-name">QuickToolsPK</div>
-                    <div class="brand-tagline">Your All-in-One Utility Toolkit</div>
-                </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
             </div>
+            <div class="brand-name">QuickToolsPK</div>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Image Tools</a></li>
+            <li><a href="#">Document Tools</a></li>
+            <li><a href="#">Developer Tools</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
             <h1>JPG to PDF Converter</h1>
             <p>Convert your JPG images to PDF documents with adjustable compression levels. Easy to use, no registration required.</p>
-        </header>
+        </div>
 
         <div class="main-content">
             <div>
                 <div class="converter-card">
-                    <h2 class="card-title"><i class="fas fa-sync-alt"></i> Convert JPG to PDF</h2>
-                    
-                    <div class="upload-area" id="drop-area">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <h3>Drag & Drop your JPG files here</h3>
-                        <p>or</p>
-                        <button class="browse-btn">Browse Files</button>
-                        <input type="file" id="file-input" accept=".jpg,.jpeg" multiple>
-                        <p class="compression-description">Supports JPG and JPEG files</p>
+                    <div class="card-header">
+                        <i class="fas fa-sync-alt"></i>
+                        Convert JPG to PDF
                     </div>
-
-                    <div class="compression-options">
-                        <h3><i class="fas fa-sliders-h"></i> Compression Settings</h3>
-                        <div class="setting-group">
-                            <span class="option-title">Compression Level</span>
-                            <div class="slider-container">
-                                <input type="range" min="1" max="100" value="80" class="slider" id="compression-slider">
-                                <span class="slider-value" id="compression-value">80%</span>
+                    <div class="card-body">
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
                             </div>
-                            <div class="compression-info">
-                                <span>Smaller File Size</span>
-                                <span>Better Quality</span>
+                            <h3>Drag & Drop your JPG files here</h3>
+                            <p>or</p>
+                            <button class="btn btn-primary" id="select-file-btn"><i class="fas fa-file-image"></i> Select JPG Files</button>
+                            <input type="file" id="file-input" accept=".jpg,.jpeg" multiple>
+                            <p class="image-dimensions">Supports JPG and JPEG files</p>
+                        </div>
+
+                        <div class="settings-panel">
+                            <h3><i class="fas fa-sliders-h"></i> Conversion Settings</h3>
+                            <div class="setting-group">
+                                <label for="quality-slider">
+                                    <i class="fas fa-compress-arrows-alt"></i> Quality Level
+                                </label>
+                                <div class="slider-container">
+                                    <input type="range" id="quality-slider" min="0" max="100" value="80">
+                                    <span class="slider-value" id="quality-value">80%</span>
+                                </div>
+                                <div class="compression-info">
+                                    <span>Smaller File Size</span>
+                                    <span>Better Quality</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="preview-container">
-                        <h3 class="preview-title"><i class="fas fa-images"></i> Selected Images</h3>
-                        <div class="image-previews" id="image-previews">
-                            <p style="color: var(--gray); text-align: center; grid-column: 1 / -1; padding: 2rem;">No images selected</p>
+                        <div class="preview-container">
+                            <h3 class="preview-title"><i class="fas fa-images"></i> Selected Images</h3>
+                            <div class="image-previews" id="image-previews">
+                                <p style="color: var(--gray); text-align: center; grid-column: 1 / -1; padding: 2rem;">No images selected</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="loading" id="loading">
-                        <div class="loading-spinner"></div>
-                        <p>Processing your PDF...</p>
-                    </div>
+                        <div class="loading" id="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Creating your PDF document...</p>
+                        </div>
 
-                    <div class="action-buttons">
-                        <button class="btn btn-success" id="convert-btn" disabled>
-                            <i class="fas fa-file-pdf"></i> Convert to PDF
-                        </button>
-                        <button class="btn btn-secondary" id="reset-btn" disabled>
-                            <i class="fas fa-redo"></i> Reset
-                        </button>
+                        <div class="action-buttons" id="action-buttons" style="display: none;">
+                            <button class="btn btn-success" id="convert-btn"><i class="fas fa-file-pdf"></i> Convert to PDF</button>
+                            <button class="btn btn-secondary" id="reset-btn"><i class="fas fa-redo"></i> Reset</button>
+                        </div>
                     </div>
                 </div>
 
@@ -911,7 +1060,7 @@
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
-                            <div class="step-title">Adjust Compression</div>
+                            <div class="step-title">Adjust Quality</div>
                             <p>Set your preferred quality level</p>
                         </div>
                         <div class="step">
@@ -961,6 +1110,46 @@
         </div>
     </div>
     
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>QuickToolsPK</h3>
+                <p>Your all-in-one utility toolkit for everyday tasks. Free, fast, and easy to use online tools.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Popular Tools</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-image"></i> Image Converter</a></li>
+                    <li><a href="#"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a></li>
+                    <li><a href="#"><i class="fas fa-file-pdf"></i> JPG to PDF</a></li>
+                    <li><a href="#"><i class="fas fa-code"></i> Code Formatter</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i> All Tools</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 QuickToolsPK. All rights reserved.</p>
+            <p>Your privacy is important to us - your files are processed entirely in your browser and never uploaded to any server.</p>
+        </div>
+    </footer>
+    
     <div class="qt-badge">
         <i class="fas fa-tools"></i>
         <span>QuickToolsPK</span>
@@ -970,85 +1159,102 @@
         <i class="fas fa-check-circle"></i>
         <span id="toast-message">Operation completed successfully!</span>
     </div>
-    
-    <footer>
-        <p>&copy; 2023 QuickToolsPK. All rights reserved.</p>
-        <p>Your images are processed entirely in your browser and are never uploaded to any server.</p>
-    </footer>
 
     <script>
         // Initialize jsPDF
         window.jsPDF = window.jspdf.jsPDF;
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Elements for JPG to PDF converter
             const fileInput = document.getElementById('file-input');
-            const dropArea = document.getElementById('drop-area');
-            const compressionSlider = document.getElementById('compression-slider');
-            const compressionValue = document.getElementById('compression-value');
+            const selectFileBtn = document.getElementById('select-file-btn');
+            const uploadArea = document.getElementById('upload-area');
+            const qualitySlider = document.getElementById('quality-slider');
+            const qualityValue = document.getElementById('quality-value');
             const imagePreviews = document.getElementById('image-previews');
             const convertBtn = document.getElementById('convert-btn');
             const resetBtn = document.getElementById('reset-btn');
             const loading = document.getElementById('loading');
+            const actionButtons = document.getElementById('action-buttons');
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
-            const browseBtn = document.querySelector('.browse-btn');
             
-            // State
             let selectedFiles = [];
             
-            // Update compression value display
-            compressionSlider.addEventListener('input', function() {
-                compressionValue.textContent = this.value + '%';
-            });
+            // Event Listeners
+            selectFileBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            qualitySlider.addEventListener('input', updateQualityValue);
+            convertBtn.addEventListener('click', convertToPdf);
+            resetBtn.addEventListener('click', resetConverter);
             
-            // Handle drag and drop
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                dropArea.addEventListener(eventName, preventDefaults, false);
-            });
+            function updateQualityValue() {
+                qualityValue.textContent = `${qualitySlider.value}%`;
+            }
             
-            function preventDefaults(e) {
+            function handleDragOver(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                uploadArea.classList.add('dragover');
             }
             
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropArea.addEventListener(eventName, highlight, false);
-            });
-            
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropArea.addEventListener(eventName, unhighlight, false);
-            });
-            
-            function highlight() {
-                dropArea.classList.add('dragover');
+            function handleDragLeave(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('dragover');
             }
-            
-            function unhighlight() {
-                dropArea.classList.remove('dragover');
-            }
-            
-            dropArea.addEventListener('drop', handleDrop, false);
-            browseBtn.addEventListener('click', () => fileInput.click());
-            fileInput.addEventListener('change', handleFiles);
             
             function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                handleFiles({target: {files}});
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    processFiles(files);
+                }
             }
             
-            function handleFiles(e) {
-                const files = Array.from(e.target.files).filter(file => 
+            function handleFileSelect(e) {
+                const files = e.target.files;
+                if (files.length) {
+                    processFiles(files);
+                }
+            }
+            
+            function processFiles(files) {
+                const imageFiles = Array.from(files).filter(file => 
                     file.type === 'image/jpeg' || file.type === 'image/jpg'
                 );
                 
-                if (files.length === 0) {
-                    showToast('Please select JPG images only', 'error');
+                if (imageFiles.length === 0) {
+                    showNotification('Please select JPG images only', 'error');
                     return;
                 }
                 
-                selectedFiles = selectedFiles.concat(files);
+                selectedFiles = selectedFiles.concat(imageFiles);
                 updatePreviews();
                 updateButtons();
             }
@@ -1085,12 +1291,12 @@
             }
             
             function updateButtons() {
-                convertBtn.disabled = selectedFiles.length === 0;
-                resetBtn.disabled = selectedFiles.length === 0;
+                if (selectedFiles.length > 0) {
+                    actionButtons.style.display = 'grid';
+                } else {
+                    actionButtons.style.display = 'none';
+                }
             }
-            
-            // Convert to PDF
-            convertBtn.addEventListener('click', convertToPdf);
             
             async function convertToPdf() {
                 if (selectedFiles.length === 0) return;
@@ -1099,11 +1305,9 @@
                 convertBtn.disabled = true;
                 
                 try {
-                    // Get compression level (1-100)
-                    const compressionLevel = parseInt(compressionSlider.value);
-                    
                     // Create a new PDF document
                     const pdf = new jsPDF();
+                    const quality = parseInt(qualitySlider.value) / 100;
                     
                     // Process each image and add to PDF
                     for (let i = 0; i < selectedFiles.length; i++) {
@@ -1149,31 +1353,34 @@
                     // Save the PDF
                     pdf.save('converted-images.pdf');
                     
-                    showToast('PDF created successfully!');
+                    showNotification('PDF created successfully!');
                 } catch (error) {
                     console.error('Error creating PDF:', error);
-                    showToast('Error creating PDF. Please try again.', 'error');
+                    showNotification('Error creating PDF. Please try again.', 'error');
                 } finally {
                     loading.style.display = 'none';
                     convertBtn.disabled = false;
                 }
             }
             
-            // Reset button
-            resetBtn.addEventListener('click', function() {
+            function resetConverter() {
                 selectedFiles = [];
                 fileInput.value = '';
                 updatePreviews();
                 updateButtons();
-                compressionSlider.value = 80;
-                compressionValue.textContent = '80%';
-                showToast('All files have been removed');
-            });
+                qualitySlider.value = 80;
+                updateQualityValue();
+                showNotification('Converter has been reset');
+            }
             
-            // Toast notification
-            function showToast(message, type = 'success') {
+            function showNotification(message, type = 'success') {
                 toastMessage.textContent = message;
-                toast.className = type === 'success' ? 'toast' : 'toast error';
+                toast.className = 'toast';
+                if (type === 'error') {
+                    toast.classList.add('error');
+                } else {
+                    toast.classList.remove('error');
+                }
                 toast.classList.add('show');
                 
                 setTimeout(() => {
@@ -1181,8 +1388,8 @@
                 }, 3000);
             }
             
-            // Initialize
-            updatePreviews();
+            // Initialize quality value display
+            updateQualityValue();
         });
     </script>
 </body>
