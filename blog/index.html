@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | QuickToolsPK</title>
+    <meta name="description" content="Practical guides on image compression, PDF management, file formats, and preparing images for the web. Clear, original articles from QuickToolsPK.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* Header */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* Blog hero */
+        .blog-hero {
+            padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+            text-align: center; background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
+        .blog-hero p { color: var(--text-muted); font-size: clamp(1rem, 1.5vw, 1.12rem); max-width: 620px; margin: 0 auto 1.75rem; line-height: 1.7; }
+        .blog-search {
+            display: flex; align-items: center; gap: 0.6rem;
+            max-width: 520px; margin: 0 auto;
+            background: var(--surface); border: 1px solid var(--border-strong);
+            border-radius: var(--r-full); padding: 0.35rem 0.35rem 0.35rem 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .blog-search:focus-within { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
+        .blog-search .icon { width: 20px; height: 20px; color: var(--text-subtle); flex-shrink: 0; }
+        .blog-search input {
+            flex: 1; border: none; background: transparent; font-family: inherit;
+            font-size: 0.95rem; color: var(--text); padding: 0.5rem 0; outline: none; min-width: 0;
+        }
+        .blog-search input::placeholder { color: var(--text-subtle); }
+
+        /* Section */
+        .section { padding: clamp(2rem, 5vw, 3.5rem) 0; }
+        .section--alt { background: var(--bg-alt); }
+        .section-head { margin-bottom: 1.75rem; }
+        .section-head h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.4rem; }
+        .section-head p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* Featured article */
+        .featured-card {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm);
+            text-decoration: none; color: inherit;
+            transition: box-shadow var(--t-med), transform var(--t-med);
+        }
+        .featured-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .featured-thumb { min-height: 260px; background: var(--gradient-brand); display: grid; place-items: center; color: #fff; font-size: 3rem; }
+        .featured-thumb i { opacity: 0.9; }
+        .featured-body { padding: clamp(1.5rem, 3vw, 2.2rem); display: flex; flex-direction: column; justify-content: center; }
+        .featured-label { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); background: var(--teal-soft); padding: 0.28rem 0.7rem; border-radius: var(--r-full); align-self: flex-start; margin-bottom: 0.85rem; }
+        .featured-body h3 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); margin-bottom: 0.6rem; line-height: 1.3; }
+        .featured-body p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; line-height: 1.65; }
+        .featured-meta { display: flex; flex-wrap: wrap; gap: 0.85rem; font-size: 0.8rem; color: var(--text-subtle); align-items: center; }
+        .featured-meta .read-link { color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; margin-left: auto; }
+        @media (max-width: 720px) { .featured-card { grid-template-columns: 1fr; } .featured-thumb { min-height: 180px; } }
+
+        /* Category filters */
+        .cat-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+        .cat-btn {
+            padding: 0.5rem 1.05rem; font-size: 0.85rem; font-weight: 600;
+            border: 1px solid var(--border-strong); border-radius: var(--r-full);
+            background: var(--surface); color: var(--text-muted); cursor: pointer;
+            transition: var(--t-fast);
+        }
+        .cat-btn:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-soft); }
+        .cat-btn.is-active { background: var(--gradient-navy); color: #fff; border-color: transparent; box-shadow: var(--shadow-sm); }
+
+        /* Blog grid */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .article-card {
+            display: flex; flex-direction: column;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: inherit;
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--t-med), transform var(--t-med), border-color var(--t-med);
+        }
+        .article-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: #cddcf0; }
+        .article-thumb { height: 170px; display: grid; place-items: center; color: #fff; font-size: 2.2rem; }
+        .article-thumb--compress { background: linear-gradient(135deg, #2563eb, #0ea5e9); }
+        .article-thumb--formats { background: linear-gradient(135deg, #7c3aed, #2563eb); }
+        .article-thumb--pdf { background: linear-gradient(135deg, #0d9488, #059669); }
+        .article-thumb--organize { background: linear-gradient(135deg, #1d4ed8, #0d9488); }
+        .article-thumb--resize { background: linear-gradient(135deg, #0891b2, #2563eb); }
+        .article-thumb--social { background: linear-gradient(135deg, #db2777, #7c3aed); }
+        .article-thumb i { opacity: 0.9; }
+        .article-body { padding: 1.2rem 1.25rem 1.35rem; display: flex; flex-direction: column; flex: 1; }
+        .article-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary-dark); background: var(--primary-soft); padding: 0.22rem 0.6rem; border-radius: var(--r-full); align-self: flex-start; margin-bottom: 0.6rem; }
+        .article-body h3 { font-size: 1.05rem; margin-bottom: 0.45rem; line-height: 1.35; }
+        .article-body p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+        .article-foot { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-subtle); padding-top: 0.75rem; border-top: 1px solid var(--border); }
+        .article-foot .read-link { color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; }
+
+        /* Footer */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg); padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">PDF Tools</a></li>
+                    <li><a class="nav-link is-active" href="index.html">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="blog-hero">
+            <div class="container">
+                <h1>Practical guides for everyday files</h1>
+                <p>Clear, original articles on image compression, PDF management, file formats, and preparing media for the web. No fluff, just steps you can use.</p>
+                <div class="blog-search">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <label for="blogSearch" class="sr-only">Search articles</label>
+                    <input type="search" id="blogSearch" placeholder="Search articles by title or description…" autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Featured article</h2>
+                    <p>Start here if you are new to file optimization.</p>
+                </div>
+                <a href="image-compression-guide.html" class="featured-card" data-category="image">
+                    <div class="featured-thumb" aria-hidden="true"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <div class="featured-body">
+                        <span class="featured-label"><i class="fas fa-star"></i> Image</span>
+                        <h3>How to compress images without losing visible quality</h3>
+                        <p>A practical walkthrough of choosing the right quality level, comparing formats, and avoiding the common mistakes that make photos look worse after compression.</p>
+                        <div class="featured-meta">
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                            <span>Image optimization</span>
+                            <span class="read-link">Read article <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- All articles -->
+        <section class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <h2>All articles</h2>
+                    <p>Browse by category or search above.</p>
+                </div>
+
+                <div class="cat-filters" role="group" aria-label="Filter by category">
+                    <button class="cat-btn is-active" data-filter="all">All</button>
+                    <button class="cat-btn" data-filter="image">Image</button>
+                    <button class="cat-btn" data-filter="pdf">PDF</button>
+                    <button class="cat-btn" data-filter="web">Web</button>
+                </div>
+
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Card 1 -->
+                    <a href="image-compression-guide.html" class="article-card" data-category="image">
+                        <div class="article-thumb article-thumb--compress" aria-hidden="true"><i class="fas fa-compress-arrows-alt"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">Image</span>
+                            <h3>How to compress images without losing visible quality</h3>
+                            <p>Choosing a quality level, comparing formats, and avoiding the mistakes that make photos look worse after compression.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 7 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 2 -->
+                    <a href="image-formats-explained.html" class="article-card" data-category="image">
+                        <div class="article-thumb article-thumb--formats" aria-hidden="true"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">Image</span>
+                            <h3>JPG, PNG, or WebP: which format should you use?</h3>
+                            <p>A plain-language comparison of the three formats most people encounter, with guidance on when each one makes sense.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 6 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="images-to-pdf-guide.html" class="article-card" data-category="pdf">
+                        <div class="article-thumb article-thumb--pdf" aria-hidden="true"><i class="fas fa-file-pdf"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">PDF</span>
+                            <h3>Converting images to PDF: a practical guide</h3>
+                            <p>When to combine images into a PDF, how to keep the file size sensible, and what to check before sharing.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 5 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 4 -->
+                    <a href="pdf-organization-tips.html" class="article-card" data-category="pdf">
+                        <div class="article-thumb article-thumb--organize" aria-hidden="true"><i class="fas fa-object-group"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">PDF</span>
+                            <h3>Keeping PDFs organized: merge, split, and name sensibly</h3>
+                            <p>Simple habits that make PDF collections easier to search, share, and archive without creating duplicate files.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 5 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 5 -->
+                    <a href="resize-images-for-web.html" class="article-card" data-category="web">
+                        <div class="article-thumb article-thumb--resize" aria-hidden="true"><i class="fas fa-expand-arrows-alt"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">Web</span>
+                            <h3>Resizing images for websites: dimensions that actually fit</h3>
+                            <p>How to pick display dimensions, avoid upscaling, and match common layout widths without guessing.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 6 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Card 6 -->
+                    <a href="social-media-image-prep.html" class="article-card" data-category="web">
+                        <div class="article-thumb article-thumb--social" aria-hidden="true"><i class="fas fa-share-alt"></i></div>
+                        <div class="article-body">
+                            <span class="article-tag">Web</span>
+                            <h3>Preparing images for social media and websites</h3>
+                            <p>A short checklist for cropping, compressing, and exporting images so they look sharp on any platform.</p>
+                            <div class="article-foot">
+                                <span><i class="far fa-clock"></i> 5 min</span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../tools/img-compress.html">Image Compressor</a></li>
+                        <li><a href="../tools/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../tools/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../tools/pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../tools/split-pdf.html">Split PDF</a></li>
+                        <li><a href="../tools/pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#tools">Image Tools</a></li>
+                        <li><a href="../index.html#tools">PDF Tools</a></li>
+                        <li><a href="../index.html#tools">Converters</a></li>
+                        <li><a href="../index.html#tools">Compressors</a></li>
+                        <li><a href="../index.html#tools">Resizers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../index.html">About Us</a></li>
+                        <li><a href="../index.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="index.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* Header */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* Blog search + category filter */
+        const searchInput = document.getElementById('blogSearch');
+        const catButtons = document.querySelectorAll('.cat-btn');
+        const articleCards = document.querySelectorAll('#blogGrid .article-card');
+        let activeCategory = 'all';
+
+        function applyFilters() {
+            const query = (searchInput.value || '').trim().toLowerCase();
+            articleCards.forEach(function (card) {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                const category = card.getAttribute('data-category');
+                const matchesSearch = !query || title.indexOf(query) !== -1 || desc.indexOf(query) !== -1;
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+                card.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+            });
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        catButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                catButtons.forEach(function (b) { b.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                activeCategory = btn.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
