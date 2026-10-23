@@ -325,11 +325,12 @@
             .article-card.animate-in { animation: none; opacity: 1; transform: none; }
         }
     </style>
+    <link rel="stylesheet" href="../site-chrome.css">
 </head>
 <body>
 
     <header class="site-header" id="siteHeader">
-        <div class="container header-inner">
+        <div class="header-inner container">
             <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
@@ -339,17 +340,26 @@
                     <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
                 </span>
             </a>
+
             <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
                 <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
+
             <nav class="primary-nav" id="primaryNav" aria-label="Primary">
                 <ul class="nav-list">
                     <li><a class="nav-link" href="../index.html">Home</a></li>
                     <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
-                    <li><a class="nav-link" href="../index.html#tools">Image Tools</a></li>
-                    <li><a class="nav-link" href="../index.html#tools">PDF Tools</a></li>
-                    <li><a class="nav-link is-active" href="index.html">Blog</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="../blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -455,6 +465,7 @@
                     </a>
                     <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
                 </div>
+
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
@@ -463,29 +474,32 @@
                         <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
                         <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
                         <li><a href="../pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="../split-pdf.html">Split PDF</a></li>
                         <li><a href="../pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h4>Popular Categories</h4>
                     <ul>
-                        <li><a href="../index.html#tools">Image Tools</a></li>
-                        <li><a href="../index.html#tools">PDF Tools</a></li>
-                        <li><a href="../index.html#tools">Converters</a></li>
-                        <li><a href="../index.html#tools">Compressors</a></li>
-                        <li><a href="../index.html#tools">Resizers</a></li>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../blog/index.html" target="_blank" rel="noopener">Blog</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="../index.html">About Us</a></li>
-                        <li><a href="../index.html">Contact</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
                         <li><a href="../index.html#faq">FAQ</a></li>
-                        <li><a href="index.html">Blog</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col footer-col--legal">
                     <h4>Legal</h4>
                     <ul>
@@ -496,6 +510,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
                 <ul class="footer-legal" aria-label="Legal links">
