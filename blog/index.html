@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | QuickToolsPK</title>
-    <meta name="description" content="Practical guides on image compression, PDF management, file formats, and preparing images for the web. Clear, original articles from QuickToolsPK.">
+    <title>Image &amp; PDF Guides: Compression, Conversion and More | QuickToolsPK</title>
+    <meta name="description" content="Learn how to compress images, convert file formats, resize photos, and manage PDFs with practical step-by-step guides from QuickToolsPK.">
     <link rel="canonical" href="https://quicktoolspk.com/blog/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
             --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
             --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
             --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
-            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
             --ease: cubic-bezier(0.22,0.61,0.36,1);
             --t-fast: 0.18s var(--ease);
             --t-med: 0.32s var(--ease);
@@ -36,10 +35,7 @@
             -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
         }
-        h1, h2, h3, h4 {
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
-            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
-        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
         a { color: inherit; }
         img, svg { display: block; max-width: 100%; }
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
@@ -80,15 +76,6 @@
         }
         .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
         .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
-        .nav-cta {
-            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
-            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
-            text-decoration: none; border-radius: var(--r-full);
-            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
-            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
-        }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
-        .nav-cta .icon { width: 16px; height: 16px; }
         .menu-toggle {
             display: none; width: 44px; height: 44px; border: 1px solid var(--border);
             border-radius: 12px; background: var(--surface); color: var(--navy);
@@ -96,20 +83,55 @@
         }
         .menu-toggle .icon { width: 22px; height: 22px; }
 
-        /* Blog hero */
+        /* Editorial hero */
         .blog-hero {
-            padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
-            text-align: center; background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            position: relative; overflow: hidden;
+            padding: clamp(2.75rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
             border-bottom: 1px solid var(--border);
         }
-        .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
-        .blog-hero p { color: var(--text-muted); font-size: clamp(1rem, 1.5vw, 1.12rem); max-width: 620px; margin: 0 auto 1.75rem; line-height: 1.7; }
+        .blog-hero::before,
+        .blog-hero::after {
+            content: ''; position: absolute; border-radius: 50%;
+            filter: blur(60px); pointer-events: none; z-index: 0;
+        }
+        .blog-hero::before {
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+            top: -140px; left: -100px; opacity: 0.7;
+        }
+        .blog-hero::after {
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%);
+            bottom: -120px; right: -80px; opacity: 0.55;
+        }
+        .hero-inner {
+            position: relative; z-index: 1;
+            max-width: 780px; margin: 0 auto; text-align: center;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.32rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1.25rem;
+        }
+        .blog-hero h1 {
+            font-size: clamp(1.9rem, 4.6vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1rem; color: var(--navy);
+        }
+        .hero-intro {
+            color: var(--text-muted); font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+            line-height: 1.75; margin: 0 auto 1rem;
+        }
+        .hero-intro + .hero-intro { margin-top: 0; margin-bottom: 1.75rem; }
         .blog-search {
             display: flex; align-items: center; gap: 0.6rem;
-            max-width: 520px; margin: 0 auto;
+            max-width: 540px; margin: 0 auto;
             background: var(--surface); border: 1px solid var(--border-strong);
             border-radius: var(--r-full); padding: 0.35rem 0.35rem 0.35rem 1.1rem;
             box-shadow: var(--shadow-sm);
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
         }
         .blog-search:focus-within { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
         .blog-search .icon { width: 20px; height: 20px; color: var(--text-subtle); flex-shrink: 0; }
@@ -126,27 +148,56 @@
         .section-head h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.4rem; }
         .section-head p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* Featured article */
+        /* Featured article — premium editorial treatment */
         .featured-card {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+            display: grid; grid-template-columns: 1.05fr 1fr;
             background: var(--surface); border: 1px solid var(--border);
             border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm);
             text-decoration: none; color: inherit;
             transition: box-shadow var(--t-med), transform var(--t-med);
         }
         .featured-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-        .featured-thumb { min-height: 260px; background: var(--gradient-brand); display: grid; place-items: center; color: #fff; font-size: 3rem; }
-        .featured-thumb i { opacity: 0.9; }
-        .featured-body { padding: clamp(1.5rem, 3vw, 2.2rem); display: flex; flex-direction: column; justify-content: center; }
-        .featured-label { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); background: var(--teal-soft); padding: 0.28rem 0.7rem; border-radius: var(--r-full); align-self: flex-start; margin-bottom: 0.85rem; }
-        .featured-body h3 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); margin-bottom: 0.6rem; line-height: 1.3; }
-        .featured-body p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; line-height: 1.65; }
-        .featured-meta { display: flex; flex-wrap: wrap; gap: 0.85rem; font-size: 0.8rem; color: var(--text-subtle); align-items: center; }
-        .featured-meta .read-link { color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; margin-left: auto; }
-        @media (max-width: 720px) { .featured-card { grid-template-columns: 1fr; } .featured-thumb { min-height: 180px; } }
+        .featured-thumb {
+            position: relative; min-height: 320px;
+            background:
+                radial-gradient(circle at 25% 30%, rgba(255,255,255,0.35) 0%, transparent 45%),
+                linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 55%, #0d9488 100%);
+            display: grid; place-items: center; color: #fff; overflow: hidden;
+        }
+        .featured-thumb::after {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 22px);
+            pointer-events: none;
+        }
+        .featured-thumb-glyph {
+            position: relative; z-index: 1;
+            width: 120px; height: 120px; border-radius: 26px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: grid; place-items: center;
+            font-size: 3rem;
+            backdrop-filter: blur(4px);
+        }
+        .featured-thumb-caption {
+            position: absolute; bottom: 1.1rem; left: 1.25rem; right: 1.25rem;
+            z-index: 1; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.85);
+        }
+        .featured-body { padding: clamp(1.6rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: center; }
+        .featured-label { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--teal); background: var(--teal-soft); padding: 0.28rem 0.7rem; border-radius: var(--r-full); align-self: flex-start; margin-bottom: 1rem; }
+        .featured-body h3 { font-size: clamp(1.25rem, 2.3vw, 1.6rem); margin-bottom: 0.65rem; line-height: 1.3; }
+        .featured-body p { color: var(--text-muted); font-size: 0.94rem; margin-bottom: 1.15rem; line-height: 1.7; }
+        .featured-meta { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.8rem; color: var(--text-subtle); align-items: center; }
+        .featured-meta .read-link { color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; margin-left: auto; transition: gap var(--t-fast); }
+        .featured-card:hover .read-link { gap: 0.55rem; }
+        @media (max-width: 720px) {
+            .featured-card { grid-template-columns: 1fr; }
+            .featured-thumb { min-height: 200px; }
+            .featured-thumb-glyph { width: 90px; height: 90px; font-size: 2.4rem; border-radius: 22px; }
+        }
 
         /* Category filters */
-        .cat-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+        .filters-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; align-items: center; }
         .cat-btn {
             padding: 0.5rem 1.05rem; font-size: 0.85rem; font-weight: 600;
             border: 1px solid var(--border-strong); border-radius: var(--r-full);
@@ -155,6 +206,7 @@
         }
         .cat-btn:hover { border-color: var(--primary); color: var(--primary-dark); background: var(--primary-soft); }
         .cat-btn.is-active { background: var(--gradient-navy); color: #fff; border-color: transparent; box-shadow: var(--shadow-sm); }
+        .results-count { font-size: 0.82rem; color: var(--text-subtle); margin-left: auto; }
 
         /* Blog grid */
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
@@ -166,24 +218,62 @@
             transition: box-shadow var(--t-med), transform var(--t-med), border-color var(--t-med);
         }
         .article-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: #cddcf0; }
-        .article-thumb { height: 170px; display: grid; place-items: center; color: #fff; font-size: 2.2rem; overflow: hidden; }
-        .article-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .article-thumb--compress { background: linear-gradient(135deg, #2563eb, #0ea5e9); }
-        .article-thumb--formats { background: linear-gradient(135deg, #7c3aed, #2563eb); }
-        .article-thumb--pdf { background: linear-gradient(135deg, #0d9488, #059669); }
-        .article-thumb--organize { background: linear-gradient(135deg, #1d4ed8, #0d9488); }
-        .article-thumb--resize { background: linear-gradient(135deg, #0891b2, #2563eb); }
-        .article-thumb--social { background: linear-gradient(135deg, #db2777, #7c3aed); }
-        .article-thumb i { opacity: 0.9; }
+        .article-card:hover .article-arrow { transform: translateX(3px); }
+        .article-thumb {
+            position: relative; height: 168px; overflow: hidden;
+            display: grid; place-items: center; color: #fff;
+        }
+        .article-thumb::before {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 18px);
+            opacity: 0.9;
+        }
+        .article-thumb-glyph {
+            position: relative; z-index: 1;
+            width: 62px; height: 62px; border-radius: 16px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.28);
+            display: grid; place-items: center; font-size: 1.6rem;
+            backdrop-filter: blur(3px);
+        }
+        .article-thumb--compress { background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%); }
+        .article-thumb--formats  { background: linear-gradient(135deg, #4f46e5 0%, #2563eb 55%, #0ea5e9 100%); }
+        .article-thumb--pdf      { background: linear-gradient(135deg, #0f766e 0%, #0d9488 55%, #059669 100%); }
+        .article-thumb--organize { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 55%, #0d9488 100%); }
+        .article-thumb--resize   { background: linear-gradient(135deg, #0e7490 0%, #0891b2 55%, #2563eb 100%); }
+        .article-thumb--social   { background: linear-gradient(135deg, #be185d 0%, #db2777 40%, #7c3aed 100%); }
         .article-body { padding: 1.2rem 1.25rem 1.35rem; display: flex; flex-direction: column; flex: 1; }
         .article-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary-dark); background: var(--primary-soft); padding: 0.22rem 0.6rem; border-radius: var(--r-full); align-self: flex-start; margin-bottom: 0.6rem; }
         .article-body h3 { font-size: 1.05rem; margin-bottom: 0.45rem; line-height: 1.35; }
         .article-body p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.6; margin-bottom: 1rem; flex: 1; }
         .article-foot { display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: var(--text-subtle); padding-top: 0.75rem; border-top: 1px solid var(--border); }
         .article-foot .read-link { color: var(--primary); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem; }
+        .article-arrow { transition: transform var(--t-fast); }
+
+        /* Empty state */
+        .empty-state {
+            grid-column: 1 / -1; display: none; text-align: center;
+            padding: 3rem 1.5rem; background: var(--surface);
+            border: 1px dashed var(--border-strong); border-radius: var(--r-lg);
+        }
+        .empty-state.is-visible { display: block; }
+        .empty-state-icon {
+            width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 1rem;
+            background: var(--primary-soft); color: var(--primary);
+            display: grid; place-items: center; font-size: 1.4rem;
+        }
+        .empty-state h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .empty-state p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.1rem; }
+
+        /* Entrance animation */
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .article-card.animate-in { animation: cardIn 0.5s var(--ease) both; }
 
         /* Footer */
-        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; }
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
         .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
         .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
         .footer-brand .brand-name { color: #fff; }
@@ -216,7 +306,6 @@
             .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
             .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
             .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
-            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
             .footer-brand { grid-column: 1 / -1; }
             .footer-col--legal { grid-column: 1 / -1; }
@@ -228,10 +317,12 @@
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-legal { justify-content: center; }
             .brand-tag { display: none; }
+            .results-count { margin-left: 0; width: 100%; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-card.animate-in { animation: none; opacity: 1; transform: none; }
         }
     </style>
 </head>
@@ -265,62 +356,47 @@
     </header>
 
     <main>
-        <!-- Hero -->
+        <!-- Editorial hero -->
         <section class="blog-hero">
             <div class="container">
-                <h1>Practical guides for everyday files</h1>
-                <p>Clear, original articles on image compression, PDF management, file formats, and preparing media for the web. No fluff, just steps you can use.</p>
-                <div class="blog-search">
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    <label for="blogSearch" class="sr-only">Search articles</label>
-                    <input type="search" id="blogSearch" placeholder="Search articles by title or description…" autocomplete="off">
+                <div class="hero-inner">
+                    <span class="hero-eyebrow"><i class="fas fa-pen-nib" aria-hidden="true"></i> QuickToolsPK Guides</span>
+                    <h1>Practical Guides for Images, PDFs, and Everyday File Tasks</h1>
+                    <p class="hero-intro">Welcome to the QuickToolsPK blog, your resource for practical guides on image optimization, PDF management, and everyday file tasks. Whether you need to reduce an image's file size, choose the right image format, resize a photo for a website, or organize PDF documents, our guides explain the process in clear, simple steps.</p>
+                    <p class="hero-intro">Explore useful tips, learn about common file formats, and discover ways to prepare digital files for sharing, websites, and everyday work. Each guide is designed to help you understand your options and choose the right tool for the task.</p>
+                    <div class="blog-search">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <label for="blogSearch" class="sr-only">Search articles</label>
+                        <input type="search" id="blogSearch" placeholder="Search by title or description…" autocomplete="off">
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Featured -->
         <section class="section">
-    <div class="container">
-        <div class="section-head">
-            <h2>Featured article</h2>
-            <p>Start here if you are new to file optimization.</p>
-        </div>
-
-        <a href="image-compression-guide.html"
-           class="featured-card"
-           data-category="image">
-
-            <div class="featured-thumb">
-                <img src="../assets/images/blog/01.jpg"
-                     alt="Image compression guide">
-            </div>
-
-            <div class="featured-body">
-                <span class="featured-label">
-                    <i class="fas fa-star"></i> Image
-                </span>
-
-                <h3>How to compress images without losing visible quality</h3>
-
-                <p>
-                    A practical walkthrough of choosing the right quality
-                    level, comparing formats, and avoiding the common
-                    mistakes that make photos look worse after compression.
-                </p>
-
-                <div class="featured-meta">
-                    <span>
-                        <i class="far fa-clock"></i> 7 min read
-                    </span>
-                    <span>Image optimization</span>
-                    <span class="read-link">
-                        Read article <i class="fas fa-arrow-right"></i>
-                    </span>
+            <div class="container">
+                <div class="section-head">
+                    <h2>Featured article</h2>
+                    <p>Start here if you are new to file optimization.</p>
                 </div>
+                <a href="image-compression-guide.html" class="featured-card" data-category="image">
+                    <div class="featured-thumb" aria-hidden="true">
+                        <div class="featured-thumb-glyph"><i class="fas fa-compress-arrows-alt"></i></div>
+                        <span class="featured-thumb-caption">Image optimization</span>
+                    </div>
+                    <div class="featured-body">
+                        <span class="featured-label"><i class="fas fa-star"></i> Image</span>
+                        <h3>How to Compress Images Without Losing Quality</h3>
+                        <p>A practical walkthrough of choosing the right quality level, comparing formats, and avoiding the common mistakes that make photos look worse after compression.</p>
+                        <div class="featured-meta">
+                            <span><i class="far fa-clock"></i> 7 min read</span>
+                            <span class="read-link">Read article <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-</section>
+        </section>
 
         <!-- All articles -->
         <section class="section section--alt">
@@ -330,97 +406,100 @@
                     <p>Browse by category or search above.</p>
                 </div>
 
-                <div class="cat-filters" role="group" aria-label="Filter by category">
+                <div class="filters-row" role="group" aria-label="Filter by category">
                     <button class="cat-btn is-active" data-filter="all">All</button>
                     <button class="cat-btn" data-filter="image">Image</button>
                     <button class="cat-btn" data-filter="pdf">PDF</button>
                     <button class="cat-btn" data-filter="web">Web</button>
+                    <span class="results-count" id="resultsCount" aria-live="polite">6 articles</span>
                 </div>
 
                 <div class="blog-grid" id="blogGrid">
-                    <!-- Card 1 -->
                     <a href="image-compression-guide.html" class="article-card" data-category="image">
-                        <div class="article-thumb article-thumb--compress"><img src="../assets/images/blog/01.jpg" alt="Image compression guide"></div>
+                        <div class="article-thumb article-thumb--compress" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-compress-arrows-alt"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">Image</span>
-                            <h3>How to compress images without losing visible quality</h3>
+                            <h3>How to Compress Images Without Losing Quality</h3>
                             <p>Choosing a quality level, comparing formats, and avoiding the mistakes that make photos look worse after compression.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 7 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 2 -->
                     <a href="image-formats-explained.html" class="article-card" data-category="image">
-                        <div class="article-thumb article-thumb--formats"><img src="../assets/images/blog/01.jpg" alt="Image format guide"></div>
+                        <div class="article-thumb article-thumb--formats" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-exchange-alt"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">Image</span>
-                            <h3>JPG, PNG, or WebP: which format should you use?</h3>
+                            <h3>JPG vs PNG vs WebP: Which Image Format Should You Use?</h3>
                             <p>A plain-language comparison of the three formats most people encounter, with guidance on when each one makes sense.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 6 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 3 -->
                     <a href="images-to-pdf-guide.html" class="article-card" data-category="pdf">
-                        <div class="article-thumb article-thumb--pdf"><img src="../assets/images/blog/01.jpg" alt="Images to PDF guide"></div>
+                        <div class="article-thumb article-thumb--pdf" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-file-pdf"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">PDF</span>
-                            <h3>Converting images to PDF: a practical guide</h3>
+                            <h3>How to Convert Images to PDF</h3>
                             <p>When to combine images into a PDF, how to keep the file size sensible, and what to check before sharing.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 5 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 4 -->
                     <a href="pdf-organization-tips.html" class="article-card" data-category="pdf">
-                        <div class="article-thumb article-thumb--organize"><img src="../assets/images/blog/01.jpg" alt="PDF organization guide"></div>
+                        <div class="article-thumb article-thumb--organize" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-object-group"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">PDF</span>
-                            <h3>Keeping PDFs organized: merge, split, and name sensibly</h3>
+                            <h3>How to Organize PDF Files: Merge, Split, and Rename</h3>
                             <p>Simple habits that make PDF collections easier to search, share, and archive without creating duplicate files.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 5 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 5 -->
                     <a href="resize-images-for-web.html" class="article-card" data-category="web">
-                        <div class="article-thumb article-thumb--resize"><img src="../assets/images/blog/01.jpg" alt="Resizing images for websites"></div>
+                        <div class="article-thumb article-thumb--resize" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-expand-arrows-alt"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">Web</span>
-                            <h3>Resizing images for websites: dimensions that actually fit</h3>
+                            <h3>How to Resize Images for Websites</h3>
                             <p>How to pick display dimensions, avoid upscaling, and match common layout widths without guessing.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 6 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
-                    <!-- Card 6 -->
                     <a href="social-media-image-prep.html" class="article-card" data-category="web">
-                        <div class="article-thumb article-thumb--social"><img src="../assets/images/blog/01.jpg" alt="Preparing images for social media"></div>
+                        <div class="article-thumb article-thumb--social" aria-hidden="true"><div class="article-thumb-glyph"><i class="fas fa-share-alt"></i></div></div>
                         <div class="article-body">
                             <span class="article-tag">Web</span>
-                            <h3>Preparing images for social media and websites</h3>
+                            <h3>How to Prepare Images for Websites and Social Media</h3>
                             <p>A short checklist for cropping, compressing, and exporting images so they look sharp on any platform.</p>
                             <div class="article-foot">
                                 <span><i class="far fa-clock"></i> 5 min</span>
-                                <span class="read-link">Read <i class="fas fa-arrow-right"></i></span>
+                                <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
+
+                    <!-- Empty state (hidden by default, shown via JS) -->
+                    <div class="empty-state" id="emptyState" role="status" aria-live="polite">
+                        <div class="empty-state-icon"><i class="fas fa-search"></i></div>
+                        <h3>No articles match your search</h3>
+                        <p>Try a different keyword or select another category.</p>
+                        <button class="cat-btn" type="button" id="resetFilters">Reset filters</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -444,13 +523,13 @@
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="../tools/img-compress.html">Image Compressor</a></li>
-                        <li><a href="../tools/img-resizer.html">Image Resizer</a></li>
-                        <li><a href="../tools/img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="../tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="../tools/pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="../tools/split-pdf.html">Split PDF</a></li>
-                        <li><a href="../tools/pdf-compression.html">PDF Compressor</a></li>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../split-pdf.html">Split PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -538,22 +617,42 @@
             if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
         });
 
-        /* Blog search + category filter */
+        /* Blog search + category filter + empty state + results count */
         const searchInput = document.getElementById('blogSearch');
-        const catButtons = document.querySelectorAll('.cat-btn');
+        const catButtons = document.querySelectorAll('.cat-btn[data-filter]');
         const articleCards = document.querySelectorAll('#blogGrid .article-card');
+        const emptyState = document.getElementById('emptyState');
+        const resultsCount = document.getElementById('resultsCount');
+        const resetFilters = document.getElementById('resetFilters');
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         let activeCategory = 'all';
+
+        // Initial entrance animation
+        if (!reduceMotion) {
+            articleCards.forEach(function (card, i) {
+                card.style.animationDelay = (i * 0.05) + 's';
+                card.classList.add('animate-in');
+            });
+        }
 
         function applyFilters() {
             const query = (searchInput.value || '').trim().toLowerCase();
+            let visible = 0;
+
             articleCards.forEach(function (card) {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 const desc = card.querySelector('p').textContent.toLowerCase();
                 const category = card.getAttribute('data-category');
                 const matchesSearch = !query || title.indexOf(query) !== -1 || desc.indexOf(query) !== -1;
                 const matchesCategory = activeCategory === 'all' || category === activeCategory;
-                card.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+                const show = matchesSearch && matchesCategory;
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
             });
+
+            emptyState.classList.toggle('is-visible', visible === 0);
+            resultsCount.textContent = visible + ' article' + (visible !== 1 ? 's' : '');
         }
 
         searchInput.addEventListener('input', applyFilters);
@@ -564,6 +663,15 @@
                 activeCategory = btn.getAttribute('data-filter');
                 applyFilters();
             });
+        });
+
+        resetFilters.addEventListener('click', function () {
+            searchInput.value = '';
+            activeCategory = 'all';
+            catButtons.forEach(function (b) {
+                b.classList.toggle('is-active', b.getAttribute('data-filter') === 'all');
+            });
+            applyFilters();
         });
     })();
     </script>
