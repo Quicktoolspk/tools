@@ -85,7 +85,6 @@
         }
 
         a { color: inherit; }
-
         img, svg { display: block; max-width: 100%; }
 
         .container {
@@ -190,7 +189,7 @@
         }
 
         /* ============================================================
-           HEADER (updated navbar)
+           HEADER
            ============================================================ */
         .site-header {
             position: sticky;
@@ -320,7 +319,7 @@
         .menu-toggle .icon { width: 22px; height: 22px; }
 
         /* ============================================================
-           HERO (unchanged)
+           HERO
            ============================================================ */
         .hero {
             position: relative;
@@ -494,7 +493,7 @@
         }
 
         /* ============================================================
-           SECTION SHELL (unchanged)
+           SECTION SHELL
            ============================================================ */
         .section { padding: var(--section-y) 0; }
         .section--alt { background: var(--bg-alt); }
@@ -516,12 +515,7 @@
             color: var(--primary);
             margin-bottom: 0.85rem;
         }
-        .eyebrow::before {
-            content: "";
-            width: 18px; height: 2px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
+        /* Removed the horizontal line (::before) from the eyebrow */
         .section-title {
             font-size: clamp(1.6rem, 3vw, 2.2rem);
             font-weight: 800;
@@ -535,7 +529,7 @@
         }
 
         /* ============================================================
-           CATEGORIES / TOOL CARDS / FEATURES / FAQ (unchanged)
+           CATEGORIES / TOOL CARDS
            ============================================================ */
         .cat-tabs {
             display: flex;
@@ -646,6 +640,7 @@
         }
         .tool-tag--pdf { color: #b45309; background: #fef3c7; }
         .tool-tag--image { color: var(--primary-dark); background: var(--primary-soft); }
+        .tool-tag--text { color: #7c3aed; background: #f3e8ff; }
 
         .tool-card h3 {
             font-size: 1.12rem;
@@ -696,6 +691,9 @@
             transform: translateY(0);
         }
 
+        /* ============================================================
+           FEATURES
+           ============================================================ */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -738,6 +736,9 @@
             line-height: 1.65;
         }
 
+        /* ============================================================
+           FAQ
+           ============================================================ */
         .faq-list {
             max-width: 780px;
             margin: 0 auto;
@@ -791,7 +792,7 @@
         }
 
         /* ============================================================
-           FOOTER (updated: 4 organised sections + legal)
+           FOOTER
            ============================================================ */
         .site-footer {
             background: var(--gradient-navy);
@@ -861,7 +862,7 @@
         }
 
         /* ============================================================
-           RESPONSIVE (updated for new navbar/footer)
+           RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
             .footer-grid {
@@ -971,7 +972,7 @@
 </head>
 <body>
 
-    <!-- ================= HEADER (updated navbar) ================= -->
+    <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
         <div class="container header-inner">
             <a href="https://www.quicktoolspk.com/" class="brand" aria-label="QuickToolsPK home">
@@ -1008,7 +1009,7 @@
         </div>
     </header>
 
-    <!-- ================= HERO (unchanged content, em dash removed) ================= -->
+    <!-- ================= HERO ================= -->
     <section class="hero">
         <div class="container hero-inner">
             <span class="hero-badge">
@@ -1050,7 +1051,7 @@
         </div>
     </section>
 
-    <!-- ================= TOOLS (unchanged content, em dash removed) ================= -->
+    <!-- ================= TOOLS ================= -->
     <section class="section" id="tools">
         <div class="container">
             <div class="section-head reveal">
@@ -1178,11 +1179,194 @@
         </div>
     </section>
 
-    <!-- ================= FEATURES (unchanged content, em dash removed) ================= -->
+    <!-- ================= NEW TOOLS SECTION ================= -->
+    <section class="section section--alt" id="more-tools">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">10 more tools</span>
+                <h2 class="section-title">More Free Online Tools</h2>
+                <p class="section-desc">Simple tools to manage PDFs, images, and text in seconds.</p>
+            </div>
+
+            <div class="tools-grid">
+                <!-- 1. Split PDF -->
+                <a class="tool-card reveal" href="tools/pdf-split.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--pdf">PDF</span>
+                    </div>
+                    <h3>Split PDF</h3>
+                    <p>Split a PDF into separate pages or smaller PDF files.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 2. Rotate PDF -->
+                <a class="tool-card reveal" href="tools/pdf-rotate.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--pdf">PDF</span>
+                    </div>
+                    <h3>Rotate PDF</h3>
+                    <p>Rotate PDF pages to the correct orientation.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 3. PDF to JPG -->
+                <a class="tool-card reveal" href="tools/pdf-to-jpg.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>PDF to JPG</h3>
+                    <p>Convert PDF pages into JPG images.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 4. Crop Image -->
+                <a class="tool-card reveal" href="tools/img-crop.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Crop Image</h3>
+                    <p>Crop an image to keep only the area you need.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 5. PNG to JPG -->
+                <a class="tool-card reveal" href="tools/png-to-jpg.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>PNG to JPG</h3>
+                    <p>Convert PNG images to JPG format.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 6. Delete PDF Pages -->
+                <a class="tool-card reveal" href="tools/pdf-delete-pages.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--pdf">PDF</span>
+                    </div>
+                    <h3>Delete PDF Pages</h3>
+                    <p>Remove unwanted pages from a PDF.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 7. Add Watermark to PDF -->
+                <a class="tool-card reveal" href="tools/pdf-watermark.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/><circle cx="12" cy="12" r="9"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--pdf">PDF</span>
+                    </div>
+                    <h3>Add Watermark to PDF</h3>
+                    <p>Add a text watermark to your PDF pages.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 8. Add Page Numbers to PDF -->
+                <a class="tool-card reveal" href="tools/pdf-page-numbers.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--pdf">PDF</span>
+                    </div>
+                    <h3>Add Page Numbers to PDF</h3>
+                    <p>Add page numbers to PDF documents.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 9. HEIC to JPG -->
+                <a class="tool-card reveal" href="tools/heic-to-jpg.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>HEIC to JPG</h3>
+                    <p>Convert iPhone HEIC photos into JPG images.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 10. Word Counter -->
+                <a class="tool-card reveal" href="tools/word-counter.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--text">Text</span>
+                    </div>
+                    <h3>Word Counter</h3>
+                    <p>Count words, characters, and spaces in your text.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
     <section class="section section--alt">
         <div class="container">
             <div class="section-head reveal">
-                <span class=">Why QuickToolsPK</span>
+                <span class="eyebrow">Why QuickToolsPK</span>
                 <h2 class="section-title">Built for speed, privacy, and simplicity</h2>
                 <p class="section-desc">No sign-ups, no hidden limits, no waiting on uploads. Just tools that work the way they should.</p>
             </div>
@@ -1223,7 +1407,7 @@
         </div>
     </section>
 
-    <!-- ================= FAQ (unchanged content, em dash removed) ================= -->
+    <!-- ================= FAQ ================= -->
     <section class="section" id="faq">
         <div class="container">
             <div class="section-head reveal">
@@ -1276,7 +1460,7 @@
         </div>
     </section>
 
-    <!-- ================= FOOTER (redesigned: Tools, Popular Categories, Company, Legal) ================= -->
+    <!-- ================= FOOTER ================= -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
@@ -1331,7 +1515,7 @@
                     </ul>
                 </div>
 
-                <!-- Legal (full-width row on tablet) -->
+                <!-- Legal -->
                 <div class="footer-col footer-col--legal">
                     <h4>Legal</h4>
                     <ul>
@@ -1354,7 +1538,7 @@
         </div>
     </footer>
 
-    <!-- ================= SCRIPT (unchanged behaviour) ================= -->
+    <!-- ================= SCRIPT ================= -->
     <script>
         (function () {
             'use strict';

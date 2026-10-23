@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         /* ============================================================
-           DESIGN TOKENS (identical to homepage)
+           DESIGN TOKENS
            ============================================================ */
         :root {
             --navy: #0b1a33; --navy-soft: #1e2a44;
@@ -41,6 +41,7 @@
             color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
             -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
         }
         h1, h2, h3, h4 {
             font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
@@ -48,7 +49,7 @@
         }
         a { color: inherit; }
         img, svg { display: block; max-width: 100%; }
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
         :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
         .icon {
@@ -58,7 +59,46 @@
         }
 
         /* ============================================================
-           HEADER (identical to homepage)
+           CREATIVE: BACKGROUND ELEMENTS & ANIMATIONS
+           ============================================================ */
+        .bg-decoration {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .deco-shape {
+            position: absolute; opacity: 0.4; animation: floatShape 15s ease-in-out infinite;
+        }
+        .deco-shape-1 { top: 10%; left: 5%; width: 120px; height: 120px; color: var(--primary-soft); animation-delay: 0s; }
+        .deco-shape-2 { top: 40%; right: 5%; width: 80px; height: 80px; color: var(--teal-soft); animation-delay: -5s; }
+        .deco-shape-3 { bottom: 15%; left: 10%; width: 60px; height: 60px; color: #fce7f3; animation-delay: -10s; }
+        .deco-shape-4 { bottom: 30%; right: 15%; width: 100px; height: 100px; color: var(--primary-soft); animation-delay: -7s; }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.05); }
+        }
+
+        .sparkle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; opacity: 0; box-shadow: 0 0 8px 1px rgba(37,99,235,0.6);
+            animation: sparkleRise linear infinite;
+        }
+        @keyframes sparkleRise {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER
            ============================================================ */
         .site-header {
             position: sticky; top: 0; z-index: 1000;
@@ -114,7 +154,7 @@
         .menu-toggle .icon { width: 22px; height: 22px; }
 
         /* ============================================================
-           PAGE SHELL
+           PAGE SHELL & TOOL UI
            ============================================================ */
         .page-main {
             flex: 1;
@@ -154,15 +194,16 @@
             background: var(--gradient-brand);
         }
 
-        /* Upload area */
+        /* Upload Area */
         .upload-area {
             border: 2px dashed var(--border-strong); border-radius: var(--r-md);
             padding: 2.25rem 1.5rem; text-align: center; cursor: pointer;
             background: var(--bg);
-            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast), transform var(--t-med);
         }
         .upload-area:hover, .upload-area.dragover {
-            border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--shadow-sm);
+            border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
         .upload-icon {
             font-size: 2.2rem; color: var(--primary); margin-bottom: 0.85rem;
@@ -170,7 +211,7 @@
             border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
             transition: transform var(--t-med);
         }
-        .upload-area:hover .upload-icon { transform: scale(1.06); }
+        .upload-area:hover .upload-icon { transform: scale(1.1) rotate(5deg); }
         .upload-area h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
         .upload-area p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; }
         #file-input { display: none; }
@@ -181,7 +222,14 @@
             padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
             border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
             transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+            position: relative; overflow: hidden;
         }
+        .btn::after {
+            content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn:hover::after { left: 130%; }
         .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
         .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
@@ -194,7 +242,9 @@
         .settings {
             margin-top: 1.5rem; padding: 1.25rem 1.35rem;
             background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            transition: box-shadow var(--t-med);
         }
+        .settings:hover { box-shadow: var(--shadow-sm); }
         .settings h3 { font-size: 1rem; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
         .settings h3 i { color: var(--primary); }
         .setting-row { display: flex; align-items: center; gap: 1rem; }
@@ -291,33 +341,98 @@
             color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
         }
 
-        /* Content sections */
-        .content-sections { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
-        .content-block h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 0.9rem; }
-        .content-block p, .content-block li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; }
-        .content-block ol, .content-block ul { padding-left: 1.4rem; margin-top: 0.5rem; }
-        .content-block ol li, .content-block ul li { margin-bottom: 0.55rem; }
+        /* ============================================================
+           CONTENT SECTIONS (FIXED SPACING)
+           ============================================================ */
+        .content-block {
+            margin-bottom: 2.5rem;
+        }
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+        .content-block h2 {
+            font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+            margin-bottom: 0.85rem;
+            position: relative;
+            padding-bottom: 6px;
+            display: inline-block;
+        }
+        .content-block h2::after {
+            content: ""; position: absolute; left: 0; bottom: 0; width: 40px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+            border-radius: 3px; transition: width 0.3s ease;
+        }
+        .content-block:hover h2::after {
+            width: 60px;
+        }
+        .content-block p, .content-block li {
+            font-size: 0.95rem; color: var(--text-muted); line-height: 1.7;
+        }
+        .content-block p {
+            margin-bottom: 0.75rem;
+        }
+        .content-block p:last-child {
+            margin-bottom: 0;
+        }
+        .content-block ol, .content-block ul {
+            padding-left: 1.15rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-block ol li, .content-block ul li {
+            margin-bottom: 0.45rem;
+            transition: transform 0.2s ease;
+        }
+        .content-block ol li:last-child, .content-block ul li:last-child {
+            margin-bottom: 0;
+        }
+        .content-block ol li:hover, .content-block ul li:hover {
+            transform: translateX(3px); color: var(--text);
+        }
         .content-block strong { color: var(--navy); }
+        .content-block code {
+            background: var(--primary-soft); color: var(--primary-dark);
+            padding: 0.1rem 0.4rem; border-radius: 5px; font-size: 0.88em;
+        }
 
         .features-list {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+            margin-top: 0.75rem;
         }
         .feature-item {
             background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
             padding: 1.25rem;
+            position: relative; overflow: hidden;
+            transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
         }
+        .feature-item::before {
+            content: ""; position: absolute; inset: 0; border-radius: inherit;
+            padding: 1.5px; background: linear-gradient(135deg, var(--primary), var(--teal), var(--primary));
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+            animation: gradShift 4s ease infinite;
+        }
+        .feature-item:hover::before { opacity: 1; }
+        .feature-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
+        @keyframes gradShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
         .feature-item h3 { font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
-        .feature-item h3 i { color: var(--teal); }
-        .feature-item p { font-size: 0.9rem; }
+        .feature-item h3 i { color: var(--teal); transition: transform 0.3s ease; }
+        .feature-item:hover h3 i { transform: scale(1.15) rotate(-6deg); }
+        .feature-item p { font-size: 0.9rem; margin: 0; }
 
-        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; }
         .faq-item {
             background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
-            overflow: hidden;
+            overflow: hidden; transition: box-shadow 0.3s ease;
         }
+        .faq-item:hover { box-shadow: var(--shadow-sm); }
         .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); }
         .faq-item summary {
-            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            list-style: none; cursor: pointer; padding: 0.85rem 1.25rem;
             display: flex; align-items: center; justify-content: space-between; gap: 1rem;
             font-weight: 600; font-size: 0.95rem; color: var(--navy);
         }
@@ -328,7 +443,12 @@
             transition: transform var(--t-med), color var(--t-med);
         }
         .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
-        .faq-answer { padding: 0 1.25rem 1.1rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+        .faq-answer {
+            padding: 0 1.25rem 1rem;
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;
+            animation: fadeInFaq 0.4s ease;
+        }
+        @keyframes fadeInFaq { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
         .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem; margin-top: 0.75rem; }
         .related-link {
@@ -338,9 +458,10 @@
             transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
         }
         .related-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: #bfd4f7; color: var(--primary-dark); }
-        .related-link i { color: var(--primary); width: 1.1em; text-align: center; }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; transition: transform 0.3s ease; }
+        .related-link:hover i { transform: scale(1.15); }
 
-        /* Toast (kept, restyled to homepage tokens) */
+        /* Toast */
         .toast {
             position: fixed; bottom: 24px; right: 24px;
             background: var(--surface); color: var(--text);
@@ -361,9 +482,9 @@
         }
 
         /* ============================================================
-           FOOTER (identical to homepage)
+           FOOTER
            ============================================================ */
-        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; }
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; position: relative; z-index: 2; }
         .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
         .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
         .footer-brand .brand-name { color: #fff; }
@@ -419,14 +540,31 @@
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-legal { justify-content: center; }
             .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .content-block { margin-bottom: 2rem; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
 <body>
+
+    <!-- CREATIVE: BACKGROUND DECORATIONS -->
+    <div class="bg-decoration" aria-hidden="true">
+        <svg class="deco-shape deco-shape-1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/></svg>
+        <svg class="deco-shape deco-shape-2" viewBox="0 0 100 100"><path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10 Z" fill="currentColor"/></svg>
+        <svg class="deco-shape deco-shape-3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="currentColor" opacity="0.3"/></svg>
+        <svg class="deco-shape deco-shape-4" viewBox="0 0 100 100"><path d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        
+        <span class="sparkle" style="left: 15%; top: 90%; animation-duration: 12s; animation-delay: 0s;"></span>
+        <span class="sparkle" style="left: 35%; top: 85%; animation-duration: 16s; animation-delay: 3s;"></span>
+        <span class="sparkle" style="left: 55%; top: 95%; animation-duration: 14s; animation-delay: 1s;"></span>
+        <span class="sparkle" style="left: 75%; top: 88%; animation-duration: 18s; animation-delay: 4s;"></span>
+        <span class="sparkle" style="left: 90%; top: 92%; animation-duration: 15s; animation-delay: 2s;"></span>
+    </div>
 
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
@@ -469,7 +607,7 @@
     <main class="page-main">
         <div class="container">
 
-            <nav class="breadcrumb" aria-label="Breadcrumb">
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
                 <a href="../index.html">Home</a>
                 <span class="sep">/</span>
                 <a href="../index.html#tools">PDF Tools</a>
@@ -477,14 +615,14 @@
                 <span>JPG to PDF Converter</span>
             </nav>
 
-            <div class="page-head">
+            <div class="page-head reveal">
                 <h1>JPG to PDF Converter</h1>
                 <p>Convert one or more JPG images into a single PDF. Drag and drop your files, adjust the quality slider, and download the result. All processing happens in your browser.</p>
             </div>
 
             <div class="tool-layout">
                 <div>
-                    <div class="card tool-card">
+                    <div class="card tool-card reveal">
 
                         <div class="upload-area" id="upload-area">
                             <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
@@ -496,7 +634,7 @@
                             <input type="file" id="file-input" accept=".jpg,.jpeg,image/jpeg" multiple>
                         </div>
 
-                        <div class="settings">
+                        <div class="settings reveal">
                             <h3><i class="fas fa-sliders-h"></i> Conversion settings</h3>
                             <div class="setting-row">
                                 <div class="slider">
@@ -511,7 +649,7 @@
                             </div>
                         </div>
 
-                        <div class="previews-section">
+                        <div class="previews-section reveal">
                             <div class="previews-title"><i class="fas fa-images"></i> Selected images</div>
                             <div class="image-previews" id="image-previews">
                                 <div class="empty-note">No images selected</div>
@@ -534,7 +672,7 @@
                     </div>
 
                     <!-- How to use -->
-                    <section class="content-block" style="margin-top:2.5rem;">
+                    <section class="content-block reveal" style="margin-top:2rem;">
                         <h2>How to convert JPG to PDF</h2>
                         <ol>
                             <li><strong>Add your JPG images.</strong> Drag and drop files onto the upload area, or click <em>Select JPG files</em> to browse. You can add multiple images at once.</li>
@@ -545,7 +683,7 @@
                     </section>
 
                     <!-- Key features -->
-                    <section class="content-block">
+                    <section class="content-block reveal">
                         <h2>Key features</h2>
                         <div class="features-list">
                             <div class="feature-item">
@@ -568,7 +706,7 @@
                     </section>
 
                     <!-- Benefits -->
-                    <section class="content-block">
+                    <section class="content-block reveal">
                         <h2>Why convert images to PDF</h2>
                         <ul>
                             <li><strong>Consistent sharing.</strong> A PDF keeps every page together and displays the same on any device.</li>
@@ -579,7 +717,7 @@
                     </section>
 
                     <!-- FAQ -->
-                    <section class="content-block">
+                    <section class="content-block reveal">
                         <h2>Frequently asked questions</h2>
                         <div class="faq-list">
                             <details class="faq-item">
@@ -610,7 +748,7 @@
                     </section>
 
                     <!-- Related tools -->
-                    <section class="content-block">
+                    <section class="content-block reveal">
                         <h2>Related tools</h2>
                         <div class="related-grid">
                             <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Image Compressor</a>
@@ -624,7 +762,7 @@
                 </div>
 
                 <!-- Sidebar ads -->
-                <aside class="sidebar" aria-label="Advertisement">
+                <aside class="sidebar reveal" aria-label="Advertisement">
                     <div class="ad-space">
                         <span class="ad-label">Advertisement</span>
                         <div class="ad-example">Ad space 300×250</div>
@@ -723,14 +861,8 @@
     (function () {
         'use strict';
 
-        /* ============================================================
-           jsPDF init (preserved)
-           ============================================================ */
         window.jsPDF = window.jspdf.jsPDF;
 
-        /* ============================================================
-           Header: sticky shadow + mobile menu
-           ============================================================ */
         const siteHeader = document.getElementById('siteHeader');
         const menuToggle = document.getElementById('menuToggle');
         const primaryNav = document.getElementById('primaryNav');
@@ -771,9 +903,28 @@
             if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
         });
 
-        /* ============================================================
-           Tool logic (preserved — same IDs, same behaviour)
-           ============================================================ */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+            });
+            reveals.forEach(el => observer.observe(el));
+        })();
+
         const fileInput = document.getElementById('file-input');
         const selectFileBtn = document.getElementById('select-file-btn');
         const uploadArea = document.getElementById('upload-area');
@@ -903,8 +1054,6 @@
                     const x = (pageWidth - imgWidth) / 2;
                     const y = (pageHeight - imgHeight) / 2;
 
-                    /* Quality variable preserved for compatibility with the original
-                       slider, but jsPDF 'FAST' compression is used here as before. */
                     pdf.addImage(img, 'JPEG', x, y, imgWidth, imgHeight, null, 'FAST');
                     URL.revokeObjectURL(url);
                 }
