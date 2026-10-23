@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEIC to JPG | Free Online iPhone Photo Converter | QuickToolsPK</title>
+    <meta name="description" content="Convert iPhone HEIC photos to JPG format online for free. Upload your image, preview the result, and download instantly. Runs in your browser with no uploads.">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/heic-to-jpg.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- HEIC to JPG Conversion Library -->
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           CREATIVE: BACKGROUND ELEMENTS & ANIMATIONS
+           ============================================================ */
+        .bg-decoration {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .deco-shape {
+            position: absolute; opacity: 0.4; animation: floatShape 15s ease-in-out infinite;
+        }
+        .deco-shape-1 { top: 10%; left: 5%; width: 120px; height: 120px; color: var(--primary-soft); animation-delay: 0s; }
+        .deco-shape-2 { top: 40%; right: 5%; width: 80px; height: 80px; color: var(--teal-soft); animation-delay: -5s; }
+        .deco-shape-3 { bottom: 15%; left: 10%; width: 60px; height: 60px; color: #fce7f3; animation-delay: -10s; }
+        .deco-shape-4 { bottom: 30%; right: 15%; width: 100px; height: 100px; color: var(--primary-soft); animation-delay: -7s; }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.05); }
+        }
+
+        .sparkle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; opacity: 0; box-shadow: 0 0 8px 1px rgba(37,99,235,0.6);
+            animation: sparkleRise linear infinite;
+        }
+        @keyframes sparkleRise {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & TOOL UI
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(1.75rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        .page-head { margin-bottom: 1.75rem; max-width: 780px; }
+        .page-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+        .page-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+        .tool-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.75rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .tool-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+        }
+        .tool-card {
+            padding: 1.75rem; position: relative; overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-brand);
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border-strong); border-radius: var(--r-md);
+            padding: 2.25rem 1.5rem; text-align: center; cursor: pointer;
+            background: var(--bg);
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast), transform var(--t-med);
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .upload-icon {
+            font-size: 2.2rem; color: var(--primary); margin-bottom: 0.85rem;
+            background: var(--primary-soft); width: 76px; height: 76px; line-height: 76px;
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            transition: transform var(--t-med);
+        }
+        .upload-area:hover .upload-icon { transform: scale(1.1) rotate(5deg); }
+        .upload-area h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .upload-area p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; }
+        .upload-hint { font-size: 0.8rem; color: var(--text-subtle); margin-top: 0.75rem; }
+        #file-input { display: none; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
+            border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+            position: relative; overflow: hidden;
+        }
+        .btn::after {
+            content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn:hover::after { left: 130%; }
+        .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover:not(:disabled) { background: var(--primary-soft); border-color: #bfd4f7; }
+        .btn-success { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #fff; box-shadow: 0 8px 22px -6px rgba(5,150,105,0.4); }
+        .btn-success:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(5,150,105,0.5); }
+
+        /* Previews */
+        .preview-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;
+        }
+        @media (max-width: 640px) { .preview-grid { grid-template-columns: 1fr; } }
+        .preview-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.1rem; text-align: center;
+            transition: transform var(--t-med), box-shadow var(--t-med);
+        }
+        .preview-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .preview-card h4 { font-size: 0.92rem; margin-bottom: 0.55rem; color: var(--navy); display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
+        .preview-img {
+            width: 100%; max-height: 200px; object-fit: contain;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-sm);
+            margin-bottom: 0.6rem;
+        }
+        .preview-meta {
+            font-size: 0.85rem; color: var(--text-muted);
+            background: var(--bg); padding: 0.6rem 0.7rem; border-radius: var(--r-sm); line-height: 1.5;
+            word-break: break-word;
+        }
+        .preview-meta strong { color: var(--navy); }
+
+        /* Actions */
+        .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+        @media (max-width: 520px) { .actions .btn { width: 100%; } }
+
+        /* Loading */
+        .loading { display: none; text-align: center; padding: 1.5rem 0; }
+        .loading.is-visible { display: block; }
+        .loading-spinner {
+            width: 46px; height: 46px; border: 4px solid var(--primary-soft);
+            border-top-color: var(--primary); border-radius: 50%;
+            animation: spin 0.9s linear infinite; margin: 0 auto 0.75rem;
+        }
+        .loading p { color: var(--text-muted); font-size: 0.9rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Sidebar ads */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ad-space {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
+        }
+        .ad-label {
+            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
+            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
+        }
+        .ad-example {
+            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
+        }
+
+        /* ============================================================
+           CONTENT SECTIONS
+           ============================================================ */
+        .content-block {
+            margin-bottom: 2.5rem;
+        }
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+        .content-block h2 {
+            font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+            margin-bottom: 0.85rem;
+            position: relative;
+            padding-bottom: 6px;
+            display: inline-block;
+        }
+        .content-block h2::after {
+            content: ""; position: absolute; left: 0; bottom: 0; width: 40px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+            border-radius: 3px; transition: width 0.3s ease;
+        }
+        .content-block:hover h2::after {
+            width: 60px;
+        }
+        .content-block p, .content-block li {
+            font-size: 0.95rem; color: var(--text-muted); line-height: 1.7;
+        }
+        .content-block p {
+            margin-bottom: 0.75rem;
+        }
+        .content-block p:last-child {
+            margin-bottom: 0;
+        }
+        .content-block ol, .content-block ul {
+            padding-left: 1.15rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-block ol li, .content-block ul li {
+            margin-bottom: 0.45rem;
+            transition: transform 0.2s ease;
+        }
+        .content-block ol li:last-child, .content-block ul li:last-child {
+            margin-bottom: 0;
+        }
+        .content-block ol li:hover, .content-block ul li:hover {
+            transform: translateX(3px); color: var(--text);
+        }
+        .content-block strong { color: var(--navy); }
+        .content-block code {
+            background: var(--primary-soft); color: var(--primary-dark);
+            padding: 0.1rem 0.4rem; border-radius: 5px; font-size: 0.88em;
+        }
+
+        .features-list {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+            margin-top: 0.75rem;
+        }
+        .feature-item {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem;
+            position: relative; overflow: hidden;
+            transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+        }
+        .feature-item::before {
+            content: ""; position: absolute; inset: 0; border-radius: inherit;
+            padding: 1.5px; background: linear-gradient(135deg, var(--primary), var(--teal), var(--primary));
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+            animation: gradShift 4s ease infinite;
+        }
+        .feature-item:hover::before { opacity: 1; }
+        .feature-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
+        @keyframes gradShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
+        .feature-item h3 { font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+        .feature-item h3 i { color: var(--teal); transition: transform 0.3s ease; }
+        .feature-item:hover h3 i { transform: scale(1.15) rotate(-6deg); }
+        .feature-item p { font-size: 0.9rem; margin: 0; }
+
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            overflow: hidden; transition: box-shadow 0.3s ease;
+        }
+        .faq-item:hover { box-shadow: var(--shadow-sm); }
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 0.85rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-chevron {
+            width: 20px; height: 20px; flex-shrink: 0; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1rem;
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;
+            animation: fadeInFaq 0.4s ease;
+        }
+        @keyframes fadeInFaq { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem; margin-top: 0.75rem; }
+        .related-link {
+            display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.1rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.92rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .related-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: #bfd4f7; color: var(--primary-dark); }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; transition: transform 0.3s ease; }
+        .related-link:hover i { transform: scale(1.15); }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--surface); color: var(--text);
+            padding: 0.9rem 1.2rem; border-radius: var(--r-md);
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 2000; transform: translateY(120px); opacity: 0;
+            transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+            border: 1px solid var(--border); border-left: 4px solid var(--success);
+            max-width: 380px; font-size: 0.9rem;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.error i { color: var(--danger); }
+        @media (max-width: 480px) {
+            .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .tool-card { padding: 1.25rem; }
+            .upload-area { padding: 1.6rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .content-block { margin-bottom: 2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CREATIVE: BACKGROUND DECORATIONS -->
+    <div class="bg-decoration" aria-hidden="true">
+        <svg class="deco-shape deco-shape-1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/></svg>
+        <svg class="deco-shape deco-shape-2" viewBox="0 0 100 100"><path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10 Z" fill="currentColor"/></svg>
+        <svg class="deco-shape deco-shape-3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="currentColor" opacity="0.3"/></svg>
+        <svg class="deco-shape deco-shape-4" viewBox="0 0 100 100"><path d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        
+        <span class="sparkle" style="left: 15%; top: 90%; animation-duration: 12s; animation-delay: 0s;"></span>
+        <span class="sparkle" style="left: 35%; top: 85%; animation-duration: 16s; animation-delay: 3s;"></span>
+        <span class="sparkle" style="left: 55%; top: 95%; animation-duration: 14s; animation-delay: 1s;"></span>
+        <span class="sparkle" style="left: 75%; top: 88%; animation-duration: 18s; animation-delay: 4s;"></span>
+        <span class="sparkle" style="left: 90%; top: 92%; animation-duration: 15s; animation-delay: 2s;"></span>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link is-active" href="../index.html#tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../index.html">About</a></li>
+                    <li><a class="nav-link" href="../index.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="https://quicktoolspk.github.io/blog/" target="_blank" rel="noopener">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="../index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>HEIC to JPG</span>
+            </nav>
+
+            <div class="page-head reveal">
+                <h1>HEIC to JPG</h1>
+                <p>Convert iPhone HEIC photos into JPG images. Upload your HEIC file, preview the result, and download the converted image instantly. All processing happens in your browser.</p>
+            </div>
+
+            <div class="tool-layout">
+                <div>
+                    <div class="card tool-card reveal">
+
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon"><i class="fas fa-file-image"></i></div>
+                            <h3>Drag and drop your HEIC file here</h3>
+                            <p>or click below to browse a file</p>
+                            <button class="btn btn-primary" id="select-file-btn" type="button">
+                                <i class="fas fa-file-upload"></i> Select HEIC file
+                            </button>
+                            <input type="file" id="file-input" accept=".heic,.heif,image/heic,image/heif">
+                            <div class="upload-hint">Supports HEIC and HEIF files. Maximum file size 20 MB.</div>
+                        </div>
+
+                        <div class="loading" id="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Converting your HEIC image…</p>
+                        </div>
+
+                        <div class="preview-grid" id="preview-container" style="display:none;">
+                            <div class="preview-card">
+                                <h4><i class="fas fa-image"></i> Original HEIC</h4>
+                                <div class="preview-meta" id="original-info">No file selected</div>
+                            </div>
+                            <div class="preview-card">
+                                <h4><i class="fas fa-file-image"></i> Converted JPG</h4>
+                                <img id="output-preview" class="preview-img" alt="Converted JPG preview" style="display:none;">
+                                <div class="preview-meta" id="output-info">No file converted</div>
+                            </div>
+                        </div>
+
+                        <div class="actions" id="action-buttons" style="display:none;">
+                            <button class="btn btn-success" id="convert-btn">
+                                <i class="fas fa-exchange-alt"></i> Convert to JPG
+                            </button>
+                            <button class="btn btn-ghost" id="reset-btn" type="button">
+                                <i class="fas fa-redo"></i> Choose another file
+                            </button>
+                        </div>
+
+                        <div class="actions" id="download-button" style="display:none;">
+                            <button class="btn btn-success" id="download-btn">
+                                <i class="fas fa-download"></i> Download JPG
+                            </button>
+                            <button class="btn btn-ghost" id="new-convert-btn" type="button">
+                                <i class="fas fa-plus"></i> Convert another HEIC
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- How to use -->
+                    <section class="content-block reveal" style="margin-top:2rem;">
+                        <h2>How to convert HEIC to JPG</h2>
+                        <ol>
+                            <li><strong>Upload a HEIC file.</strong> Drag and drop a file onto the upload area, or click <em>Select HEIC file</em>.</li>
+                            <li><strong>Convert the image.</strong> Click <em>Convert to JPG</em>. The tool will process the HEIC file and render it as a standard JPG.</li>
+                            <li><strong>Preview the result.</strong> Check the converted JPG preview to ensure it looks correct.</li>
+                            <li><strong>Download.</strong> Click <em>Download JPG</em> to save the new image to your device.</li>
+                        </ol>
+                    </section>
+
+                    <!-- Key features -->
+                    <section class="content-block reveal">
+                        <h2>Key features</h2>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <h3><i class="fas fa-exchange-alt"></i> HEIC to JPG</h3>
+                                <p>Quickly convert iPhone HEIC photos into universally supported JPG files.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-shield-alt"></i> 100% private</h3>
+                                <p>Your files are processed locally in your browser and are never uploaded to a server.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-bolt"></i> Fast and free</h3>
+                                <p>No registration, no watermarks, and no waiting for uploads.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-image"></i> High quality</h3>
+                                <p>The conversion preserves the original resolution and visual quality of your photo.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- FAQ -->
+                    <section class="content-block reveal">
+                        <h2>Frequently asked questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>Is this HEIC to JPG converter free?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. The tool is completely free to use with no hidden limits.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Are my files uploaded to a server?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. The image is processed entirely in your browser. Nothing is sent to a server.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Why do iPhone photos use HEIC?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">HEIC (High-Efficiency Image Container) is a modern format that provides better compression than JPG, meaning smaller file sizes with similar quality. Apple uses it by default on newer iPhones.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Does the conversion reduce quality?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">JPG is a lossy format, but we use a high-quality setting (0.9) to ensure the resulting image looks virtually identical to the original HEIC.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Do you offer Cash on Delivery?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">This is a digital tool, so Cash on Delivery does not apply. The tool is free to use online.</div>
+                            </details>
+                        </div>
+                    </section>
+
+                    <!-- Related tools -->
+                    <section class="content-block reveal">
+                        <h2>Related tools</h2>
+                        <div class="related-grid">
+                            <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a>
+                            <a class="related-link" href="png-to-jpg.html"><i class="fas fa-file-image"></i> PNG to JPG</a>
+                            <a class="related-link" href="img-crop.html"><i class="fas fa-crop"></i> Crop Image</a>
+                            <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Image Compressor</a>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Sidebar ads -->
+                <aside class="sidebar reveal" aria-label="Advertisement">
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×250</div>
+                    </div>
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×600</div>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="img-crop.html">Crop Image</a></li>
+                        <li><a href="png-to-jpg.html">PNG to JPG</a></li>
+                        <li><a href="heic-to-jpg.html">HEIC to JPG</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="pdf-split.html">Split PDF</a></li>
+                        <li><a href="pdf-rotate.html">Rotate PDF</a></li>
+                        <li><a href="pdf-to-jpg.html">PDF to JPG</a></li>
+                        <li><a href="pdf-delete-pages.html">Delete PDF Pages</a></li>
+                        <li><a href="pdf-watermark.html">Add Watermark to PDF</a></li>
+                        <li><a href="pdf-page-numbers.html">Add Page Numbers to PDF</a></li>
+                        <li><a href="pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#tools">Image Tools</a></li>
+                        <li><a href="../index.html#tools">PDF Tools</a></li>
+                        <li><a href="../index.html#tools">Converters</a></li>
+                        <li><a href="../index.html#tools">Compressors</a></li>
+                        <li><a href="../index.html#tools">Resizers</a></li>
+                        <li><a href="https://quicktoolspk.github.io/blog/" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../index.html">About Us</a></li>
+                        <li><a href="../index.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Image converted successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+            });
+            reveals.forEach(el => observer.observe(el));
+        })();
+
+        /* ---- Tool logic ---- */
+        const fileInput = document.getElementById('file-input');
+        const selectFileBtn = document.getElementById('select-file-btn');
+        const uploadArea = document.getElementById('upload-area');
+        const loading = document.getElementById('loading');
+        
+        const previewContainer = document.getElementById('preview-container');
+        const originalInfo = document.getElementById('original-info');
+        const outputInfo = document.getElementById('output-info');
+        const outputPreview = document.getElementById('output-preview');
+        
+        const convertBtn = document.getElementById('convert-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const newConvertBtn = document.getElementById('new-convert-btn');
+        const actionButtons = document.getElementById('action-buttons');
+        const downloadButton = document.getElementById('download-button');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        let originalFile = null;
+        let convertedImageBlob = null;
+
+        selectFileBtn.addEventListener('click', function () { fileInput.click(); });
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
+        uploadArea.addEventListener('drop', handleDrop);
+        
+        convertBtn.addEventListener('click', convertImage);
+        resetBtn.addEventListener('click', resetConverter);
+        downloadBtn.addEventListener('click', downloadImage);
+        newConvertBtn.addEventListener('click', resetConverter);
+
+        function handleDragOver(e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.add('dragover'); }
+        function handleDragLeave(e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover'); }
+        function handleDrop(e) {
+            e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover');
+            if (!e.dataTransfer.files.length) return;
+            const f = e.dataTransfer.files[0];
+            const isHeic = f.name.toLowerCase().endsWith('.heic') || f.name.toLowerCase().endsWith('.heif') || f.type === 'image/heic' || f.type === 'image/heif';
+            if (!isHeic) { showNotification('Please select a HEIC file.', 'error'); return; }
+            processFile(f);
+        }
+        function handleFileSelect(e) {
+            const f = e.target.files[0];
+            if (!f) return;
+            const isHeic = f.name.toLowerCase().endsWith('.heic') || f.name.toLowerCase().endsWith('.heif') || f.type === 'image/heic' || f.type === 'image/heif';
+            if (!isHeic) { showNotification('Please select a HEIC file.', 'error'); return; }
+            processFile(f);
+        }
+
+        function processFile(file) {
+            if (file.size > 20 * 1024 * 1024) {
+                showNotification('File size exceeds 20 MB. Please choose a smaller image.', 'error');
+                return;
+            }
+            originalFile = file;
+            originalInfo.innerHTML = 'Name: <strong>' + file.name + '</strong><br>Size: <strong>' + formatFileSize(file.size) + '</strong>';
+            previewContainer.style.display = 'grid';
+            actionButtons.style.display = 'flex';
+            downloadButton.style.display = 'none';
+            outputPreview.style.display = 'none';
+            outputPreview.src = '';
+            outputInfo.innerHTML = 'No file converted';
+            convertedImageBlob = null;
+            showNotification('HEIC file ready. Click Convert to JPG.');
+        }
+
+        async function convertImage() {
+            if (!originalFile) return;
+            loading.classList.add('is-visible');
+            actionButtons.style.display = 'none';
+
+            try {
+                // Convert HEIC to JPG using the heic2any library
+                const conversionResult = await heic2any({
+                    blob: originalFile,
+                    toType: "image/jpeg",
+                    quality: 0.9
+                });
+
+                // heic2any can return an array if the HEIC has multiple images (e.g., burst photos)
+                // We will take the first one
+                convertedImageBlob = Array.isArray(conversionResult) ? conversionResult[0] : conversionResult;
+
+                const imageUrl = URL.createObjectURL(convertedImageBlob);
+                outputPreview.src = imageUrl;
+                outputPreview.style.display = 'block';
+                
+                outputInfo.innerHTML = 'Size: <strong>' + formatFileSize(convertedImageBlob.size) + '</strong>';
+
+                loading.classList.remove('is-visible');
+                downloadButton.style.display = 'flex';
+                showNotification('Image converted to JPG successfully.');
+            } catch (err) {
+                console.error('Error converting HEIC:', err);
+                loading.classList.remove('is-visible');
+                actionButtons.style.display = 'flex';
+                showNotification('Error converting HEIC. The file might be corrupted or unsupported.', 'error');
+            }
+        }
+
+        function downloadImage() {
+            if (!convertedImageBlob) return;
+            const link = document.createElement('a');
+            link.download = 'converted-image.jpg';
+            link.href = URL.createObjectURL(convertedImageBlob);
+            link.click();
+        }
+
+        function resetConverter() {
+            fileInput.value = '';
+            originalFile = null;
+            convertedImageBlob = null;
+            previewContainer.style.display = 'none';
+            actionButtons.style.display = 'none';
+            downloadButton.style.display = 'none';
+            originalInfo.innerHTML = 'No file selected';
+            outputInfo.innerHTML = 'No file converted';
+            outputPreview.src = '';
+            uploadArea.classList.remove('active');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / 1048576).toFixed(2) + ' MB';
+        }
+
+        function showNotification(message, type) {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.classList.add('show');
+            clearTimeout(showNotification._t);
+            showNotification._t = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    })();
+    </script>
+</body>
+</html>

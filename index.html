@@ -492,6 +492,174 @@
             margin-top: 0.5rem;
         }
 
+                /* ============================================================
+           HERO FLOATING ICONS — MINIMAL GLASS DOTS (FASTER ANIMATION)
+           (desktop & tablet only)
+           ============================================================ */
+        .hero-float-icons {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-icon {
+            position: absolute;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+
+            /* Soft frosted glass tile */
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+            /* Subtle 3D lift */
+            box-shadow:
+                0 4px 12px -4px rgba(15, 30, 55, 0.12),
+                0 1px 2px rgba(15, 30, 55, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+            /* FASTER ANIMATION (4.5s instead of 9s) */
+            animation: floatIcon 4.5s ease-in-out infinite;
+            transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        box-shadow 0.45s ease;
+        }
+
+        /* Coloured tint dot behind the icon */
+        .float-icon::before {
+            content: "";
+            position: absolute;
+            inset: 26%;
+            border-radius: 50%;
+            filter: blur(14px);
+            opacity: 0.55;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Thin minimal line icon */
+        .float-icon .icon {
+            width: 22px;
+            height: 22px;
+            stroke-width: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- Individual colours + positions ---------- */
+
+        /* Blue */
+        .float-icon--img {
+            top: 12%; left: 7%; color: #2563eb; animation-delay: 0s;
+        }
+        .float-icon--img::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        /* Cyan */
+        .float-icon--pdf {
+            top: 30%; left: 14%; color: #0891b2; animation-delay: 0.5s;
+        }
+        .float-icon--pdf::before { background: radial-gradient(circle, #06b6d4, transparent 70%); }
+
+        /* Indigo */
+        .float-icon--exchange {
+            top: 49%; left: 5%; color: #4f46e5; animation-delay: 1.0s;
+        }
+        .float-icon--exchange::before { background: radial-gradient(circle, #6366f1, transparent 70%); }
+
+        /* Teal */
+        .float-icon--crop {
+            top: 67%; left: 15%; color: #0d9488; animation-delay: 1.5s;
+        }
+        .float-icon--crop::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        /* Emerald */
+        .float-icon--convert {
+            top: 84%; left: 8%; color: #059669; animation-delay: 2.0s;
+        }
+        .float-icon--convert::before { background: radial-gradient(circle, #10b981, transparent 70%); }
+
+        /* Blue */
+        .float-icon--copy {
+            top: 12%; right: 7%; color: #1d4ed8; animation-delay: 0.25s;
+        }
+        .float-icon--copy::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        /* Teal */
+        .float-icon--lock {
+            top: 30%; right: 14%; color: #0f766e; animation-delay: 0.75s;
+        }
+        .float-icon--lock::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        /* Sky */
+        .float-icon--upload {
+            top: 49%; right: 5%; color: #0284c7; animation-delay: 1.25s;
+        }
+        .float-icon--upload::before { background: radial-gradient(circle, #0ea5e9, transparent 70%); }
+
+        /* Teal */
+        .float-icon--scissors {
+            top: 67%; right: 15%; color: #0d9488; animation-delay: 1.75s;
+        }
+        .float-icon--scissors::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        /* Blue */
+        .float-icon--download {
+            top: 84%; right: 8%; color: #2563eb; animation-delay: 2.25s;
+        }
+        .float-icon--download::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        /* ---------- Animations ---------- */
+
+        /* Gentle float with very slight rotation (now faster) */
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-12px) rotate(3deg); }
+        }
+
+        /* Soft hover lift */
+        .float-icon:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow:
+                0 8px 20px -6px rgba(15, 30, 55, 0.18),
+                0 2px 4px rgba(15, 30, 55, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            animation-play-state: paused;
+        }
+
+        /* ---------- Responsive ---------- */
+
+        /* Tablet: even smaller + pulled closer to edges */
+        @media (min-width: 861px) and (max-width: 1100px) {
+            .float-icon {
+                width: 46px;
+                height: 46px;
+                border-radius: 13px;
+            }
+            .float-icon .icon {
+                width: 18px;
+                height: 18px;
+            }
+            .float-icon::before {
+                filter: blur(10px);
+            }
+        }
+
+        /* Hide on mobile */
+        @media (max-width: 860px) {
+            .hero-float-icons { display: none; }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .float-icon { animation: none !important; }
+            .float-icon:hover { transform: none !important; }
+        }
+        
         /* ============================================================
            SECTION SHELL
            ============================================================ */
@@ -937,6 +1105,16 @@
                 gap: 0.75rem 1.5rem;
             }
         }
+        /* Image tools section: slight tweak for long tool names */
+        #image-tools .tool-card h3 {
+            font-size: 1.02rem;
+            line-height: 1.35;
+            word-break: break-word;
+        }
+        #image-tools .tool-card p {
+            font-size: 0.88rem;
+            line-height: 1.55;
+        } 
 
         @media (max-width: 600px) {
             .hero { padding-top: 2.5rem; }
@@ -1010,7 +1188,25 @@
     </header>
 
     <!-- ================= HERO ================= -->
+        <!-- ================= HERO ================= -->
     <section class="hero">
+        <!-- Floating animated icons (desktop & tablet only) -->
+        <div class="hero-float-icons" aria-hidden="true">
+            <!-- Left side -->
+            <span class="float-icon float-icon--img"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
+            <span class="float-icon float-icon--pdf"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="float-icon float-icon--exchange"><svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
+            <span class="float-icon float-icon--crop"><svg class="icon" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg></span>
+            <span class="float-icon float-icon--convert"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="2"/></svg></span>
+
+            <!-- Right side -->
+            <span class="float-icon float-icon--copy"><svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+            <span class="float-icon float-icon--lock"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <span class="float-icon float-icon--upload"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+            <span class="float-icon float-icon--scissors"><svg class="icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+            <span class="float-icon float-icon--download"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+        </div>
+
         <div class="container hero-inner">
             <span class="hero-badge">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
@@ -1352,6 +1548,393 @@
                     </div>
                     <h3>Word Counter</h3>
                     <p>Count words, characters, and spaces in your text.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <!-- ================= 22 IMAGE TOOLS SECTION ================= -->
+    <section class="section" id="image-tools" aria-labelledby="image-tools-title">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">22 image tools</span>
+                <h2 class="section-title" id="image-tools-title">Image Tools for Every Task</h2>
+                <p class="section-desc">Resize for social media, make passport photos, crop, adjust colours, add text, and more. All free, all in your browser.</p>
+            </div>
+
+            <div class="tools-grid">
+                <!-- 1. Social Media Image Resizer -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/social-media-image-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Social Media Image Resizer</h3>
+                    <p>Resize one image for many platforms at once.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 2. Passport Size Photo Maker -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/passport-size-photo-maker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Passport Size Photo Maker</h3>
+                    <p>Create passport or visa size photos quickly.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 3. Remove Metadata -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/remove-metadata.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Remove Metadata</h3>
+                    <p>Strip EXIF data and GPS information from photos.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 4. Instagram Image Resizer -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/instagram-image-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37a4 4 0 1 1-7.75 1.26 4 4 0 0 1 7.75-1.26z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Instagram Image Resizer</h3>
+                    <p>Perfect sizes for Instagram posts, stories, and reels.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 5. Rotate & Flip -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/rotate-flip.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Rotate &amp; Flip</h3>
+                    <p>Rotate or flip images in any direction.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 6. Borders & Padding -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/borders-padding.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Borders &amp; Padding</h3>
+                    <p>Add borders or extra padding around an image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 7. Circle Crop -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/circle-crop.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Circle Crop</h3>
+                    <p>Crop any image into a perfect circle.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 8. Rounded Corners -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/rounded-corners.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 21v-8a8 8 0 0 1 8-8h10"/><path d="M3 21h18V11"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Rounded Corners</h3>
+                    <p>Round the corners of any image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 9. Change Background Colour -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/change-background-colour.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Change Background Colour</h3>
+                    <p>Replace the background colour of your image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 10. Adjust Image Colours -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/adjust-image-colours.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Adjust Image Colours</h3>
+                    <p>Fine-tune brightness, contrast, saturation, and more.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 11. Black & White Image -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/black-white-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Black &amp; White Image</h3>
+                    <p>Convert any colour image to black and white.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 12. Add Text to Image -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/add-text-to-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Add Text to Image</h3>
+                    <p>Overlay text on any image with custom style.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 13. Signature Resizer -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/signature-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 17c3-6 6-6 9 0s6 6 9 0"/><path d="M3 7h18"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Signature Resizer</h3>
+                    <p>Resize signatures to required dimensions.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 14. Image Requirement Checker -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-requirement-checker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Requirement Checker</h3>
+                    <p>Check if your image meets specific requirements.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 15. Image Information & Metadata -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-information-metadata.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Information &amp; Metadata</h3>
+                    <p>View full details and metadata of any image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 16. Redact Image -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/redact-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Redact Image</h3>
+                    <p>Hide sensitive parts of an image permanently.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 17. Image Colour Picker -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-colour-picker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 0-20c5.52 0 10 4.48 10 10a3 3 0 0 1-3 3h-2a3 3 0 0 0-3 3v1a3 3 0 0 1-3 3z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Colour Picker</h3>
+                    <p>Pick any colour from an image and copy the code.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 18. YouTube Thumbnail & Banner -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/youtube-thumbnail-banner.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>YouTube Thumbnail &amp; Banner</h3>
+                    <p>Create YouTube thumbnails and channel banners.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 19. X (Twitter) Header & Post -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/x-twitter-header-post.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>X (Twitter) Header &amp; Post</h3>
+                    <p>Perfect sizes for X headers and post images.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 20. LinkedIn Banner & Profile Photo -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/linkedin-banner-profile-photo.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>LinkedIn Banner &amp; Profile Photo</h3>
+                    <p>Resize images for LinkedIn banners and profiles.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 21. Facebook Cover & Post -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/facebook-cover-post.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Facebook Cover &amp; Post</h3>
+                    <p>Get the right sizes for Facebook covers and posts.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- 22. Visa Photo Maker -->
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/visa-photo-maker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/><circle cx="18" cy="6" r="2"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Visa Photo Maker</h3>
+                    <p>Create visa-compliant photos for any country.</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta">Use tool
                             <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
