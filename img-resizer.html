@@ -3,1143 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Resizer - QuickToolsPK</title>
-    <meta name="description" content="Free online tool to resize images while maintaining quality. Adjust dimensions, scale by percentage, and download instantly.">
+    <title>Image Resizer | Free Online Photo Resizer | QuickToolsPK</title>
+    <meta name="description" content="Resize images online for free. Scale by percentage or set custom width and height, keep aspect ratio, preview side by side, and download. Runs in your browser.">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/img-resizer.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ============================================================
+           DESIGN TOKENS (identical to homepage)
+           ============================================================ */
         :root {
-            --primary: #4361ee;
-            --primary-dark: #7209b7;
-            --secondary: #dadada;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #2ec4b6;
-            --warning: #ff9f1c;
-            --danger: #e71d36;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --button-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
-            --border-radius: 16px;
-            --transition: all 0.3s ease;
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
         }
 
-        /* Navigation Bar */
-        .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* ============================================================
+           HEADER (identical to homepage)
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
         }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
         }
-
-        .nav-brand .logo {
-            font-size: 2.2rem;
-            background: rgba(255, 255, 255, 0.2);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
         .brand-name {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1.8rem;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
         }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 25px;
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
         }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 8px 12px;
-            border-radius: 8px;
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
         }
-
-        .nav-menu a:hover, .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
         }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+        /* ============================================================
+           PAGE SHELL
+           ============================================================ */
+        .page-main {
             flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(1.75rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem);
         }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
 
-        /* Page header styling */
-        .page-header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
-            transform: rotate(30deg);
-        }
-        
-        .page-header h1 {
-            font-size: 2.4rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            position: relative;
-        }
-        
-        .page-header p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.9;
-            position: relative;
-        }
+        .page-head { margin-bottom: 1.75rem; max-width: 780px; }
+        .page-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+        .page-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 30px;
+        .tool-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.75rem;
+            align-items: start;
         }
-        
         @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
+            .tool-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
         }
 
-        /* Card styling */
-        .converter-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 35px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
         }
-        
-        .converter-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+        .tool-card {
+            padding: 1.75rem; position: relative; overflow: hidden;
         }
-        
-        .converter-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-header {
-            background: var(--primary);
-            color: white;
-            padding: 15px 20px;
-            font-weight: 600;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: -35px -35px 25px -35px;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-brand);
         }
 
+        /* Upload */
         .upload-area {
-            border: 2px dashed var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 50px 20px;
-            text-align: center;
-            margin-bottom: 30px;
-            transition: all 0.3s;
-            cursor: pointer;
-            background: var(--light);
-            position: relative;
-            overflow: hidden;
+            border: 2px dashed var(--border-strong); border-radius: var(--r-md);
+            padding: 2.25rem 1.5rem; text-align: center; cursor: pointer;
+            background: var(--bg);
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
         }
-        
-        .upload-area.active, .upload-area.dragover {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.03);
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--shadow-sm);
         }
-        
-        .upload-area:hover {
-            border-color: var(--primary);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
-        }
-        
         .upload-icon {
-            font-size: 3.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            background: rgba(67, 97, 238, 0.1);
-            width: 90px;
-            height: 90px;
-            line-height: 90px;
-            border-radius: 50%;
-            display: inline-block;
-            transition: all 0.3s;
+            font-size: 2.2rem; color: var(--primary); margin-bottom: 0.85rem;
+            background: var(--primary-soft); width: 76px; height: 76px; line-height: 76px;
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            transition: transform var(--t-med);
         }
-        
-        .upload-area:hover .upload-icon {
-            transform: scale(1.05);
-            background: rgba(67, 97, 238, 0.15);
-        }
-        
-        .upload-area h3 {
-            margin-bottom: 12px;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-        
-        .upload-area p {
-            color: var(--gray);
-            max-width: 400px;
-            margin: 0 auto;
-            font-size: 1.05rem;
-        }
+        .upload-area:hover .upload-icon { transform: scale(1.06); }
+        .upload-area h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .upload-area p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; }
+        .upload-hint { font-size: 0.8rem; color: var(--text-subtle); margin-top: 0.75rem; }
+        #file-input { display: none; }
 
-        /* Button styling */
+        /* Buttons */
         .btn {
-            padding: 18px 25px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: var(--button-shadow);
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
+            border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            opacity: 0.92;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.35);
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, var(--success) 0%, #20968d 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(46, 196, 182, 0.3);
-        }
-        
-        .btn-success:hover {
-            opacity: 0.92;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(46, 196, 182, 0.4);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--light-gray);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--light);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+        .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover:not(:disabled) { background: var(--primary-soft); border-color: #bfd4f7; }
+        .btn-success { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #fff; box-shadow: 0 8px 22px -6px rgba(5,150,105,0.4); }
+        .btn-success:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(5,150,105,0.5); }
 
-        #file-input {
-            display: none;
+        /* Settings */
+        .settings {
+            margin-top: 1.5rem; padding: 1.25rem 1.35rem;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
         }
+        .settings h3 { font-size: 1rem; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .settings h3 i { color: var(--primary); }
+        .setting-group { margin-bottom: 1.15rem; }
+        .setting-group:last-child { margin-bottom: 0; }
+        .setting-label {
+            display: flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; font-weight: 600;
+            color: var(--navy); margin-bottom: 0.55rem;
+        }
+        .setting-label i { color: var(--primary); font-size: 0.9em; }
 
-        .settings-panel {
-            margin: 35px 0;
-            padding: 30px;
-            background: var(--light);
-            border-radius: 16px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        .select {
+            width: 100%; padding: 0.7rem 2.2rem 0.7rem 0.9rem; font-family: inherit;
+            font-size: 0.92rem; color: var(--text); background: var(--surface);
+            border: 1px solid var(--border-strong); border-radius: var(--r-md);
+            cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6b83' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat; background-position: right 0.8rem center; background-size: 16px;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
         }
-        
-        .settings-panel h3 {
-            margin-bottom: 20px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.4rem;
-        }
-        
-        .settings-panel h3 i {
-            color: var(--primary);
-            font-size: 1.6rem;
-        }
+        .select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
 
-        .setting-group {
-            margin-bottom: 20px;
+        .setting-row { display: flex; align-items: center; gap: 1rem; }
+        .slider { flex: 1; }
+        .slider input[type="range"] {
+            -webkit-appearance: none; appearance: none; width: 100%; height: 8px;
+            border-radius: 4px; background: var(--border-strong); outline: none;
         }
-
-        .setting-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
+        .slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 22px; height: 22px;
+            border-radius: 50%; background: var(--primary); cursor: pointer;
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.18);
+            transition: box-shadow var(--t-fast), transform var(--t-fast);
         }
-
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 15px;
+        .slider input[type="range"]::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 0 6px rgba(37,99,235,0.22); transform: scale(1.05);
         }
-        
-        .slider-container input {
-            flex-grow: 1;
+        .slider input[type="range"]::-moz-range-thumb {
+            width: 22px; height: 22px; border: none; border-radius: 50%;
+            background: var(--primary); cursor: pointer;
         }
-        
-        .compression-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-
-        /* Range slider styling */
-        input[type=range] {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 10px;
-            border-radius: 5px;
-            background: var(--light-gray);
-            outline: none;
-            transition: background 0.3s;
-        }
-
-        /* Chrome, Safari, Opera */
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
-            transition: all 0.3s;
-        }
-        input[type=range]::-webkit-slider-thumb:hover {
-            box-shadow: 0 0 0 6px rgba(67, 97, 238, 0.2);
-            transform: scale(1.1);
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-            height: 10px;
-            border-radius: 5px;
-            background: linear-gradient(90deg, var(--success), var(--primary), var(--primary-dark));
-        }
-
-        /* Firefox */
-        input[type=range]::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
-            transition: all 0.3s;
-        }
-        input[type=range]::-moz-range-thumb:hover {
-            box-shadow: 0 0 0 6px rgba(67, 97, 238, 0.2);
-            transform: scale(1.1);
-        }
-        input[type=range]::-moz-range-track {
-            height: 10px;
-            border-radius: 5px;
-            background: linear-gradient(90deg, var(--success), var(--primary), var(--primary-dark));
-        }
-
-        /* Remove outline on focus */
-        input[type=range]:focus {
-            outline: none;
-        }
-
         .slider-value {
-            min-width: 60px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 1.1rem;
+            min-width: 58px; text-align: center; font-weight: 700;
+            color: var(--primary); font-size: 1rem;
+            background: var(--primary-soft); border-radius: var(--r-full); padding: 0.25rem 0.6rem;
         }
+        .slider-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-subtle); margin-top: 0.4rem; }
 
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ced4da;
-            border-radius: var(--border-radius);
-            font-size: 16px;
-            background: white;
-            color: var(--dark);
-            cursor: pointer;
-            transition: var(--transition);
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 16px;
-        }
-
-        select:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        }
-
+        /* Dimension inputs */
         .dimension-inputs {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 15px;
-            align-items: center;
-            margin-top: 10px;
+            display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.6rem; align-items: center;
+        }
+        .dimension-inputs input[type="number"] {
+            width: 100%; padding: 0.7rem 0.9rem; font-family: inherit; font-size: 0.92rem;
+            border: 1px solid var(--border-strong); border-radius: var(--r-md);
+            background: var(--surface); color: var(--text);
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .dimension-inputs input[type="number"]:focus {
+            outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+        }
+        .dimension-inputs .times {
+            text-align: center; font-weight: 700; color: var(--text-subtle); font-size: 0.95rem;
+        }
+        @media (max-width: 480px) {
+            .dimension-inputs { grid-template-columns: 1fr; }
+            .dimension-inputs .times { display: none; }
         }
 
-        .dimension-inputs span {
-            text-align: center;
-            font-weight: 600;
-            color: var(--gray);
+        .checkbox-row {
+            display: flex; align-items: center; gap: 0.55rem; margin-top: 0.75rem;
+            padding: 0.65rem 0.85rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+        }
+        .checkbox-row input[type="checkbox"] {
+            width: 17px; height: 17px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0;
+        }
+        .checkbox-row label { font-size: 0.88rem; color: var(--text); cursor: pointer; font-weight: 500; }
+
+        /* Previews */
+        .preview-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;
+        }
+        @media (max-width: 640px) { .preview-grid { grid-template-columns: 1fr; } }
+        .preview-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1rem; text-align: center;
+        }
+        .preview-card h4 { font-size: 0.92rem; margin-bottom: 0.6rem; color: var(--navy); }
+        .preview-img {
+            width: 100%; height: 200px; object-fit: contain;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-sm);
+            padding: 0.5rem; margin-bottom: 0.6rem;
+        }
+        .preview-meta {
+            font-size: 0.85rem; color: var(--text-muted);
+            background: var(--bg); padding: 0.5rem 0.7rem; border-radius: var(--r-sm);
+        }
+        .preview-meta strong { color: var(--navy); }
+        .preview-dims { font-size: 0.75rem; color: var(--text-subtle); margin-top: 0.35rem; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.25rem;
+        }
+        @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
+        .stat {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 0.9rem 0.75rem; text-align: center;
+        }
+        .stat h4 { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        .stat-value { font-size: 1.35rem; font-weight: 800; color: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif; }
+        .stat.savings .stat-value { color: var(--success); }
+
+        /* Actions */
+        .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+        @media (max-width: 520px) { .actions .btn { width: 100%; } }
+
+        /* Loading */
+        .loading { display: none; text-align: center; padding: 1.5rem 0; }
+        .loading.is-visible { display: block; }
+        .loading-spinner {
+            width: 46px; height: 46px; border: 4px solid var(--primary-soft);
+            border-top-color: var(--primary); border-radius: 50%;
+            animation: spin 0.9s linear infinite; margin: 0 auto 0.75rem;
+        }
+        .loading p { color: var(--text-muted); font-size: 0.9rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Sidebar ads */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ad-space {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
+        }
+        .ad-label {
+            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
+            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
+        }
+        .ad-example {
+            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
         }
 
-        .dimension-input {
-            position: relative;
+        /* Content sections */
+        .content-sections { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+        .content-block h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 0.9rem; }
+        .content-block p, .content-block li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; }
+        .content-block ol, .content-block ul { padding-left: 1.4rem; margin-top: 0.5rem; }
+        .content-block ol li, .content-block ul li { margin-bottom: 0.55rem; }
+        .content-block strong { color: var(--navy); }
+        .content-block code {
+            background: var(--primary-soft); color: var(--primary-dark);
+            padding: 0.1rem 0.4rem; border-radius: 5px; font-size: 0.88em;
         }
 
-        .dimension-input input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ced4da;
-            border-radius: var(--border-radius);
-            font-size: 16px;
-            transition: var(--transition);
+        .features-list {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
         }
+        .feature-item {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem;
+        }
+        .feature-item h3 { font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+        .feature-item h3 i { color: var(--teal); }
+        .feature-item p { font-size: 0.9rem; }
 
-        .dimension-input input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        }
-
-        .aspect-ratio-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(67, 97, 238, 0.05);
-            border-radius: 10px;
-        }
-
-        .aspect-ratio-toggle input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-        }
-
-        .preview-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            margin: 35px 0;
-        }
-        
-        @media (min-width: 768px) {
-            .preview-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .preview-box {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--light-gray);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
             overflow: hidden;
         }
-        
-        .preview-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0.7;
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
         }
-        
-        .preview-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-chevron {
+            width: 20px; height: 20px; flex-shrink: 0; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
         }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer { padding: 0 1.25rem 1.1rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
 
-        .preview-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.9rem; margin-top: 0.75rem; }
+        .related-link {
+            display: flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.1rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.92rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
         }
+        .related-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); border-color: #bfd4f7; color: var(--primary-dark); }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; }
 
-        .preview-img {
-            max-width: 100%;
-            max-height: 250px;
-            margin: 15px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            background: var(--light);
-            padding: 10px;
-            border: 1px solid var(--light-gray);
-        }
-
-        .preview-img:hover {
-            transform: scale(1.02);
-        }
-
-        .file-info {
-            font-size: 1rem;
-            color: var(--gray);
-            background: var(--light);
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .file-info strong {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .image-dimensions {
-            font-size: 12px;
-            color: var(--secondary);
-            margin-top: 5px;
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        @media (max-width: 576px) {
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .stat-box {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--light-gray);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-box:hover {
-            transform: translateY(-3px);
-        }
-        
-        .stat-box h4 {
-            color: var(--gray);
-            margin-bottom: 10px;
-            font-weight: 500;
-            font-size: 1rem;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .savings .stat-value {
-            color: var(--success);
-        }
-
-        .ad-space {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--light-gray);
-        }
-        
-        .ad-space p {
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-        
-        .ad-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            background: var(--light);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-        
-        .ad-example {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(45deg, #f5f7fa, #e4e8f0);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-weight: 600;
-            border: 1px dashed var(--light-gray);
-        }
-
-        .instructions {
-            padding: 20px;
-        }
-
-        .instructions ol {
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-
-        .instructions li {
-            margin-bottom: 10px;
-            padding-left: 5px;
-        }
-
-        .benefits-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .benefits-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 5px 0;
-        }
-
-        .benefits-list i {
-            color: var(--success);
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        /* Footer styling */
-        .main-footer {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-            color: white;
-            padding: 40px 0 20px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-section {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .footer-section h3 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 30px auto 0;
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-icons a:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* Loading animation */
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 30px 0;
-        }
-        
-        .loading-spinner {
-            border: 4px solid var(--light);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Toast notification */
+        /* Toast */
         .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            color: var(--dark);
-            padding: 18px 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            border-left: 4px solid var(--success);
-            max-width: 400px;
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--surface); color: var(--text);
+            padding: 0.9rem 1.2rem; border-radius: var(--r-md);
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 2000; transform: translateY(120px); opacity: 0;
+            transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+            border: 1px solid var(--border); border-left: 4px solid var(--success);
+            max-width: 380px; font-size: 0.9rem;
         }
-        
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .toast i {
-            font-size: 1.4rem;
-            color: var(--success);
-        }
-        
-        .toast.error {
-            border-left: 4px solid var(--danger);
-        }
-        
-        .toast.error i {
-            color: var(--danger);
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.error i { color: var(--danger); }
+        @media (max-width: 480px) {
+            .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
         }
 
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: help;
+        /* ============================================================
+           FOOTER (identical to homepage)
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
         }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.85rem;
-            font-weight: normal;
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
         }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
         }
-
-        /* QuickToolsPK badge */
-        .qt-badge {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: white;
-            padding: 12px 18px;
-            border-radius: 50px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            z-index: 999;
-            font-weight: 600;
-            color: var(--primary);
-            border: 1px solid var(--light-gray);
-            transition: all 0.3s ease;
-            display: none; /* Hidden by default */
+        @media (max-width: 600px) {
+            .tool-card { padding: 1.25rem; }
+            .upload-area { padding: 1.6rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
         }
-        
-        .qt-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .qt-badge i {
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 992px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 20px 0;
-                z-index: 999;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .converter-card {
-                padding: 25px;
-            }
-            
-            .upload-area {
-                padding: 40px 15px;
-            }
-            
-            .upload-icon {
-                font-size: 3.2rem;
-                width: 80px;
-                height: 80px;
-                line-height: 80px;
-            }
-            
-            .settings-panel {
-                padding: 25px;
-            }
-            
-            .preview-box {
-                padding: 20px;
-            }
-            
-            .preview-img {
-                height: 200px;
-            }
-            
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .navbar {
-                padding: 15px 20px;
-            }
-            
-            .brand-name {
-                font-size: 1.5rem;
-            }
-            
-            .nav-brand .logo {
-                width: 40px;
-                height: 40px;
-                font-size: 1.8rem;
-            }
-            
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .page-header p {
-                font-size: 1rem;
-            }
-            
-            .dimension-inputs {
-                grid-template-columns: 1fr;
-            }
-            
-            .dimension-inputs span {
-                display: none;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-brand">
-            <div class="logo">
-                <i class="fas fa-tools"></i>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link is-active" href="../index.html#tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../index.html">About</a></li>
+                    <li><a class="nav-link" href="../index.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="https://quicktoolspk.github.io/blog/" target="_blank" rel="noopener">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="../index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>Image Resizer</span>
+            </nav>
+
+            <div class="page-head">
+                <h1>Image Resizer</h1>
+                <p>Resize an image by percentage or set custom width and height. Keep the aspect ratio if you want, preview the result side by side, and download. All processing happens in your browser.</p>
             </div>
-            <div class="brand-name">QuickToolsPK</div>
-        </div>
-        
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <ul class="nav-menu" id="nav-menu">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">Image Tools</a></li>
-            <li><a href="#">Document Tools</a></li>
-            <li><a href="#">Developer Tools</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
 
-    <div class="container">
-        <div class="page-header">
-            <h1>Image Resizer</h1>
-            <p>Resize your images online without losing quality. Adjust dimensions, maintain aspect ratio, and download instantly.</p>
-        </div>
+            <div class="tool-layout">
+                <div>
+                    <div class="card tool-card">
 
-        <div class="main-content">
-            <div>
-                <div class="converter-card">
-                    <div class="card-header">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                        Image Resizer
-                    </div>
-                    <div class="card-body">
                         <div class="upload-area" id="upload-area">
-                            <div class="upload-icon">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </div>
-                            <h3>Drag & Drop your image here</h3>
-                            <p>or</p>
-                            <button class="btn btn-primary" id="select-file-btn"><i class="fas fa-file-image"></i> Select Image File</button>
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h3>Drag and drop your image here</h3>
+                            <p>or click below to browse a file</p>
+                            <button class="btn btn-primary" id="select-file-btn" type="button">
+                                <i class="fas fa-file-image"></i> Select image file
+                            </button>
                             <input type="file" id="file-input" accept="image/*">
-                            <p class="image-dimensions">Supports JPG, PNG, WEBP, GIF • Max 10MB</p>
+                            <div class="upload-hint">Supports JPG, PNG, WEBP, and GIF. Maximum file size 10 MB.</div>
                         </div>
 
-                        <div class="settings-panel">
-                            <h3><i class="fas fa-sliders-h"></i> Resize Settings</h3>
-                            
+                        <div class="settings">
+                            <h3><i class="fas fa-sliders-h"></i> Resize settings</h3>
+
                             <div class="setting-group">
-                                <label for="resize-method"><i class="fas fa-ruler"></i> Resize Method</label>
-                                <select id="resize-method">
-                                    <option value="percentage">Percentage Scaling</option>
-                                    <option value="dimensions">Custom Dimensions</option>
+                                <label class="setting-label" for="resize-method"><i class="fas fa-ruler"></i> Resize method</label>
+                                <select id="resize-method" class="select">
+                                    <option value="percentage">Percentage scaling</option>
+                                    <option value="dimensions">Custom dimensions</option>
                                 </select>
                             </div>
 
                             <div class="setting-group" id="percentage-setting">
-                                <label for="scale-slider">
-                                    <i class="fas fa-compress-arrows-alt"></i> Scale Percentage
-                                </label>
-                                <div class="slider-container">
-                                    <input type="range" id="scale-slider" min="1" max="200" value="100">
+                                <label class="setting-label" for="scale-slider"><i class="fas fa-compress-arrows-alt"></i> Scale percentage</label>
+                                <div class="setting-row">
+                                    <div class="slider">
+                                        <input type="range" id="scale-slider" min="1" max="200" value="100">
+                                        <div class="slider-labels">
+                                            <span>Smaller</span>
+                                            <span>Larger</span>
+                                        </div>
+                                    </div>
                                     <span class="slider-value" id="scale-value">100%</span>
-                                </div>
-                                <div class="compression-info">
-                                    <span>Smaller</span>
-                                    <span>Larger</span>
                                 </div>
                             </div>
 
-                            <div class="setting-group" id="dimensions-setting" style="display: none;">
-                                <label for="width-input">
-                                    <i class="fas fa-arrows-alt-h"></i> Dimensions (Width × Height)
-                                </label>
+                            <div class="setting-group" id="dimensions-setting" style="display:none;">
+                                <label class="setting-label"><i class="fas fa-arrows-alt-h"></i> Dimensions (width × height)</label>
                                 <div class="dimension-inputs">
-                                    <div class="dimension-input">
-                                        <input type="number" id="width-input" placeholder="Width" min="1">
-                                    </div>
-                                    <span>×</span>
-                                    <div class="dimension-input">
-                                        <input type="number" id="height-input" placeholder="Height" min="1">
-                                    </div>
+                                    <input type="number" id="width-input" placeholder="Width" min="1" aria-label="Width in pixels">
+                                    <span class="times" aria-hidden="true">×</span>
+                                    <input type="number" id="height-input" placeholder="Height" min="1" aria-label="Height in pixels">
                                 </div>
-                                <div class="aspect-ratio-toggle">
+                                <div class="checkbox-row">
                                     <input type="checkbox" id="maintain-aspect" checked>
                                     <label for="maintain-aspect">Maintain aspect ratio</label>
                                 </div>
@@ -1148,459 +591,514 @@
 
                         <div class="loading" id="loading">
                             <div class="loading-spinner"></div>
-                            <p>Processing your image...</p>
+                            <p>Processing your image…</p>
                         </div>
 
-                        <div class="preview-container" id="preview-container" style="display: none;">
-                            <div class="preview-box">
-                                <div class="preview-title"><i class="fas fa-image"></i> Original Image</div>
+                        <div class="preview-grid" id="preview-container" style="display:none;">
+                            <div class="preview-card">
+                                <h4><i class="fas fa-image"></i> Original</h4>
                                 <img id="original-preview" class="preview-img" alt="Original image preview">
-                                <div class="file-info" id="original-info"></div>
-                                <div id="original-dimensions" class="image-dimensions"></div>
+                                <div class="preview-meta" id="original-info"></div>
+                                <div class="preview-dims" id="original-dimensions"></div>
                             </div>
-                            
-                            <div class="preview-box">
-                                <div class="preview-title"><i class="fas fa-expand-arrows-alt"></i> Resized Image</div>
+                            <div class="preview-card">
+                                <h4><i class="fas fa-expand-arrows-alt"></i> Resized</h4>
                                 <img id="resized-preview" class="preview-img" alt="Resized image preview">
-                                <div class="file-info" id="resized-info"></div>
-                                <div id="resized-dimensions" class="image-dimensions"></div>
+                                <div class="preview-meta" id="resized-info"></div>
+                                <div class="preview-dims" id="resized-dimensions"></div>
                             </div>
                         </div>
 
-                        <div class="stats-container" id="stats-container" style="display: none;">
-                            <div class="stat-box">
+                        <div class="stats-grid" id="stats-container" style="display:none;">
+                            <div class="stat">
+                                <h4>Size reduction</h4>
                                 <div class="stat-value" id="size-reduction">0%</div>
-                                <div class="stat-label">Size Reduction</div>
                             </div>
-                            <div class="stat-box">
+                            <div class="stat">
+                                <h4>Scale percentage</h4>
                                 <div class="stat-value" id="scale-percent">100%</div>
-                                <div class="stat-label">Scale Percentage</div>
                             </div>
-                            <div class="stat-box savings">
+                            <div class="stat savings">
+                                <h4>Resolution change</h4>
                                 <div class="stat-value" id="resolution-change">0%</div>
-                                <div class="stat-label">Resolution Change</div>
                             </div>
                         </div>
 
-                        <div class="action-buttons" id="action-buttons" style="display: none;">
-                            <button class="btn btn-success" id="download-btn"><i class="fas fa-download"></i> Download Resized Image</button>
-                            <button class="btn btn-secondary" id="resize-another-btn"><i class="fas fa-redo"></i> Resize Another Image</button>
+                        <div class="actions" id="action-buttons" style="display:none;">
+                            <button class="btn btn-success" id="download-btn">
+                                <i class="fas fa-download"></i> Download resized image
+                            </button>
+                            <button class="btn btn-ghost" id="resize-another-btn" type="button">
+                                <i class="fas fa-redo"></i> Resize another image
+                            </button>
                         </div>
                     </div>
+
+                    <!-- How to use -->
+                    <section class="content-block" style="margin-top:2.5rem;">
+                        <h2>How to resize an image</h2>
+                        <ol>
+                            <li><strong>Upload an image.</strong> Drag and drop a file onto the upload area, or click <em>Select image file</em>. JPG, PNG, WEBP, and GIF are supported up to 10 MB.</li>
+                            <li><strong>Choose the resize method.</strong> Use <em>Percentage scaling</em> to scale up or down proportionally, or <em>Custom dimensions</em> to enter exact width and height.</li>
+                            <li><strong>Adjust the settings.</strong> Move the slider or type the dimensions. When <em>Maintain aspect ratio</em> is checked, editing one field updates the other automatically.</li>
+                            <li><strong>Download.</strong> Click <em>Download resized image</em> to save the result. Click <em>Resize another image</em> to start over.</li>
+                        </ol>
+                    </section>
+
+                    <!-- Key features -->
+                    <section class="content-block">
+                        <h2>Key features</h2>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <h3><i class="fas fa-compress-arrows-alt"></i> Percentage or exact size</h3>
+                                <p>Scale an image by any percentage from 1% to 200%, or enter precise pixel dimensions.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-lock"></i> Aspect ratio lock</h3>
+                                <p>When <em>Maintain aspect ratio</em> is on, width and height stay proportional as you edit.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-shield-alt"></i> Runs in your browser</h3>
+                                <p>Images are read and resized locally with the HTML canvas API. Nothing is uploaded to a server.</p>
+                            </div>
+                            <div class="feature-item">
+                                <h3><i class="fas fa-eye"></i> Side-by-side preview</h3>
+                                <p>Compare the original and resized images, along with dimensions, format, and file size, before downloading.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Benefits -->
+                    <section class="content-block">
+                        <h2>Why resize your images</h2>
+                        <ul>
+                            <li><strong>Faster websites.</strong> Smaller images load more quickly and use less bandwidth.</li>
+                            <li><strong>Social media fit.</strong> Platforms have recommended image dimensions. Resize to match them for a sharper result.</li>
+                            <li><strong>Email and forms.</strong> Some services reject oversized files. Resizing avoids upload failures.</li>
+                            <li><strong>Consistent layouts.</strong> Match images to the exact dimensions your layout expects.</li>
+                        </ul>
+                    </section>
+
+                    <!-- FAQ -->
+                    <section class="content-block">
+                        <h2>Frequently asked questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>Is this image resizer free?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. The tool is free to use and does not require an account or login.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Are my images uploaded to a server?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Images are read and resized locally using the HTML canvas API. Nothing is sent to a server.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Does resizing change the image format?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. The output keeps the same file format as the input. If you need a different format, use the Image Format Converter after resizing.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>What does "Maintain aspect ratio" do?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">When it is checked, editing the width automatically updates the height (and vice versa) so the image is not stretched or squashed.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>What is the maximum file size?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">The tool accepts images up to 10 MB. Larger files may fail to process on low-memory devices.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>Can I enlarge an image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. The percentage slider goes up to 200%, and custom dimensions can be larger than the original. Note that enlarging an image does not add real detail; it only scales the existing pixels.</div>
+                            </details>
+                        </div>
+                    </section>
+
+                    <!-- Related tools -->
+                    <section class="content-block">
+                        <h2>Related tools</h2>
+                        <div class="related-grid">
+                            <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Image Compressor</a>
+                            <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a>
+                            <a class="related-link" href="JPG-to-PDF-Converter.html"><i class="fas fa-file-pdf"></i> JPG to PDF Converter</a>
+                            <a class="related-link" href="pdf-compression.html"><i class="fas fa-file-archive"></i> PDF Compressor</a>
+                        </div>
+                    </section>
                 </div>
 
-                <div class="converter-card">
-                    <div class="card-header">
-                        <i class="fas fa-info-circle"></i>
-                        How to Use & Benefits
+                <!-- Sidebar ads -->
+                <aside class="sidebar" aria-label="Advertisement">
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×250</div>
                     </div>
-                    <div class="card-body">
-                        <div class="instructions">
-                            <h3 class="preview-title"><i class="fas fa-list-ol"></i> How to Use</h3>
-                            <ol>
-                                <li>Upload an image or drag and drop</li>
-                                <li>Choose resize method (percentage or custom dimensions)</li>
-                                <li>Adjust the settings according to your needs</li>
-                                <li>Download your resized image</li>
-                            </ol>
-                            
-                            <h3 class="preview-title"><i class="fas fa-star"></i> Benefits</h3>
-                            <ul class="benefits-list">
-                                <li><i class="fas fa-bolt"></i> Faster loading for websites</li>
-                                <li><i class="fas fa-mobile-alt"></i> Perfect for social media and mobile devices</li>
-                                <li><i class="fas fa-lock"></i> 100% client-side processing</li>
-                                <li><i class="fas fa-server"></i> No server uploads needed</li>
-                                <li><i class="fas fa-expand"></i> Maintain aspect ratio option</li>
-                            </ul>
-                        </div>
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×600</div>
                     </div>
-                </div>
+                </aside>
             </div>
-            
-            <div class="sidebar">
-                <div class="ad-space">
-                    <div class="ad-label">Advertisement</div>
-                    <p>Ad Space (300x250)</p>
-                    <div class="ad-example">
-                        <!-- Example ad space - would be replaced with actual AdSense code -->
-                        Google AdSense Ad
-                    </div>
-                </div>
-                
-                <div class="ad-space">
-                    <div class="ad-label">Advertisement</div>
-                    <p>Ad Space (300x600)</p>
-                    <div class="ad-example">
-                        <!-- Example ad space - would be replaced with actual AdSense code -->
-                        Google AdSense Ad
-                    </div>
-                </div>
-            </div>
+
         </div>
-    </div>
-    
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>QuickToolsPK</h3>
-                <p>Your all-in-one utility toolkit for everyday tasks. Free, fast, and easy to use online tools.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="split-pdf.html">Split PDF</a></li>
+                        <li><a href="pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#tools">Image Tools</a></li>
+                        <li><a href="../index.html#tools">PDF Tools</a></li>
+                        <li><a href="../index.html#tools">Converters</a></li>
+                        <li><a href="../index.html#tools">Compressors</a></li>
+                        <li><a href="../index.html#tools">Resizers</a></li>
+                        <li><a href="https://quicktoolspk.github.io/blog/" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../index.html">About Us</a></li>
+                        <li><a href="../index.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="footer-section">
-                <h3>Popular Tools</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-image"></i> Image Converter</a></li>
-                    <li><a href="#"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a></li>
-                    <li><a href="#"><i class="fas fa-compress-arrows-alt"></i> PDF Compressor</a></li>
-                    <li><a href="#"><i class="fas fa-code"></i> Code Formatter</a></li>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
                 </ul>
             </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-tools"></i> All Tools</a></li>
-                    <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2023 QuickToolsPK. All rights reserved.</p>
-            <p>Your privacy is important to us - your files are processed entirely in your browser and never uploaded to any server.</p>
         </div>
     </footer>
-    
-    <div class="qt-badge">
-        <i class="fas fa-tools"></i>
-        <span>QuickToolsPK</span>
-    </div>
-    
-    <div class="toast" id="toast">
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
         <i class="fas fa-check-circle"></i>
-        <span id="toast-message">Image resized successfully!</span>
+        <span id="toast-message">Image resized successfully.</span>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const navMenu = document.getElementById('nav-menu');
-            
-                    mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
+    (function () {
+        'use strict';
 
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        /* ============================================================
+           Header: sticky shadow + mobile menu
+           ============================================================ */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
                 });
-            });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-            // Elements for image resizer
-            const fileInput = document.getElementById('file-input');
-            const selectFileBtn = document.getElementById('select-file-btn');
-            const uploadArea = document.getElementById('upload-area');
-            const resizeMethod = document.getElementById('resize-method');
-            const percentageSetting = document.getElementById('percentage-setting');
-            const dimensionsSetting = document.getElementById('dimensions-setting');
-            const scaleSlider = document.getElementById('scale-slider');
-            const scaleValue = document.getElementById('scale-value');
-            const widthInput = document.getElementById('width-input');
-            const heightInput = document.getElementById('height-input');
-            const maintainAspect = document.getElementById('maintain-aspect');
-            const loading = document.getElementById('loading');
-            const previewContainer = document.getElementById('preview-container');
-            const originalPreview = document.getElementById('original-preview');
-            const resizedPreview = document.getElementById('resized-preview');
-            const originalInfo = document.getElementById('original-info');
-            const resizedInfo = document.getElementById('resized-info');
-            const originalDimensions = document.getElementById('original-dimensions');
-            const resizedDimensions = document.getElementById('resized-dimensions');
-            const downloadBtn = document.getElementById('download-btn');
-            const resizeAnotherBtn = document.getElementById('resize-another-btn');
-            const actionButtons = document.getElementById('action-buttons');
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-            const statsContainer = document.getElementById('stats-container');
-            const sizeReduction = document.getElementById('size-reduction');
-            const scalePercent = document.getElementById('scale-percent');
-            const resolutionChange = document.getElementById('resolution-change');
-            
-            let resizedImageData = null;
-            let originalImageData = null;
-            let originalFile = null;
-            let originalWidth = 0;
-            let originalHeight = 0;
-            let aspectRatio = 0;
-            
-            // Event Listeners
-            selectFileBtn.addEventListener('click', () => fileInput.click());
-            fileInput.addEventListener('change', handleFileSelect);
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('dragleave', handleDragLeave);
-            uploadArea.addEventListener('drop', handleDrop);
-            scaleSlider.addEventListener('input', updateScaleValue);
-            scaleSlider.addEventListener('change', resizeImage);
-            widthInput.addEventListener('input', handleDimensionChange);
-            heightInput.addEventListener('input', handleDimensionChange);
-            resizeMethod.addEventListener('change', handleResizeMethodChange);
-            downloadBtn.addEventListener('click', downloadImage);
-            resizeAnotherBtn.addEventListener('click', resetResizer);
-            
-            function updateScaleValue() {
-                scaleValue.textContent = `${scaleSlider.value}%`;
-                if (resizedImageData) {
-                    scalePercent.textContent = `${scaleSlider.value}%`;
-                }
-            }
-            
-            function handleResizeMethodChange() {
-                if (resizeMethod.value === 'percentage') {
-                    percentageSetting.style.display = 'block';
-                    dimensionsSetting.style.display = 'none';
-                } else {
-                    percentageSetting.style.display = 'none';
-                    dimensionsSetting.style.display = 'block';
-                }
-                if (originalImageData) {
-                    resizeImage();
-                }
-            }
-            
-            function handleDimensionChange(e) {
-                if (!maintainAspect.checked || !originalWidth || !originalHeight) return;
-                
-                if (e.target.id === 'width-input' && widthInput.value) {
-                    const newWidth = parseInt(widthInput.value);
-                    heightInput.value = Math.round(newWidth / aspectRatio);
-                } else if (e.target.id === 'height-input' && heightInput.value) {
-                    const newHeight = parseInt(heightInput.value);
-                    widthInput.value = Math.round(newHeight * aspectRatio);
-                }
-                
-                if (originalImageData) {
-                    resizeImage();
-                }
-            }
-            
-            function handleDragOver(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadArea.classList.add('dragover');
-            }
-            
-            function handleDragLeave(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadArea.classList.remove('dragover');
-            }
-            
-            function handleDrop(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadArea.classList.remove('dragover');
-                
-                const files = e.dataTransfer.files;
-                if (files.length && files[0].type.startsWith('image/')) {
-                    // Check file size
-                    if (files[0].size > 10 * 1024 * 1024) {
-                        showNotification('File size exceeds 10MB limit. Please choose a smaller image.', 'error');
-                        return;
-                    }
-                    processImage(files[0]);
-                }
-            }
-            
-            function handleFileSelect(e) {
-                const file = e.target.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    // Check file size
-                    if (file.size > 10 * 1024 * 1024) {
-                        showNotification('File size exceeds 10MB limit. Please choose a smaller image.', 'error');
-                        return;
-                    }
-                    processImage(file);
-                }
-            }
-            
-            function processImage(file) {
-                loading.style.display = 'block';
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    originalImageData = e.target.result;
-                    
-                    const img = new Image();
-                    img.onload = function() {
-                        originalWidth = img.width;
-                        originalHeight = img.height;
-                        aspectRatio = originalWidth / originalHeight;
-                        
-                        originalPreview.src = originalImageData;
-                        originalInfo.innerHTML = `<i class="fas fa-weight-hanging"></i> Format: ${file.type} | Size: ${formatFileSize(file.size)}`;
-                        originalDimensions.textContent = `Dimensions: ${originalWidth} × ${originalHeight} pixels`;
-                        
-                        // Set initial dimension values
-                        widthInput.value = originalWidth;
-                        heightInput.value = originalHeight;
-                        
-                        // Store original file info for later comparison
-                        originalFile = {
-                            type: file.type,
-                            size: file.size,
-                            width: originalWidth,
-                            height: originalHeight
-                        };
-                        
-                        resizeImage();
-                    };
-                    img.onerror = function() {
-                        loading.style.display = 'none';
-                        showNotification('Error loading image. Please try again.', 'error');
-                    };
-                    img.src = originalImageData;
-                };
-                reader.onerror = function() {
-                    loading.style.display = 'none';
-                    showNotification('Error reading file. Please try again.', 'error');
-                };
-                reader.readAsDataURL(file);
-            }
-            
-            function resizeImage() {
-                if (!originalImageData) return;
-                
-                loading.style.display = 'block';
-                
-                // Use setTimeout to allow the UI to update before intensive conversion
-                setTimeout(() => {
-                    const img = new Image();
-                    img.onload = function() {
-                        let newWidth, newHeight;
-                        
-                        if (resizeMethod.value === 'percentage') {
-                            const scaleFactor = scaleSlider.value / 100;
-                            newWidth = Math.round(originalWidth * scaleFactor);
-                            newHeight = Math.round(originalHeight * scaleFactor);
-                        } else {
-                            newWidth = parseInt(widthInput.value) || originalWidth;
-                            newHeight = parseInt(heightInput.value) || originalHeight;
-                        }
-                        
-                        const canvas = document.createElement('canvas');
-                        canvas.width = newWidth;
-                        canvas.height = newHeight;
-                        
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, newWidth, newHeight);
-                        
-                        try {
-                            resizedImageData = canvas.toDataURL(originalFile.type);
-                            resizedPreview.src = resizedImageData;
-                            resizedDimensions.textContent = `Dimensions: ${newWidth} × ${newHeight} pixels`;
-                            
-                            // Calculate resized image size
-                            const base64 = resizedImageData.split(',')[1];
-                            const binaryLength = window.atob(base64).length;
-                            resizedInfo.innerHTML = `<i class="fas fa-weight-hanging"></i> Format: ${originalFile.type} | Size: ${formatFileSize(binaryLength)}`;
-                            
-                            // Calculate and display stats
-                            const reduction = Math.round((1 - (binaryLength / originalFile.size)) * 100);
-                            sizeReduction.textContent = `${reduction > 0 ? reduction : 0}%`;
-                            sizeReduction.style.color = reduction > 0 ? 'var(--success)' : 'var(--danger)';
-                            
-                            const scalePct = Math.round((newWidth / originalWidth) * 100);
-                            scalePercent.textContent = `${scalePct}%`;
-                            
-                            const resolutionDiff = Math.round(((originalWidth * originalHeight) - (newWidth * newHeight)) / (originalWidth * originalHeight) * 100);
-                            resolutionChange.textContent = `${resolutionDiff}%`;
-                            resolutionChange.style.color = resolutionDiff > 0 ? 'var(--success)' : 'var(--danger)';
-                            
-                            previewContainer.style.display = 'grid';
-                            actionButtons.style.display = 'flex';
-                            statsContainer.style.display = 'flex';
-                            loading.style.display = 'none';
-                            
-                            showNotification('Image resized successfully!');
-                        } catch (e) {
-                            console.error('Error resizing image:', e);
-                            loading.style.display = 'none';
-                            showNotification('Error resizing image.', 'error');
-                        }
-                    };
-                    img.onerror = function() {
-                        loading.style.display = 'none';
-                        showNotification('Error processing image. Please try again.', 'error');
-                    };
-                    img.src = originalImageData;
-                }, 100);
-            }
-            
-            function downloadImage() {
-                if (!resizedImageData) return;
-                
-                const link = document.createElement('a');
-                link.download = `resized-image.${originalFile.type.split('/')[1]}`;
-                link.href = resizedImageData;
-                link.click();
-            }
-            
-            function resetResizer() {
-                fileInput.value = '';
-                originalImageData = null;
-                resizedImageData = null;
-                previewContainer.style.display = 'none';
-                actionButtons.style.display = 'none';
-                statsContainer.style.display = 'none';
-                originalPreview.src = '';
-                resizedPreview.src = '';
-                originalInfo.textContent = '';
-                resizedInfo.textContent = '';
-                originalDimensions.textContent = '';
-                resizedDimensions.textContent = '';
-                uploadArea.classList.remove('active');
-                scaleSlider.value = 100;
-                updateScaleValue();
-            }
-            
-            function formatFileSize(bytes) {
-                if (bytes < 1024) return bytes + ' bytes';
-                else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
-                else return (bytes / 1048576).toFixed(2) + ' MB';
-            }
-            
-            function showNotification(message, type = 'success') {
-                toastMessage.textContent = message;
-                toast.className = 'toast';
-                if (type === 'error') {
-                    toast.classList.add('error');
-                } else {
-                    toast.classList.remove('error');
-                }
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }
-            
-            // Initialize scale value display
-            updateScaleValue();
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
         });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ============================================================
+           Tool logic (preserved IDs & behaviour)
+           ============================================================ */
+        const fileInput = document.getElementById('file-input');
+        const selectFileBtn = document.getElementById('select-file-btn');
+        const uploadArea = document.getElementById('upload-area');
+        const resizeMethod = document.getElementById('resize-method');
+        const percentageSetting = document.getElementById('percentage-setting');
+        const dimensionsSetting = document.getElementById('dimensions-setting');
+        const scaleSlider = document.getElementById('scale-slider');
+        const scaleValue = document.getElementById('scale-value');
+        const widthInput = document.getElementById('width-input');
+        const heightInput = document.getElementById('height-input');
+        const maintainAspect = document.getElementById('maintain-aspect');
+        const loading = document.getElementById('loading');
+        const previewContainer = document.getElementById('preview-container');
+        const originalPreview = document.getElementById('original-preview');
+        const resizedPreview = document.getElementById('resized-preview');
+        const originalInfo = document.getElementById('original-info');
+        const resizedInfo = document.getElementById('resized-info');
+        const originalDimensions = document.getElementById('original-dimensions');
+        const resizedDimensions = document.getElementById('resized-dimensions');
+        const downloadBtn = document.getElementById('download-btn');
+        const resizeAnotherBtn = document.getElementById('resize-another-btn');
+        const actionButtons = document.getElementById('action-buttons');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const statsContainer = document.getElementById('stats-container');
+        const sizeReduction = document.getElementById('size-reduction');
+        const scalePercent = document.getElementById('scale-percent');
+        const resolutionChange = document.getElementById('resolution-change');
+
+        let resizedImageData = null;
+        let originalImageData = null;
+        let originalFile = null;
+        let originalWidth = 0;
+        let originalHeight = 0;
+        let aspectRatio = 0;
+
+        selectFileBtn.addEventListener('click', function () { fileInput.click(); });
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
+        uploadArea.addEventListener('drop', handleDrop);
+        scaleSlider.addEventListener('input', updateScaleValue);
+        scaleSlider.addEventListener('change', resizeImage);
+        widthInput.addEventListener('input', handleDimensionChange);
+        heightInput.addEventListener('input', handleDimensionChange);
+        resizeMethod.addEventListener('change', handleResizeMethodChange);
+        downloadBtn.addEventListener('click', downloadImage);
+        resizeAnotherBtn.addEventListener('click', resetResizer);
+
+        updateScaleValue();
+
+        function updateScaleValue() {
+            scaleValue.textContent = scaleSlider.value + '%';
+            if (resizedImageData) scalePercent.textContent = scaleSlider.value + '%';
+        }
+
+        function handleResizeMethodChange() {
+            if (resizeMethod.value === 'percentage') {
+                percentageSetting.style.display = 'block';
+                dimensionsSetting.style.display = 'none';
+            } else {
+                percentageSetting.style.display = 'none';
+                dimensionsSetting.style.display = 'block';
+            }
+            if (originalImageData) resizeImage();
+        }
+
+        function handleDimensionChange(e) {
+            if (!maintainAspect.checked || !originalWidth || !originalHeight) return;
+            if (e.target.id === 'width-input' && widthInput.value) {
+                heightInput.value = Math.round(parseInt(widthInput.value, 10) / aspectRatio);
+            } else if (e.target.id === 'height-input' && heightInput.value) {
+                widthInput.value = Math.round(parseInt(heightInput.value, 10) * aspectRatio);
+            }
+            if (originalImageData) resizeImage();
+        }
+
+        function handleDragOver(e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.add('dragover'); }
+        function handleDragLeave(e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover'); }
+        function handleDrop(e) {
+            e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover');
+            if (!e.dataTransfer.files.length) return;
+            const f = e.dataTransfer.files[0];
+            if (f.type.indexOf('image/') !== 0) { showNotification('Please select an image file.', 'error'); return; }
+            if (f.size > 10 * 1024 * 1024) { showNotification('File is larger than 10 MB.', 'error'); return; }
+            processImage(f);
+        }
+        function handleFileSelect(e) {
+            const f = e.target.files[0];
+            if (!f) return;
+            if (f.type.indexOf('image/') !== 0) { showNotification('Please select an image file.', 'error'); return; }
+            if (f.size > 10 * 1024 * 1024) { showNotification('File is larger than 10 MB.', 'error'); return; }
+            processImage(f);
+        }
+
+        function processImage(file) {
+            loading.classList.add('is-visible');
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+                originalImageData = ev.target.result;
+                const img = new Image();
+                img.onload = function () {
+                    originalWidth = img.width;
+                    originalHeight = img.height;
+                    aspectRatio = originalWidth / originalHeight;
+                    originalPreview.src = originalImageData;
+                    originalInfo.innerHTML = 'Format: <strong>' + file.type + '</strong> · Size: <strong>' + formatFileSize(file.size) + '</strong>';
+                    originalDimensions.textContent = 'Dimensions: ' + originalWidth + ' × ' + originalHeight + ' px';
+                    widthInput.value = originalWidth;
+                    heightInput.value = originalHeight;
+                    originalFile = { type: file.type, size: file.size, width: originalWidth, height: originalHeight };
+                    resizeImage();
+                };
+                img.onerror = function () {
+                    loading.classList.remove('is-visible');
+                    showNotification('Error loading image. Please try again.', 'error');
+                };
+                img.src = originalImageData;
+            };
+            reader.onerror = function () {
+                loading.classList.remove('is-visible');
+                showNotification('Error reading file. Please try again.', 'error');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resizeImage() {
+            if (!originalImageData) return;
+            loading.classList.add('is-visible');
+
+            setTimeout(function () {
+                const img = new Image();
+                img.onload = function () {
+                    let newWidth, newHeight;
+                    if (resizeMethod.value === 'percentage') {
+                        const scaleFactor = scaleSlider.value / 100;
+                        newWidth = Math.round(originalWidth * scaleFactor);
+                        newHeight = Math.round(originalHeight * scaleFactor);
+                    } else {
+                        newWidth = parseInt(widthInput.value, 10) || originalWidth;
+                        newHeight = parseInt(heightInput.value, 10) || originalHeight;
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                    try {
+                        resizedImageData = canvas.toDataURL(originalFile.type);
+                        resizedPreview.src = resizedImageData;
+                        resizedDimensions.textContent = 'Dimensions: ' + newWidth + ' × ' + newHeight + ' px';
+
+                        const base64 = resizedImageData.split(',')[1];
+                        const binaryLength = window.atob(base64).length;
+                        resizedInfo.innerHTML = 'Format: <strong>' + originalFile.type + '</strong> · Size: <strong>' + formatFileSize(binaryLength) + '</strong>';
+
+                        const reduction = Math.round((1 - (binaryLength / originalFile.size)) * 100);
+                        sizeReduction.textContent = (reduction > 0 ? reduction : 0) + '%';
+                        sizeReduction.style.color = reduction > 0 ? 'var(--success)' : 'var(--danger)';
+
+                        const scalePct = Math.round((newWidth / originalWidth) * 100);
+                        scalePercent.textContent = scalePct + '%';
+
+                        const resolutionDiff = Math.round(((originalWidth * originalHeight) - (newWidth * newHeight)) / (originalWidth * originalHeight) * 100);
+                        resolutionChange.textContent = resolutionDiff + '%';
+                        resolutionChange.style.color = resolutionDiff > 0 ? 'var(--success)' : 'var(--danger)';
+
+                        previewContainer.style.display = 'grid';
+                        actionButtons.style.display = 'flex';
+                        statsContainer.style.display = 'grid';
+                        loading.classList.remove('is-visible');
+                        showNotification('Image resized successfully.');
+                    } catch (err) {
+                        console.error('Error resizing image:', err);
+                        loading.classList.remove('is-visible');
+                        showNotification('Error resizing image.', 'error');
+                    }
+                };
+                img.onerror = function () {
+                    loading.classList.remove('is-visible');
+                    showNotification('Error processing image. Please try again.', 'error');
+                };
+                img.src = originalImageData;
+            }, 100);
+        }
+
+        function downloadImage() {
+            if (!resizedImageData) return;
+            const link = document.createElement('a');
+            link.download = 'resized-image.' + originalFile.type.split('/')[1];
+            link.href = resizedImageData;
+            link.click();
+        }
+
+        function resetResizer() {
+            fileInput.value = '';
+            originalImageData = null;
+            resizedImageData = null;
+            previewContainer.style.display = 'none';
+            actionButtons.style.display = 'none';
+            statsContainer.style.display = 'none';
+            originalPreview.src = '';
+            resizedPreview.src = '';
+            originalInfo.innerHTML = '';
+            resizedInfo.innerHTML = '';
+            originalDimensions.textContent = '';
+            resizedDimensions.textContent = '';
+            uploadArea.classList.remove('active');
+            scaleSlider.value = 100;
+            updateScaleValue();
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / 1048576).toFixed(2) + ' MB';
+        }
+
+        function showNotification(message, type) {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.classList.add('show');
+            clearTimeout(showNotification._t);
+            showNotification._t = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    })();
     </script>
 </body>
 </html>
