@@ -530,13 +530,14 @@
             *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
         }
     </style>
+    <link rel="stylesheet" href="site-chrome.css">
 </head>
 <body>
 
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
-        <div class="container header-inner">
-            <a href="https://quicktoolspk.com/index.html" class="brand" aria-label="QuickToolsPK home">
+        <div class="header-inner container">
+            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </span>
@@ -553,14 +554,14 @@
 
             <nav class="primary-nav" id="primaryNav" aria-label="Primary">
                 <ul class="nav-list">
-                    <li><a class="nav-link" href="https://quicktoolspk.com/index.html">Home</a></li>
-                    <li><a class="nav-link" href="https://quicktoolspk.com/index.html#tools">All Tools</a></li>
-                    <li><a class="nav-link is-active" href="https://quicktoolspk.com/index.html#tools">Image Tools</a></li>
-                    <li><a class="nav-link" href="https://quicktoolspk.com/index.html#tools">PDF Tools</a></li>
-                    <li><a class="nav-link" href="https://quicktoolspk.com/index.html">About</a></li>
-                    <li><a class="nav-link" href="https://quicktoolspk.com/index.html">Contact</a></li>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
                     <li>
-                        <a class="nav-cta" href="https://quicktoolspk.com/blog/index.html">
+                        <a class="nav-cta" href="blog/index.html">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                             Blog
                         </a>
@@ -575,9 +576,9 @@
         <div class="container">
 
             <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="https://quicktoolspk.com/index.html">Home</a>
+                <a href="index.html">Home</a>
                 <span class="sep">/</span>
-                <a href="https://quicktoolspk.com/index.html#tools">Image Tools</a>
+                <a href="index.html#tools">Image Tools</a>
                 <span class="sep">/</span>
                 <span>JPG Compressor</span>
             </nav>
@@ -743,10 +744,10 @@
                         <section class="content-block">
                             <h2>Related tools</h2>
                             <div class="related-grid">
-                                <a class="related-link" href="https://quicktoolspk.com/tools/img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
-                                <a class="related-link" href="https://quicktoolspk.com/tools/img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a>
-                                <a class="related-link" href="https://quicktoolspk.com/tools/JPG-to-PDF-Converter.html"><i class="fas fa-file-pdf"></i> JPG to PDF Converter</a>
-                                <a class="related-link" href="https://quicktoolspk.com/tools/pdf-compression.html"><i class="fas fa-file-archive"></i> PDF Compressor</a>
+                                <a class="related-link" href="img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
+                                <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a>
+                                <a class="related-link" href="JPG-to-PDF-Converter.html"><i class="fas fa-file-pdf"></i> JPG to PDF Converter</a>
+                                <a class="related-link" href="pdf-compression.html"><i class="fas fa-file-archive"></i> PDF Compressor</a>
                             </div>
                         </section>
 
@@ -774,7 +775,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
-                    <a href="https://quicktoolspk.com/index.html" class="brand" aria-label="QuickToolsPK home">
+                    <a href="index.html" class="brand" aria-label="QuickToolsPK home">
                         <span class="brand-mark" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                         </span>
@@ -789,35 +790,34 @@
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="https://quicktoolspk.com/tools/img-compress.html">Image Compressor</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/img-resizer.html">Image Resizer</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/split-pdf.html">Split PDF</a></li>
-                        <li><a href="https://quicktoolspk.com/tools/pdf-compression.html">PDF Compressor</a></li>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Popular Categories</h4>
                     <ul>
-                        <li><a href="https://quicktoolspk.com/index.html#tools">Image Tools</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html#tools">PDF Tools</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html#tools">Converters</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html#tools">Compressors</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html#tools">Resizers</a></li>
-                        <li><a href="https://quicktoolspk.com/blog/index.html">Blog</a></li>
+                        <li><a href="index.html#image-tools">Image Tools</a></li>
+                        <li><a href="index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="img-resizer.html">Resizers</a></li>
+                        <li><a href="blog/index.html" target="_blank" rel="noopener">Blog</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="https://quicktoolspk.com/index.html">About Us</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html">Contact</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html#faq">FAQ</a></li>
-                        <li><a href="https://quicktoolspk.com/index.html">How It Works</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#faq">How It Works</a></li>
                     </ul>
                 </div>
 

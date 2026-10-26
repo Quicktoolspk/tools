@@ -54,108 +54,49 @@
         /* ============================================================
            RESET & BASE
            ============================================================ */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            color: var(--text);
-            background: var(--bg);
-            line-height: 1.65;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
-
         h1, h2, h3, h4 {
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            color: var(--navy);
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
         }
-
         a { color: inherit; }
         img, svg { display: block; max-width: 100%; }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 4vw, 2rem);
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px; height: 1px;
-            padding: 0; margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        :focus-visible {
-            outline: 3px solid var(--primary);
-            outline-offset: 3px;
-            border-radius: 6px;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
 
         /* ============================================================
            ICON SYSTEM
            ============================================================ */
         .icon {
-            width: 1.25em;
-            height: 1.25em;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-            flex-shrink: 0;
-            display: inline-block;
-            vertical-align: middle;
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
         }
 
         /* ============================================================
            BUTTONS
            ============================================================ */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.6rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.2;
-            border-radius: var(--r-full);
-            border: 1px solid transparent;
-            cursor: pointer;
-            text-decoration: none;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.85rem 1.6rem; font-family: 'Inter', sans-serif;
+            font-size: 0.95rem; font-weight: 600; line-height: 1.2;
+            border-radius: var(--r-full); border: 1px solid transparent;
+            cursor: pointer; text-decoration: none; white-space: nowrap;
             transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
-            position: relative;
-            isolation: isolate;
+            position: relative; isolation: isolate;
         }
-
         .btn:active { transform: translateY(0) scale(0.99); }
-
         .btn--primary {
-            background: var(--gradient-brand);
-            background-size: 160% 160%;
-            color: #fff;
-            box-shadow: var(--shadow-brand);
+            background: var(--gradient-brand); background-size: 160% 160%;
+            color: #fff; box-shadow: var(--shadow-brand);
             animation: gradientShift 9s ease infinite;
         }
         .btn--primary:hover {
@@ -163,261 +104,172 @@
             box-shadow: 0 14px 28px -8px rgba(37, 99, 235, 0.45);
             filter: saturate(1.08);
         }
-
         .btn--ghost {
-            background: var(--surface);
-            color: var(--navy);
-            border-color: var(--border-strong);
-            box-shadow: var(--shadow-xs);
+            background: var(--surface); color: var(--navy);
+            border-color: var(--border-strong); box-shadow: var(--shadow-xs);
         }
         .btn--ghost:hover {
-            background: var(--primary-soft);
-            border-color: #bfd4f7;
-            color: var(--primary-dark);
-            transform: translateY(-2px);
+            background: var(--primary-soft); border-color: #bfd4f7;
+            color: var(--primary-dark); transform: translateY(-2px);
             box-shadow: var(--shadow-sm);
         }
-
-        .btn--sm {
-            padding: 0.6rem 1.15rem;
-            font-size: 0.875rem;
-        }
-
+        .btn--sm { padding: 0.6rem 1.15rem; font-size: 0.875rem; }
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
 
         /* ============================================================
-           HEADER
+           HEADER — FLOATING PILL GLASSMORPHIC
            ============================================================ */
         .site-header {
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 1160px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.82);
-            backdrop-filter: saturate(180%) blur(14px);
-            -webkit-backdrop-filter: saturate(180%) blur(14px);
-            border-bottom: 1px solid rgba(229, 236, 245, 0.9);
-            transition: box-shadow var(--t-med), background var(--t-med);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: var(--r-full);
+            box-shadow:
+                0 8px 32px -8px rgba(15, 30, 55, 0.12),
+                0 2px 8px -2px rgba(15, 30, 55, 0.06),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            transition: box-shadow var(--t-med), background var(--t-med), top var(--t-med);
         }
         .site-header.is-scrolled {
-            box-shadow: var(--shadow-sm);
-            background: rgba(255, 255, 255, 0.94);
+            top: 0.75rem;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow:
+                0 12px 40px -10px rgba(15, 30, 55, 0.18),
+                0 4px 12px -4px rgba(15, 30, 55, 0.08),
+                inset 0 1px 1px rgba(255, 255, 255, 0.95);
         }
 
         .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            padding: 0.85rem 0;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; padding: 0.6rem 0.6rem 0.6rem 1.25rem;
         }
 
         .brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            flex-shrink: 0;
-            min-width: 0;
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            text-decoration: none; flex-shrink: 0; min-width: 0;
         }
-
         .brand-mark {
-            width: 46px;
-            height: 46px;
-            border-radius: 13px;
-            display: grid;
-            place-items: center;
-            background: var(--gradient-brand);
-            color: #fff;
-            box-shadow: 0 6px 16px -6px rgba(37, 99, 235, 0.5);
-            transition: transform var(--t-med);
-            flex-shrink: 0;
+            width: 38px; height: 38px; border-radius: 12px;
+            display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 4px 12px -4px rgba(37, 99, 235, 0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
         }
-        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
-        .brand-mark .icon { width: 24px; height: 24px; }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 1.15;
-            min-width: 0;
-        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.06); }
+        .brand-mark .icon { width: 20px; height: 20px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.1; min-width: 0; }
         .brand-name {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--navy);
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            white-space: nowrap;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
         }
-        .brand-tag {
-            font-size: 0.72rem;
-            font-weight: 500;
-            color: var(--text-subtle);
-            letter-spacing: 0.005em;
-            margin-top: 2px;
-            white-space: nowrap;
-        }
+        .brand-tag { font-size: 0.65rem; font-weight: 500; color: var(--text-subtle); margin-top: 1px; white-space: nowrap; }
 
         .primary-nav { display: flex; align-items: center; min-width: 0; }
-        .nav-list {
-            display: flex;
-            align-items: center;
-            gap: 0.2rem;
-            list-style: none;
-        }
+        .nav-list { display: flex; align-items: center; gap: 0.1rem; list-style: none; }
         .nav-link {
-            display: inline-block;
-            padding: 0.5rem 0.8rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text);
-            text-decoration: none;
-            border-radius: var(--r-full);
-            transition: color var(--t-fast), background var(--t-fast);
-            white-space: nowrap;
+            display: inline-block; padding: 0.5rem 0.85rem; font-size: 0.88rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
         }
-        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link:hover { color: var(--primary-dark); background: rgba(37, 99, 235, 0.08); }
 
         .nav-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            margin-left: 0.4rem;
-            padding: 0.6rem 1.1rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #fff;
-            text-decoration: none;
-            border-radius: var(--r-full);
-            background: var(--gradient-navy);
-            box-shadow: var(--shadow-sm);
-            transition: transform var(--t-fast), box-shadow var(--t-fast);
-            white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
         }
         .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
-        .nav-cta .icon { width: 16px; height: 16px; }
+        .nav-cta .icon { width: 15px; height: 15px; }
 
         .menu-toggle {
-            display: none;
-            width: 44px;
-            height: 44px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--surface);
-            color: var(--navy);
-            cursor: pointer;
-            place-items: center;
-            transition: background var(--t-fast), border-color var(--t-fast);
-            flex-shrink: 0;
+            display: none; width: 40px; height: 40px;
+            border: 1px solid var(--border); border-radius: 50%;
+            background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
         }
         .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
-        .menu-toggle .icon { width: 22px; height: 22px; }
+        .menu-toggle .icon { width: 20px; height: 20px; }
 
         /* ============================================================
-           HERO
+           HERO — MINIMAL CLEAN
            ============================================================ */
         .hero {
             position: relative;
-            padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+            padding: clamp(9rem, 14vw, 12rem) 0 clamp(4rem, 7vw, 6rem);
             overflow: hidden;
-            background: var(--gradient-soft);
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
             border-bottom: 1px solid var(--border);
         }
-
         .hero::before,
         .hero::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(64px);
-            pointer-events: none;
-            opacity: 0.55;
-            z-index: 0;
+            content: ""; position: absolute; border-radius: 50%;
+            filter: blur(80px); pointer-events: none; opacity: 0.5; z-index: 0;
         }
         .hero::before {
-            width: 420px; height: 420px;
+            width: 500px; height: 500px;
             background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
-            top: -120px; left: -120px;
-            animation: floatSlow 14s ease-in-out infinite;
+            top: -150px; left: -150px;
+            animation: floatSlow 16s ease-in-out infinite;
         }
         .hero::after {
-            width: 380px; height: 380px;
+            width: 400px; height: 400px;
             background: radial-gradient(circle, #99f6e4 0%, transparent 70%);
-            bottom: -140px; right: -100px;
-            animation: floatSlow 16s ease-in-out infinite reverse;
+            bottom: -150px; right: -100px;
+            animation: floatSlow 18s ease-in-out infinite reverse;
         }
-
         @keyframes floatSlow {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(18px, -22px) scale(1.05); }
         }
 
         .hero-inner {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1.5rem;
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; gap: 1.5rem;
+            max-width: 820px; margin: 0 auto;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.95rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--teal);
-            background: var(--teal-soft);
-            border: 1px solid #a7f3d0;
-            border-radius: var(--r-full);
-            letter-spacing: 0.01em;
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            padding: 0.35rem 0.9rem; font-size: 0.78rem; font-weight: 600;
+            color: var(--teal); background: rgba(204, 251, 241, 0.6);
+            border: 1px solid rgba(167, 243, 208, 0.8);
+            border-radius: var(--r-full); letter-spacing: 0.01em;
+            backdrop-filter: blur(8px);
         }
-        .hero-badge .icon { width: 15px; height: 15px; }
+        .hero-badge .icon { width: 14px; height: 14px; }
 
         .hero-title {
-            font-size: clamp(2rem, 5vw, 3.4rem);
-            font-weight: 800;
-            letter-spacing: -0.035em;
-            line-height: 1.1;
-            max-width: 900px;
-            background: linear-gradient(135deg, #0b1a33 0%, #1e40af 55%, #0d9488 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+            font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+            font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+            color: var(--navy);
         }
 
         .hero-sub {
-            font-size: clamp(1rem, 1.6vw, 1.15rem);
-            color: var(--text-muted);
-            max-width: 640px;
-            line-height: 1.7;
+            font-size: clamp(1rem, 1.6vw, 1.12rem);
+            color: var(--text-muted); max-width: 580px; line-height: 1.7;
         }
 
-        .search-wrap {
-            width: 100%;
-            max-width: 580px;
-            position: relative;
-            margin-top: 0.25rem;
-        }
-
+        .search-wrap { width: 100%; max-width: 540px; position: relative; margin-top: 0.25rem; }
         .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            padding: 0.45rem 0.45rem 0.45rem 1.1rem;
-            background: var(--surface);
-            border: 1px solid var(--border-strong);
-            border-radius: var(--r-full);
-            box-shadow: var(--shadow-sm);
+            display: flex; align-items: center; gap: 0.65rem;
+            padding: 0.4rem 0.4rem 0.4rem 1.1rem;
+            background: var(--surface); border: 1px solid var(--border-strong);
+            border-radius: var(--r-full); box-shadow: var(--shadow-sm);
             transition: box-shadow var(--t-med), border-color var(--t-med), transform var(--t-med);
         }
         .search-bar:focus-within {
@@ -425,71 +277,123 @@
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), var(--shadow-md);
             transform: translateY(-1px);
         }
-        .search-bar > .icon {
-            width: 20px; height: 20px;
-            color: var(--text-subtle);
-            flex-shrink: 0;
-        }
+        .search-bar > .icon { width: 18px; height: 18px; color: var(--text-subtle); flex-shrink: 0; }
         .search-input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            font-family: inherit;
-            font-size: 0.98rem;
-            color: var(--text);
-            padding: 0.5rem 0;
-            min-width: 0;
-            outline: none;
+            flex: 1; border: none; background: transparent; font-family: inherit;
+            font-size: 0.95rem; color: var(--text); padding: 0.5rem 0;
+            min-width: 0; outline: none;
         }
         .search-input::placeholder { color: var(--text-subtle); }
         .search-submit {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.6rem 1.2rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #fff;
-            background: var(--gradient-brand);
-            border: none;
-            border-radius: var(--r-full);
-            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1.15rem; font-size: 0.85rem; font-weight: 600;
+            color: #fff; background: var(--gradient-brand); border: none;
+            border-radius: var(--r-full); cursor: pointer;
             transition: filter var(--t-fast), transform var(--t-fast);
         }
         .search-submit:hover { filter: saturate(1.1); transform: translateY(-1px); }
-        .search-submit .icon { width: 16px; height: 16px; }
+        .search-submit .icon { width: 15px; height: 15px; }
 
         .search-chips {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 0.9rem;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 0.4rem; margin-top: 0.85rem;
         }
         .chip {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid var(--border);
-            padding: 0.32rem 0.8rem;
-            border-radius: var(--r-full);
-            text-decoration: none;
+            font-size: 0.78rem; font-weight: 500; color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.6); border: 1px solid var(--border);
+            padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            text-decoration: none; backdrop-filter: blur(6px);
             transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
         }
         .chip:hover {
-            color: var(--primary-dark);
-            background: #fff;
-            border-color: #bfd4f7;
-            transform: translateY(-1px);
+            color: var(--primary-dark); background: #fff;
+            border-color: #bfd4f7; transform: translateY(-1px);
         }
 
         .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 0.65rem; margin-top: 0.75rem;
+        }
+
+        /* ============================================================
+           HERO FLOATING ICONS
+           ============================================================ */
+        .hero-float-icons {
+            position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .float-icon {
+            position: absolute; width: 52px; height: 52px; border-radius: 15px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            box-shadow:
+                0 4px 12px -4px rgba(15, 30, 55, 0.12),
+                0 1px 2px rgba(15, 30, 55, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            animation: floatIcon 4.5s ease-in-out infinite;
+            transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease;
+        }
+        .float-icon::before {
+            content: ""; position: absolute; inset: 26%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.55; z-index: -1; pointer-events: none;
+        }
+        .float-icon .icon { width: 20px; height: 20px; stroke-width: 1.6; position: relative; z-index: 1; }
+
+        .float-icon--img { top: 20%; left: 6%; color: #2563eb; animation-delay: 0s; }
+        .float-icon--img::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        .float-icon--pdf { top: 38%; left: 12%; color: #0891b2; animation-delay: 0.5s; }
+        .float-icon--pdf::before { background: radial-gradient(circle, #06b6d4, transparent 70%); }
+
+        .float-icon--exchange { top: 56%; left: 4%; color: #4f46e5; animation-delay: 1.0s; }
+        .float-icon--exchange::before { background: radial-gradient(circle, #6366f1, transparent 70%); }
+
+        .float-icon--crop { top: 74%; left: 13%; color: #0d9488; animation-delay: 1.5s; }
+        .float-icon--crop::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .float-icon--convert { top: 88%; left: 7%; color: #059669; animation-delay: 2.0s; }
+        .float-icon--convert::before { background: radial-gradient(circle, #10b981, transparent 70%); }
+
+        .float-icon--copy { top: 20%; right: 6%; color: #1d4ed8; animation-delay: 0.25s; }
+        .float-icon--copy::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        .float-icon--lock { top: 38%; right: 12%; color: #0f766e; animation-delay: 0.75s; }
+        .float-icon--lock::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .float-icon--upload { top: 56%; right: 4%; color: #0284c7; animation-delay: 1.25s; }
+        .float-icon--upload::before { background: radial-gradient(circle, #0ea5e9, transparent 70%); }
+
+        .float-icon--scissors { top: 74%; right: 13%; color: #0d9488; animation-delay: 1.75s; }
+        .float-icon--scissors::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .float-icon--download { top: 88%; right: 7%; color: #2563eb; animation-delay: 2.25s; }
+        .float-icon--download::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-12px) rotate(3deg); }
+        }
+        .float-icon:hover {
+            transform: translateY(-6px) scale(1.06);
+            box-shadow:
+                0 8px 20px -6px rgba(15, 30, 55, 0.18),
+                0 2px 4px rgba(15, 30, 55, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            animation-play-state: paused;
+        }
+        @media (min-width: 861px) and (max-width: 1100px) {
+            .float-icon { width: 44px; height: 44px; border-radius: 12px; }
+            .float-icon .icon { width: 17px; height: 17px; }
+            .float-icon::before { filter: blur(9px); }
+        }
+        @media (max-width: 860px) {
+            .hero-float-icons { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .float-icon { animation: none !important; }
+            .float-icon:hover { transform: none !important; }
         }
 
         /* ============================================================
@@ -499,71 +403,41 @@
         .section--alt { background: var(--bg-alt); }
         .section--surface { background: var(--surface); }
 
-        .section-head {
-            max-width: 640px;
-            margin: 0 auto 3rem;
-            text-align: center;
-        }
+        .section-head { max-width: 640px; margin: 0 auto 3rem; text-align: center; }
         .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 0.85rem;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--primary); margin-bottom: 0.85rem;
         }
-        /* Removed the horizontal line (::before) from the eyebrow */
         .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.85rem;
+            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800;
+            letter-spacing: -0.03em; margin-bottom: 0.85rem;
         }
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 1.02rem;
-            line-height: 1.7;
-        }
+        .section-desc { color: var(--text-muted); font-size: 1.02rem; line-height: 1.7; }
 
         /* ============================================================
            CATEGORIES / TOOL CARDS
            ============================================================ */
         .cat-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2.5rem;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 0.5rem; margin-bottom: 2.5rem;
         }
         .cat-tab {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.55rem 1.1rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--r-full);
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            padding: 0.55rem 1.1rem; font-size: 0.88rem; font-weight: 600;
+            color: var(--text-muted); background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-full);
             cursor: pointer;
             transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
         }
         .cat-tab .icon { width: 16px; height: 16px; }
         .cat-tab:hover {
-            color: var(--primary-dark);
-            border-color: #bfd4f7;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-xs);
+            color: var(--primary-dark); border-color: #bfd4f7;
+            transform: translateY(-1px); box-shadow: var(--shadow-xs);
         }
         .cat-tab.is-active {
-            color: #fff;
-            background: var(--gradient-navy);
-            border-color: transparent;
-            box-shadow: var(--shadow-sm);
+            color: #fff; background: var(--gradient-navy);
+            border-color: transparent; box-shadow: var(--shadow-sm);
         }
 
         .tools-grid {
@@ -571,109 +445,63 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
-
         .tool-card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            position: relative; display: flex; flex-direction: column;
             padding: 1.6rem 1.5rem 1.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--r-lg);
-            box-shadow: var(--shadow-xs);
-            text-decoration: none;
-            color: inherit;
-            overflow: hidden;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+            text-decoration: none; color: inherit; overflow: hidden;
             transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
         }
         .tool-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
+            content: ""; position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(37,99,235,0.045) 0%, rgba(13,148,136,0.045) 100%);
-            opacity: 0;
-            transition: opacity var(--t-med);
-            pointer-events: none;
+            opacity: 0; transition: opacity var(--t-med); pointer-events: none;
         }
         .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: #cddcf0;
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px); border-color: #cddcf0; box-shadow: var(--shadow-lg);
         }
         .tool-card:hover::before { opacity: 1; }
 
         .tool-card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.1rem;
-            position: relative;
-            z-index: 1;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1.1rem; position: relative; z-index: 1;
         }
-
         .tool-icon {
-            width: 52px;
-            height: 52px;
-            display: grid;
-            place-items: center;
-            border-radius: 15px;
-            color: var(--primary);
-            background: var(--primary-soft);
+            width: 52px; height: 52px; display: grid; place-items: center;
+            border-radius: 15px; color: var(--primary); background: var(--primary-soft);
             transition: transform var(--t-med), background var(--t-med), color var(--t-med);
         }
         .tool-icon .icon { width: 26px; height: 26px; }
         .tool-card:hover .tool-icon {
             transform: scale(1.06) rotate(-4deg);
-            background: var(--gradient-brand);
-            color: #fff;
+            background: var(--gradient-brand); color: #fff;
         }
 
         .tool-tag {
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--teal);
-            background: var(--teal-soft);
-            padding: 0.28rem 0.65rem;
-            border-radius: var(--r-full);
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--teal); background: var(--teal-soft);
+            padding: 0.28rem 0.65rem; border-radius: var(--r-full);
         }
         .tool-tag--pdf { color: #b45309; background: #fef3c7; }
         .tool-tag--image { color: var(--primary-dark); background: var(--primary-soft); }
         .tool-tag--text { color: #7c3aed; background: #f3e8ff; }
 
         .tool-card h3 {
-            font-size: 1.12rem;
-            font-weight: 700;
-            letter-spacing: -0.015em;
-            margin-bottom: 0.4rem;
-            position: relative;
-            z-index: 1;
+            font-size: 1.12rem; font-weight: 700; letter-spacing: -0.015em;
+            margin-bottom: 0.4rem; position: relative; z-index: 1;
         }
         .tool-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 1.3rem;
-            flex: 1;
-            position: relative;
-            z-index: 1;
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;
+            margin-bottom: 1.3rem; flex: 1; position: relative; z-index: 1;
         }
-
         .tool-card-foot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            z-index: 1;
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative; z-index: 1;
         }
         .tool-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--primary);
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            font-size: 0.88rem; font-weight: 600; color: var(--primary);
             transition: gap var(--t-fast), color var(--t-fast);
         }
         .tool-cta .icon { width: 16px; height: 16px; transition: transform var(--t-fast); }
@@ -681,275 +509,132 @@
         .tool-card:hover .tool-cta .icon { transform: translateX(2px); }
 
         .reveal {
-            opacity: 0;
-            transform: translateY(18px);
+            opacity: 0; transform: translateY(18px);
             transition: opacity var(--t-slow), transform var(--t-slow);
             will-change: opacity, transform;
         }
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
         /* ============================================================
            FEATURES
            ============================================================ */
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.25rem;
         }
         .feature {
-            padding: 1.75rem 1.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--r-md);
+            padding: 1.75rem 1.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-md);
             box-shadow: var(--shadow-xs);
             transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
         }
-        .feature:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-            border-color: #cddcf0;
-        }
+        .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cddcf0; }
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            border-radius: 13px;
-            margin-bottom: 1.1rem;
-            color: var(--teal);
-            background: var(--teal-soft);
+            width: 48px; height: 48px; display: grid; place-items: center;
+            border-radius: 13px; margin-bottom: 1.1rem;
+            color: var(--teal); background: var(--teal-soft);
             transition: transform var(--t-med);
         }
         .feature:hover .feature-icon { transform: scale(1.05); }
         .feature-icon .icon { width: 24px; height: 24px; }
-        .feature h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 0.45rem;
-        }
-        .feature p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
+        .feature h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.45rem; }
+        .feature p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; }
 
         /* ============================================================
            FAQ
            ============================================================ */
-        .faq-list {
-            max-width: 780px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
+        .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.75rem; }
         .faq-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--r-md);
-            box-shadow: var(--shadow-xs);
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); box-shadow: var(--shadow-xs);
             overflow: hidden;
             transition: border-color var(--t-med), box-shadow var(--t-med);
         }
-        .faq-item[open] {
-            border-color: #cddcf0;
-            box-shadow: var(--shadow-sm);
-        }
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-sm); }
         .faq-item summary {
-            list-style: none;
-            cursor: pointer;
-            padding: 1.1rem 1.35rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            font-weight: 600;
-            font-size: 0.98rem;
-            color: var(--navy);
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; font-weight: 600; font-size: 0.98rem; color: var(--navy);
             transition: background var(--t-fast);
         }
         .faq-item summary::-webkit-details-marker { display: none; }
         .faq-item summary:hover { background: var(--primary-soft); }
         .faq-chevron {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            color: var(--text-subtle);
+            width: 22px; height: 22px; flex-shrink: 0; color: var(--text-subtle);
             transition: transform var(--t-med), color var(--t-med);
         }
-        .faq-item[open] .faq-chevron {
-            transform: rotate(180deg);
-            color: var(--primary);
-        }
-        .faq-answer {
-            padding: 0 1.35rem 1.25rem;
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer { padding: 0 1.35rem 1.25rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
 
         /* ============================================================
            FOOTER
            ============================================================ */
-        .site-footer {
-            background: var(--gradient-navy);
-            color: #c7d3e6;
-            padding: 3.5rem 0 0;
-            margin-top: 0;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.7fr 1fr 1fr 1fr;
-            gap: 2.5rem;
-            padding-bottom: 2.75rem;
-        }
-        .footer-brand .brand-mark {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255, 255, 255, 0.1); box-shadow: none; border: 1px solid rgba(255, 255, 255, 0.12); }
         .footer-brand .brand-name { color: #fff; }
         .footer-brand .brand-tag { color: #8fa3c0; }
-        .footer-about {
-            margin-top: 1.1rem;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: #a9b8ce;
-            max-width: 330px;
-        }
-        .footer-col h4 {
-            color: #fff;
-            font-size: 0.92rem;
-            font-weight: 700;
-            letter-spacing: 0.01em;
-            margin-bottom: 1rem;
-        }
-        .footer-col ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-        }
-        .footer-col a {
-            font-size: 0.88rem;
-            color: #a9b8ce;
-            text-decoration: none;
-            transition: color var(--t-fast), padding-left var(--t-fast);
-        }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
         .footer-col a:hover { color: #fff; padding-left: 3px; }
-
         .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 1.4rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-            font-size: 0.82rem;
-            color: #8fa3c0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
         }
         .footer-bottom a { color: #c7d3e6; text-decoration: none; }
         .footer-bottom a:hover { color: #fff; }
-        .footer-legal {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.1rem;
-            list-style: none;
-        }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
 
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1.5fr 1fr 1fr;
-            }
-            .footer-col--legal {
-                grid-column: 1 / -1;
-            }
-            .footer-col--legal ul {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 0.75rem 1.5rem;
-            }
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
         }
-
         @media (max-width: 860px) {
+            .site-header { top: 0.75rem; width: calc(100% - 1.5rem); }
+            .header-inner { padding: 0.5rem 0.5rem 0.5rem 1rem; }
             .menu-toggle { display: grid; }
-
             .primary-nav {
-                position: fixed;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: var(--surface);
-                border-bottom: 1px solid var(--border);
+                position: absolute; top: calc(100% + 0.6rem); left: 0; right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.7);
+                border-radius: var(--r-lg);
                 box-shadow: var(--shadow-lg);
-                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
-                transform: translateY(-12px);
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
+                padding: 0.75rem;
+                transform: translateY(-8px); opacity: 0; visibility: hidden; pointer-events: none;
                 transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
-                max-height: calc(100vh - 72px);
-                overflow-y: auto;
+                max-height: calc(100vh - 120px); overflow-y: auto;
             }
-            .primary-nav.is-open {
-                opacity: 1;
-                transform: translateY(0);
-                visibility: visible;
-                pointer-events: auto;
-            }
-            .nav-list {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.25rem;
-            }
-            .nav-link {
-                display: block;
-                padding: 0.8rem 0.9rem;
-                border-radius: 10px;
-                font-size: 0.98rem;
-            }
-            .nav-cta {
-                margin: 0.5rem 0 0;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .tools-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.2rem; }
+            .nav-link { display: block; padding: 0.75rem 0.9rem; border-radius: 12px; font-size: 0.95rem; }
+            .nav-cta { margin: 0.4rem 0 0; justify-content: center; width: 100%; padding: 0.7rem 1.1rem; }
+            .tools-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
             .footer-brand { grid-column: 1 / -1; }
             .footer-col--legal { grid-column: 1 / -1; }
-            .footer-col--legal ul {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 0.75rem 1.5rem;
-            }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
         }
+        #image-tools .tool-card h3 { font-size: 1.02rem; line-height: 1.35; word-break: break-word; }
+        #image-tools .tool-card p { font-size: 0.88rem; line-height: 1.55; }
 
         @media (max-width: 600px) {
-            .hero { padding-top: 2.5rem; }
+            .hero { padding-top: 8rem; }
             .hero-actions .btn { width: 100%; }
             .hero-actions { width: 100%; }
-
             .tools-grid { grid-template-columns: 1fr; }
-
-            .search-bar { padding: 0.4rem 0.4rem 0.4rem 0.9rem; }
+            .search-bar { padding: 0.35rem 0.35rem 0.35rem 0.9rem; }
             .search-submit span { display: none; }
-            .search-submit { padding: 0.6rem; border-radius: 50%; }
-            .search-submit .icon { width: 18px; height: 18px; }
-
+            .search-submit { padding: 0.55rem; border-radius: 50%; }
+            .search-submit .icon { width: 17px; height: 17px; }
             .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-brand { grid-column: auto; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -972,10 +657,10 @@
 </head>
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- ================= HEADER — FLOATING PILL ================= -->
     <header class="site-header" id="siteHeader">
-        <div class="container header-inner">
-            <a href="https://www.quicktoolspk.com/" class="brand" aria-label="QuickToolsPK home">
+        <div class="header-inner container">
+            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </span>
@@ -992,12 +677,12 @@
 
             <nav class="primary-nav" id="primaryNav" aria-label="Primary">
                 <ul class="nav-list">
-                    <li><a class="nav-link" href="https://www.quicktoolspk.com/">Home</a></li>
-                    <li><a class="nav-link" href="#tools">All Tools</a></li>
-                    <li><a class="nav-link" href="#">Image Tools</a></li>
-                    <li><a class="nav-link" href="#">PDF Tools</a></li>
-                    <li><a class="nav-link" href="#">About</a></li>
-                    <li><a class="nav-link" href="#">Contact</a></li>
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
                     <li>
                         <a class="nav-cta" href="blog/index.html">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -1009,8 +694,22 @@
         </div>
     </header>
 
-    <!-- ================= HERO ================= -->
+    <!-- ================= HERO — MINIMAL ================= -->
     <section class="hero">
+        <div class="hero-float-icons" aria-hidden="true">
+            <span class="float-icon float-icon--img"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
+            <span class="float-icon float-icon--pdf"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+            <span class="float-icon float-icon--exchange"><svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
+            <span class="float-icon float-icon--crop"><svg class="icon" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg></span>
+            <span class="float-icon float-icon--convert"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="14" r="2"/></svg></span>
+
+            <span class="float-icon float-icon--copy"><svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+            <span class="float-icon float-icon--lock"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <span class="float-icon float-icon--upload"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
+            <span class="float-icon float-icon--scissors"><svg class="icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+            <span class="float-icon float-icon--download"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+        </div>
+
         <div class="container hero-inner">
             <span class="hero-badge">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
@@ -1018,7 +717,7 @@
             </span>
 
             <h1 class="hero-title">Every file tool you need,<br>right in your browser.</h1>
-            <p class="hero-sub">Compress, convert, resize, merge, and protect images and PDFs instantly. Your files never leave your device, so you stay fast and private.</p>
+            <p class="hero-sub">Compress, convert, resize, merge, and protect images and PDFs instantly. Your files never leave your device.</p>
 
             <form class="search-wrap" role="search" onsubmit="return false;">
                 <label for="toolSearch" class="sr-only">Search tools</label>
@@ -1031,10 +730,10 @@
                     </button>
                 </div>
                 <div class="search-chips" aria-label="Popular searches">
-                    <a class="chip" href="https://quicktoolspk.com/img-compress.html">Compress image</a>
-                    <a class="chip" href="https://quicktoolspk.com/JPG-to-PDF-Converter.html">JPG to PDF</a>
-                    <a class="chip" href="https://quicktoolspk.com/pdf-merge.html">Merge PDF</a>
-                    <a class="chip" href="https://quicktoolspk.com/img-resizer.html">Resize image</a>
+                    <a class="chip" href="img-compress.html">Compress image</a>
+                    <a class="chip" href="JPG-to-PDF-Converter.html">JPG to PDF</a>
+                    <a class="chip" href="pdf-merge.html">Merge PDF</a>
+                    <a class="chip" href="img-resizer.html">Resize image</a>
                 </div>
             </form>
 
@@ -1043,7 +742,7 @@
                     <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
                     Browse all tools
                 </a>
-                <a href="https://quicktoolspk.com/pdf-tools.html" class="btn btn--ghost">
+                <a href="#more-tools" class="btn btn--ghost">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     PDF tools
                 </a>
@@ -1080,7 +779,7 @@
             </div>
 
             <div class="tools-grid">
-                <a class="tool-card reveal" href="https://quicktoolspk.com/img-compress.html">
+                <a class="tool-card reveal" href="img-compress.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -1096,7 +795,7 @@
                     </div>
                 </a>
 
-                <a class="tool-card reveal" href="https://quicktoolspk.com/JPG-to-PDF-Converter.html">
+                <a class="tool-card reveal" href="JPG-to-PDF-Converter.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M9 18h6"/></svg>
@@ -1112,7 +811,7 @@
                     </div>
                 </a>
 
-                <a class="tool-card reveal" href="https://quicktoolspk.com/img-fmt-converter.html">
+                <a class="tool-card reveal" href="img-fmt-converter.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -1128,7 +827,7 @@
                     </div>
                 </a>
 
-                <a class="tool-card reveal" href="https://quicktoolspk.com/img-resizer.html">
+                <a class="tool-card reveal" href="img-resizer.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -1144,7 +843,7 @@
                     </div>
                 </a>
 
-                <a class="tool-card reveal" href="https://quicktoolspk.com/pdf-merge.html">
+                <a class="tool-card reveal" href="pdf-merge.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7"/><path d="M17.5 14v7"/></svg>
@@ -1160,7 +859,7 @@
                     </div>
                 </a>
 
-                <a class="tool-card reveal" href="https://quicktoolspk.com/pdf-compression.html">
+                <a class="tool-card reveal" href="pdf-compression.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 12 15 15"/><line x1="12" y1="12" x2="12" y2="18"/></svg>
@@ -1189,8 +888,7 @@
             </div>
 
             <div class="tools-grid">
-                <!-- 1. Split PDF -->
-                <a class="tool-card reveal" href="tools/pdf-split.html">
+                <a class="tool-card reveal" href="pdf-split.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
@@ -1206,8 +904,7 @@
                     </div>
                 </a>
 
-                <!-- 2. Rotate PDF -->
-                <a class="tool-card reveal" href="tools/pdf-rotate.html">
+                <a class="tool-card reveal" href="pdf-rotate.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
@@ -1223,8 +920,7 @@
                     </div>
                 </a>
 
-                <!-- 3. PDF to JPG -->
-                <a class="tool-card reveal" href="tools/pdf-to-jpg.html">
+                <a class="tool-card reveal" href="pdf-to-jpg.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -1240,8 +936,7 @@
                     </div>
                 </a>
 
-                <!-- 4. Crop Image -->
-                <a class="tool-card reveal" href="tools/img-crop.html">
+                <a class="tool-card reveal" href="img-crop.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
@@ -1257,8 +952,7 @@
                     </div>
                 </a>
 
-                <!-- 5. PNG to JPG -->
-                <a class="tool-card reveal" href="tools/png-to-jpg.html">
+                <a class="tool-card reveal" href="png-to-jpg.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
@@ -1274,8 +968,7 @@
                     </div>
                 </a>
 
-                <!-- 6. Delete PDF Pages -->
-                <a class="tool-card reveal" href="tools/pdf-delete-pages.html">
+                <a class="tool-card reveal" href="pdf-delete-pages.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
@@ -1291,8 +984,7 @@
                     </div>
                 </a>
 
-                <!-- 7. Add Watermark to PDF -->
-                <a class="tool-card reveal" href="tools/pdf-watermark.html">
+                <a class="tool-card reveal" href="pdf-watermark.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/><circle cx="12" cy="12" r="9"/></svg>
@@ -1308,8 +1000,7 @@
                     </div>
                 </a>
 
-                <!-- 8. Add Page Numbers to PDF -->
-                <a class="tool-card reveal" href="tools/pdf-page-numbers.html">
+                <a class="tool-card reveal" href="pdf-page-numbers.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
@@ -1325,8 +1016,7 @@
                     </div>
                 </a>
 
-                <!-- 9. HEIC to JPG -->
-                <a class="tool-card reveal" href="tools/heic-to-jpg.html">
+                <a class="tool-card reveal" href="heic-to-jpg.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -1342,8 +1032,7 @@
                     </div>
                 </a>
 
-                <!-- 10. Word Counter -->
-                <a class="tool-card reveal" href="tools/word-counter.html">
+                <a class="tool-card reveal" href="word-counter.html">
                     <div class="tool-card-top">
                         <span class="tool-icon" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -1352,6 +1041,371 @@
                     </div>
                     <h3>Word Counter</h3>
                     <p>Count words, characters, and spaces in your text.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 22 IMAGE TOOLS SECTION ================= -->
+    <section class="section" id="image-tools" aria-labelledby="image-tools-title">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">22 image tools</span>
+                <h2 class="section-title" id="image-tools-title">Image Tools for Every Task</h2>
+                <p class="section-desc">Resize for social media, make passport photos, crop, adjust colours, add text, and more. All free, all in your browser.</p>
+            </div>
+
+            <div class="tools-grid">
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/social-media-image-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Social Media Image Resizer</h3>
+                    <p>Resize one image for many platforms at once.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/passport-size-photo-maker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Passport Size Photo Maker</h3>
+                    <p>Create passport or visa size photos quickly.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/remove-metadata.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Remove Metadata</h3>
+                    <p>Strip EXIF data and GPS information from photos.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/instagram-image-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37a4 4 0 1 1-7.75 1.26 4 4 0 0 1 7.75-1.26z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Instagram Image Resizer</h3>
+                    <p>Perfect sizes for Instagram posts, stories, and reels.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/rotate-flip.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Rotate &amp; Flip</h3>
+                    <p>Rotate or flip images in any direction.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/borders-padding.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Borders &amp; Padding</h3>
+                    <p>Add borders or extra padding around an image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/circle-crop.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Circle Crop</h3>
+                    <p>Crop any image into a perfect circle.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/rounded-corners.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 21v-8a8 8 0 0 1 8-8h10"/><path d="M3 21h18V11"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Rounded Corners</h3>
+                    <p>Round the corners of any image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/change-background-colour.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Change Background Colour</h3>
+                    <p>Replace the background colour of your image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/adjust-image-colours.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Adjust Image Colours</h3>
+                    <p>Fine-tune brightness, contrast, saturation, and more.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/black-white-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Black &amp; White Image</h3>
+                    <p>Convert any colour image to black and white.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/add-text-to-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Add Text to Image</h3>
+                    <p>Overlay text on any image with custom style.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/signature-resizer.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M3 17c3-6 6-6 9 0s6 6 9 0"/><path d="M3 7h18"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Signature Resizer</h3>
+                    <p>Resize signatures to required dimensions.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-requirement-checker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Requirement Checker</h3>
+                    <p>Check if your image meets specific requirements.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-information-metadata.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Information &amp; Metadata</h3>
+                    <p>View full details and metadata of any image.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/redact-image.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Redact Image</h3>
+                    <p>Hide sensitive parts of an image permanently.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/image-colour-picker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 0-20c5.52 0 10 4.48 10 10a3 3 0 0 1-3 3h-2a3 3 0 0 0-3 3v1a3 3 0 0 1-3 3z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Image Colour Picker</h3>
+                    <p>Pick any colour from an image and copy the code.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/youtube-thumbnail-banner.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>YouTube Thumbnail &amp; Banner</h3>
+                    <p>Create YouTube thumbnails and channel banners.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/x-twitter-header-post.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>X (Twitter) Header &amp; Post</h3>
+                    <p>Perfect sizes for X headers and post images.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/linkedin-banner-profile-photo.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>LinkedIn Banner &amp; Profile Photo</h3>
+                    <p>Resize images for LinkedIn banners and profiles.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/facebook-cover-post.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Facebook Cover &amp; Post</h3>
+                    <p>Get the right sizes for Facebook covers and posts.</p>
+                    <div class="tool-card-foot">
+                        <span class="tool-cta">Use tool
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a class="tool-card reveal" href="https://quicktoolspk.com/tools/visa-photo-maker.html">
+                    <div class="tool-card-top">
+                        <span class="tool-icon" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/><circle cx="18" cy="6" r="2"/></svg>
+                        </span>
+                        <span class="tool-tag tool-tag--image">Image</span>
+                    </div>
+                    <h3>Visa Photo Maker</h3>
+                    <p>Create visa-compliant photos for any country.</p>
                     <div class="tool-card-foot">
                         <span class="tool-cta">Use tool
                             <svg class="icon" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1464,9 +1518,8 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
-                <!-- Brand column -->
                 <div class="footer-col footer-brand">
-                    <a href="#" class="brand" aria-label="QuickToolsPK home">
+                    <a href="index.html" class="brand" aria-label="QuickToolsPK home">
                         <span class="brand-mark" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                         </span>
@@ -1478,44 +1531,40 @@
                     <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
                 </div>
 
-                <!-- Tools -->
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="https://quicktoolspk.github.io/tools/img-compress.html">Image Compressor</a></li>
-                        <li><a href="https://quicktoolspk.github.io/tools/img-resizer.html">Image Resizer</a></li>
-                        <li><a href="https://quicktoolspk.github.io/tools/img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="https://quicktoolspk.github.io/tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="https://quicktoolspk.github.io/tools/pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="https://quicktoolspk.github.io/tools/pdf-compression.html">PDF Compressor</a></li>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
 
-                <!-- Popular Categories -->
                 <div class="footer-col">
                     <h4>Popular Categories</h4>
                     <ul>
-                        <li><a href="#">Image Tools</a></li>
-                        <li><a href="#">PDF Tools</a></li>
-                        <li><a href="#">Converters</a></li>
-                        <li><a href="#">Compressors</a></li>
-                        <li><a href="#">Resizers</a></li>
-                        <li><a href="/blog/" target="_blank" rel="noopener">Blog</a></li>
+                        <li><a href="index.html#image-tools">Image Tools</a></li>
+                        <li><a href="index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="img-resizer.html">Resizers</a></li>
+                        <li><a href="blog/index.html" target="_blank" rel="noopener">Blog</a></li>
                     </ul>
                 </div>
 
-                <!-- Company -->
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#">How It Works</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#faq">How It Works</a></li>
                     </ul>
                 </div>
 
-                <!-- Legal -->
                 <div class="footer-col footer-col--legal">
                     <h4>Legal</h4>
                     <ul>
