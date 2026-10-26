@@ -196,7 +196,7 @@
         }
         .article-inline-img img {
             width: 100%;
-            height: 280px;
+             height: auto;  
             object-fit: cover;
             display: block;
             transition: transform 0.5s var(--ease);
@@ -205,7 +205,7 @@
             transform: scale(1.03);
         }
         @media (max-width: 600px) {
-            .article-inline-img img { height: 200px; }
+            .article-inline-img img { aspect-ratio: 4 / 3; }
         }
 
         .article-body p { margin-bottom: 1.25rem; }
@@ -708,7 +708,7 @@
                 <div class="article-body">
 
                     <figure class="article-figure">
-                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80" 
+                        <img src="../assets/images/blog/02.jpg" 
                              alt="Why a JPG file can become larger after compression" 
                              loading="lazy" width="1200" height="675">
                         <figcaption>Understanding the behavior of JPG compression is key to getting smaller files.</figcaption>
@@ -749,7 +749,7 @@
 
                     <!-- IMAGE: Quality Setting -->
                     <div class="article-inline-img">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" 
+                        <img src="../assets/images/blog/02.2.jpg" 
                              alt="Visual comparison of different JPG quality settings" 
                              loading="lazy" width="1200" height="280">
                     </div>
@@ -806,7 +806,7 @@
 
                     <!-- IMAGE: Dimensions Comparison -->
                     <div class="article-inline-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+                        <img src="../assets/images/blog/02.3.jpg" 
                              alt="How larger image dimensions can increase JPG file size" 
                              loading="lazy" width="1200" height="280">
                     </div>
@@ -844,7 +844,7 @@
 
                     <!-- IMAGE: Format Comparison -->
                     <div class="article-inline-img">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" 
+                        <img src="../assets/images/blog/02.4.jpg" 
                              alt="JPG PNG and WebP image formats compared" 
                              loading="lazy" width="1200" height="280">
                     </div>
@@ -891,7 +891,7 @@
                             <p><strong>What to do:</strong> Choose a format according to the image's purpose. For ordinary photos, compare JPG with WebP if your website or workflow supports it. For graphics that require transparency, use a suitable format such as PNG or WebP.</p>
                         </div>
                     </div>
-                    <p>You can use the QuickToolsPK <a href="../tools/img-fmt-converter.html">Image Format Converter</a> to test a different format.</p>
+                    <p>You can use the QuickToolsPK <a href="../img-fmt-converter.html">Image Format Converter</a> to test a different format.</p>
 
                     <h2>6. The Compressor Uses a Different Encoding Method</h2>
                     <p>Not all JPG encoders produce identical files. They can differ in how they process image data, apply optimization, and save the resulting file.</p>
@@ -1024,7 +1024,7 @@
                     <h2>Conclusion</h2>
                     <p>A JPG file getting bigger after compression does not necessarily mean your image is broken. It usually means the new saving process did not produce a more efficient file for that particular image.</p>
                     <p>Check the quality setting, image dimensions, output format, and metadata. Compare the resulting size with the original and keep the version that best balances file size and visual quality.</p>
-                    <p>Ready to optimize your images? Try the QuickToolsPK <a href="../tools/img-compress.html">Image Compressor</a> and compare your results.</p>
+                    <p>Ready to optimize your images? Try the QuickToolsPK <a href="../img-compress.html">Image Compressor</a> and compare your results.</p>
 
                     <!-- Related Tools CTA -->
                     <div class="related-tools-premium">
@@ -1043,7 +1043,7 @@
                             <p>Test these concepts with your own images and see the difference for yourself.</p>
                             
                             <div class="premium-tools-grid">
-                                <a href="../tools/img-compress.html" class="premium-tool-card">
+                                <a href="../img-compress.html" class="premium-tool-card">
                                     <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
                                     <div class="tool-card-text">
                                         <span class="tool-card-title">Image Compressor</span>
@@ -1052,7 +1052,7 @@
                                     <i class="fas fa-arrow-right tool-card-arrow"></i>
                                 </a>
                                 
-                                <a href="../tools/img-fmt-converter.html" class="premium-tool-card">
+                                <a href="../img-fmt-converter.html" class="premium-tool-card">
                                     <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
                                     <div class="tool-card-text">
                                         <span class="tool-card-title">Image Format Converter</span>
@@ -1061,7 +1061,7 @@
                                     <i class="fas fa-arrow-right tool-card-arrow"></i>
                                 </a>
                                 
-                                <a href="../tools/img-resizer.html" class="premium-tool-card">
+                                <a href="../img-resizer.html" class="premium-tool-card">
                                     <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
                                     <div class="tool-card-text">
                                         <span class="tool-card-title">Image Resizer</span>
@@ -1074,7 +1074,7 @@
                     </div>
 
                     <div class="back-to-blog">
-                        <a href="index.html">
+                        <a href="../index.html">
                             <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                             Back to all articles
                         </a>
@@ -1105,12 +1105,12 @@
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="../tools/img-compress.html">Image Compressor</a></li>
-                        <li><a href="../tools/img-resizer.html">Image Resizer</a></li>
-                        <li><a href="../tools/img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="../tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="../tools/pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="../tools/pdf-compression.html">PDF Compressor</a></li>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
 
@@ -1120,9 +1120,9 @@
                         <li><a href="../index.html#image-tools">Image Tools</a></li>
                         <li><a href="../index.html#more-tools">PDF Tools</a></li>
                         <li><a href="../index.html#image-tools">Converters</a></li>
-                        <li><a href="../tools/img-compress.html">Compressors</a></li>
-                        <li><a href="../tools/img-resizer.html">Resizers</a></li>
-                        <li><a href="index.html">Blog</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../index.html">Blog</a></li>
                     </ul>
                 </div>
 
