@@ -84,9 +84,10 @@
         .menu-toggle .icon { width: 22px; height: 22px; }
 
         /* Editorial hero */
-        .blog-hero {
+                .blog-hero {
             position: relative; overflow: hidden;
-            padding: clamp(2.75rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
+            /* Top padding ko 8rem/12vw/10rem kar diya hai taake navbar space le sake */
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2.5rem, 5vw, 4rem);
             background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
             border-bottom: 1px solid var(--border);
         }
@@ -358,7 +359,10 @@
             .footer-col--legal { grid-column: 1 / -1; }
             .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
         }
-        @media (max-width: 600px) {
+               @media (max-width: 600px) {
+            .blog-hero { padding-top: 7rem; } /* Mobile ke liye thoda kam space */
+            
+            /* ... aapka baaki mobile CSS ... */
             .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-brand { grid-column: auto; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -437,9 +441,9 @@
                     <h2>Featured article</h2>
                     <p>Start here if you are new to file optimization.</p>
                 </div>
-                <a href="image-compression-guide.html" class="featured-card" data-category="image">
+                <a href="../blog/image-compression-guide.html" class="featured-card" data-category="image">
                     <div class="featured-thumb" aria-hidden="true">
-                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80" alt="Abstract design representing image optimization">
+                        <img src="../assets/images/blog/01.jpg" alt="Abstract design representing image optimization">
                         <div class="featured-thumb-glyph"><i class="fas fa-compress-arrows-alt"></i></div>
                         <span class="featured-thumb-caption">Image optimization</span>
                     </div>
@@ -475,24 +479,24 @@
                 <div class="blog-grid" id="blogGrid">
 
                     <!-- Card 1 -->
-                    <a href="why-jpg-gets-bigger.html" class="article-card" data-category="image">
+                    <a href="../blog/why-jpg-files-get-bigger-when-compressed.html" class="article-card" data-category="image">
                         <div class="article-thumb">
-                            <img src="../assets/images/blog/why-jpg-gets-bigger.jpg" alt="Image file size comparison concept">
-                            <div class="article-thumb-glyph"><i class="fas fa-file-image"></i></div>
+                            <img src="../assets/images/blog/02.jpg" alt="Comparing JPG, PNG, and WebP image formats">
+                            <div class="article-thumb-glyph"><i class="fas fa-exchange-alt"></i></div>
                         </div>
                         <div class="article-body">
                             <span class="article-tag">Image</span>
-                            <h3>Why Your Image Gets Bigger After Converting It to JPG</h3>
-                            <p>A practical guide to image formats, file size, transparency, and compression. Learn why JPG isn't always smaller.</p>
+                            <h3>Why JPG Files Get Bigger When You Compress Them</h3>
+                            <p>Learn why JPEG compression can sometimes increase file size and how to avoid this issue.</p>
                             <div class="article-foot">
-                                <span><i class="far fa-clock"></i> 9 min</span>
+                                <span><i class="far fa-clock"></i> 7 min</span>
                                 <span class="read-link">Read <i class="fas fa-arrow-right article-arrow"></i></span>
                             </div>
                         </div>
                     </a>
 
                     <!-- Card 2 -->
-                    <a href="image-formats-explained.html" class="article-card" data-category="image">
+                    <a href="../blog/image-formats-explained.html" class="article-card" data-category="image">
                         <div class="article-thumb">
                             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=75" alt="Comparing image formats">
                             <div class="article-thumb-glyph"><i class="fas fa-exchange-alt"></i></div>
@@ -509,7 +513,7 @@
                     </a>
 
                     <!-- Card 3 -->
-                    <a href="images-to-pdf-guide.html" class="article-card" data-category="pdf">
+                    <a href="../blog/images-to-pdf-guide.html" class="article-card" data-category="pdf">
                         <div class="article-thumb">
                             <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=75" alt="Documents being converted to PDF">
                             <div class="article-thumb-glyph"><i class="fas fa-file-pdf"></i></div>
@@ -526,7 +530,7 @@
                     </a>
 
                     <!-- Card 4 -->
-                    <a href="pdf-organization-tips.html" class="article-card" data-category="pdf">
+                    <a href="../blog/pdf-organization-tips.html" class="article-card" data-category="pdf">
                         <div class="article-thumb">
                             <img src="https://images.unsplash.com/photo-1568234928966-359c35dd8327?auto=format&fit=crop&w=800&q=75" alt="Organizing digital documents">
                             <div class="article-thumb-glyph"><i class="fas fa-object-group"></i></div>
@@ -543,7 +547,7 @@
                     </a>
 
                     <!-- Card 5 -->
-                    <a href="resize-images-for-web.html" class="article-card" data-category="web">
+                    <a href="../blog/resize-images-for-web.html" class="article-card" data-category="web">
                         <div class="article-thumb">
                             <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=75" alt="Responsive web design with images">
                             <div class="article-thumb-glyph"><i class="fas fa-expand-arrows-alt"></i></div>
@@ -560,7 +564,7 @@
                     </a>
 
                     <!-- Card 6 -->
-                    <a href="social-media-image-prep.html" class="article-card" data-category="web">
+                    <a href="../blog/social-media-image-prep.html" class="article-card" data-category="web">
                         <div class="article-thumb">
                             <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=75" alt="Social media content preparation">
                             <div class="article-thumb-glyph"><i class="fas fa-share-alt"></i></div>

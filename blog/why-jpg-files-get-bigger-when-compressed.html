@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPG vs PNG vs WebP: Which Image Format Is Best? | QuickToolsPK</title>
-    <meta name="description" content="Compare JPG, PNG, and WebP to choose the right image format for photos, logos, screenshots, and websites. Learn about quality, transparency, file size, and conversion.">
-    <link rel="canonical" href="https://quicktoolspk.com/blog/jpg-vs-png-vs-webp.html">
+    <title>Why JPG Files Get Bigger When You Compress Them | QuickToolsPK</title>
+    <meta name="description" content="Find out why your JPG file gets larger after compression and learn how to reduce image size using the right quality settings, format, and dimensions.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/why-jpg-files-get-bigger-when-compressed.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -91,14 +91,14 @@
         /* ============================================================
            ARTICLE HEADER (Hero)
            ============================================================ */
-        .article-header {
+                .article-header {
             position: relative; overflow: hidden;
-            padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(2rem, 5vw, 3rem);
+            /* Top padding badha di hai taake navbar content ko na dhake */
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
             background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
             border-bottom: 1px solid var(--border);
         }
         
-        /* Animated Background Blobs */
         .article-header::before, .article-header::after {
             content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
             pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
@@ -186,7 +186,7 @@
             content: '📸'; font-size: 1rem; font-style: normal;
         }
 
-        /* Inline Section Images (NEW) */
+        /* Inline Section Images */
         .article-inline-img {
             margin: 1.5rem 0 2rem;
             border-radius: var(--r-md);
@@ -363,54 +363,190 @@
             line-height: 1.75;
         }
 
-        /* Related Tools CTA */
-        .related-tools {
+                /* ============================================================
+           RELATED TOOLS CTA (PREMIUM UI)
+           ============================================================ */
+        .related-tools-premium {
+            position: relative;
             margin-top: 4rem;
-            background: var(--gradient-navy);
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--r-lg);
-            padding: clamp(2rem, 5vw, 3rem);
-            color: #fff;
-            text-align: center;
-            position: relative;
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
             overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
         }
-        .related-tools::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 50%);
+
+        /* Background Glowing Orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
         }
-        .related-tools h2 {
-            color: #fff; font-size: 1.4rem;
-            margin-bottom: 0.75rem; border: none; padding: 0;
-            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        .glow-orb--1 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+            top: -150px; left: -100px;
+        }
+        .glow-orb--2 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, #0d9488 0%, transparent 70%);
+            bottom: -120px; right: -80px;
+            animation-delay: -5s;
+        }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .related-tools-content {
             position: relative;
+            z-index: 1;
+            text-align: center;
         }
-        .related-tools p {
-            color: #c7d3e6; font-size: 0.95rem;
-            margin-bottom: 2rem; max-width: 560px; margin-left: auto; margin-right: auto;
-            position: relative;
+
+        /* Header with Icons */
+        .related-tools-icon-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
         }
-        .tools-cta-grid {
-            display: flex; flex-wrap: wrap; gap: 0.85rem;
-            justify-content: center; position: relative;
+
+        .icon-stack {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 1.4rem;
         }
-        .tool-cta-link {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            padding: 0.85rem 1.5rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: var(--r-full);
-            color: #fff; text-decoration: none;
-            font-size: 0.92rem; font-weight: 600;
-            transition: background var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
-            backdrop-filter: blur(4px);
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+
+        .related-tools-icon-header h2 {
+            color: #fff;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
-        .tool-cta-link:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.4);
-            transform: translateY(-2px);
+
+        .related-tools-content > p {
+            color: #94a3b8;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .tool-cta-link .icon { color: #fff; }
+
+        /* Premium Cards Grid */
+        .premium-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Individual Premium Tool Card */
+        .premium-tool-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .premium-tool-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(96, 165, 250, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
+        }
+
+        .tool-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: grid;
+            place-items: center;
+            color: #60a5fa;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .premium-tool-card:hover .tool-card-icon {
+            background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+            color: #fff;
+            transform: scale(1.05) rotate(-5deg);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .tool-card-text {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .tool-card-title {
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .tool-card-subtitle {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.3s ease;
+        }
+        
+        .premium-tool-card:hover .tool-card-subtitle {
+            color: #94a3b8;
+        }
+
+        .tool-card-arrow {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .premium-tool-card:hover .tool-card-arrow {
+            color: #60a5fa;
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 600px) {
+            .premium-tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .premium-tool-card {
+                padding: 0.85rem 1rem;
+            }
+        }
 
         /* Back to blog */
         .back-to-blog {
@@ -548,18 +684,18 @@
                         <span class="sep">/</span>
                         <a href="index.html">Blog</a>
                         <span class="sep">/</span>
-                        <span>Image Formats</span>
+                        <span>Image Optimization</span>
                     </nav>
 
                     <span class="article-tag-hero">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                        Image Formats
+                        Image Optimization
                     </span>
 
-                    <h1>JPG vs PNG vs WebP: Which Image Format Is Best?</h1>
+                    <h1>Why JPG Files Get Bigger When You Compress Them</h1>
 
                     <div class="article-meta-row">
-                        <span class="meta-item"><i class="far fa-clock"></i> 10 min read</span>
+                        <span class="meta-item"><i class="far fa-clock"></i> 8 min read</span>
                         <span class="meta-item"><i class="fas fa-folder-open"></i> Image formats &amp; compression</span>
                     </div>
                 </div>
@@ -572,415 +708,368 @@
                 <div class="article-body">
 
                     <figure class="article-figure">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" 
-                             alt="Comparing JPG, PNG, and WebP image formats" 
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Why a JPG file can become larger after compression" 
                              loading="lazy" width="1200" height="675">
-                        <figcaption>Understanding file formats is the first step to optimizing images for the web.</figcaption>
+                        <figcaption>Understanding the behavior of JPG compression is key to getting smaller files.</figcaption>
                     </figure>
 
-                    <p>Choosing an image format can be confusing. JPG is popular for photographs, PNG is known for transparency, and WebP is designed to offer efficient compression with support for both transparency and animation.</p>
-                    <p>But which format should you actually use?</p>
-                    <p>The answer depends on what your image contains, where you plan to use it, how important image quality is, and whether you need a transparent background.</p>
-                    <p>In this guide, you will learn how JPG, PNG, and WebP differ, which format is suitable for different situations, and how to avoid common mistakes when converting images for websites, online stores, documents, and social media.</p>
+                    <p>You upload a JPG image to an online compressor, select a compression setting, and download the result. But instead of getting a smaller file, you discover that the new image is actually larger than the original.</p>
+                    <p>Why does this happen?</p>
+                    <p>It seems strange because image compression is supposed to reduce file size. However, compressing a JPG does not guarantee that the resulting file will be smaller. The result depends on the original image, the quality setting, the compression method, and the way the new file is saved.</p>
+                    <p>In this guide, you will learn why JPG files sometimes get bigger after compression, how to identify the cause, and which settings can help you create smaller images without unnecessarily sacrificing quality.</p>
 
-                    <h2>Quick comparison: JPG vs PNG vs WebP</h2>
+                    <h2>Quick Answer: Why Does Your JPG File Get Bigger?</h2>
+                    <p>The most common explanation is that your original JPG was already efficiently compressed, but the tool saved it again using a different or less efficient configuration.</p>
+                    <p>Other possible reasons include:</p>
+                    <ul>
+                        <li>The output quality setting is higher than the original image's effective quality.</li>
+                        <li>The image was resized to larger dimensions.</li>
+                        <li>The new file includes additional metadata or a color profile.</li>
+                        <li>The output uses a different image format or encoding method.</li>
+                        <li>The tool is optimized for image quality rather than the smallest possible file.</li>
+                    </ul>
+                    <p>JPEG uses lossy compression, meaning some image information is discarded to reduce file size. Saving a previously compressed image again does not automatically make it smaller.</p>
+
+                    <h2>1. Your Original JPG Is Already Compressed</h2>
+                    <p>This is one of the main reasons a JPG file may become larger after compression.</p>
+                    <p>JPG images commonly use lossy compression. When an image is first saved, the encoder removes some information that is less noticeable to the human eye.</p>
+                    <p>If the original image has already been optimized, a second compression process may have little additional data to remove. If the new encoder uses a less efficient setting, the resulting file can even become larger.</p>
+                    <p>For example, imagine a photo that was originally exported with a carefully chosen compression setting. You upload it to another tool, which re-encodes it using a higher quality setting. The new image may preserve more of the information it receives, but that can require more bytes.</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>What to do:</strong> Try a lower output quality setting, or compare the new file with the original before downloading or replacing it. Keep the original if the compressed version is not smaller or looks worse.</p>
+                        </div>
+                    </div>
+
+                    <h2>2. The Quality Setting Is Too High</h2>
+                    <p>Many image compressors let you adjust image quality. A higher quality setting usually preserves more visual detail, while a lower setting generally reduces file size.</p>
+                    <p>However, the quality number selected in one tool is not necessarily equivalent to the same number in another tool. Different encoders use different methods, so a quality setting of 90 in one application may produce a different result from 90 in another.</p>
+
+                    <!-- IMAGE: Quality Setting -->
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Visual comparison of different JPG quality settings" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p>Here is a practical starting point for ordinary photographs. These are suggested test ranges, not guaranteed file-size results.</p>
+                    
                     <div class="table-wrap">
                         <table class="article-table">
                             <thead>
                                 <tr>
-                                    <th>Feature</th>
-                                    <th>JPG / JPEG</th>
-                                    <th>PNG</th>
-                                    <th>WebP</th>
+                                    <th>Quality setting</th>
+                                    <th>What to expect</th>
+                                    <th>Best for</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Best starting point</td>
-                                    <td>Photographs</td>
-                                    <td>Logos, screenshots, sharp graphics</td>
-                                    <td>Many website images</td>
+                                    <td>90 to 100</td>
+                                    <td>Usually larger files with more detail retained</td>
+                                    <td>High-quality photo exports</td>
                                 </tr>
                                 <tr>
-                                    <td>Lossy compression</td>
-                                    <td>Yes</td>
-                                    <td>No</td>
-                                    <td>Yes</td>
+                                    <td>75 to 89</td>
+                                    <td>A useful balance to test between quality and size</td>
+                                    <td>Website photos and everyday sharing</td>
                                 </tr>
                                 <tr>
-                                    <td>Lossless compression</td>
-                                    <td>No, in ordinary JPG workflows</td>
-                                    <td>Yes</td>
-                                    <td>Yes</td>
+                                    <td>50 to 74</td>
+                                    <td>Often smaller files, with more visible compression possible</td>
+                                    <td>Images with tighter size limits</td>
                                 </tr>
                                 <tr>
-                                    <td>Transparency</td>
-                                    <td>No</td>
-                                    <td>Yes</td>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>Animation</td>
-                                    <td>No</td>
-                                    <td>APNG uses the PNG extension</td>
-                                    <td>Yes</td>
-                                </tr>
-                                <tr>
-                                    <td>File size</td>
-                                    <td>Often small for photos</td>
-                                    <td>Can be larger for detailed photos</td>
-                                    <td>Often smaller at comparable visual quality</td>
-                                </tr>
-                                <tr>
-                                    <td>Browser compatibility</td>
-                                    <td>Very broad</td>
-                                    <td>Very broad</td>
-                                    <td>Broad support in modern browsers</td>
+                                    <td>Below 50</td>
+                                    <td>Stronger compression may cause noticeable artifacts</td>
+                                    <td>Only when a very small file is necessary</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p>The comparison describes typical characteristics, not guaranteed file sizes. Results depend on the source image, encoder, compression settings, and intended quality.</p>
-
-                    <h2>1. What is JPG, and when should you use it?</h2>
-                    <p>JPG, also called JPEG, is a common image format for photographs. It uses lossy compression, which reduces file size by discarding some image information.</p>
-                    
-                    <!-- NEW IMAGE: JPG Section -->
-                    <div class="article-inline-img">
-                        <img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1200&q=80" 
-                             alt="Photograph of a landscape showing colors and gradients ideal for JPG" 
-                             loading="lazy" width="1200" height="280">
-                    </div>
-                    
-                    <p>This can be useful when an image contains many colors, gradients, textures, and subtle changes in brightness.</p>
-                    
-                    <h3>JPG is a good choice for</h3>
-                    <ul class="checklist">
-                        <li>Photographs on blogs and websites.</li>
-                        <li>Product photography when a solid background is acceptable.</li>
-                        <li>Images shared through email or messaging.</li>
-                        <li>Photo galleries where file size matters.</li>
-                        <li>Images that do not need transparency.</li>
-                    </ul>
-
-                    <h3>When JPG may not be the best choice</h3>
-                    <p>JPG does not support transparent pixels. It can also produce visible artifacts around small text, sharp edges, diagrams, and logos when compressed too heavily.</p>
                     <div class="callout">
-                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-icon"><i class="fas fa-exclamation-triangle"></i></div>
                         <div class="callout-content">
-                            <p><strong>Practical tip:</strong> If a photograph is too large for your website, try resizing it to the required display dimensions and then exporting it at a suitable JPG quality. Compare the final image visually before publishing.</p>
+                            <p><strong>Important:</strong> These ranges are approximate. Test your actual image because the best setting depends on its content and the encoder.</p>
                         </div>
                     </div>
 
-                    <h2>2. What is PNG, and when should you use it?</h2>
-                    <p>PNG uses lossless compression, which preserves the image's pixel information during encoding. It also supports transparency, making it useful for graphics that need to sit on different backgrounds.</p>
-
-                    <!-- NEW IMAGE: PNG Section -->
-                    <div class="article-inline-img">
-                        <img src="https://images.unsplash.com/photo-1626785774625-0b1c2c4eab67?auto=format&fit=crop&w=1200&q=80" 
-                             alt="Graphic design with transparent elements ideal for PNG" 
-                             loading="lazy" width="1200" height="280">
-                    </div>
-
-                    <h3>PNG is a good choice for</h3>
-                    <ul class="checklist">
-                        <li>Logos with transparent backgrounds.</li>
-                        <li>Screenshots containing small text.</li>
-                        <li>Diagrams, charts, and interface graphics.</li>
-                        <li>Images where exact pixel reproduction is important.</li>
-                        <li>Graphics with sharp edges that should remain clear.</li>
+                    <h2>3. The Image Dimensions Have Increased</h2>
+                    <p>Compression and resizing are two different operations.</p>
+                    <ul>
+                        <li><strong>Compression</strong> changes how image information is stored.</li>
+                        <li><strong>Resizing</strong> changes the image's width and height in pixels.</li>
                     </ul>
+                    <p>If your original image is 1200 × 800 pixels but the output is 2400 × 1600 pixels, the new image contains four times as many pixels. Even with compression, this increase can make the resulting file much larger.</p>
 
-                    <h3>When PNG may not be the best choice</h3>
-                    <p>PNG can create larger files than lossy formats for detailed photographs. A large PNG photograph may therefore be unnecessarily heavy for a website.</p>
-                    <div class="callout">
-                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
-                        <div class="callout-content">
-                            <p><strong>Practical tip:</strong> If you have a transparent logo, do not convert it to JPG simply to reduce file size. JPG cannot preserve transparency. Consider optimizing the PNG or testing lossless WebP if your workflow supports it.</p>
-                        </div>
-                    </div>
-
-                    <h2>3. What is WebP, and why is it useful for websites?</h2>
-                    <p>WebP is a modern image format that supports both lossy and lossless compression. It also supports transparency and animation.</p>
-
-                    <!-- NEW IMAGE: WebP Section -->
+                    <!-- IMAGE: Dimensions Comparison -->
                     <div class="article-inline-img">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
-                             alt="Modern web interface showing optimized image loading" 
+                             alt="How larger image dimensions can increase JPG file size" 
                              loading="lazy" width="1200" height="280">
                     </div>
 
-                    <p>It is useful for website owners because it can often provide a smaller image than JPG or PNG while maintaining suitable visual quality. However, the actual savings depend on the image and encoding settings.</p>
-
-                    <h3>WebP is a good choice for</h3>
+                    <p>Before compressing, check these details:</p>
                     <ul class="checklist">
-                        <li>Website photographs and banners.</li>
-                        <li>Product images in online stores.</li>
-                        <li>Images where reducing download size is important.</li>
-                        <li>Graphics that need transparency.</li>
-                        <li>Many image assets used in modern web interfaces.</li>
+                        <li>Is the output width the same as the original?</li>
+                        <li>Is the output height unchanged?</li>
+                        <li>Did the tool automatically upscale the image?</li>
+                        <li>Are you exporting at a higher resolution than you need?</li>
                     </ul>
+                    <p>For website images, use dimensions appropriate for the actual display size. Avoid enlarging small images unless you have a specific reason.</p>
 
-                    <h3>What should you consider before using WebP?</h3>
-                    <p>WebP has broad support in modern browsers, but you should still check compatibility with your target software, publishing system, and image-processing workflow.</p>
-                    <p>If you need to support a particular application that does not accept WebP, keep an appropriate JPG or PNG version available.</p>
+                    <h2>4. The Compressor Adds Metadata</h2>
+                    <p>Image files can contain additional information beyond the visible picture. Depending on the file and software, this may include:</p>
+                    <ul>
+                        <li>Camera and capture information</li>
+                        <li>Date and time details</li>
+                        <li>GPS location information</li>
+                        <li>Color profiles</li>
+                        <li>Embedded thumbnails or other metadata</li>
+                    </ul>
+                    <p>When a tool saves a new JPG, it may preserve, remove, or add some of this information. The extra data can affect the final file size.</p>
+                    <p>Metadata is not always the main reason for a larger file, and removing it will not guarantee a smaller image. However, if privacy matters, check whether your tool provides an option to remove location or other unnecessary metadata.</p>
                     <div class="callout">
                         <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
                         <div class="callout-content">
-                            <p><strong>Practical tip:</strong> Test a representative image before converting an entire image library. A smaller file is useful only if the result meets your visual quality and compatibility requirements.</p>
+                            <p><strong>What to do:</strong> If available, test an export with unnecessary metadata removed and compare the output size. Do not remove a color profile blindly if accurate color reproduction matters.</p>
                         </div>
                     </div>
 
-                    <h2>4. Which format should you use for your specific image?</h2>
-                    <p>This is the most important part of the decision. Instead of memorizing technical definitions, start with the type of image you are working with.</p>
+                    <h2>5. You Changed the Image Format</h2>
+                    <p>Sometimes, what appears to be a compression problem is actually a format-conversion problem.</p>
+                    <p>Different image formats are designed for different types of content and compression methods.</p>
+
+                    <!-- IMAGE: Format Comparison -->
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" 
+                             alt="JPG PNG and WebP image formats compared" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
 
                     <div class="table-wrap">
                         <table class="article-table">
                             <thead>
                                 <tr>
-                                    <th>Your situation</th>
-                                    <th>Recommended starting format</th>
-                                    <th>Why</th>
+                                    <th>Format</th>
+                                    <th>Best use</th>
+                                    <th>What to watch for</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>A photograph for a blog post</td>
-                                    <td>JPG or WebP</td>
-                                    <td>Both can compress photographic content efficiently</td>
+                                    <td>JPG / JPEG</td>
+                                    <td>Photographs and realistic images</td>
+                                    <td>Does not support transparency</td>
                                 </tr>
                                 <tr>
-                                    <td>A logo with a transparent background</td>
-                                    <td>PNG or WebP</td>
-                                    <td>Both support transparency</td>
+                                    <td>PNG</td>
+                                    <td>Screenshots, graphics, and transparency</td>
+                                    <td>Can be larger for photographs</td>
                                 </tr>
                                 <tr>
-                                    <td>A screenshot with tiny text</td>
-                                    <td>PNG or lossless WebP</td>
-                                    <td>Lossless compression helps preserve sharp details</td>
+                                    <td>WebP</td>
+                                    <td>Website images and many everyday image uses</td>
+                                    <td>Check compatibility with your workflow</td>
                                 </tr>
                                 <tr>
-                                    <td>A product photo for an online store</td>
-                                    <td>WebP or JPG</td>
-                                    <td>Compare file size, visual quality, and platform compatibility</td>
-                                </tr>
-                                <tr>
-                                    <td>A transparent decorative graphic</td>
-                                    <td>PNG or WebP</td>
-                                    <td>The transparent background can be retained</td>
-                                </tr>
-                                <tr>
-                                    <td>A chart with thin lines and labels</td>
-                                    <td>PNG or lossless WebP</td>
-                                    <td>Sharp edges and readable labels matter</td>
-                                </tr>
-                                <tr>
-                                    <td>An image for older software</td>
-                                    <td>JPG or PNG</td>
-                                    <td>These formats have very broad compatibility</td>
-                                </tr>
-                                <tr>
-                                    <td>A website banner that is too large</td>
-                                    <td>Test WebP and JPG</td>
-                                    <td>Compare the output at the required dimensions</td>
+                                    <td>AVIF</td>
+                                    <td>Images where efficient compression is important</td>
+                                    <td>Check the requirements of your target platforms</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p>These are practical starting points, not absolute rules. For important images, compare the results using your actual content.</p>
 
-                    <h2>5. Why does the same image have different file sizes?</h2>
-                    <p>Imagine that you save one photograph in JPG, PNG, and WebP. The three files may look similar on screen, but their sizes can differ significantly.</p>
-                    <p>This happens because the formats use different compression methods and settings.</p>
-                    
-                    <h3>Other factors also affect the result:</h3>
-                    <ul>
-                        <li><strong>Pixel dimensions:</strong> A 3000 × 2000 image contains many more pixels than a 900 × 600 image.</li>
-                        <li><strong>Image complexity:</strong> A detailed photograph and a simple illustration contain different kinds of visual information.</li>
-                        <li><strong>Compression quality:</strong> Stronger lossy compression can reduce size but may make defects more visible.</li>
-                        <li><strong>Transparency:</strong> PNG and WebP can preserve transparent areas; JPG cannot.</li>
-                        <li><strong>Encoding settings:</strong> Different tools may produce different results from the same source.</li>
-                    </ul>
+                    <p>PNG uses lossless compression, while JPG uses lossy compression. WebP supports both lossy and lossless compression, and its file size depends on the selected mode and settings.</p>
+                    <p>For example, converting an already compressed JPG to PNG may produce a larger file. PNG may preserve the decoded image without additional lossy compression, but it does not necessarily store photographic content as compactly as JPG.</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>What to do:</strong> Choose a format according to the image's purpose. For ordinary photos, compare JPG with WebP if your website or workflow supports it. For graphics that require transparency, use a suitable format such as PNG or WebP.</p>
+                        </div>
+                    </div>
+                    <p>You can use the QuickToolsPK <a href="../tools/img-fmt-converter.html">Image Format Converter</a> to test a different format.</p>
 
-                    <h3>An important distinction: file size versus image dimensions</h3>
-                    <p>Image dimensions are measured in pixels, while file size is measured in bytes, KB, or MB.</p>
-                    <p>Reducing the dimensions can reduce the amount of image data, but it also changes the image's resolution. Changing the file format does not necessarily change the pixel dimensions.</p>
-                    <p>If your image is both too large in dimensions and too large in file size, resizing and then choosing suitable compression settings may be more effective than conversion alone.</p>
+                    <h2>6. The Compressor Uses a Different Encoding Method</h2>
+                    <p>Not all JPG encoders produce identical files. They can differ in how they process image data, apply optimization, and save the resulting file.</p>
+                    <p>Two files can look nearly identical while having different sizes. Likewise, a new file can become larger even when it uses the same .jpg extension.</p>
+                    <p>The filename extension alone does not tell you how efficiently the image was encoded.</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>What to do:</strong> Compare more than one quality setting or compression tool if necessary. Always compare the final file size and inspect the image visually.</p>
+                        </div>
+                    </div>
 
-                    <h2>6. A practical test: Find the best format for your image</h2>
-                    <p>Rather than trusting a blanket claim that one format is always smaller, run a simple comparison.</p>
+                    <h2>How to Fix a JPG That Gets Bigger After Compression</h2>
+                    <p>Follow these steps in order.</p>
 
-                    <h3>Test A: Photograph</h3>
-                    <p>Save the same photograph as JPG and WebP using suitable quality settings. Compare the file sizes and inspect fine details.</p>
+                    <h3>Step 1: Check the original file size</h3>
+                    <p>Note the original size in KB or MB before uploading it.</p>
 
-                    <h3>Test B: Transparent logo</h3>
-                    <p>Compare PNG with lossless WebP, if available. Check that transparency is preserved and edges remain clean.</p>
+                    <h3>Step 2: Reduce the quality setting gradually</h3>
+                    <p>Try a moderate setting first. Avoid choosing maximum quality if your goal is to minimize file size.</p>
 
-                    <h3>Test C: Screenshot</h3>
-                    <p>Compare PNG with a suitable WebP export. Zoom in on text and thin lines to spot artifacts.</p>
+                    <h3>Step 3: Check image dimensions</h3>
+                    <p>Make sure the output is not larger in pixels than the original unless you need a larger image.</p>
 
-                    <h3>Record your results</h3>
-                    <p>Use the table below to record your own measurements. Keep the source image and pixel dimensions consistent for a fair format comparison.</p>
-                    
+                    <h3>Step 4: Test another format if appropriate</h3>
+                    <p>Compare WebP or another suitable format when your destination supports it.</p>
+
+                    <h3>Step 5: Compare the result</h3>
+                    <p>Check file size, dimensions, and visual quality before replacing the original.</p>
+
+                    <h2>Before and After: How to Compare Your JPG Files</h2>
+                    <p>Use this table to record your own results. The example below is a blank test sheet, not a claim that a specific compressor achieved these results.</p>
+
                     <div class="table-wrap">
                         <table class="article-table">
                             <thead>
                                 <tr>
                                     <th>Test</th>
-                                    <th>Original format</th>
-                                    <th>Output format</th>
-                                    <th>File size</th>
-                                    <th>Quality notes</th>
+                                    <th>Original</th>
+                                    <th>Compressed result</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Photograph</td>
-                                    <td>Your source</td>
+                                    <td>File size</td>
+                                    <td>Record size</td>
+                                    <td>Record size</td>
+                                </tr>
+                                <tr>
+                                    <td>Width</td>
+                                    <td>Record pixels</td>
+                                    <td>Record pixels</td>
+                                </tr>
+                                <tr>
+                                    <td>Height</td>
+                                    <td>Record pixels</td>
+                                    <td>Record pixels</td>
+                                </tr>
+                                <tr>
+                                    <td>Image quality</td>
+                                    <td>Inspect original</td>
+                                    <td>Inspect result</td>
+                                </tr>
+                                <tr>
+                                    <td>Format</td>
                                     <td>JPG</td>
-                                    <td>Measure</td>
-                                    <td>Inspect details</td>
-                                </tr>
-                                <tr>
-                                    <td>Photograph</td>
-                                    <td>Same source</td>
-                                    <td>WebP</td>
-                                    <td>Measure</td>
-                                    <td>Inspect details</td>
-                                </tr>
-                                <tr>
-                                    <td>Logo</td>
-                                    <td>Your source</td>
-                                    <td>PNG</td>
-                                    <td>Measure</td>
-                                    <td>Check transparency</td>
-                                </tr>
-                                <tr>
-                                    <td>Logo</td>
-                                    <td>Same source</td>
-                                    <td>WebP</td>
-                                    <td>Measure</td>
-                                    <td>Check transparency</td>
-                                </tr>
-                                <tr>
-                                    <td>Screenshot</td>
-                                    <td>Your source</td>
-                                    <td>PNG</td>
-                                    <td>Measure</td>
-                                    <td>Inspect text</td>
-                                </tr>
-                                <tr>
-                                    <td>Screenshot</td>
-                                    <td>Same source</td>
-                                    <td>WebP</td>
-                                    <td>Measure</td>
-                                    <td>Inspect text</td>
+                                    <td>Confirm output</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p>No results are filled in because these comparisons have not yet been performed on your actual tools. Adding genuine measurements and screenshots will make this article more distinctive and useful.</p>
 
-                    <p>To calculate how much smaller an output is:</p>
+                    <p>To calculate the percentage change in file size, use:</p>
                     <div class="formula-box">
-                        <div class="formula-title"><i class="fas fa-calculator"></i> Reduction formula</div>
+                        <div class="formula-title"><i class="fas fa-calculator"></i> Size change formula</div>
                         <div class="formula-code">
-                            Reduction (%) = ((Original size − New size) / Original size) × 100
+                            Size change (%) = ((New size − Original size) / Original size) × 100
                         </div>
                     </div>
-                    <p>For example, if a file decreases from 400 KB to 300 KB, the reduction is 25%. This is an illustrative calculation, not a test result.</p>
+                    <p>A positive result means the file became larger. A negative result means it became smaller.</p>
+                    <p>For example, if a file changes from 1 MB to 0.7 MB, its size has decreased by 30%. If it changes from 1 MB to 1.2 MB, it has increased by 20%.</p>
 
-                    <h2>7. Common image-format mistakes and how to fix them</h2>
-                    
-                    <h3>Mistake 1: Converting every image to JPG</h3>
-                    <p>This can remove transparency and introduce compression artifacts in graphics.</p>
-                    <p><strong>Fix:</strong> Choose the format based on the image's purpose. Use PNG or WebP when transparency is required.</p>
-
-                    <h3>Mistake 2: Assuming WebP always produces the smallest file</h3>
-                    <p>WebP is efficient in many cases, but the result depends on the source image, encoder, and settings.</p>
-                    <p><strong>Fix:</strong> Compare representative files at suitable visual quality rather than choosing by extension alone.</p>
-
-                    <h3>Mistake 3: Reducing quality until the image looks bad</h3>
-                    <p>An extremely small image is not helpful if important details become blurry.</p>
-                    <p><strong>Fix:</strong> Test a few quality settings and inspect the image at its intended display size.</p>
-
-                    <h3>Mistake 4: Forgetting about the target platform</h3>
-                    <p>Some content-management systems, forms, or editing applications may have format restrictions.</p>
-                    <p><strong>Fix:</strong> Check the destination's supported formats before converting a whole batch of images.</p>
-
-                    <h3>Mistake 5: Confusing compression with resizing</h3>
-                    <p>Compression changes how image data is stored. Resizing changes pixel dimensions.</p>
-                    <p><strong>Fix:</strong> If the image is unnecessarily large in both dimensions and file size, consider both operations separately.</p>
-
-                    <h2>8. How to convert an image to the right format</h2>
-                    <p>Follow these simple steps:</p>
+                    <h2>Try QuickToolsPK's Image Compressor</h2>
+                    <p>If you want to reduce the size of a JPG for a website, email, online form, or social media upload, start with the QuickToolsPK <a href="../tools/img-compress.html">Image Compressor</a>.</p>
+                    <p>For the best result:</p>
                     <ol>
-                        <li>Identify the image type: photograph, transparent logo, screenshot, or illustration.</li>
-                        <li>Decide whether transparency is required.</li>
-                        <li>Check the image's pixel dimensions and intended use.</li>
-                        <li>Choose a suitable output format based on the comparison guide.</li>
-                        <li>Convert a sample image using an available tool.</li>
-                        <li>Check the new file size, dimensions, and visual quality.</li>
-                        <li>Keep the original file until you are satisfied with the result.</li>
+                        <li>Upload the original image.</li>
+                        <li>Choose a moderate compression setting, if available.</li>
+                        <li>Download the result.</li>
+                        <li>Compare the file sizes.</li>
+                        <li>Inspect the image at its intended display size.</li>
                     </ol>
-                    <p>You can start with the QuickToolsPK <a href="../tools/img-fmt-converter.html">Image Format Converter</a> to explore supported image conversions. If you also need to reduce the file size, try the <a href="../tools/img-compress.html">Image Compressor</a>.</p>
+                    <p>If the output is larger, try a different setting or format. You do not need to keep a compressed file that is bigger than the original.</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Tip:</strong> Keep a copy of your original image. Repeatedly re-saving a JPG can introduce additional quality loss, so it is better to create new exports from the best available source.</p>
+                        </div>
+                    </div>
 
                     <!-- FAQ -->
                     <div class="faq-section">
-                        <h2>9. Frequently asked questions</h2>
+                        <h2>Frequently Asked Questions</h2>
                         <details class="faq-item">
-                            <summary>Is JPG better than PNG?</summary>
-                            <div class="faq-answer">Neither is universally better. JPG is commonly useful for photographs, while PNG is useful for transparent graphics, screenshots, and images that need lossless compression.</div>
+                            <summary>Can compressing a JPG increase its file size?</summary>
+                            <div class="faq-answer">Yes. A compressor can produce a larger file if the original was already efficiently encoded or the new output uses a different quality setting, encoding method, or additional data.</div>
                         </details>
                         <details class="faq-item">
-                            <summary>Is WebP better than JPG?</summary>
-                            <div class="faq-answer">WebP often achieves smaller files at comparable visual quality and supports transparency, unlike JPG. The best choice still depends on your image, encoding settings, and compatibility requirements.</div>
+                            <summary>Does higher JPG quality mean a bigger file?</summary>
+                            <div class="faq-answer">Usually, yes. Higher quality settings generally preserve more image detail and can increase file size. The exact result depends on the image and encoder.</div>
                         </details>
                         <details class="faq-item">
-                            <summary>Does WebP support transparent backgrounds?</summary>
-                            <div class="faq-answer">Yes. WebP supports transparency in both lossy and lossless modes.</div>
+                            <summary>Should I compress a JPG more than once?</summary>
+                            <div class="faq-answer">It is generally better to work from the original source. Repeated lossy saves can degrade image quality, and another compression pass may not reduce file size.</div>
                         </details>
                         <details class="faq-item">
-                            <summary>Does converting PNG to JPG reduce quality?</summary>
-                            <div class="faq-answer">It can. JPG uses lossy compression, and transparent areas must be replaced with a solid background. The amount of visible quality loss depends on the image and compression settings.</div>
+                            <summary>Why does converting JPG to PNG increase file size?</summary>
+                            <div class="faq-answer">PNG uses lossless compression, which is useful for screenshots and graphics but may store photographic images less efficiently than JPG. Changing to PNG does not automatically make a photo smaller.</div>
                         </details>
                         <details class="faq-item">
-                            <summary>Which format is best for website images?</summary>
-                            <div class="faq-answer">WebP is a strong option for many website images. JPG and PNG remain useful depending on whether the image is a photograph, graphic, or transparent asset and what the destination supports.</div>
+                            <summary>Is WebP better than JPG for websites?</summary>
+                            <div class="faq-answer">WebP can often deliver smaller images at visually similar quality, but the result depends on the image and settings. Check your website's requirements and test the output before switching formats.</div>
                         </details>
                         <details class="faq-item">
-                            <summary>Should I convert all my old website images to WebP?</summary>
-                            <div class="faq-answer">Not automatically. Start with important, large images, test the results, and confirm that your website or publishing system handles the format correctly. Prioritize changes that provide a meaningful improvement.</div>
-                        </details>
-                        <details class="faq-item">
-                            <summary>Can I convert JPG to PNG to restore quality?</summary>
-                            <div class="faq-answer">No. Saving a JPG as PNG does not restore visual information lost during earlier lossy compression. It can also create a larger file.</div>
+                            <summary>How can I reduce a JPG without losing too much quality?</summary>
+                            <div class="faq-answer">Start with a moderate quality setting, keep the image dimensions appropriate for its use, and compare the final image visually. If the file is still too large, test a suitable alternative format.</div>
                         </details>
                     </div>
 
                     <h2>Conclusion</h2>
-                    <p>JPG, PNG, and WebP each serve different purposes.</p>
-                    <p>Use JPG as a practical starting point for photographs, PNG for transparency and sharp graphics, and WebP when you want an efficient modern format for many web images.</p>
-                    <p>Most importantly, do not choose a format based only on its name. Check the image's purpose, dimensions, transparency requirements, compatibility, and actual output quality.</p>
-                    <p>The right image format is the one that gives you the best balance of quality, file size, and usability for your specific task.</p>
+                    <p>A JPG file getting bigger after compression does not necessarily mean your image is broken. It usually means the new saving process did not produce a more efficient file for that particular image.</p>
+                    <p>Check the quality setting, image dimensions, output format, and metadata. Compare the resulting size with the original and keep the version that best balances file size and visual quality.</p>
+                    <p>Ready to optimize your images? Try the QuickToolsPK <a href="../tools/img-compress.html">Image Compressor</a> and compare your results.</p>
 
                     <!-- Related Tools CTA -->
-                    <div class="related-tools">
-                        <h2><i class="fas fa-tools" style="color:var(--teal)"></i> Try the tools mentioned in this guide</h2>
-                        <p>Test these concepts with your own images and see the difference for yourself.</p>
-                        <div class="tools-cta-grid">
-                            <a href="../img-fmt-converter.html" class="tool-cta-link">
-                                <svg class="icon" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                                Image Format Converter
-                            </a>
-                            <a href="../img-compress.html" class="tool-cta-link">
-                                <svg class="icon" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-                                Image Compressor
-                            </a>
-                            <a href="../img-resizer.html" class="tool-cta-link">
-                                <svg class="icon" viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-                                Image Resizer
-                            </a>
+                    <div class="related-tools-premium">
+                        <!-- Glowing Background Orbs -->
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own images and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../tools/img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../tools/img-fmt-converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Format Converter</span>
+                                        <span class="tool-card-subtitle">Switch between JPG, PNG &amp; WebP</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../tools/img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Change dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -1016,12 +1105,12 @@
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="../img-compress.html">Image Compressor</a></li>
-                        <li><a href="../img-resizer.html">Image Resizer</a></li>
-                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
-                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                        <li><a href="../tools/img-compress.html">Image Compressor</a></li>
+                        <li><a href="../tools/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../tools/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../tools/pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../tools/pdf-compression.html">PDF Compressor</a></li>
                     </ul>
                 </div>
 
@@ -1031,9 +1120,9 @@
                         <li><a href="../index.html#image-tools">Image Tools</a></li>
                         <li><a href="../index.html#more-tools">PDF Tools</a></li>
                         <li><a href="../index.html#image-tools">Converters</a></li>
-                        <li><a href="../img-compress.html">Compressors</a></li>
-                        <li><a href="../img-resizer.html">Resizers</a></li>
-                        <li><a href="../index.html">Blog</a></li>
+                        <li><a href="../tools/img-compress.html">Compressors</a></li>
+                        <li><a href="../tools/img-resizer.html">Resizers</a></li>
+                        <li><a href="index.html">Blog</a></li>
                     </ul>
                 </div>
 
