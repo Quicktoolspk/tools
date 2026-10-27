@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Image Size Trap: Why a Small Photo Can Still Load Slowly | QuickToolsPK</title>
+    <meta name="description" content="Image is only 80 KB but your page still loads slowly? Learn how dimensions, format, and loading behavior matter, and how to find the real cause.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/why-small-image-still-loads-slowly.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>Website Speed</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        Website Speed
+                    </span>
+
+                    <h1>The Image Size Trap: Why a Small Photo Can Still Load Slowly</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 7 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> Image optimization &amp; Speed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-tachometer-alt"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-file-image"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-bolt"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-mobile-alt"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="../assets/images/blog/05.jpg" 
+                             alt="Small image file icon with a slow loading bar on a website page" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>File size is not the only factor that determines how fast your page loads.</figcaption>
+                    </figure>
+
+                    <p>You compressed your image. It’s only 80 KB. You uploaded it, opened your page, and it still feels slow.</p>
+                    <p>Frustrating, right? The cause is usually that KB size is only one part of the story. This guide explains why a small image size can still go with a website that loads slowly, and how to find the real problem in a few minutes.</p>
+
+                    <h2>The Short Answer</h2>
+                    <p>File size measures how much data the browser downloads. It doesn’t measure everything else the browser has to do with that image. A small file can still slow a page down when:</p>
+                    <ul class="checklist">
+                        <li>The pixel dimensions are much larger than the space it’s displayed in</li>
+                        <li>The format isn’t the best fit for the image</li>
+                        <li>The image loads late, or is told to wait (lazy loading, background images, scripts)</li>
+                        <li>You have many images, and the small sizes add up</li>
+                        <li>The real delay is somewhere else, like the server, caching, or scripts</li>
+                    </ul>
+
+                    <h2>File Size, Dimensions, and Display Size Are Three Different Things</h2>
+                    <p>Most people only check the first one.</p>
+                    
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Term</th>
+                                    <th>What it means</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>File size</td>
+                                    <td>Data stored on disk and downloaded</td>
+                                    <td>85 KB</td>
+                                </tr>
+                                <tr>
+                                    <td>Pixel dimensions</td>
+                                    <td>Width × height of the image itself</td>
+                                    <td>4000 × 3000 px</td>
+                                </tr>
+                                <tr>
+                                    <td>Displayed size</td>
+                                    <td>Space the image takes on the page</td>
+                                    <td>400 × 300 px</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>An image can be tiny in KB and still huge in pixels. Heavy compression can squeeze a very large image into a small file. The browser then has to deal with all those pixels anyway.</p>
+
+                    <!-- IMAGE: File Size vs Dimensions -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/05.2.jpg" 
+                             alt="Diagram showing file size, pixel dimensions, and displayed size of an image" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Reason 1: The Pixel Dimensions Are Too Big</h2>
+                    <p>Here’s the part many guides skip. To show an image, the browser decompresses it into raw pixel data. In a common setup, each pixel takes about 4 bytes (red, green, blue, and transparency). So the memory needed depends on the pixel count, not the KB size.</p>
+                    <p>A rough calculation:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Image dimensions</th>
+                                    <th>Pixels</th>
+                                    <th>Approx. decoded size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>800 × 600</td>
+                                    <td>480,000</td>
+                                    <td>~1.9 MB</td>
+                                </tr>
+                                <tr>
+                                    <td>1600 × 1200</td>
+                                    <td>1,920,000</td>
+                                    <td>~7.7 MB</td>
+                                </tr>
+                                <tr>
+                                    <td>4000 × 3000</td>
+                                    <td>12,000,000</td>
+                                    <td>~48 MB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><em>These are rough estimates for a standard 4-bytes-per-pixel bitmap. Actual browser behavior can vary.</em></p>
+                    <p>So a heavily compressed 4000 × 3000 photo might download as a small file, yet still be expensive to decode and hold in memory. This hits phones and older devices hardest.</p>
+                    <p><strong>The fix:</strong> Resize the image to the size you actually need, then compress it. Order matters. Resize first.</p>
+
+                    <h2>Reason 2: The Image Is Displayed Much Smaller Than It Really Is</h2>
+                    <p>Say your blog layout shows an image 600 px wide, but you uploaded a 3000 px photo. The browser downloads the large version and scales it down visually. The page looks fine, and nobody notices until it’s slow.</p>
+                    <p>A useful rule of thumb: Upload close to the largest size the image will ever be displayed at. Sharp screens (often called retina or high-DPR displays) may use up to 2× that size, but rarely more. Going 5× or 10× bigger only adds weight.</p>
+
+                    <h2>Reason 3: The Format Isn’t the Best Fit</h2>
+                    <p>Format changes how efficiently the same picture is stored.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Format</th>
+                                    <th>Typically good for</th>
+                                    <th>Watch out for</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>JPG</td>
+                                    <td>Photos</td>
+                                    <td>Artifacts around sharp text and edges</td>
+                                </tr>
+                                <tr>
+                                    <td>PNG</td>
+                                    <td>Logos, screenshots, transparency</td>
+                                    <td>Large files for detailed photos</td>
+                                </tr>
+                                <tr>
+                                    <td>WebP</td>
+                                    <td>Photos and graphics on the web</td>
+                                    <td>Check your platform’s support</td>
+                                </tr>
+                                <tr>
+                                    <td>AVIF</td>
+                                    <td>Photos at small sizes</td>
+                                    <td>Newer; check support and encoding time</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Modern formats like WebP and AVIF can often produce smaller files than JPG or PNG at similar visual quality, but results depend on the image and settings. Test with your own files instead of assuming.</p>
+                    <p>Using PNG for a photograph is a classic mistake. A photo saved as PNG can be far larger than it needs to be.</p>
+
+                    <h2>Reason 4: Loading Behavior Matters More Than You Think</h2>
+                    <p>Two pages can download the same images and feel completely different. Why? Timing.</p>
+                    <ul>
+                        <li><strong>Lazy loading the wrong image.</strong> Lazy loading tells the browser to wait on images until they’re near the screen. That’s great for images far down the page. But if you lazy load your main top image (the hero image), you delay the part visitors see first.</li>
+                        <li><strong>Late discovery.</strong> Browsers find images in the HTML quickly. Images set as CSS backgrounds, or added later by JavaScript or sliders, are found later, so they start loading later.</li>
+                        <li><strong>No priority for the important image.</strong> Modern browsers let you hint that an image is important. Check current browser support and your platform’s documentation before using these hints.</li>
+                        <li><strong>Missing width and height.</strong> If the page doesn’t know the image’s space in advance, content jumps around once it loads. It feels slow and unstable even when the download itself was quick.</li>
+                    </ul>
+
+                    <!-- IMAGE: Lazy loading timeline -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/05.3.jpg" 
+                             alt="Page loading timeline comparing a lazy loaded hero image with a normally loaded hero image" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Reason 5: Small Images Add Up</h2>
+                    <p>Thirty images at 90 KB each is still roughly 2.7 MB. Sliders, galleries, product grids, and icons can quietly become the heaviest part of a page.</p>
+                    <p>Ask yourself:</p>
+                    <ul class="checklist">
+                        <li>Do all these images need to load right away?</li>
+                        <li>Can similar images share a single file, or can some be removed?</li>
+                        <li>Are thumbnails really thumbnails, or full-size images shrunk by CSS?</li>
+                    </ul>
+
+                    <h2>Reason 6: The Image Isn’t the Real Problem</h2>
+                    <p>Sometimes images take the blame for something else. Common culprits:</p>
+                    <ul class="checklist">
+                        <li>Slow server response</li>
+                        <li>Missing browser caching, so visitors re-download everything</li>
+                        <li>Heavy third-party scripts (chat widgets, trackers, ad code)</li>
+                        <li>Large fonts or render-blocking CSS and JavaScript</li>
+                        <li>Too many plugins on WordPress</li>
+                    </ul>
+                    <p>If your images are properly sized and the page is still slow, look at these next.</p>
+
+                    <h2>How to Diagnose It: A Practical Checklist</h2>
+                    <p>You don’t need special tools. Your browser has them built in.</p>
+                    <ol>
+                        <li>Open your page in Chrome (or another browser with developer tools).</li>
+                        <li>Open DevTools (right-click the page, choose Inspect), then go to the Network tab.</li>
+                        <li>Reload the page and filter by Img.</li>
+                        <li>Sort by size or time. Note which images are largest and which start late.</li>
+                        <li>Compare dimensions. Hover over an image in the list or check the Elements panel to compare its natural size with its displayed size.</li>
+                        <li>Run a speed test. Tools like Lighthouse or PageSpeed Insights will flag oversized or poorly loaded images.</li>
+                        <li>Test again after each change so you know what actually helped.</li>
+                    </ol>
+
+                    <h3>Symptom → Likely Cause → Fix</h3>
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>What you see</th>
+                                    <th>Likely cause</th>
+                                    <th>What to do</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Small KB, but page feels heavy on phones</td>
+                                    <td>Huge pixel dimensions</td>
+                                    <td>Resize to display size, then compress</td>
+                                </tr>
+                                <tr>
+                                    <td>Top image appears late</td>
+                                    <td>Hero image is lazy loaded or found late</td>
+                                    <td>Load it normally, and prioritize it</td>
+                                </tr>
+                                <tr>
+                                    <td>Content jumps as images load</td>
+                                    <td>Missing width and height</td>
+                                    <td>Set dimensions on the image</td>
+                                </tr>
+                                <tr>
+                                    <td>Many images, long total load</td>
+                                    <td>Too many images loading at once</td>
+                                    <td>Lazy load below-the-fold images only</td>
+                                </tr>
+                                <tr>
+                                    <td>Photo saved as PNG is large</td>
+                                    <td>Wrong format</td>
+                                    <td>Try JPG or WebP</td>
+                                </tr>
+                                <tr>
+                                    <td>Images fine, page still slow</td>
+                                    <td>Server, scripts, or caching</td>
+                                    <td>Check hosting, caching, and plugins</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Test It Yourself</h2>
+                    <p>Don’t just trust our word. Run a simple test:</p>
+                    <ol>
+                        <li>Take one photo.</li>
+                        <li>Save it at different dimensions (for example, 4000 px, 2000 px, 1200 px, and 800 px wide).</li>
+                        <li>Save each in two formats (for example, JPG and WebP) at a similar visual quality.</li>
+                        <li>Note the file size of each.</li>
+                        <li>Place each on a test page and measure page speed separately, several times, then take the average. Speed results can vary between runs, so one test isn’t enough.</li>
+                    </ol>
+                    
+                      <!-- IMAGE: test it yourself  -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/05.4.jpg" 
+                             alt="Page loading timeline comparing a lazy loaded hero image with a normally loaded hero image" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p>Fill in your own results:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Width</th>
+                                    <th>Format</th>
+                                    <th>File size</th>
+                                    <th>Page load result</th>
+                                    <th>Looks OK?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>4000 px</td>
+                                    <td>JPG</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2000 px</td>
+                                    <td>JPG</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1200 px</td>
+                                    <td>JPG</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>800 px</td>
+                                    <td>JPG</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1200 px</td>
+                                    <td>WebP</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>800 px</td>
+                                    <td>WebP</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>You’ll likely see that dimensions matter alongside KB size. Your own numbers will tell you how much.</p>
+
+                    <h2>How to Fix It: Best Practices</h2>
+                    <ul class="checklist">
+                        <li><strong>Resize first, compress second.</strong> Match the image to where it’s displayed.</li>
+                        <li><strong>Choose the right format.</strong> JPG or WebP for photos, PNG for logos and transparency.</li>
+                        <li><strong>Serve sizes that fit the screen.</strong> Responsive images let the browser pick a suitable version.</li>
+                        <li><strong>Lazy load below-the-fold images only.</strong> Never delay the main top image.</li>
+                        <li><strong>Set width and height</strong> so the layout doesn’t jump.</li>
+                        <li><strong>Check caching and hosting</strong> if images are fine but the page isn’t.</li>
+                        <li><strong>Re-test after every change.</strong></li>
+                    </ul>
+
+                    <h2>Common Mistakes</h2>
+                    <ul>
+                        <li>Compressing a huge image instead of resizing it</li>
+                        <li>Lazy loading every image, including the hero</li>
+                        <li>Using PNG for photos</li>
+                        <li>Uploading the original camera photo</li>
+                        <li>Trusting KB size alone</li>
+                        <li>Testing speed once and calling it done</li>
+                    </ul>
+
+                    <h2>Quick Summary</h2>
+                    <ul>
+                        <li>KB size is only part of image performance.</li>
+                        <li>Pixel dimensions affect decoding and memory, even for small files.</li>
+                        <li>Resize to the display size, then compress.</li>
+                        <li>Format and loading behavior change how fast an image appears.</li>
+                        <li>Many small images add up.</li>
+                        <li>Diagnose with DevTools and test again after each change.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own images and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Fix oversized dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-fmt-converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Format Converter</span>
+                                        <span class="tool-card-subtitle">Switch to WebP or JPG</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Does image resolution affect page speed even if the KB size is small?</summary>
+                            <div class="faq-answer">It can. A heavily compressed, very large image still has to be decoded and drawn by the browser, which takes memory and processing power. This matters most on phones.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>What is the best image size for a website?</summary>
+                            <div class="faq-answer">It depends on your layout. A good starting point is the largest width the image is displayed at, with a larger version only if you serve sharp-screen devices. Check your theme’s content width and test.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Should I lazy load every image?</summary>
+                            <div class="faq-answer">No. Lazy load images that are below the visible screen. Load your main top image normally so it appears quickly.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is WebP always better than JPG?</summary>
+                            <div class="faq-answer">Not always. It often produces smaller files, but results vary by image and settings. Test both and confirm your platform supports it.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my website slow even after compressing images?</summary>
+                            <div class="faq-answer">Compression only reduces file size. Dimensions, loading order, too many images, slow hosting, missing caching, or heavy scripts can still slow the page.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How do I find which image is slowing my page?</summary>
+                            <div class="faq-answer">Open DevTools, go to the Network tab, filter by images, and sort by size or load time. Then compare each image’s natural size with the size it’s displayed at.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Do I need to resize before compressing?</summary>
+                            <div class="faq-answer">Yes, in most cases. Resizing removes unneeded pixels first, and compression then reduces the file further.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>A small KB number can hide a bigger problem. Dimensions, format, and loading behavior decide how an image really performs. Check them one by one, fix the biggest issue first, and test again.</p>
+                    <p>Ready to try? Use the QuickToolsPK <a href="../img-resizer.html">Image Resizer</a> to match your image to its display size, then run it through the <a href="../img-compress.html">Image Compressor</a>.</p>
+
+                    <div class="back-to-blog">
+                        <a href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>

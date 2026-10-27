@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Your PDF to JPG Conversion Looks Blurry: A Practical Fix Guide | QuickToolsPK</title>
+    <meta name="description" content="PDF to JPG looks blurry? Learn why text and diagrams lose sharpness and how to choose the right resolution for text, scans, and photos.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/why-pdf-to-jpg-looks-blurry.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>PDF Tools</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        PDF Tools
+                    </span>
+
+                    <h1>Why Your PDF to JPG Conversion Looks Blurry: A Practical Fix Guide</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 7 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> File Conversion Guides</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-file-pdf"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-file-image"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-search-plus"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-magic"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="../assets/images/blog/06.jpg" 
+                             alt="Laptop showing a sharp PDF page next to a blurry JPG version of the same page" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Nothing is wrong with your file — it's usually a resolution or quality issue.</figcaption>
+                    </figure>
+
+                    <p>You open the PDF and it looks perfect. You convert it to JPG, and suddenly the text is soft, the thin lines in the diagram are fuzzy, and small numbers are hard to read.</p>
+                    <p>Nothing is wrong with your file. This is the most common reason a PDF to JPG conversion looks blurry, and it is usually fixable in a minute. This guide explains what is happening and how to choose the right resolution for text pages, scanned pages, and photos.</p>
+
+                    <h2>The Short Answer</h2>
+                    <p>A PDF page can store text and diagrams as vector data, which stays sharp at any zoom. A JPG is a grid of pixels with a fixed size. When you convert, the page is turned into that grid at one particular resolution. If the resolution is too low, or the JPG compression is too strong, the result looks blurry.</p>
+                    <p>Most blurry conversions come from one of these:</p>
+                    
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <ul style="margin:0; padding-left: 1.2rem;">
+                                <li>The export resolution (DPI) is too low for the page.</li>
+                                <li>The JPG quality is set too low, which smudges text edges.</li>
+                                <li>The PDF is a scan, so the original image was already soft.</li>
+                                <li>The JPG is being zoomed or printed much larger than its pixel size allows.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>Why a PDF Can Look Sharp and a JPG Doesn’t</h2>
+                    <p>Think of a PDF as a set of instructions: “draw this letter here, in this font, at this size.” A viewer can redraw those instructions at any zoom level, so edges stay crisp.</p>
+                    <p>A JPG has no instructions. It is a fixed grid of colored pixels. Once the page is converted, you can’t get more detail than the grid holds. Zoom in and you simply see bigger pixels.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>PDF (text and diagrams)</th>
+                                    <th>JPG</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>How it’s stored</td>
+                                    <td>Mostly vector instructions</td>
+                                    <td>Fixed grid of pixels</td>
+                                </tr>
+                                <tr>
+                                    <td>Zooming in</td>
+                                    <td>Stays sharp</td>
+                                    <td>Gets blurry or blocky</td>
+                                </tr>
+                                <tr>
+                                    <td>Compression</td>
+                                    <td>Depends on the content</td>
+                                    <td>Lossy, always</td>
+                                </tr>
+                                <tr>
+                                    <td>Best for</td>
+                                    <td>Documents, reading, printing</td>
+                                    <td>Sharing a page as a picture</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/06.2.jpg" 
+                             alt="Zoomed comparison of vector PDF text and pixelated JPG text" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p><em>Note: A PDF can also contain regular photos or scans. Those are already pixel-based. More on that below.</em></p>
+
+                    <h2>Reason 1: The Resolution Is Too Low</h2>
+                    <p>When a PDF page becomes a JPG, the converter has to decide how many pixels to create. That is what the DPI (dots per inch) or “scale” setting controls. Higher DPI means more pixels, and more pixels mean sharper text.</p>
+                    <p>Here is how the pixel size of a standard page changes with DPI:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>DPI</th>
+                                    <th>A4 page (approx. pixels)</th>
+                                    <th>US Letter page (approx. pixels)</th>
+                                    <th>Typical use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>72</td>
+                                    <td>595 × 842</td>
+                                    <td>612 × 792</td>
+                                    <td>Very small preview</td>
+                                </tr>
+                                <tr>
+                                    <td>150</td>
+                                    <td>1240 × 1754</td>
+                                    <td>1275 × 1650</td>
+                                    <td>Reading on screen, sharing</td>
+                                </tr>
+                                <tr>
+                                    <td>300</td>
+                                    <td>2480 × 3508</td>
+                                    <td>2550 × 3300</td>
+                                    <td>Printing, small text, detail</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/06.3.jpg" 
+                             alt="Diagram showing the same PDF page at 72, 150, and 300 DPI" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p>These are simple calculations (page size in inches × DPI), so they are accurate for standard page sizes. A page converted at 72 DPI has only about a quarter of the pixels of 150 DPI, which is why small text turns to mush.</p>
+                    <p>Some converters use a low default resolution to keep files small, so it’s worth checking what yours uses.</p>
+                    <p><strong>The fix:</strong> Increase the resolution, or choose a higher quality option if the tool doesn’t show DPI directly.</p>
+
+                    <h2>Reason 2: The JPG Quality Setting Is Too Low</h2>
+                    <p>JPG is lossy. It throws away detail to save space, and text suffers more than photos because letters have sharp edges on a plain background.</p>
+                    <p>Low quality creates a fuzzy halo around letters, often called compression artifacts. You may notice it as speckles or smudges near the text. Colored text on a colored background is even more affected.</p>
+                    <p><strong>The fix:</strong> Use a higher quality setting for text pages. Don’t go to the extreme maximum automatically, because the file gets much larger. Test a couple of levels and zoom in to compare.</p>
+
+                    <h2>Reason 3: The PDF Is a Scan</h2>
+                    <p>This is the one people don’t expect. A scanned PDF is usually just a photo of a page placed inside a PDF. The text isn’t text at all. It’s pixels.</p>
+                    <p>That means the quality is capped by the original scan. If it was scanned at low resolution, or photographed on a phone in poor light, converting it to JPG at 600 DPI won’t add detail that was never captured. It will only make a bigger file of the same blurry image.</p>
+                    <p><strong>How to tell:</strong> Open the PDF and try selecting a word with your cursor. If you can’t select any text, or the page zooms into pixels, it’s probably a scan.</p>
+                    <p><strong>The fix:</strong> Convert at a resolution close to the scan’s original, not far above it. If the scan itself is poor, the real fix is to rescan at a higher resolution.</p>
+
+                    <h2>Reason 4: Photos and Diagrams Inside the PDF Are Already Low Quality</h2>
+                    <p>A PDF can contain a mix: sharp vector text, plus embedded images. The text will convert well at a good resolution, but a low-quality picture inside the PDF stays low quality.</p>
+                    <p>Charts and diagrams are the tricky part. If a diagram was created as vector, it converts sharply at a high enough DPI. If it was pasted in as a small screenshot, it is already limited by its own pixels.</p>
+
+                    <h2>Reason 5: JPG Is Not Ideal for Text</h2>
+                    <p>Even with good settings, JPG isn’t the perfect format for pages full of text, thin lines, and flat colors. PNG is lossless, so it keeps letter edges clean, though the file is often larger.</p>
+                    <p>If you only need to share or upload the page and sharpness matters most, consider PNG for text-heavy pages and JPG for photo-heavy pages. (This links to a question we covered earlier: <a href="why-image-gets-bigger-after-converting-to-jpg.html">why image files can get bigger after converting formats</a>.)</p>
+
+                    <h2>Reason 6: The Image Is Being Enlarged</h2>
+                    <p>Sometimes the conversion is fine, but the JPG is used in a way that stretches it. A 1240 px wide image placed in a layout that displays it 2000 px wide will look soft, no matter how it was made. Printing works the same way: a low-pixel image printed large looks blurry.</p>
+                    <p><strong>The fix:</strong> Convert at a resolution that matches how the image will be used.</p>
+
+                    <h2>Which Resolution Should You Choose? A Decision Guide</h2>
+                    <p>There is no single best DPI. It depends on what’s in the page and where the JPG will go.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Your page type</th>
+                                    <th>Suggested starting point</th>
+                                    <th>Why</th>
+                                    <th>Watch out for</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Text-heavy page (reports, assignments, contracts)</td>
+                                    <td>150 DPI for screen, 300 DPI for print or small text</td>
+                                    <td>Letters need enough pixels to stay crisp</td>
+                                    <td>Low JPG quality smudges text</td>
+                                </tr>
+                                <tr>
+                                    <td>Page with small fonts or tables</td>
+                                    <td>300 DPI</td>
+                                    <td>Tiny characters need more detail</td>
+                                    <td>Larger file size</td>
+                                </tr>
+                                <tr>
+                                    <td>Scanned page</td>
+                                    <td>Close to the scan’s original resolution</td>
+                                    <td>Can’t add detail that isn’t there</td>
+                                    <td>Going far above just bloats the file</td>
+                                </tr>
+                                <tr>
+                                    <td>Photo-heavy page</td>
+                                    <td>150–200 DPI is often enough</td>
+                                    <td>Photos hide detail loss better</td>
+                                    <td>Don’t exceed the photo’s own resolution</td>
+                                </tr>
+                                <tr>
+                                    <td>Diagram or chart with thin lines</td>
+                                    <td>200–300 DPI</td>
+                                    <td>Thin lines blur easily</td>
+                                    <td>Consider PNG</td>
+                                </tr>
+                                <tr>
+                                    <td>Quick preview or thumbnail</td>
+                                    <td>72–100 DPI</td>
+                                    <td>Small file matters more than detail</td>
+                                    <td>Not for reading small text</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>These are starting points, not rules. Always zoom in to 100% and check the result.</p>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/06.4.jpg" 
+                             alt="Decision flowchart for choosing PDF to JPG resolution based on page type" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>What Happens to File Size at Higher Resolution?</h2>
+                    <p>Doubling the DPI doesn’t double the file size. It roughly quadruples the number of pixels (twice as wide and twice as tall), and file size tends to grow a lot with it. That’s the trade-off: sharper, but heavier.</p>
+                    <p>If a high-resolution JPG becomes too large to upload or share, compress it afterwards, and compare it again at 100% zoom. Resolution first, then compression.</p>
+
+                    <h2>Test It Yourself</h2>
+                    <p>Don’t just trust the table above. Run a quick test on one of your own PDFs:</p>
+                    <ol>
+                        <li>Pick one page that has text, a small table, and a diagram.</li>
+                        <li>Convert the same page at three resolutions, for example low, medium, and high. Write down the exact settings your tool offers, since different tools give different options.</li>
+                        <li>Keep the JPG quality setting the same for each.</li>
+                        <li>Record the file size and the pixel dimensions.</li>
+                        <li>Zoom to 100% and check the smallest text and the thinnest line.</li>
+                    </ol>
+
+                    <p>Fill in your own results:</p>
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Setting used</th>
+                                    <th>Pixel dimensions</th>
+                                    <th>File size</th>
+                                    <th>Small text readable?</th>
+                                    <th>Thin lines clear?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Low</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Medium</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>High</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>High + PNG (optional)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Step-by-Step: How to Fix a Blurry PDF to JPG</h2>
+                    <ol class="checklist">
+                        <li><strong>Check what kind of PDF it is.</strong> Can you select the text? If yes, it’s a normal PDF. If not, it’s likely a scan.</li>
+                        <li><strong>Raise the resolution</strong> to the next level and convert again.</li>
+                        <li><strong>Use a higher quality setting</strong> if the tool allows it.</li>
+                        <li><strong>Zoom to 100%</strong> and check the smallest text.</li>
+                        <li><strong>Switch to PNG</strong> if letters still look smudged and the file size is acceptable.</li>
+                        <li><strong>Compress at the end</strong> if the file is too large.</li>
+                    </ol>
+
+                    <h2>Common Mistakes</h2>
+                    <ul>
+                        <li>Judging sharpness at a zoom level that’s different from how it will be used</li>
+                        <li>Converting a poor scan at a very high resolution and expecting improvement</li>
+                        <li>Using the lowest quality setting to get a small file, then wondering why text is fuzzy</li>
+                        <li>Re-saving the JPG again and again (quality drops each time)</li>
+                        <li>Using JPG for text-heavy pages when PNG would be cleaner</li>
+                        <li>Comparing results without zooming to 100%</li>
+                    </ul>
+
+                    <h2>Quick Summary</h2>
+                    <ul class="checklist">
+                        <li>PDF text is vector and stays sharp. JPG is pixels and doesn’t.</li>
+                        <li>Low DPI and low JPG quality are the two biggest causes of blur.</li>
+                        <li>Scanned PDFs are capped by the scan quality.</li>
+                        <li>Text pages need more resolution than photo pages.</li>
+                        <li>PNG can keep text cleaner than JPG.</li>
+                        <li>Higher resolution means a bigger file, so compress afterwards if needed.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own files and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../JPG-to-PDF-Converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-file-image"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">PDF to JPG Converter</span>
+                                        <span class="tool-card-subtitle">Fix blurry conversions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Change dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>What DPI should I use for PDF to JPG?</summary>
+                            <div class="faq-answer">For screen viewing, 150 DPI is a common starting point. For printing or very small text, 300 DPI is better. Test with your own page, since needs vary.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is the text blurry but the PDF looks sharp?</summary>
+                            <div class="faq-answer">The PDF stores text as vector instructions that redraw at any zoom. The JPG is a fixed grid of pixels, so low resolution or strong compression makes edges soft.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Can I fix a blurry scanned PDF by converting it at a higher DPI?</summary>
+                            <div class="faq-answer">Not really. Converting at higher DPI can’t add detail the scan never captured. Rescanning at a higher resolution is the real fix.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is PNG better than JPG for text pages?</summary>
+                            <div class="faq-answer">Often, yes. PNG is lossless, so text edges stay cleaner. The trade-off is that the files can be larger.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why did my JPG get so large at higher resolution?</summary>
+                            <div class="faq-answer">More pixels means more data. Doubling the DPI roughly quadruples the pixel count. Compress the result afterwards if you need a smaller file.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Does JPG quality matter for text?</summary>
+                            <div class="faq-answer">Yes. Text has sharp edges, and low quality settings create smudges and halos around letters.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why does the converted image look different on my phone and my computer?</summary>
+                            <div class="faq-answer">Screens display images at different sizes and pixel densities. A low-resolution JPG that looks acceptable on a small phone screen may look soft when viewed large on a desktop.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>A blurry PDF to JPG conversion is rarely a mystery. It is usually resolution, quality, or the nature of the PDF itself. Check what kind of page you have, choose the resolution that fits it, and compare at 100% zoom before sharing.</p>
+                    <p>Ready to try? Use the QuickToolsPK <a href="../JPG-to-PDF-Converter.html">PDF to JPG converter</a>, convert one page at two different settings, and compare the text side by side.</p>
+
+                    <div class="back-to-blog">
+                        <a href="../blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../blog/index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
