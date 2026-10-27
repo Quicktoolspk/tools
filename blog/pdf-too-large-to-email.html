@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Too Large to Email? Find the Real Cause Before Compressing | QuickToolsPK</title>
+    <meta name="description" content="PDF too large to email? Find out whether scanned pages, embedded photos, or duplicate pages are responsible, then choose the right way to reduce or split your PDF.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/pdf-too-large-to-email.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>PDF Tools</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        PDF Tools
+                    </span>
+
+                    <h1>PDF Too Large to Email? Find the Real Cause Before Compressing</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 8 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> PDF Troubleshooting &amp; Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-file-pdf"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-envelope-open-text"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-compress-arrows-alt"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-cut"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="../assets/images/blog/07.jpg" 
+                             alt="PDF file that is too large to email with compression and splitting solutions" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Don't just compress. Find out exactly what is making your PDF so large.</figcaption>
+                    </figure>
+
+                    <p>You finish preparing an important PDF, attach it to an email, and discover that the file is too large to send. You try compressing it, but the result is still too big. Sometimes the document becomes smaller, but its text or images lose quality.</p>
+                    <p>The problem may not be the PDF as a whole. A few high-resolution scanned pages, embedded photographs, unnecessary duplicate pages, or an unsuitable export setting can account for much of a document's size.</p>
+                    <p>The best way to reduce a PDF is to identify what is making it large before choosing a compression method. A scanned document needs a different approach from a PDF containing photographs, while a document with redundant pages may benefit more from cleanup than compression.</p>
+                    <p>This guide explains how to diagnose the problem, reduce PDF file size while preserving readability, and decide when splitting the document or sharing a link is the better option.</p>
+
+                    <h2>Quick answer: What should you do if your PDF is too large to email?</h2>
+                    <p>Start by checking the PDF's actual file size and your email provider's attachment limit. Then identify what's inside the document.</p>
+                    
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="callout-content">
+                            <ul style="margin:0; padding-left: 1.2rem;">
+                                <li><strong>Scanned pages:</strong> Optimize the scanned images and resolution.</li>
+                                <li><strong>Embedded photographs:</strong> Reduce unnecessary image resolution or adjust image compression.</li>
+                                <li><strong>Duplicate or unnecessary pages:</strong> Remove them if they are genuinely redundant.</li>
+                                <li><strong>PDF still too large after compression:</strong> Inspect the output and try a different optimization method.</li>
+                                <li><strong>Document cannot be reduced enough:</strong> Split it into smaller PDFs or share it through a cloud storage link.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>For example, personal Gmail accounts have a 25 MB attachment limit, while Outlook.com currently documents a 25 MB email limit. Limits can differ for business accounts, administrators, and other email services. Check the rules that apply to your account before deciding how small the file needs to be.</p>
+
+                    <h2>1. Check the email attachment limit first</h2>
+                    <p>Before changing your document, confirm how large an attachment your email service allows.</p>
+                    <p>An email message can have a size limit that applies to the message as a whole, not just the PDF. This means that multiple attachments and message content may also affect whether the email can be sent. Business email accounts can have different limits configured by their administrators.</p>
+                    
+                    <h3>Common email attachment limits</h3>
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Email service or account</th>
+                                    <th>Published limit or guidance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Personal Gmail</td>
+                                    <td>Up to 25 MB in attachments</td>
+                                </tr>
+                                <tr>
+                                    <td>Outlook.com</td>
+                                    <td>25 MB per email message</td>
+                                </tr>
+                                <tr>
+                                    <td>Outlook with a business account</td>
+                                    <td>Depends on the account type and administrator settings</td>
+                                </tr>
+                                <tr>
+                                    <td>Yahoo Mail</td>
+                                    <td>Up to 25 MB total attachments</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><em>These figures are not universal limits for every account or configuration. Confirm your provider's current rules, especially if you use a company email address.</em></p>
+
+                    <h3>Why a PDF under the stated limit might still fail</h3>
+                    <p>Your email may include more than one attachment, or your organization's email system may enforce a lower limit. Some services also account for the message as a whole rather than the PDF's standalone size.</p>
+                    
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Practical tip:</strong> If your email limit is 25 MB, do not assume a PDF that is almost exactly 25 MB will always send successfully. Leave room for other attachments and message overhead.</p>
+                        </div>
+                    </div>
+
+                    <p>If your PDF is already well below your email provider's limit, the issue might instead involve the recipient's system, a network problem, or another attachment restriction. Compressing the PDF further may not solve that particular problem.</p>
+
+                    <h2>2. Find out what is making your PDF so large</h2>
+                    <p>PDF files can contain text, fonts, vector graphics, photographs, scanned page images, and other embedded resources. The contents and how they are encoded affect the total file size.</p>
+                    <p>Use this table to identify the most likely cause before changing the document.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>What you notice</th>
+                                    <th>Possible cause</th>
+                                    <th>Best first step</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>The PDF is a scan of paper documents</td>
+                                    <td>High-resolution page images</td>
+                                    <td>Optimize the scanned pages</td>
+                                </tr>
+                                <tr>
+                                    <td>The PDF contains many photographs</td>
+                                    <td>Large embedded image data</td>
+                                    <td>Reduce image resolution or adjust compression</td>
+                                </tr>
+                                <tr>
+                                    <td>The PDF contains repeated pages</td>
+                                    <td>Redundant content</td>
+                                    <td>Remove verified duplicate pages</td>
+                                </tr>
+                                <tr>
+                                    <td>Compression barely changes the size</td>
+                                    <td>Already-optimized content or unsuitable settings</td>
+                                    <td>Inspect the PDF and try another method</td>
+                                </tr>
+                                <tr>
+                                    <td>Only a few pages contain large images</td>
+                                    <td>A small number of pages dominate the file</td>
+                                    <td>Optimize those pages if your software supports it</td>
+                                </tr>
+                                <tr>
+                                    <td>The document is long but mostly text</td>
+                                    <td>Embedded resources, fonts, or other document data</td>
+                                    <td>Inspect PDF properties and optimization options</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><em>These are diagnostic clues rather than guaranteed explanations. A PDF can have more than one cause of excessive size.</em></p>
+
+                    <h2>3. Troubleshooting path one: Your PDF contains scanned pages</h2>
+                    <p>Scanned PDFs are a common source of unexpectedly large documents.</p>
+                    <p>When you scan a physical page, the scanner captures it as an image. A PDF made from those scans may contain an image for every page instead of compact, selectable text.</p>
+                    <p>Imagine scanning 100 pages in color at a high resolution. Each page may contain more image information than is necessary for a document intended to be read on a screen. The combined size can become substantial.</p>
+
+                    <!-- IMAGE: Scanned PDFs -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/07.2.jpg" 
+                             alt="Scanned paper pages combined into a PDF with color and grayscale scan options" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to reduce a scanned PDF</h3>
+                    <ol>
+                        <li><strong>Check the document's purpose.</strong> A basic office document may not need the same image detail as a document intended for professional printing.</li>
+                        <li><strong>Inspect the scan resolution.</strong> If the document was scanned at an unnecessarily high resolution, consider rescanning it at a suitable setting.</li>
+                        <li><strong>Choose the appropriate color mode.</strong> Black-and-white or grayscale may be suitable for some text documents, while color should be retained when it conveys important information.</li>
+                        <li><strong>Use image optimization.</strong> If your PDF software offers scan optimization, adjust it to balance size and readability.</li>
+                        <li><strong>Check text clarity.</strong> Zoom in on small text, numbers, stamps, signatures, and fine details before using the smaller file.</li>
+                    </ol>
+
+                    <h3>Should you use OCR?</h3>
+                    <p>Optical character recognition, or OCR, attempts to recognize text in scanned images so that it can be searched or selected.</p>
+                    <p>OCR can improve how a scanned document is used, but it does not automatically guarantee a smaller PDF. The resulting file size depends on the original images, OCR output, and optimization settings.</p>
+                    <p>Use OCR when searchable text is important. Treat it as a document usability feature, not a guaranteed compression method.</p>
+
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Important:</strong> Do not reduce scan resolution or remove color information if doing so would make a legal, financial, medical, or other important document difficult to read.</p>
+                        </div>
+                    </div>
+
+                    <h2>4. Troubleshooting path two: Your PDF contains many photographs</h2>
+                    <p>A PDF containing product photos, presentation slides, event images, or portfolio pages may be large because of its embedded image data.</p>
+                    <p>Changing the PDF's overall settings without considering the images may produce little improvement. In some cases, the document needs image optimization rather than simply being saved again.</p>
+
+                    <!-- IMAGE: Image-heavy PDF -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/07.3.jpg" 
+                             alt="PDF pages with photographs before and after image compression" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to reduce image-heavy PDF size</h3>
+                    <ul class="checklist">
+                        <li>Check whether the photographs are much larger than their displayed size.</li>
+                        <li>Reduce excessive image resolution when the intended use allows it.</li>
+                        <li>Use suitable image compression settings.</li>
+                        <li>Remove images that are genuinely unnecessary.</li>
+                        <li>Preserve the original photographs separately if they may be needed later.</li>
+                    </ul>
+                    <p>For example, a portfolio designed primarily for on-screen viewing may not need every photograph stored at full print resolution. A print-ready document, however, may need more detail.</p>
+                    <p><em>The right setting depends on the document's purpose.</em></p>
+
+                    <h3>Why aggressive compression can look bad</h3>
+                    <p>Photographs contain subtle details, textures, gradients, and color transitions. Strong compression may make these areas appear blurry, blocky, or unnatural.</p>
+                    <p>Before replacing your original file, compare the compressed PDF with the original at the same zoom level. Check faces, fine textures, small captions, and image edges.</p>
+                    <p>If the file becomes smaller but the photographs no longer look acceptable, choose a less aggressive setting.</p>
+
+                    <h2>5. Troubleshooting path three: Your PDF contains duplicate pages</h2>
+                    <p>Duplicate pages may not always be the main cause of a large PDF, but removing genuinely redundant content can reduce the document's size and make it easier to use.</p>
+                    <p>This approach is especially relevant to merged scans, invoice bundles, reports, and documents assembled from multiple files.</p>
+
+                    <h3>How to check for duplicate pages</h3>
+                    <ol>
+                        <li>Open the PDF in a viewer that displays page thumbnails.</li>
+                        <li>Review repeated page numbers, headings, invoice numbers, dates, or content.</li>
+                        <li>Compare pages that appear identical before removing anything.</li>
+                        <li>Remove only pages confirmed to be unnecessary.</li>
+                        <li>Save a new copy and verify the page order and total page count.</li>
+                    </ol>
+
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Be careful:</strong> With documents that contain similar-looking forms, two pages may look nearly identical but represent different transactions, dates, or people.</p>
+                        </div>
+                    </div>
+                    
+                    <p>If a PDF contains a large amount of genuinely redundant content, removing it may be more useful than repeatedly compressing the entire document.</p>
+                    <p><strong>QuickToolsPK tip:</strong> A <a href="../pdf-delete-pages.html">Delete PDF Pages</a> tool can help remove unwanted pages, while a <a href="../tools/split-pdf.html">Split PDF</a> tool can separate a large document into smaller parts. Confirm the resulting document carefully before sharing it.</p>
+
+                    <h2>6. PDF still too large after compression? Here's what to check</h2>
+                    <p>If you have already compressed the PDF but it remains too large, do not immediately repeat the same process with even stronger settings.</p>
+                    <p>First, find out what changed.</p>
+
+                    <h3>Step 1: Compare the original and compressed files</h3>
+                    <p>Check the file sizes of both PDFs.</p>
+                    <p>Consider this hypothetical example:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Original PDF</td>
+                                    <td>32 MB</td>
+                                </tr>
+                                <tr>
+                                    <td>Compressed PDF</td>
+                                    <td>29 MB</td>
+                                </tr>
+                                <tr>
+                                    <td>Size reduction</td>
+                                    <td>3 MB, or about 9.4%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><em>These figures are illustrative, not the result of a QuickToolsPK test.</em></p>
+                    <p>A small reduction might mean the PDF was already optimized, the compression settings were conservative, or the file contains content that the selected method cannot reduce substantially.</p>
+
+                    <h3>Step 2: Check whether the PDF was already optimized</h3>
+                    <p>If the PDF was previously compressed or exported for web use, running the same optimization again may produce little additional improvement.</p>
+                    <p>Try a different approach based on the contents rather than repeating an identical process.</p>
+
+                    <h3>Step 3: Look at the document's contents</h3>
+                    <p>Does it contain scanned pages, embedded photographs, unnecessary pages, or other resources that can be optimized?</p>
+                    <p>Choose the relevant troubleshooting path instead of applying the same settings to every document.</p>
+
+                    <h3>Step 4: Try a suitable alternative setting</h3>
+                    <p>If your PDF software provides different compression presets or image optimization controls, test a less aggressive and a more aggressive option on a copy of the file.</p>
+                    <p>Compare the output sizes and visual quality. The strongest setting is not necessarily the best one.</p>
+
+                    <h3>Step 5: Decide whether further compression is worthwhile</h3>
+                    <p>If the document is only slightly over the attachment limit, a small reduction might be enough. If it is much larger than the limit, splitting it or using a sharing link may be more practical.</p>
+
+                    <h2>7. How to compress a PDF without making it difficult to read</h2>
+                    <p>A smaller PDF is useful only if the recipient can still read and use it.</p>
+                    <p>Before choosing a compression setting, decide which parts of the document must remain clear.</p>
+                    
+                    <ul class="checklist">
+                        <li><strong>Text:</strong> Check headings, footnotes, tables, and small print.</li>
+                        <li><strong>Scanned pages:</strong> Check letters, numbers, stamps, and signatures.</li>
+                        <li><strong>Photographs:</strong> Look for blur, blockiness, and loss of detail.</li>
+                        <li><strong>Charts:</strong> Make sure labels and thin lines remain legible.</li>
+                        <li><strong>Color:</strong> Verify that important color-coded information remains distinguishable.</li>
+                    </ul>
+
+                    <h3>A practical comparison method</h3>
+                    <p>Create a compressed copy and compare it with the original:</p>
+                    <ol>
+                        <li>Record the original file size.</li>
+                        <li>Apply one compression setting.</li>
+                        <li>Record the new file size.</li>
+                        <li>Calculate the percentage reduction.</li>
+                        <li>Inspect the same pages in both versions.</li>
+                        <li>Keep the compressed copy only if its quality is acceptable.</li>
+                    </ol>
+                    
+                    <p>Calculate the reduction using:</p>
+                    <div class="formula-box">
+                        <div class="formula-title"><i class="fas fa-calculator"></i> Reduction formula</div>
+                        <div class="formula-code">
+                            Reduction (%) = ((Original size − New size) / Original size) × 100
+                        </div>
+                    </div>
+
+                    <p>For example, reducing a 20 MB PDF to 15 MB gives a reduction of 25%.</p>
+                    <p>The calculation measures file-size reduction, not image quality. A visual inspection is still necessary.</p>
+
+                    <h2>8. Should you compress the PDF or split it into smaller files?</h2>
+                    <p>Sometimes the best solution is not further compression.</p>
+                    <p>If your PDF is much larger than the email attachment limit, splitting it into smaller files may be more practical. The right choice depends on how the recipient needs to access the information.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Recommended approach</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>The PDF is only slightly over the limit</td>
+                                    <td>Try appropriate compression first</td>
+                                </tr>
+                                <tr>
+                                    <td>A scanned document contains oversized page images</td>
+                                    <td>Optimize the scan</td>
+                                </tr>
+                                <tr>
+                                    <td>The PDF contains unnecessary duplicate pages</td>
+                                    <td>Remove verified duplicates</td>
+                                </tr>
+                                <tr>
+                                    <td>The PDF is a long report with distinct chapters</td>
+                                    <td>Split it by chapter or section</td>
+                                </tr>
+                                <tr>
+                                    <td>The recipient needs the entire document in one place</td>
+                                    <td>Consider a cloud-sharing link</td>
+                                </tr>
+                                <tr>
+                                    <td>The document contains sensitive information</td>
+                                    <td>Use an approved sharing method with appropriate access controls</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- IMAGE: Split PDF -->
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/07.4.jpg" 
+                             alt="One large PDF divided into three smaller PDF documents for sharing" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to split a large PDF for email</h3>
+                    <ol>
+                        <li>Open a PDF splitting tool.</li>
+                        <li>Select the original PDF.</li>
+                        <li>Choose a logical page range or split method.</li>
+                        <li>Create smaller PDF files.</li>
+                        <li>Check the size of each resulting file.</li>
+                        <li>Confirm the pages are complete and in the correct order.</li>
+                    </ol>
+                    <p>For example, a 60-page report might be divided into three 20-page parts. However, equal page counts do not guarantee equal file sizes because pages can contain very different amounts of image data.</p>
+                    <p>If the recipient must review the report as one continuous document, provide clear filenames such as <code>Report-Part-1.pdf</code>, <code>Report-Part-2.pdf</code>, and <code>Report-Part-3.pdf</code>.</p>
+
+                    <h3>When a cloud-sharing link is better</h3>
+                    <p>If the PDF is too large to send as an attachment even after sensible optimization, upload it to an approved cloud storage service and share the link.</p>
+                    <p>Before sharing, check that:</p>
+                    <ul class="checklist">
+                        <li>The recipient has permission to open the file.</li>
+                        <li>The link does not expose the document to unintended people.</li>
+                        <li>Any access restrictions are appropriate for the contents.</li>
+                        <li>Your organization permits the selected storage service.</li>
+                    </ul>
+                    <p>This is particularly important for confidential business records or personal documents.</p>
+
+                    <h2>9. A practical PDF size troubleshooting checklist</h2>
+                    <p>Use this checklist to identify your next step.</p>
+
+                    <div class="table-wrap" style="padding: 1.5rem; background: var(--surface); border-radius: var(--r-md);">
+                        <h3 style="margin-top:0; margin-bottom: 1rem; font-size: 1.1rem; color: var(--navy);">PDF troubleshooting checklist</h3>
+                        <ul class="checklist" style="margin:0;">
+                            <li><strong>Check the email attachment limit.</strong> Confirm the limit for your sending account and recipient.</li>
+                            <li><strong>Inspect the PDF's contents.</strong> Look for scanned pages, photographs, and embedded graphics.</li>
+                            <li><strong>Check for unnecessary pages.</strong> Remove duplicate or unwanted pages only after verifying them.</li>
+                            <li><strong>Compress a copy of the original.</strong> Use settings appropriate for the document's purpose.</li>
+                            <li><strong>Compare file size and readability.</strong> Record the new size and inspect important details.</li>
+                            <li><strong>Split the PDF or share a link.</strong> Use this option if the document still exceeds the limit.</li>
+                        </ul>
+                    </div>
+
+                    <h2>10. Which QuickToolsPK tool should you use?</h2>
+                    <p>Choose the tool based on the problem you identified.</p>
+                    <ul>
+                        <li><a href="../pdf-compression.html"><strong>PDF Compressor:</strong></a> Reduce the size of a PDF that contains oversized images or other compressible content.</li>
+                        <li><a href="../split-pdf.html"><strong>Split PDF:</strong></a> Separate a long PDF into smaller files when sending the complete document as one attachment is impractical.</li>
+                        <li><a href="../tools/pdf-delete-pages.html"><strong>Delete PDF Pages:</strong></a> Remove unwanted or duplicate pages after verifying that they are not needed.</li>
+                        <li><a href="../tools/JPG-to-PDF-Converter.html"><strong>JPG to PDF Converter:</strong></a> Combine image files into a PDF when a document format is required, while checking the resulting file size.</li>
+                    </ul>
+                    <p>Use compression first when the document can be reduced without compromising its purpose. Use splitting when the document needs to be divided, and consider a sharing link when the file remains too large.</p>
+                    <p>The best solution is the one that meets the attachment limit while preserving the information the recipient needs.</p>
+
+                    <h2>Quick summary</h2>
+                    <ul class="checklist">
+                        <li>Check your email provider's actual attachment limit before modifying the PDF.</li>
+                        <li>Scanned PDFs can be large because each page may contain a high-resolution image.</li>
+                        <li>Image-heavy PDFs may benefit from appropriate image optimization.</li>
+                        <li>Remove duplicate pages only after confirming they are genuinely unnecessary.</li>
+                        <li>If compression makes little difference, inspect the document and try a different approach.</li>
+                        <li>Compare file size and readability after every optimization.</li>
+                        <li>Split long documents into logical sections if smaller attachments are more practical.</li>
+                        <li>Use an appropriately permissioned cloud-sharing link when email attachments are unsuitable.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own files and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../pdf-compression.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-file-archive"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">PDF Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../split-pdf.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-cut"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Split PDF</span>
+                                        <span class="tool-card-subtitle">Divide into smaller files</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../pdf-delete-pages.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-trash-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Delete PDF Pages</span>
+                                        <span class="tool-card-subtitle">Remove unnecessary pages</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my PDF too large to email?</summary>
+                            <div class="faq-answer">Your PDF may contain high-resolution scanned pages, large embedded photographs, unnecessary pages, or other embedded resources. Check the contents first, then choose the appropriate optimization method.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How do I reduce PDF file size without losing quality?</summary>
+                            <div class="faq-answer">Start by identifying oversized images or unnecessary content. Try suitable optimization settings and compare the result with the original. Some reductions can be achieved without noticeable quality loss, but this depends on the PDF.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my PDF still too large after compression?</summary>
+                            <div class="faq-answer">The PDF may already be optimized, or the chosen compression settings may not address its largest components. Inspect the document, try a different optimization method, or split it into smaller files if necessary.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How can I reduce the size of a scanned PDF?</summary>
+                            <div class="faq-answer">Use suitable scan resolution and color settings, and apply image optimization when available. Preserve enough detail to read small text, signatures, stamps, and other important information. OCR can make scanned text searchable but does not guarantee a smaller file.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Can removing duplicate pages reduce PDF size?</summary>
+                            <div class="faq-answer">Yes. Removing unnecessary duplicate pages can reduce the file size, particularly when those pages contain substantial image data. Always verify that the pages are genuinely redundant before deleting them.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Will splitting a PDF make its total size smaller?</summary>
+                            <div class="faq-answer">Not necessarily. Splitting creates multiple files and may make them easier to email individually, but it does not inherently reduce the combined size of the document. The output may also contain some additional overhead.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>What should I do if my PDF is larger than 25 MB?</summary>
+                            <div class="faq-answer">Check the limits of your email provider. If your account allows only 25 MB, try suitable compression or splitting. Alternatively, upload the PDF to an approved cloud storage service and share a link with the correct access permissions.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is it better to compress a PDF or send a sharing link?</summary>
+                            <div class="faq-answer">Compression is useful when you need a smaller attachment and can preserve acceptable quality. A sharing link is often more practical for very large files or documents that should remain intact. Consider confidentiality, recipient access, and organizational policies before sharing.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>A PDF that is too large to email does not always need stronger compression. It may contain oversized scanned pages, high-resolution photographs, redundant pages, or content that is already efficiently encoded.</p>
+                    <p>Start by checking the attachment limit and inspecting the document. Optimize scanned pages and images where appropriate, remove unnecessary content carefully, and compare the new file with the original. If the document remains too large, splitting it or sharing a secure link may be the more sensible choice.</p>
+                    <p>For your next step, try the QuickToolsPK <a href="../pdf-compression.html">PDF Compressor</a> to reduce the file size, or use <a href="../split-pdf.html">Split PDF</a> if dividing the document makes more sense. Always check the final file before sending it.</p>
+                    <p>The goal is not simply to make a PDF smaller. It is to create a document that fits the sharing requirements and remains clear, complete, and useful.</p>
+
+                    <div class="back-to-blog">
+                        <a href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
