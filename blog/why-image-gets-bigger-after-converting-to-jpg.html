@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Your Image Gets Bigger After Converting to JPG | QuickToolsPK</title>
+    <meta name="description" content="Find out why a JPG can be larger than your original PNG. Learn how transparency, image dimensions, quality settings, and compression affect file size.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/why-image-gets-bigger-after-converting-to-jpg.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        /* Container for Side Floating Icons */
+        .article-container-layout {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure {
+            margin: 0 0 2.5rem; position: relative;
+        }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>Image Conversion</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        Image Conversion
+                    </span>
+
+                    <h1>Why Your Image Gets Bigger After Converting It to JPG</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 8 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> Image formats &amp; optimization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-file-image"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-compress-arrows-alt"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-exchange-alt"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-magic"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Illustration showing image conversion from PNG to JPG" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Converting an image to JPG does not always guarantee a smaller file size.</figcaption>
+                    </figure>
+
+                    <p>You convert a PNG image to JPG expecting a smaller file, but the result is bigger than the original. Why does that happen?</p>
+                    <p>It seems strange because JPG is widely known for compressing images, especially photographs. However, converting an image to JPG does not guarantee a smaller file size. The result depends on the original image, its dimensions, the conversion settings, and how the new file is encoded.</p>
+                    <p>In this guide, you'll learn why a PNG can become a larger JPG, how transparent backgrounds affect the result, and what to do when you need a smaller image for a website, email, upload, or social media post.</p>
+
+                    <h2>Quick answer: Why did your JPG become larger?</h2>
+                    <p>A JPG can become larger than the original PNG when the converter uses a high quality setting, preserves large image dimensions, or encodes an image that PNG was already storing efficiently.</p>
+                    <p>The type of image matters, too. Photographs often compress well as JPGs, while screenshots, logos, text-heavy graphics, and images with large areas of flat color may be more efficiently stored as PNGs.</p>
+                    
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>To fix the problem, check the following:</strong> Image dimensions, JPG quality, Transparency, Image content, and Actual file size.</p>
+                        </div>
+                    </div>
+
+                    <h2>1. PNG and JPG compress images differently</h2>
+                    <p>The first thing to understand is that PNG and JPG use different compression methods.</p>
+                    <p>PNG uses lossless compression. This means the image's pixel information can be reconstructed without the loss introduced by lossy compression. JPG normally uses lossy compression, which reduces file size by discarding some image information in ways designed to be less noticeable to viewers.</p>
+                    <p>Neither method is automatically the best for every image.</p>
+
+                    <h3>Why JPG often works well for photographs</h3>
+                    <p>Photographs contain complex variations in color, lighting, texture, and detail. JPG compression is designed to handle this kind of visual information efficiently. For example, a photograph of a landscape may become substantially smaller when exported as a JPG at a suitable quality setting.</p>
+
+                    <h3>Why PNG can be better for graphics</h3>
+                    <p>Consider a company logo with sharp edges, a screenshot containing small text, or an illustration with solid-color areas. PNG can preserve these details without introducing the same lossy artifacts associated with JPG.</p>
+                    <p>When such an image is converted to JPG at a high quality setting, the resulting file may be larger than expected. The original PNG may already have represented the image efficiently.</p>
+
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-info-circle"></i></div>
+                        <div class="callout-content">
+                            <p><strong>The important lesson:</strong> JPG is often a good choice for photographs, but PNG can be a better choice for screenshots, diagrams, logos, and graphics that require sharp edges or transparency.</p>
+                        </div>
+                    </div>
+
+                    <h2>2. High JPG quality settings can increase file size</h2>
+                    <p>One of the most common things to check is the quality setting used by your image converter.</p>
+                    <p>Many image editors offer a JPG quality slider or preset. A higher setting generally preserves more image detail, but it can also produce a larger file. A lower setting discards more information and may produce a smaller file, with a greater risk of visible artifacts.</p>
+
+                    <!-- IMAGE: Quality Settings -->
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Visual comparison of low, medium, and high JPG quality settings" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p>Imagine converting the same photograph three times:</p>
+                    
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Export setting</th>
+                                    <th>Expected trade-off</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>High quality</td>
+                                    <td>More detail retained; potentially larger file</td>
+                                </tr>
+                                <tr>
+                                    <td>Medium quality</td>
+                                    <td>Balance between visual appearance and file size</td>
+                                </tr>
+                                <tr>
+                                    <td>Low quality</td>
+                                    <td>Smaller file is possible, but artifacts may become visible</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>These are qualitative comparisons, not measured test results. The actual file sizes depend on the image and encoder.</p>
+
+                    <h3>What JPG quality should you use?</h3>
+                    <p>For everyday web images, start with a moderate-to-high quality setting and inspect the result. If the file is still too large, lower the setting gradually.</p>
+                    <p>Look closely at:</p>
+                    <ul class="checklist">
+                        <li>Faces, hair, and textured surfaces</li>
+                        <li>Small text and fine lines</li>
+                        <li>Edges around objects</li>
+                        <li>Gradients, shadows, and color transitions</li>
+                    </ul>
+                    <p>Do not automatically select maximum quality when your goal is a smaller upload. Equally, do not reduce quality so aggressively that the image looks visibly damaged.</p>
+
+                    <h2>3. Transparent PNG backgrounds change during conversion</h2>
+                    <p>Transparency is another important reason to examine your conversion settings.</p>
+                    <p>PNG supports transparent and partially transparent pixels. Standard JPG does not support an alpha channel, which is the image information used to represent transparency.</p>
+                    <p>Think about a logo that appears to float on a transparent background. When you convert it to JPG, the transparent areas must be replaced with a solid background or otherwise composited into the image.</p>
+
+                    <!-- IMAGE: Transparency -->
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1626785774625-0b1c2c4eab67?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Transparent PNG logo compared with a JPG logo on a solid white background" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <p>Adding a background does not automatically make a JPG larger. The effect on file size depends on the resulting pixels and the encoder. However, converting a small, efficiently compressed logo or graphic to a high-quality JPG can produce an unexpectedly large result.</p>
+
+                    <h3>How to convert a transparent PNG correctly</h3>
+                    <ol>
+                        <li>Open the image in your converter or editor.</li>
+                        <li>Select a background color that suits the intended use, usually white for a document or a website with a white background.</li>
+                        <li>Keep the original dimensions unless resizing is necessary.</li>
+                        <li>Export as JPG at a suitable quality setting.</li>
+                        <li>Compare the exported file size and inspect the edges.</li>
+                    </ol>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Tip:</strong> If you need the logo to remain transparent, keep it as PNG or choose a format that supports transparency, such as WebP. Do not use standard JPG when transparency is essential.</p>
+                        </div>
+                    </div>
+
+                    <h2>4. Your image dimensions may be too large</h2>
+                    <p>An image's pixel dimensions can have a major effect on its file size.</p>
+                    <p>For example, an image that is 4,000 × 3,000 pixels contains 12 million pixels. An image that is 2,000 × 1,500 pixels contains 3 million pixels.</p>
+                    <p>The second image has one-quarter as many pixels. That does not mean its compressed file will always be exactly one-quarter the size, but reducing dimensions can significantly reduce the amount of image information an encoder must handle.</p>
+
+                    <!-- IMAGE: Dimensions -->
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Comparison of 4000 by 3000 and 2000 by 1500 pixel image dimensions" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>Check dimensions before converting</h3>
+                    <p>Suppose your original PNG is 1,600 × 1,200 pixels. If your converter exports it at 3,200 × 2,400 pixels, the output contains four times as many pixels.</p>
+                    <p>That can increase the resulting file size even though the format has changed to JPG.</p>
+                    <p>Before exporting, compare:</p>
+                    <ul class="checklist">
+                        <li>Original width and height</li>
+                        <li>Output width and height</li>
+                        <li>Any automatic resizing or upscaling option</li>
+                        <li>Whether the converter preserves the original aspect ratio</li>
+                    </ul>
+
+                    <h3>Should you resize before converting?</h3>
+                    <p>Resize when the image is larger than its intended display size.</p>
+                    <p>For example, if a blog content area displays an image at approximately 1,000 pixels wide, a 4,000-pixel-wide image may be unnecessarily large, depending on the design and display requirements.</p>
+                    <p>Keep a copy of the original. Reducing dimensions removes detail that cannot be recovered simply by enlarging the image later.</p>
+
+                    <h2>5. Different image types produce different results</h2>
+                    <p>Not every image benefits equally from PNG-to-JPG conversion. The content matters as much as the extension.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Image type</th>
+                                    <th>Usually worth trying</th>
+                                    <th>Why</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Digital photograph</td>
+                                    <td>JPG</td>
+                                    <td>Often compresses photographic detail efficiently</td>
+                                </tr>
+                                <tr>
+                                    <td>Screenshot with small text</td>
+                                    <td>PNG</td>
+                                    <td>Preserves sharp text and edges</td>
+                                </tr>
+                                <tr>
+                                    <td>Simple logo</td>
+                                    <td>PNG or SVG</td>
+                                    <td>Better suited to transparency and crisp edges</td>
+                                </tr>
+                                <tr>
+                                    <td>Flat-color illustration</td>
+                                    <td>PNG</td>
+                                    <td>Can store simple graphics efficiently</td>
+                                </tr>
+                                <tr>
+                                    <td>Product photograph</td>
+                                    <td>JPG or WebP</td>
+                                    <td>Useful for photographic content; compare actual results</td>
+                                </tr>
+                                <tr>
+                                    <td>Transparent product cutout</td>
+                                    <td>PNG or transparent WebP</td>
+                                    <td>Keeps the background transparent</td>
+                                </tr>
+                                <tr>
+                                    <td>Website banner</td>
+                                    <td>JPG or WebP</td>
+                                    <td>Depends on whether it is photographic or text-heavy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>These are starting recommendations, not universal rules. The smallest format can vary with the image and the export settings.</p>
+
+                    <h3>Example: A photograph versus a logo</h3>
+                    <p>Imagine two files: A colorful photograph with detailed textures, and a small logo made from two colors on a transparent background.</p>
+                    <p>The photograph may benefit from JPG's lossy compression. The logo may already be compact as PNG, and converting it to JPG may introduce blurry edges or a larger file.</p>
+                    <p>That is why it is better to compare formats for the actual image instead of choosing a format based on its name alone.</p>
+
+                    <h2>6. How to make a JPG smaller after converting from PNG</h2>
+                    <p>If your converted JPG is larger than the original, follow this practical workflow.</p>
+
+                    <h3>Step 1: Check the original and converted file sizes</h3>
+                    <p>Compare both files in the same units. For example: Original PNG: 180 KB, Converted JPG: 260 KB. In this hypothetical example, the JPG is 80 KB larger. That is an increase of approximately 44.4%.</p>
+                    <p><em>These numbers demonstrate the calculation only. They are not results from a QuickToolsPK conversion test.</em></p>
+
+                    <h3>Step 2: Confirm the pixel dimensions</h3>
+                    <p>Check that the converted image has not been enlarged accidentally. Keep the same dimensions if they are already suitable for your intended use.</p>
+
+                    <h3>Step 3: Lower the JPG quality setting gradually</h3>
+                    <p>If your converter offers a quality control, try a lower setting and compare the results visually. Avoid repeatedly saving an already compressed JPG, because further lossy exports can introduce additional quality loss. Whenever possible, export again from the original PNG.</p>
+
+                    <h3>Step 4: Remove unnecessary image data</h3>
+                    <p>Some image files include metadata, such as camera details, timestamps, or color information. Depending on the image and the encoder, removing unnecessary metadata may reduce file size.</p>
+                    <p>Do not remove color-profile information blindly if accurate color reproduction is important.</p>
+
+                    <h3>Step 5: Consider another format</h3>
+                    <p>If JPG still does not give you the result you need, compare the original PNG with a suitably encoded WebP file. WebP supports both lossy and lossless compression and can also support transparency.</p>
+
+                    <h3>Step 6: Compare the final result</h3>
+                    <p>Check both file size and visual quality before using the image. A smaller file is not automatically better if the text becomes blurry, edges look rough, or the background changes unexpectedly.</p>
+
+                    <h2>7. Compare conversion settings instead of guessing</h2>
+                    <p>If you want to understand exactly why your image gets bigger, perform a controlled comparison using the same source file.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Test</th>
+                                    <th>What to change</th>
+                                    <th>What to record</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A</td>
+                                    <td>Default JPG settings</td>
+                                    <td>File size and visible quality</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>Moderate JPG quality</td>
+                                    <td>File size and visible quality</td>
+                                </tr>
+                                <tr>
+                                    <td>C</td>
+                                    <td>Lower JPG quality</td>
+                                    <td>File size and visible quality</td>
+                                </tr>
+                                <tr>
+                                    <td>D</td>
+                                    <td>Smaller pixel dimensions</td>
+                                    <td>File size and visible quality</td>
+                                </tr>
+                                <tr>
+                                    <td>E</td>
+                                    <td>Alternative format, such as WebP</td>
+                                    <td>File size, quality, and transparency support</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Keep other settings consistent wherever possible. Record the width, height, output format, quality setting, and file size for each export. This will help you identify which setting makes the biggest difference for your particular image.</p>
+
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Important:</strong> No universal percentage reduction can be promised. The results should be measured using the actual source image and converter.</p>
+                        </div>
+                    </div>
+
+                    <h2>8. Common mistakes to avoid</h2>
+                    <p>When trying to reduce an image's file size, watch out for these mistakes:</p>
+                    <ul class="checklist">
+                        <li><strong>Assuming JPG is always smaller:</strong> The result depends on image content and encoding.</li>
+                        <li><strong>Using maximum quality by default:</strong> A higher quality setting may create a larger file than necessary.</li>
+                        <li><strong>Ignoring image dimensions:</strong> Large pixel dimensions can make files unnecessarily heavy.</li>
+                        <li><strong>Converting transparent logos to JPG:</strong> This removes transparency and can produce unwanted backgrounds.</li>
+                        <li><strong>Reducing quality too much:</strong> Excessive compression can make text, faces, and edges look poor.</li>
+                        <li><strong>Comparing unrelated images:</strong> A fair comparison uses the same original image.</li>
+                        <li><strong>Repeatedly recompressing JPGs:</strong> Work from the original source when possible to avoid cumulative quality loss.</li>
+                    </ul>
+
+                    <h2>9. Which tool should you use?</h2>
+                    <p>The right tool depends on what you want to achieve.</p>
+                    <ul>
+                        <li><strong>Convert PNG to JPG:</strong> Use a PNG-to-JPG converter when you need a standard JPG and do not need transparency.</li>
+                        <li><strong>Change image formats:</strong> Use an image format converter when you want to compare supported output formats.</li>
+                        <li><strong>Reduce file size:</strong> Use an image compressor when you want to optimize an image while controlling the quality.</li>
+                        <li><strong>Resize an image:</strong> Use an image resizing tool when the original dimensions exceed your actual requirements.</li>
+                    </ul>
+                    <p>For QuickToolsPK readers, the PNG to JPG and Image Format Converter tools are relevant next steps. Use them to convert a copy of your image, inspect the output, and compare its file size with the original.</p>
+                    <p>Do not assume that conversion alone will solve a file-size problem. Choose the format, dimensions, and quality settings based on your intended use.</p>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own images and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../img-fmt-converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Format Converter</span>
+                                        <span class="tool-card-subtitle">Switch between JPG, PNG &amp; WebP</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Change dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my JPG bigger than my original PNG?</summary>
+                            <div class="faq-answer">The PNG may already be efficiently compressed, or the JPG may have been exported at high quality or larger dimensions. Compare the image dimensions and export settings before trying another conversion.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Does converting PNG to JPG always reduce file size?</summary>
+                            <div class="faq-answer">No. JPG often works well for photographs, but some graphics, screenshots, and logos may remain smaller as PNG. The result depends on the image and conversion settings.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why does my transparent PNG look different after conversion to JPG?</summary>
+                            <div class="faq-answer">Standard JPG does not support transparency. Transparent areas must be replaced with a solid background or composited into the image, so the result may look different.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>What JPG quality setting should I use to reduce file size?</summary>
+                            <div class="faq-answer">Start with a moderate-to-high quality setting, inspect the result, and lower quality gradually if necessary. The ideal setting depends on the image and how it will be used.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Will resizing an image make the JPG smaller?</summary>
+                            <div class="faq-answer">It can. Reducing pixel dimensions reduces the amount of image information that must be encoded. The resulting file-size reduction varies with the image and compression settings.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is PNG or JPG better for logos?</summary>
+                            <div class="faq-answer">PNG is often a good choice for raster logos that need transparency and sharp edges. SVG is usually worth considering for vector logos. JPG is generally less suitable for logos with transparent backgrounds or fine text.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is WebP better than JPG for smaller files?</summary>
+                            <div class="faq-answer">WebP can provide smaller files at comparable visual quality in many cases and supports transparency. However, results vary, so compare the actual output and consider compatibility requirements.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How can I reduce JPG file size without making it blurry?</summary>
+                            <div class="faq-answer">Keep suitable pixel dimensions, adjust quality gradually, and compare the output with the original. Start from the original PNG whenever possible rather than repeatedly recompressing an existing JPG.</div>
+                        </details>
+                    </div>
+
+                    <div class="back-to-blog">
+                        <a href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
