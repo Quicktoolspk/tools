@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One PDF, Three Jobs: How to Split, Rotate and Rebuild a Document | QuickToolsPK</title>
+    <meta name="description" content="Need to reorganize a PDF? Learn how to split selected pages, rotate incorrect orientations, merge documents, and check page order before sharing.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/split-rotate-merge-pdf.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>PDF Tools</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        PDF Tools
+                    </span>
+
+                    <h1>One PDF, Three Jobs: How to Split, Rotate and Rebuild a Document</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 8 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> Document Workflow &amp; Organization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-cut"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-sync-alt"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-object-group"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-check-double"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="https://images.unsplash.com/photo-1568234928966-359c35dd8327?auto=format&fit=crop&w=1200&q=80" 
+                             alt="PDF workflow showing how to split pages, rotate documents, and merge a final PDF" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Treat splitting, rotating, and merging as one organized workflow.</figcaption>
+                    </figure>
+
+                    <p>Have you ever received a PDF containing dozens of pages when you only need a few? Perhaps one scanned page is sideways, and you need to combine the corrected pages with information from another document.</p>
+                    <p>Opening multiple files, saving separate copies, rotating pages, and rebuilding everything in the correct order can quickly become confusing.</p>
+                    <p>The solution is to treat the task as one document workflow: split the PDF, rotate the pages that need correcting, and merge the selected pages into a final document.</p>
+                    <p>In this guide, you'll learn how to carry out each step, avoid missing or duplicated pages, and check the finished PDF before sharing it.</p>
+
+                    <h2>Quick answer: How do you split, rotate, and merge a PDF?</h2>
+                    <p>Follow this order:</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-list-ol"></i></div>
+                        <div class="callout-content">
+                            <ol style="margin:0; padding-left: 1.2rem;">
+                                <li><strong>Plan the final document.</strong> Identify the pages you need and the order in which they should appear.</li>
+                                <li><strong>Split or extract pages.</strong> Separate the required pages from the original PDF.</li>
+                                <li><strong>Rotate incorrect pages.</strong> Correct the orientation of individual pages or selected page ranges.</li>
+                                <li><strong>Merge the documents.</strong> Combine the selected pages and other required PDFs in the intended order.</li>
+                                <li><strong>Verify the result.</strong> Check page count, orientation, sequence, readability, and the final filename.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <p>PDF software such as Adobe Acrobat supports splitting, extracting, rotating, rearranging, and combining pages. The exact controls depend on the application you use.</p>
+                    <p>You do not always need three separate operations. Some PDF editors let you extract, rotate, and rearrange pages within one interface. However, treating each task as a separate stage makes it easier to check your work.</p>
+
+                    <h2>1. Start with a realistic PDF workflow</h2>
+                    <p>Imagine you have a 12-page project report containing:</p>
+                    <ul>
+                        <li>Pages 1–4: Introduction and project overview</li>
+                        <li>Pages 5–7: Supporting documents</li>
+                        <li>Pages 8–10: Financial summary</li>
+                        <li>Pages 11–12: Appendix</li>
+                    </ul>
+                    <p>You need a new PDF containing pages 1–3, page 6, and pages 8–10. Page 6 is sideways, and you also need to include a separate two-page approval document at the end.</p>
+                    <p>Your final document should contain nine pages:</p>
+                    <ul class="checklist">
+                        <li>Three introduction pages</li>
+                        <li>One corrected supporting-document page</li>
+                        <li>Three financial-summary pages</li>
+                        <li>Two approval pages</li>
+                    </ul>
+                    <p><em>This is a hypothetical example to demonstrate the workflow, not a measured test using an actual PDF.</em></p>
+
+                    <h3>Example document plan</h3>
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Original report</td>
+                                    <td>12 pages</td>
+                                </tr>
+                                <tr>
+                                    <td>Extract required pages</td>
+                                    <td>Pages 1–3, 6, and 8–10</td>
+                                </tr>
+                                <tr>
+                                    <td>Correct orientation</td>
+                                    <td>Rotate page 6 as needed</td>
+                                </tr>
+                                <tr>
+                                    <td>Merge the approval document</td>
+                                    <td>Add two pages at the end</td>
+                                </tr>
+                                <tr>
+                                    <td>Final document</td>
+                                    <td>9 pages. Correct sequence, orientation, and content.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Planning the page sequence first prevents unnecessary editing and makes the final review much easier.</p>
+
+                    <h2>2. Step one: Split the PDF or extract the pages you need</h2>
+                    <p>Splitting and extracting are related operations, but they serve slightly different purposes.</p>
+                    <ul>
+                        <li><strong>Splitting</strong> divides a PDF into multiple files, often by page range, file size, or document sections.</li>
+                        <li><strong>Extracting</strong> selects specific pages and creates a new document from them.</li>
+                    </ul>
+                    <p>Some PDF applications provide both options. Adobe Acrobat's page-organization tools, for example, support splitting documents and extracting individual pages or groups of pages.</p>
+
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Selected pages extracted from a multi-page PDF into a new document" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to extract selected PDF pages</h3>
+                    <ol>
+                        <li>Open the original PDF in a PDF editor or page-extraction tool.</li>
+                        <li>Locate the option for extracting pages or organizing pages.</li>
+                        <li>Select the pages you need.</li>
+                        <li>Choose whether the extracted pages should become one new PDF or separate files, if your tool offers that choice.</li>
+                        <li>Save the result under a new filename.</li>
+                        <li>Open the extracted PDF and check its contents.</li>
+                    </ol>
+                    <p>For the example report, the pages you want are 1–3, 6, and 8–10.</p>
+                    <p>If your tool supports entering page ranges, you may be able to select these ranges directly. Otherwise, use page thumbnails to select the required pages.</p>
+
+                    <h3>What if you need several separate PDFs?</h3>
+                    <p>Suppose you need to send the financial summary to one person and the supporting documents to another. You could split the document into logical sections instead of creating one combined file.</p>
+                    <p>Use meaningful filenames such as:</p>
+                    <ul class="checklist">
+                        <li>project-introduction.pdf</li>
+                        <li>supporting-documents.pdf</li>
+                        <li>financial-summary.pdf</li>
+                        <li>approval-documents.pdf</li>
+                    </ul>
+                    <p>Clear filenames help prevent confusion when you later merge the documents.</p>
+                    
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="callout-content">
+                            <p><strong>Important:</strong> Keep the original PDF unchanged. Work on a copy so you can recover any pages accidentally omitted during extraction.</p>
+                        </div>
+                    </div>
+
+                    <h2>3. Step two: Rotate the pages that are sideways or upside down</h2>
+                    <p>Scanned documents often contain pages with inconsistent orientation. For example, most pages may be portrait, while one scanned receipt or table appears sideways.</p>
+                    <p>You can usually correct these pages by rotating them in 90-degree increments.</p>
+
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1200&q=80" 
+                             alt="A sideways PDF page rotated into the correct readable orientation" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to rotate an individual PDF page</h3>
+                    <ol>
+                        <li>Open the extracted PDF or the document you want to correct.</li>
+                        <li>Switch to the page thumbnails or page-organization view.</li>
+                        <li>Select the incorrectly oriented page.</li>
+                        <li>Choose Rotate Left or Rotate Right.</li>
+                        <li>Inspect the page and repeat if necessary.</li>
+                        <li>Save the document and reopen it to verify the saved orientation.</li>
+                    </ol>
+                    <p>The menu names may vary between PDF applications, but the principle is the same: select the actual page and apply a rotation operation.</p>
+
+                    <h3>Rotating the view is not always the same as rotating the page</h3>
+                    <p>This distinction is important.</p>
+                    <p>Some PDF viewers offer a temporary view-rotation command that changes how the page appears on your screen. It may not change the saved document. Adobe documents this distinction between rotating a view and saving an actual page rotation.</p>
+                    <p>If the page must remain correctly oriented when another person opens the PDF, use the page-rotation or organize-pages function, save the document, and reopen it to confirm the result.</p>
+
+                    <h3>Common rotation mistakes</h3>
+                    <ul>
+                        <li>Rotating every page when only one needs correction.</li>
+                        <li>Rotating a page in the viewer without saving the actual change.</li>
+                        <li>Selecting the wrong page because the thumbnails are too small.</li>
+                        <li>Rotating a page twice and leaving it upside down.</li>
+                        <li>Forgetting to inspect landscape tables, receipts, or signatures after rotation.</li>
+                    </ul>
+                    <p>Always confirm that the text is upright and readable, not merely that the page has changed orientation.</p>
+
+                    <h2>4. Step three: Merge the selected PDFs into one document</h2>
+                    <p>Once the pages have been extracted and corrected, you can assemble the final document.</p>
+                    <p>Merging combines two or more PDF files into one PDF. Many PDF editors also let you rearrange files or individual pages before saving the combined result.</p>
+
+                    <div class="article-inline-img">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Multiple PDFs merged into one document with pages arranged in the correct order" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h3>How to merge PDFs</h3>
+                    <ol>
+                        <li>Open a PDF merging tool.</li>
+                        <li>Add the extracted document.</li>
+                        <li>Add the other PDF files you want to include.</li>
+                        <li>Arrange the files in the required order.</li>
+                        <li>If supported, expand the file thumbnails to arrange individual pages.</li>
+                        <li>Start the merge operation.</li>
+                        <li>Save the resulting document with a descriptive filename.</li>
+                    </ol>
+                    <p>For the example project, the order is:</p>
+                    <ol>
+                        <li>Introduction pages</li>
+                        <li>Corrected supporting document</li>
+                        <li>Financial summary</li>
+                        <li>Approval document</li>
+                    </ol>
+                    <p>If the merging tool only allows you to rearrange complete files, prepare the extracted files in the correct sequence before merging. You may need a page-organization feature to fine-tune the order afterward.</p>
+
+                    <h3>What if pages from the same PDF need to appear in different places?</h3>
+                    <p>Do not assume that adding the same PDF twice will automatically produce the correct result. It may add unwanted pages or create duplicates.</p>
+                    <p>Instead, extract the necessary page groups into separate files, arrange those files in the required sequence, and merge them. Alternatively, use a PDF editor that lets you move individual page thumbnails before saving.</p>
+                    <p>This approach provides better control over the final sequence.</p>
+
+                    <h2>5. The most important step: Check the final page order</h2>
+                    <p>A PDF can look complete at first glance while still containing missing pages, duplicated sections, or misplaced attachments.</p>
+                    <p>Before sharing your rebuilt document, compare the final PDF with your original plan.</p>
+                    <p>For the hypothetical nine-page report, the expected order is:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Final page</th>
+                                    <th>Expected content</th>
+                                    <th>Check</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Introduction, original page 1</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Introduction, original page 2</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Introduction, original page 3</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Supporting document, original page 6</td>
+                                    <td>Upright</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Financial summary, original page 8</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Financial summary, original page 9</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Financial summary, original page 10</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Approval document, page 1</td>
+                                    <td>Correct</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Approval document, page 2</td>
+                                    <td>Correct</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><em>This is the intended sequence for the example, not a record of a processed file.</em></p>
+
+                    <h3>How to verify page order efficiently</h3>
+                    <ul class="checklist">
+                        <li>Compare the final page count with your plan.</li>
+                        <li>Review the page thumbnails from beginning to end.</li>
+                        <li>Check the first and last page of every section.</li>
+                        <li>Look for duplicate pages and missing attachments.</li>
+                        <li>Confirm that rotated pages remain readable.</li>
+                        <li>Check that section transitions make sense.</li>
+                        <li>Open the final saved file rather than relying only on the editing preview.</li>
+                    </ul>
+                    <p>If the original PDF contains printed page numbers, verify those as well. The PDF's position number and the page number printed on the document may not match.</p>
+
+                    <h2>6. How to rebuild a PDF without losing quality</h2>
+                    <p>Splitting, rotating, and merging pages generally do not require re-creating every page as a new image. When the software handles the PDF structure appropriately, these operations can preserve the original page content.</p>
+                    <p>However, outcomes depend on the tool and the operations performed. Converting pages to images, printing to a new PDF, or using additional compression may change text quality, searchable content, or document features.</p>
+                    <p>To protect the original quality:</p>
+                    <ul class="checklist">
+                        <li>Use page-level PDF operations instead of converting pages into screenshots.</li>
+                        <li>Keep a backup of the source document.</li>
+                        <li>Avoid unnecessary conversions between file formats.</li>
+                        <li>Inspect text, images, and fine details after editing.</li>
+                        <li>Confirm that links, bookmarks, forms, or annotations important to your workflow still work.</li>
+                    </ul>
+                    <p>Adobe notes that page extraction can preserve associated content such as form fields, comments, and links, although some document structures may not transfer in every circumstance.</p>
+                    <p><strong>Practical rule:</strong> If the document is important, compare the final PDF with the original before deleting your working copies.</p>
+
+                    <h2>7. A better workflow for different document types</h2>
+                    <p>The order of operations may vary depending on the source PDF and the desired result.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Document type</th>
+                                    <th>Recommended workflow</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Scanned paperwork</td>
+                                    <td>Extract the necessary pages, rotate sideways scans, check readability, and then merge the selected documents. Preserve the original scans for reference.</td>
+                                </tr>
+                                <tr>
+                                    <td>Reports with appendices</td>
+                                    <td>Plan the final section order first. Extract the relevant chapters, keep tables with their supporting explanations, and append the required attachments at the end.</td>
+                                </tr>
+                                <tr>
+                                    <td>Invoices and forms</td>
+                                    <td>Verify invoice numbers, dates, and signatures before deleting or moving pages. Keep transaction-specific pages together and use clear filenames.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>The same three tools can support all these workflows, but the checks you perform should reflect the document's purpose.</p>
+
+                    <h2>8. Common mistakes when splitting, rotating, and merging PDFs</h2>
+                    <p>Avoid these problems when rebuilding a document:</p>
+                    <ol class="checklist">
+                        <li><strong>Losing track of original page numbers.</strong> Write down the pages you need before extracting them. Remember that page position and printed page numbering may differ.</li>
+                        <li><strong>Rotating the wrong page.</strong> Select the page thumbnail carefully and inspect it after rotation.</li>
+                        <li><strong>Saving only a temporary view change.</strong> Confirm that the page's actual orientation has been changed and saved.</li>
+                        <li><strong>Merging files in the wrong order.</strong> Arrange the files before merging and check the sequence afterward.</li>
+                        <li><strong>Adding an entire PDF when only a few pages are required.</strong> Extract the required pages first to avoid unwanted content and duplicate sections.</li>
+                        <li><strong>Overwriting the original document.</strong> Save the rebuilt version separately until all checks are complete.</li>
+                        <li><strong>Ignoring sensitive information.</strong> If a PDF contains confidential information, use a tool approved for that information and review its upload, storage, and deletion policies before using an online service.</li>
+                        <li><strong>Forgetting the final review.</strong> Open the saved PDF and check page count, orientation, order, and readability before sharing it.</li>
+                    </ol>
+
+                    <h2>9. Which QuickToolsPK tool should you use?</h2>
+                    <p>Choose the tool that matches your current step.</p>
+                    <ul>
+                        <li><a href="../tools/split-pdf.html"><strong>Split PDF:</strong></a> Use this when you need to divide a large document into separate files or extract selected page ranges, depending on the tool's available options. <em>Best for: Selecting the pages you need.</em></li>
+                        <li><a href="../tools/rotate-pdf.html"><strong>Rotate PDF:</strong></a> Use this to correct sideways or upside-down pages. Check whether the tool supports rotating individual pages or selected ranges. <em>Best for: Correcting page orientation.</em></li>
+                        <li><a href="../tools/pdf-merge.html"><strong>Merge PDF:</strong></a> Use this to combine the prepared PDFs into one document and arrange the files in the desired sequence if the tool supports reordering. <em>Best for: Rebuilding the final document.</em></li>
+                    </ul>
+                    <p><em>The tool names above reflect the intended QuickToolsPK workflow. Confirm each live page's exact capabilities before publishing instructions that promise a particular operation.</em></p>
+
+                    <h2>Quick summary</h2>
+                    <ul class="checklist">
+                        <li>Plan the final page sequence before editing.</li>
+                        <li>Split or extract the pages you actually need.</li>
+                        <li>Rotate individual pages when their orientation is incorrect.</li>
+                        <li>Merge the prepared files in the intended order.</li>
+                        <li>Check for missing pages, duplicates, and orientation problems.</li>
+                        <li>Save the rebuilt PDF under a new filename.</li>
+                        <li>Reopen the final file and verify its contents before sharing it.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own files and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../tools/split-pdf.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-cut"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Split PDF</span>
+                                        <span class="tool-card-subtitle">Extract selected pages</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../tools/rotate-pdf.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-sync-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Rotate PDF</span>
+                                        <span class="tool-card-subtitle">Fix page orientation</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../tools/pdf-merge.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-object-group"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Merge PDF</span>
+                                        <span class="tool-card-subtitle">Combine final documents</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Can I split a PDF, rotate pages, and merge it again?</summary>
+                            <div class="faq-answer">Yes. Extract or split the required pages, correct their orientation, and merge the prepared files. Check the page order and saved output afterward.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Can I rotate only one page in a PDF?</summary>
+                            <div class="faq-answer">Yes, if your PDF editor supports individual-page rotation. Select the relevant page, rotate it, save the document, and reopen it to verify the change.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Does splitting a PDF reduce its quality?</summary>
+                            <div class="faq-answer">Splitting pages alone does not necessarily reduce their quality. The outcome depends on the tool and whether it preserves the original PDF content instead of converting pages to images or applying additional compression.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How do I merge selected pages from different PDFs?</summary>
+                            <div class="faq-answer">Extract the pages you need from each source PDF, arrange the resulting files or page thumbnails in the correct order, and merge them. Inspect the final document for missing or duplicated pages.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my PDF still rotated after saving?</summary>
+                            <div class="faq-answer">You may have changed only the viewer's temporary rotation setting rather than the saved page orientation. Use the actual page-rotation function, save the document, and reopen it to confirm the result.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Will merging PDFs change their page numbers?</summary>
+                            <div class="faq-answer">Merging can change the pages' positions within the combined document. Printed page numbers usually remain part of the original page content, so they may not match the new PDF's page positions. Add or update pagination if necessary.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How can I make sure I have not missed any pages?</summary>
+                            <div class="faq-answer">Create a page plan before editing. After merging, compare the final page count and sequence with that plan, check section transitions, and inspect the final saved PDF.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is it safe to use an online PDF tool?</summary>
+                            <div class="faq-answer">That depends on the service, its data-handling practices, and your document's sensitivity. For confidential files, review the service's privacy and retention policies or use an approved local application.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>Splitting, rotating, and merging a PDF are most effective when treated as one organized workflow rather than three unrelated tasks.</p>
+                    <p>Start by deciding which pages belong in the final document. Extract those pages, correct any orientation problems, and merge the prepared files in the right sequence. Then verify the saved PDF for missing content, duplicates, and readability.</p>
+                    <p>For your next document, use the QuickToolsPK <a href="../tools/split-pdf.html">Split PDF</a>, <a href="../tools/rotate-pdf.html">Rotate PDF</a>, and <a href="../tools/pdf-merge.html">Merge PDF</a> tools as the three stages of your workflow. Keeping the original file and checking the final result will help you avoid common mistakes and produce a cleaner, more professional document.</p>
+
+                    <div class="back-to-blog">
+                        <a href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../tools/img-compress.html">Image Compressor</a></li>
+                        <li><a href="../tools/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../tools/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../tools/pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../tools/pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../tools/img-compress.html">Compressors</a></li>
+                        <li><a href="../tools/img-resizer.html">Resizers</a></li>
+                        <li><a href="index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>

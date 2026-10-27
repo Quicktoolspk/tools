@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebP, AVIF, JPG or PNG? A Real-World Image Format Decision Guide | QuickToolsPK</title>
+    <meta name="description" content="Not sure whether to use WebP, AVIF, JPG, or PNG? Use this decision guide for logos, product photos, screenshots, and banners.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/webp-avif-jpg-png-image-format-guide.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>Image Optimization</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        Image Optimization
+                    </span>
+
+                    <h1>WebP, AVIF, JPG or PNG? A Real-World Image Format Decision Guide</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 9 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> Image Formats &amp; Compression</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-image"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-compress-arrows-alt"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-tachometer-alt"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-mobile-alt"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="../assets/images/blog/08.jpg" 
+                             alt="Four image format cards labeled WebP, AVIF, JPG and PNG on a modern workspace" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Four formats, four different strengths. Match the format to the image.</figcaption>
+                    </figure>
+
+                    <p>You have a logo, a product photo, a screenshot, and a wide banner. You export them all as JPG because that's what you always do. Then someone tells you to use WebP. Someone else says AVIF is the future. A designer insists the logo must stay PNG.</p>
+                    <p>Who's right? All of them, depending on the image. This guide helps you choose between WebP, AVIF, JPG, and PNG for each type of image on your website, and shows you how to test the results yourself instead of guessing.</p>
+
+                    <h2>The Short Answer</h2>
+                    <p>There is no single best format. Match the format to the image:</p>
+                    <ul class="checklist">
+                        <li><strong>Transparent logo or icon:</strong> PNG, or WebP if you want a smaller file</li>
+                        <li><strong>Product photo:</strong> WebP or AVIF, with JPG as a safe fallback</li>
+                        <li><strong>Screenshot with text:</strong> PNG, or lossless WebP</li>
+                        <li><strong>Photographic banner:</strong> AVIF or WebP, with JPG as a fallback</li>
+                        <li><strong>Maximum compatibility:</strong> JPG for photos, PNG for graphics</li>
+                    </ul>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p>If you only remember one rule: <strong>photos like lossy formats, graphics with sharp edges like lossless formats.</strong></p>
+                        </div>
+                    </div>
+
+                    <h2>The Four Formats in Plain Language</h2>
+                    <p>Two ideas explain almost everything.</p>
+                    <p><strong>Lossy</strong> compression throws away some detail the eye barely notices to make the file smaller. <strong>Lossless</strong> compression keeps every pixel exactly as it was.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Format</th>
+                                    <th>Compression</th>
+                                    <th>Transparency</th>
+                                    <th>Best known for</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>JPG</strong></td>
+                                    <td>Lossy</td>
+                                    <td>No</td>
+                                    <td>Photos, works everywhere</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PNG</strong></td>
+                                    <td>Lossless</td>
+                                    <td>Yes</td>
+                                    <td>Logos, screenshots, sharp graphics</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebP</strong></td>
+                                    <td>Lossy or lossless</td>
+                                    <td>Yes</td>
+                                    <td>A flexible modern format for the web</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AVIF</strong></td>
+                                    <td>Lossy or lossless</td>
+                                    <td>Yes</td>
+                                    <td>Very efficient for photos, newer</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/08.2.jpg" 
+                             alt="Comparison chart of WebP, AVIF, JPG and PNG features" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>JPG: Old, Simple, Works Everywhere</h2>
+                    <p>JPG has been the default for photos for decades. Every browser, phone, email app, and social platform understands it.</p>
+                    <p><strong>Good for:</strong> photos where wide compatibility matters.</p>
+                    <p><strong>Weak at:</strong> transparency (not supported), and sharp text or thin lines, where it can leave blurry edges.</p>
+
+                    <h2>PNG: Sharp and Lossless</h2>
+                    <p>PNG keeps every pixel intact and supports transparency. That makes it a natural fit for logos, icons, and screenshots.</p>
+                    <p><strong>Good for:</strong> logos, icons, screenshots, graphics with flat colors, anything that needs a transparent background.</p>
+                    <p><strong>Weak at:</strong> photos, where the files can become very large.</p>
+                    <p>If you want to know why a PNG sometimes grows when converted to another format, we explain it in our guide on <a href="why-jpg-gets-bigger.html">why an image gets bigger after converting to JPG</a>.</p>
+
+                    <h2>WebP: The All-Rounder</h2>
+                    <p>WebP can do lossy compression like JPG, lossless like PNG, and it supports transparency. That makes it flexible: one format that can often replace both JPG and PNG on a website.</p>
+                    <p><strong>Good for:</strong> most website images, including photos and transparent graphics.</p>
+                    <p><strong>Things to check:</strong> whether your CMS, plugins, email tools, and social platforms accept it. Support across modern browsers is broad, but confirm it for your audience.</p>
+
+                    <h2>AVIF: Very Efficient, Newer</h2>
+                    <p>AVIF is a newer format that can produce very small files for photos at good quality. It also supports transparency.</p>
+                    <p><strong>Good for:</strong> photos and photographic banners where every kilobyte counts.</p>
+                    <p><strong>Things to check:</strong> browser and tool support (broad now, but not as old as WebP), and the time it takes to encode images, which can be slower. Results vary by image, so test your own files.</p>
+
+                    <h2>Decision Matrix: Which Format for Which Image?</h2>
+                    <p>This is the part most guides skip. Here's a practical matrix by image type.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Image type</th>
+                                    <th>First choice</th>
+                                    <th>Safe fallback</th>
+                                    <th>Why</th>
+                                    <th>Avoid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Transparent logo</strong></td>
+                                    <td>PNG (or WebP)</td>
+                                    <td>PNG</td>
+                                    <td>Needs transparency and crisp edges</td>
+                                    <td>JPG (no transparency)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Product photo</strong></td>
+                                    <td>WebP or AVIF</td>
+                                    <td>JPG</td>
+                                    <td>Photos compress well with lossy formats</td>
+                                    <td>PNG (usually too large)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Screenshot with text</strong></td>
+                                    <td>PNG (or lossless WebP)</td>
+                                    <td>PNG</td>
+                                    <td>Sharp text needs lossless storage</td>
+                                    <td>Low-quality JPG</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Photographic banner (hero)</strong></td>
+                                    <td>AVIF or WebP</td>
+                                    <td>JPG</td>
+                                    <td>Large photo, so size savings matter most</td>
+                                    <td>PNG</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Icons and simple graphics</strong></td>
+                                    <td>SVG (if vector) or PNG</td>
+                                    <td>PNG</td>
+                                    <td>Flat colors and sharp edges</td>
+                                    <td>JPG</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Image for email or social upload</strong></td>
+                                    <td>JPG or PNG</td>
+                                    <td>Same</td>
+                                    <td>Not every platform accepts newer formats</td>
+                                    <td>Assuming WebP/AVIF will upload</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><em>This is general guidance. File size and quality depend on the image and the settings you use, so verify with your own test (below).</em></p>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/08.3.jpg" 
+                             alt="Decision matrix infographic for choosing an image format by image type" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Transparent Logo: Keep the Edges Clean</h2>
+                    <p>A logo usually has flat colors, sharp edges, and often a transparent background. JPG can't do transparency, so it fills the empty area with a solid color. It can also blur thin lines.</p>
+                    <p><strong>Use PNG</strong> for the safest result. <strong>Try WebP</strong> if you want a smaller file and your platform supports it. If the logo is a vector design, SVG is often the cleanest option for websites.</p>
+
+                    <h2>Product Photo: Where Modern Formats Shine</h2>
+                    <p>Photos have smooth color changes, which lossy compression handles well. This is where WebP and AVIF often give a smaller file than JPG at similar visual quality.</p>
+                    <p>Be careful with the quality slider. Too low, and you'll see blur, blocks, or banding on product edges and textures. Customers judge products by images, so compare zoomed in before publishing.</p>
+
+                    <h2>Screenshot: Don't Let Text Get Blurry</h2>
+                    <p>Screenshots have sharp text and flat colors. A lossy format can leave fuzzy halos around letters. PNG (or lossless WebP) keeps them clean.</p>
+                    <p>If the screenshot is large and you need a smaller file, compare a high-quality lossy WebP against the PNG at 100% zoom before deciding.</p>
+
+                    <h2>Photographic Banner: Biggest Image, Biggest Win</h2>
+                    <p>A wide hero banner is often the largest image on the page, so format choice can affect how fast the page feels. A modern format like AVIF or WebP is worth testing here.</p>
+                    <p>Also check the pixel dimensions. A banner that is far larger than the space it's displayed in will be heavy in any format. Our guide on <a href="why-small-image-still-loads-slowly.html">why a small photo can still load slowly</a> explains why.</p>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/08.4.jpg" 
+                             alt="Same banner image saved as JPG, WebP and AVIF side by side" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Browser and Platform Support: Check Before You Commit</h2>
+                    <p>This changes over time, so verify the current status before publishing a final choice.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Format</th>
+                                    <th>General support picture</th>
+                                    <th>What to verify</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>JPG</strong></td>
+                                    <td>Universal</td>
+                                    <td>Nothing, it just works</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PNG</strong></td>
+                                    <td>Universal</td>
+                                    <td>Nothing, it just works</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebP</strong></td>
+                                    <td>Supported by all major modern browsers</td>
+                                    <td>Your CMS, email tools, and old devices</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AVIF</strong></td>
+                                    <td>Broad but newer</td>
+                                    <td>Specific browser versions, your CMS, and your CDN</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Two practical tips:</p>
+                    <ol>
+                        <li><strong>Use a fallback.</strong> The HTML <code>&lt;picture&gt;</code> element lets you offer AVIF or WebP first and JPG or PNG as a backup, so older browsers still show an image.</li>
+                        <li><strong>Check your platform.</strong> Many CMS tools and plugins now handle WebP or AVIF automatically. Confirm how yours works before converting everything manually.</li>
+                    </ol>
+                    <p>Check up-to-date support tables on MDN Web Docs or Can I use before you decide.</p>
+
+                    <h2>Test It Yourself</h2>
+                    <p>The best answer for your site comes from your own images. Here's a simple test:</p>
+                    <ol>
+                        <li>Pick four source images: a transparent logo, a product photo, a screenshot, and a photographic banner.</li>
+                        <li>Convert each into JPG, PNG, WebP, and AVIF (where the format makes sense). Use the <a href="../img-fmt-converter.html">Image Format Converter</a>.</li>
+                        <li>Keep the pixel dimensions the same in every version.</li>
+                        <li>Use a similar visual quality level, and write down the settings.</li>
+                        <li>Record the file size of each.</li>
+                        <li>Open each at 100% zoom and look at edges, text, gradients, and skin or fabric textures.</li>
+                        <li>Note whether each format opens correctly in the browsers and tools you care about.</li>
+                    </ol>
+                    <p>Fill in your own results:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Format</th>
+                                    <th>Dimensions</th>
+                                    <th>Quality setting</th>
+                                    <th>File size</th>
+                                    <th>Looks OK?</th>
+                                    <th>Browser/tool support note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Transparent logo</td><td>PNG</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Transparent logo</td><td>WebP</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Product photo</td><td>JPG</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Product photo</td><td>WebP</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Product photo</td><td>AVIF</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Screenshot</td><td>PNG</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Screenshot</td><td>WebP</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Banner</td><td>JPG</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Banner</td><td>WebP</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Banner</td><td>AVIF</td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/08.5.jpg" 
+                             alt="Results table comparing file size and quality across WebP, AVIF, JPG and PNG" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Step-by-Step: How to Choose in 60 Seconds</h2>
+                    <ol>
+                        <li><strong>Does it need a transparent background?</strong> Yes: PNG, WebP, or AVIF. No: continue.</li>
+                        <li><strong>Is it mostly text, flat colors, or sharp lines?</strong> Yes: PNG or lossless WebP. No: continue.</li>
+                        <li><strong>Is it a photo?</strong> Yes: WebP or AVIF, with JPG as a fallback.</li>
+                        <li><strong>Will it be uploaded to email or social media?</strong> If so, JPG or PNG is the safer choice.</li>
+                        <li><strong>Test it.</strong> Compare size and quality at 100% zoom before publishing.</li>
+                    </ol>
+
+                    <h2>Common Mistakes</h2>
+                    <ul class="checklist">
+                        <li>Using PNG for photographs</li>
+                        <li>Using JPG for logos that need transparency</li>
+                        <li>Assuming the smallest file always looks the best</li>
+                        <li>Converting everything to AVIF without checking support</li>
+                        <li>Saving at very low quality to win a few kilobytes</li>
+                        <li>Comparing formats at different dimensions</li>
+                        <li>Re-saving the same lossy file again and again</li>
+                    </ul>
+
+                    <h2>Quick Summary</h2>
+                    <ul class="checklist">
+                        <li>No format wins every time. Match it to the image.</li>
+                        <li>PNG suits logos and screenshots. JPG suits photos where compatibility matters.</li>
+                        <li>WebP is a flexible all-rounder for the web.</li>
+                        <li>AVIF can be very efficient for photos, but check support.</li>
+                        <li>Always keep a fallback and test with your own files.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own files and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../img-fmt-converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Format Converter</span>
+                                        <span class="tool-card-subtitle">Switch between formats</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Change dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Which image format is best for a website?</summary>
+                            <div class="faq-answer">It depends on the image. WebP is a strong all-round choice for modern sites, PNG for sharp graphics, and JPG as a universal fallback for photos. AVIF is worth testing for large photos.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is WebP better than JPG?</summary>
+                            <div class="faq-answer">Often it produces smaller files at similar visual quality, but results vary by image and settings. JPG still wins on universal compatibility.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Is AVIF better than WebP?</summary>
+                            <div class="faq-answer">AVIF can be more efficient for photos, but it's newer and may encode more slowly. Compare both on your own images and check support.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Which format is best for a logo with a transparent background?</summary>
+                            <div class="faq-answer">PNG is the safe choice. WebP can work too if your platform supports it. If the logo is a vector, consider SVG.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Should I still use PNG?</summary>
+                            <div class="faq-answer">Yes, for screenshots, logos, and graphics that need sharp edges or transparency, and when compatibility matters.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Can I use WebP or AVIF for emails and social media?</summary>
+                            <div class="faq-answer">Not always. Some platforms and email clients don't accept or display them. JPG and PNG are safer for uploads.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Do I need to keep a JPG version?</summary>
+                            <div class="faq-answer">For websites, a fallback is a good idea so older browsers and tools still work. Your CMS or the &lt;picture&gt; element can handle this.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>Choosing an image format isn't about following a trend. It's about what the image contains and where it will be used. Use the matrix, test your own files, and keep a fallback where needed.</p>
+                    <p>Ready to try? Open the QuickToolsPK <a href="../img-fmt-converter.html">Image Format Converter</a>, convert one logo, one photo, and one screenshot, and compare them yourself.</p>
+
+                    <div class="back-to-blog">
+                        <a href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
