@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Resizing an Image Does Not Always Reduce Its File Size | QuickToolsPK</title>
+    <meta name="description" content="Resized a photo but the file is still big? Learn how pixels, quality, format, and metadata affect file size, and how to fix it.">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/why-resizing-image-does-not-reduce-file-size.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           ARTICLE HEADER (Hero)
+           ============================================================ */
+        .article-header {
+            position: relative; overflow: hidden;
+            padding: clamp(8rem, 12vw, 10rem) 0 clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 55%, #eef4ff 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Animated Background Blobs */
+        .article-header::before, .article-header::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; animation: floatBlob 12s ease-in-out infinite alternate;
+        }
+        .article-header::before {
+            width: 400px; height: 400px; top: -150px; left: -100px; opacity: 0.6;
+            background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+        }
+        .article-header::after {
+            width: 350px; height: 350px; bottom: -120px; right: -80px; opacity: 0.5;
+            background: radial-gradient(circle, #99f6e4 0%, transparent 70%); animation-delay: -5s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        .header-content {
+            position: relative; z-index: 1;
+            max-width: 820px; margin: 0 auto;
+        }
+
+        .article-breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .article-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color var(--t-fast); }
+        .article-breadcrumb a:hover { color: var(--primary-dark); }
+        .article-breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-tag-hero {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--teal); background: var(--teal-soft); border: 1px solid #a7f3d0;
+            padding: 0.35rem 0.85rem; border-radius: var(--r-full); margin-bottom: 1rem;
+            box-shadow: 0 2px 10px -2px rgba(13,148,136,0.2);
+        }
+        .article-tag-hero .icon { width: 14px; height: 14px; animation: pulseIcon 3s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800; letter-spacing: -0.035em; line-height: 1.15;
+            margin-bottom: 1.25rem; color: var(--navy);
+        }
+
+        .article-meta-row {
+            display: flex; flex-wrap: wrap; gap: 1.25rem;
+            font-size: 0.85rem; color: var(--text-subtle); align-items: center;
+        }
+        .article-meta-row .meta-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+        .article-meta-row .meta-item i { color: var(--primary); font-size: 1.1em; }
+
+        /* ============================================================
+           ARTICLE BODY & LAYOUT
+           ============================================================ */
+        .article-wrap { padding: clamp(2rem, 5vw, 3.5rem) 0; position: relative; overflow: hidden; }
+        
+        .article-body {
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 10;
+            font-size: 1.05rem; line-height: 1.85; color: var(--text);
+        }
+
+        /* ============================================================
+           FLOATING SIDE ICONS (ANIMATED)
+           ============================================================ */
+        .side-float-icon {
+            position: absolute;
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: grid; place-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            box-shadow: 0 12px 24px -8px rgba(15, 30, 55, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            z-index: 1;
+            animation: floatIcon 6s ease-in-out infinite;
+        }
+        
+        .side-float-icon::before {
+            content: ''; position: absolute; inset: 20%; border-radius: 50%;
+            filter: blur(12px); opacity: 0.6; z-index: -1;
+        }
+        
+        .side-float-icon--1 { top: 8%; left: 4%; animation-delay: 0s; }
+        .side-float-icon--1::before { background: radial-gradient(circle, #3b82f6, transparent 70%); }
+        
+        .side-float-icon--2 { top: 25%; right: 4%; animation-delay: -1.5s; color: var(--teal); }
+        .side-float-icon--2::before { background: radial-gradient(circle, #14b8a6, transparent 70%); }
+
+        .side-float-icon--3 { top: 55%; left: 6%; animation-delay: -3s; color: #8b5cf6; }
+        .side-float-icon--3::before { background: radial-gradient(circle, #a78bfa, transparent 70%); }
+
+        .side-float-icon--4 { top: 80%; right: 5%; animation-delay: -4.5s; color: #f59e0b; }
+        .side-float-icon--4::before { background: radial-gradient(circle, #fbbf24, transparent 70%); }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        @media (max-width: 1300px) {
+            .side-float-icon { display: none; }
+        }
+
+        /* ============================================================
+           CONTENT ELEMENTS
+           ============================================================ */
+        .article-figure { margin: 0 0 2.5rem; position: relative; }
+        .article-figure img {
+            width: 100%; height: auto; border-radius: var(--r-lg);
+            box-shadow: var(--shadow-md); display: block;
+            max-height: 450px; object-fit: cover;
+            transition: transform var(--t-med);
+        }
+        .article-figure:hover img { transform: scale(1.01); }
+        
+        .article-figure figcaption {
+            font-size: 0.82rem; color: var(--text-subtle); text-align: center;
+            margin-top: 0.75rem; font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+        }
+        .article-figure figcaption::before { content: '📸'; font-size: 1rem; font-style: normal; }
+
+        .article-inline-img {
+            margin: 2rem 0 2.5rem; border-radius: var(--r-md);
+            overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+        }
+        .article-inline-img img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            display: block; transition: transform 0.5s var(--ease);
+        }
+        .article-inline-img:hover img { transform: scale(1.03); }
+
+        .article-body p { margin-bottom: 1.25rem; }
+        
+        .article-body h2 {
+            font-size: 1.6rem; margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .article-body h2::before {
+            content: ''; display: inline-block; width: 6px; height: 24px;
+            border-radius: 4px; background: var(--gradient-brand); flex-shrink: 0;
+        }
+        
+        .article-body h3 {
+            font-size: 1.2rem; margin: 2rem 0 0.85rem;
+            color: var(--navy-soft); display: flex; align-items: center; gap: 0.6rem;
+        }
+        .article-body h3::before {
+            content: '→'; color: var(--teal); font-weight: 800; font-size: 1.1em;
+            transition: transform var(--t-fast);
+        }
+        .article-body h3:hover::before { transform: translateX(4px); }
+
+        .article-body ul, .article-body ol { padding-left: 1.4rem; margin-bottom: 1.25rem; }
+        .article-body li { margin-bottom: 0.6rem; }
+        .article-body a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color var(--t-fast); }
+        .article-body a:hover { text-decoration: underline; color: var(--primary-dark); }
+        .article-body strong { color: var(--navy); font-weight: 700; }
+        .article-body code {
+            background: var(--primary-soft); color: var(--primary-dark);
+            padding: 0.1rem 0.4rem; border-radius: 5px; font-size: 0.88em;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 2rem 0;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+        .article-table th {
+            background: var(--bg-alt); color: var(--navy); text-align: left;
+            padding: 1rem 1.25rem; font-weight: 700;
+            border-bottom: 2px solid var(--border-strong);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .article-table td {
+            padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+            vertical-align: top; color: var(--text-muted);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+        .article-table tr:hover td { background: rgba(37,99,235,0.03); }
+
+        /* Callout */
+        .callout {
+            background: var(--primary-soft); border-left: 4px solid var(--primary);
+            padding: 1.25rem 1.5rem; border-radius: var(--r-sm);
+            margin: 2rem 0; display: flex; gap: 1rem; align-items: flex-start;
+            box-shadow: 0 2px 10px -4px rgba(37,99,235,0.1);
+        }
+        .callout-icon {
+            background: #fff; color: var(--primary); width: 36px; height: 36px;
+            border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            box-shadow: var(--shadow-sm); font-size: 1.1rem;
+        }
+        .callout-content p { margin: 0; font-size: 0.95rem; color: var(--navy); line-height: 1.7; }
+        .callout-content strong { color: var(--primary-dark); }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .checklist li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li::before {
+            content: '✓'; background: var(--teal-soft); color: var(--teal);
+            width: 24px; height: 24px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* FAQ */
+        .faq-section { margin-top: 3.5rem; }
+        .faq-section h2 {
+            font-size: 1.6rem; margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem; border-bottom: 2px solid var(--primary-soft);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .faq-section h2::before {
+            content: '?'; background: var(--primary-soft); color: var(--primary);
+            width: 32px; height: 32px; border-radius: 50%; display: grid;
+            place-items: center; font-size: 1.1rem; font-weight: 800;
+        }
+        .faq-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); margin-bottom: 0.85rem; overflow: hidden;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .faq-item:hover { border-color: var(--border-strong); }
+        .faq-item[open] { border-color: var(--primary); box-shadow: 0 4px 12px -4px rgba(37,99,235,0.1); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1.1rem 1.35rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 1rem; color: var(--navy);
+            transition: background var(--t-fast);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { background: var(--primary-soft); }
+        .faq-item summary::after {
+            content: '+'; font-size: 1.5rem; color: var(--primary);
+            font-weight: 400; flex-shrink: 0; transition: transform var(--t-med);
+            width: 24px; height: 24px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--primary-soft);
+        }
+        .faq-item[open] summary::after {
+            content: '−'; transform: rotate(180deg); background: var(--primary); color: #fff;
+        }
+        .faq-answer {
+            padding: 0 1.35rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.75;
+        }
+
+        /* Related Tools CTA */
+        .related-tools-premium {
+            position: relative; margin-top: 4rem;
+            background: linear-gradient(145deg, #0b1a33 0%, #111c33 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--r-lg);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(60px);
+            pointer-events: none; z-index: 0; opacity: 0.4;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+        .glow-orb--1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb 0%, transparent 70%); top: -150px; left: -100px; }
+        .glow-orb--2 { width: 250px; height: 250px; background: radial-gradient(circle, #0d9488 0%, transparent 70%); bottom: -120px; right: -80px; animation-delay: -5s; }
+        @keyframes floatOrb { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(20px, 20px) scale(1.1); } }
+        
+        .related-tools-content { position: relative; z-index: 1; text-align: center; }
+        .related-tools-icon-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .icon-stack { display: flex; align-items: center; gap: 0.25rem; font-size: 1.4rem; }
+        .icon-stack .fa-bolt { color: #60a5fa; text-shadow: 0 0 15px rgba(96, 165, 250, 0.5); }
+        .icon-stack .fa-tools { color: #2dd4bf; text-shadow: 0 0 15px rgba(45, 212, 191, 0.5); }
+        .related-tools-icon-header h2 { color: #fff; font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+        .related-tools-content > p { color: #94a3b8; font-size: clamp(0.9rem, 1.5vw, 1rem); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        
+        .premium-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .premium-tool-card {
+            display: flex; align-items: center; gap: 1rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 1rem 1.25rem; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            text-align: left; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .premium-tool-card:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(96, 165, 250, 0.4); transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2); }
+        .tool-card-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(13,148,136,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05); display: grid; place-items: center;
+            color: #60a5fa; font-size: 1.1rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .premium-tool-card:hover .tool-card-icon { background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%); color: #fff; transform: scale(1.05) rotate(-5deg); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .tool-card-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+        .tool-card-title { color: #f8fafc; font-weight: 600; font-size: 0.95rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-card-subtitle { color: #64748b; font-size: 0.75rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s ease; }
+        .premium-tool-card:hover .tool-card-subtitle { color: #94a3b8; }
+        .tool-card-arrow { color: rgba(255, 255, 255, 0.2); font-size: 0.9rem; transition: all 0.3s ease; flex-shrink: 0; }
+        .premium-tool-card:hover .tool-card-arrow { color: #60a5fa; transform: translateX(4px); }
+
+        /* Back to blog */
+        .back-to-blog { text-align: center; margin-top: 3rem; }
+        .back-to-blog a {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-weight: 500; text-decoration: none;
+            font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast);
+        }
+        .back-to-blog a:hover { color: var(--primary-dark); background: var(--primary-soft); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-header { padding-top: 7rem; }
+            .article-body { font-size: 1rem; }
+            .article-body h2 { font-size: 1.35rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+            .article-body h2::before { width: 40px; height: 4px; }
+            .article-body h3 { font-size: 1.1rem; }
+            .article-table { font-size: 0.85rem; }
+            .article-table th, .article-table td { padding: 0.75rem 0.85rem; }
+            .callout { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .premium-tools-grid { grid-template-columns: 1fr; }
+            .premium-tool-card { padding: 0.85rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .article-header::before, .article-header::after { animation: none; }
+            .article-tag-hero .icon { animation: none; }
+            .side-float-icon { animation: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../site-chrome.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main>
+        <!-- Article Header -->
+        <section class="article-header">
+            <div class="container">
+                <div class="header-content">
+                    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+                        <a href="../index.html">Home</a>
+                        <span class="sep">/</span>
+                        <a href="index.html">Blog</a>
+                        <span class="sep">/</span>
+                        <span>Image Tools</span>
+                    </nav>
+
+                    <span class="article-tag-hero">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                        Image Tools
+                    </span>
+
+                    <h1>Why Resizing an Image Does Not Always Reduce Its File Size</h1>
+
+                    <div class="article-meta-row">
+                        <span class="meta-item"><i class="far fa-clock"></i> 7 min read</span>
+                        <span class="meta-item"><i class="fas fa-folder-open"></i> Image Resizing &amp; Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Article Body -->
+        <article class="article-wrap">
+            
+            <!-- Side Floating Icons (Hidden on small screens) -->
+            <div class="side-float-icon side-float-icon--1"><i class="fas fa-expand-arrows-alt"></i></div>
+            <div class="side-float-icon side-float-icon--2"><i class="fas fa-compress-arrows-alt"></i></div>
+            <div class="side-float-icon side-float-icon--3"><i class="fas fa-file-image"></i></div>
+            <div class="side-float-icon side-float-icon--4"><i class="fas fa-weight-hanging"></i></div>
+
+            <div class="container">
+                <div class="article-body">
+
+                    <figure class="article-figure">
+                        <img src="../assets/images/blog/11.jpg" 
+                             alt="Photo being resized on a laptop while the file size meter barely moves" 
+                             loading="lazy" width="1200" height="675">
+                        <figcaption>Fewer pixels should mean a smaller file, right? Not always.</figcaption>
+                    </figure>
+
+                    <p>You had a 4000 px photo. You resized it to half the width. Surely the file should now be tiny. But the size barely dropped, or in some cases it even went up.</p>
+                    <p>If resizing an image does not reduce the file size the way you expected, you're not doing anything wrong. Pixel dimensions are only one of four things that decide file size. This guide separates them so you can see which one is holding your file back.</p>
+
+                    <h2>The Short Answer</h2>
+                    <p>Resizing changes the <strong>number of pixels</strong>. File size also depends on <strong>compression quality</strong>, <strong>image format</strong>, <strong>image content</strong>, and <strong>metadata</strong>. If any of those work against you, a smaller image can still produce a large file.</p>
+                    <p>The most common reasons:</p>
+                    <ul class="checklist">
+                        <li>The resized image was saved at a higher quality setting than the original</li>
+                        <li>The photo has lots of fine detail or noise, which doesn't compress well</li>
+                        <li>The format is lossless (like PNG), so quality settings don't shrink it</li>
+                        <li>The tool kept extra data (metadata) or color profiles</li>
+                        <li>File size doesn't shrink in a straight line with pixel count</li>
+                    </ul>
+
+                    <h2>Four Things That Control File Size</h2>
+                    <p>Most people only think about the first one.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Factor</th>
+                                    <th>What it is</th>
+                                    <th>Does resizing change it?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pixel dimensions</strong></td>
+                                    <td>Width × height of the image</td>
+                                    <td>Yes, this is what resizing changes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Compression quality</strong></td>
+                                    <td>How strongly the file is compressed</td>
+                                    <td>Not by itself, the save setting decides</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Format</strong></td>
+                                    <td>JPG, PNG, WebP, AVIF, etc.</td>
+                                    <td>Only if you change it</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Metadata</strong></td>
+                                    <td>Camera info, color profile, extra data</td>
+                                    <td>Depends on the tool</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Keep these four apart in your head and the problem gets much easier to solve.</p>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/11.2.jpg" 
+                             alt="Diagram showing the four factors that control image file size" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Factor 1: Pixel Dimensions</h2>
+                    <p>Pixel count is width × height. Halving both width and height cuts the pixel count to <strong>one quarter</strong>, not one half.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Dimensions</th>
+                                    <th>Pixels</th>
+                                    <th>Compared with 4000 × 3000</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>4000 × 3000</td>
+                                    <td>12,000,000</td>
+                                    <td>100%</td>
+                                </tr>
+                                <tr>
+                                    <td>2000 × 1500</td>
+                                    <td>3,000,000</td>
+                                    <td>25%</td>
+                                </tr>
+                                <tr>
+                                    <td>1000 × 750</td>
+                                    <td>750,000</td>
+                                    <td>about 6%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><em>(This is simple multiplication, so it's accurate.)</em></p>
+                    <p>You might expect the file to shrink to 25% as well. Often it doesn't, and the next factors explain why.</p>
+
+                    <h2>Factor 2: Compression Quality</h2>
+                    <p>When you save a JPG, you choose how much detail to throw away. Many tools pick a high default quality. If your original camera photo was saved at a moderate quality, and your resize tool re-saves it at a very high one, the new file can be much heavier than the pixel count suggests.</p>
+                    <p>A rough way to think about it:</p>
+                    <ul class="checklist">
+                        <li>Fewer pixels, same quality setting: smaller file</li>
+                        <li>Fewer pixels, <strong>higher</strong> quality setting: possibly no saving at all</li>
+                    </ul>
+                    <p>Quality is a separate dial. Resizing doesn't touch it unless the tool does.</p>
+                    <div class="callout">
+                        <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <p><strong>The fix:</strong> Lower the quality a little after resizing, and compare at 100% zoom. Even a modest reduction often makes a big difference.</p>
+                        </div>
+                    </div>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/11.3.jpg" 
+                             alt="Same resized photo saved at three JPG quality levels" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Factor 3: Format</h2>
+                    <p>Format decides <em>how</em> the pixels are stored.</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Format</th>
+                                    <th>Compression</th>
+                                    <th>Resizing effect on size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>JPG</strong></td>
+                                    <td>Lossy, quality adjustable</td>
+                                    <td>Usually drops, depends on quality</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PNG</strong></td>
+                                    <td>Lossless</td>
+                                    <td>Drops with pixels, but no quality slider to tune</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebP</strong></td>
+                                    <td>Lossy or lossless</td>
+                                    <td>Depends on the mode used</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AVIF</strong></td>
+                                    <td>Lossy or lossless</td>
+                                    <td>Depends on the mode and tool</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>A resized <strong>PNG</strong> is the classic surprise. PNG doesn't throw detail away, so there is no quality dial. A photo saved as PNG stays large even when the pixel count falls. For photos, converting to JPG or WebP is often what actually reduces size. We cover that in <a href="why-jpg-gets-bigger.html">why an image gets bigger after converting to JPG</a>.</p>
+
+                    <h2>Factor 4: Image Content</h2>
+                    <p>Two images with the same dimensions can have very different file sizes.</p>
+                    <ul>
+                        <li>A <strong>smooth image</strong> (blue sky, plain wall, simple background) compresses very well</li>
+                        <li>A <strong>detailed or noisy image</strong> (grass, fabric, night photos with grain, crowds) compresses poorly</li>
+                    </ul>
+                    <p>When you resize, detail doesn't vanish evenly. A shrunken image can pack the same amount of texture into fewer pixels, so each pixel carries more detail and compresses less efficiently. This is one reason size doesn't fall in proportion to pixel count.</p>
+
+                    <h2>Factor 5: Metadata and Extra Data</h2>
+                    <p>A photo file contains more than pixels. It can include:</p>
+                    <ul class="checklist">
+                        <li>Camera and lens details (EXIF)</li>
+                        <li>Date and, sometimes, location</li>
+                        <li>Color profiles</li>
+                        <li>Embedded preview thumbnails</li>
+                    </ul>
+                    <p>For a large photo this is a small part of the total. For a small image, though, extra data can be a noticeable share of the file. Some resize tools keep it, others strip it. If you resize a photo down to a small thumbnail and the file is still bigger than expected, metadata is one place to look.</p>
+                    <p><em>Tip: if you share photos publicly, removing location data is a privacy bonus too.</em></p>
+
+                    <h2>Why File Size Doesn't Shrink in a Straight Line</h2>
+                    <p>Even with the same quality setting, the relationship between pixels and bytes isn't a simple ratio.</p>
+                    <ul>
+                        <li>Compression works best on large, smooth areas, and downscaling can change that</li>
+                        <li>Small images have a minimum fixed overhead (headers, tables, metadata)</li>
+                        <li>Resampling can sharpen edges, which compresses less well</li>
+                        <li>The original may already have been compressed efficiently, leaving little to gain</li>
+                    </ul>
+                    <p>So treat pixel count as a rough guide, not a calculator.</p>
+
+                    <h2>Quick Diagnosis: Why Is My Resized Image Still Big?</h2>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>What you see</th>
+                                    <th>Likely cause</th>
+                                    <th>What to try</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pixels dropped by 75%, size dropped only a little</td>
+                                    <td>Quality setting too high on re-save</td>
+                                    <td>Lower quality and compare</td>
+                                </tr>
+                                <tr>
+                                    <td>Resized PNG is still large</td>
+                                    <td>Lossless format</td>
+                                    <td>Convert photos to JPG or WebP</td>
+                                </tr>
+                                <tr>
+                                    <td>Resized file is bigger than the original</td>
+                                    <td>Original was heavily compressed, new one is not</td>
+                                    <td>Save at a lower quality setting</td>
+                                </tr>
+                                <tr>
+                                    <td>Detailed, grainy photo stays heavy</td>
+                                    <td>Content compresses poorly</td>
+                                    <td>Reduce dimensions more, or lower quality</td>
+                                </tr>
+                                <tr>
+                                    <td>Small image, size still higher than expected</td>
+                                    <td>Metadata or profile overhead</td>
+                                    <td>Strip metadata if possible</td>
+                                </tr>
+                                <tr>
+                                    <td>Size hasn't changed at all</td>
+                                    <td>Only DPI changed, not pixels</td>
+                                    <td>Change the actual width and height</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>A Common Trap: Changing DPI Doesn't Change Pixels</h2>
+                    <p>Some tools show a DPI or PPI setting. Changing it from 300 to 72 does <strong>not</strong> remove any pixels. It only changes the print size information stored in the file. If your goal is a smaller file, change the pixel width and height, not just the DPI label.</p>
+
+                    <h2>Test It Yourself</h2>
+                    <p>Do a simple comparison with one of your own photos:</p>
+                    <ol>
+                        <li>Note the <strong>original</strong> pixel dimensions and file size in bytes (or KB).</li>
+                        <li>Resize it to about half the width, keeping the same format and quality setting if your tool allows.</li>
+                        <li>Record the new pixel dimensions and file size.</li>
+                        <li>Resize again at a much smaller width, and record it.</li>
+                        <li>Save one version at a lower quality, and record the size.</li>
+                        <li>Compare each at 100% zoom.</li>
+                    </ol>
+                    <p>Fill in your own results:</p>
+
+                    <div class="table-wrap">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>Pixel dimensions</th>
+                                    <th>Format</th>
+                                    <th>Quality setting</th>
+                                    <th>File size (bytes/KB)</th>
+                                    <th>Size vs original</th>
+                                    <th>Looks OK?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Original</td><td></td><td></td><td></td><td></td><td>100%</td><td></td></tr>
+                                <tr><td>Resized (about 50% width)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Resized (about 25% width)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td>Resized + lower quality</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Compare the pixel percentage with the file size percentage. If they don't match, one of the four factors is the reason.</p>
+
+                    <div class="article-inline-img">
+                        <img src="../assets/images/blog/11.4.jpg" 
+                             alt="Table comparing original and resized image pixel dimensions and file sizes" 
+                             loading="lazy" width="1200" height="280">
+                    </div>
+
+                    <h2>Resize First or Compress First?</h2>
+                    <p>For most photos, <strong>resize first, then compress</strong>. Resizing removes pixels you don't need, and compression then reduces the remaining data. Doing it the other way round wastes effort, because you compress pixels that you were going to delete anyway.</p>
+                    <p>Our guide on <a href="why-small-image-still-loads-slowly.html">why a small photo can still load slowly</a> explains why dimensions matter for websites even when the KB number looks small.</p>
+
+                    <h2>Step-by-Step: How to Get a Smaller File</h2>
+                    <ol class="checklist">
+                        <li><strong>Check the current size.</strong> Note the pixel dimensions and file size.</li>
+                        <li><strong>Decide the size you really need.</strong> Match the dimensions to where the image will be shown or uploaded.</li>
+                        <li><strong>Resize</strong> to those dimensions using the <a href="../img-resizer.html">Image Resizer</a>.</li>
+                        <li><strong>Check the format.</strong> For photos, JPG or WebP usually beats PNG.</li>
+                        <li><strong>Lower the quality slightly</strong> and compare at 100% zoom.</li>
+                        <li><strong>Compress</strong> with the <a href="../img-compress.html">Image Compressor</a> if you still need a smaller file.</li>
+                        <li><strong>Compare against your target</strong> (for example, a portal's KB limit) and adjust.</li>
+                    </ol>
+
+                    <h2>Common Mistakes</h2>
+                    <ul class="checklist">
+                        <li>Expecting file size to fall at the same rate as pixel count</li>
+                        <li>Resizing a PNG photo and keeping it as PNG</li>
+                        <li>Saving at maximum quality "to be safe"</li>
+                        <li>Changing only the DPI number</li>
+                        <li>Judging the result without zooming in</li>
+                        <li>Resizing a small image to a larger size (upscaling adds pixels, not detail)</li>
+                        <li>Re-saving the same JPG over and over</li>
+                    </ul>
+
+                    <h2>Quick Summary</h2>
+                    <ul class="checklist">
+                        <li>Resizing changes pixel count. File size also depends on quality, format, content, and metadata.</li>
+                        <li>Halving width and height cuts pixels to a quarter, but file size rarely drops exactly that much.</li>
+                        <li>A high quality setting on re-save can cancel out the savings.</li>
+                        <li>PNG photos stay large because PNG is lossless.</li>
+                        <li>Changing DPI doesn't change pixels.</li>
+                        <li>Resize first, then compress.</li>
+                    </ul>
+
+                    <!-- Related Tools CTA (Premium UI) -->
+                    <div class="related-tools-premium">
+                        <div class="glow-orb glow-orb--1"></div>
+                        <div class="glow-orb glow-orb--2"></div>
+                        
+                        <div class="related-tools-content">
+                            <div class="related-tools-icon-header">
+                                <div class="icon-stack">
+                                    <i class="fas fa-bolt"></i>
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h2>Try the tools mentioned in this guide</h2>
+                            </div>
+                            <p>Test these concepts with your own files and see the difference for yourself.</p>
+                            
+                            <div class="premium-tools-grid">
+                                <a href="../img-resizer.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Resizer</span>
+                                        <span class="tool-card-subtitle">Change dimensions</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-compress.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Compressor</span>
+                                        <span class="tool-card-subtitle">Reduce file size</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                                
+                                <a href="../img-fmt-converter.html" class="premium-tool-card">
+                                    <div class="tool-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                    <div class="tool-card-text">
+                                        <span class="tool-card-title">Image Format Converter</span>
+                                        <span class="tool-card-subtitle">Switch between formats</span>
+                                    </div>
+                                    <i class="fas fa-arrow-right tool-card-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h2>Frequently asked questions</h2>
+                        
+                        <details class="faq-item">
+                            <summary>Does resizing an image reduce its file size?</summary>
+                            <div class="faq-answer">Usually, yes, but not always by the amount you expect. Quality setting, format, content, and metadata also affect the final size.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my resized image bigger than the original?</summary>
+                            <div class="faq-answer">The tool may have saved it at a higher quality than the original, changed the format, or kept extra data. Lowering the quality setting often fixes it.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Should I resize or compress first?</summary>
+                            <div class="faq-answer">Resize first, then compress. This removes unneeded pixels before reducing the data.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Does changing DPI reduce file size?</summary>
+                            <div class="faq-answer">No. DPI doesn't change the number of pixels. Change the actual width and height instead.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Why is my PNG still large after resizing?</summary>
+                            <div class="faq-answer">PNG is lossless, so there is no quality slider to tune. For photos, converting to JPG or WebP often reduces size more.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>How can I reduce an image to a specific KB?</summary>
+                            <div class="faq-answer">Resize to the dimensions you need, then adjust the quality or use compression, and check the size each time until you reach your target.</div>
+                        </details>
+                        
+                        <details class="faq-item">
+                            <summary>Does metadata make a big difference?</summary>
+                            <div class="faq-answer">For large photos it's usually a small part of the file. For small images it can matter more. Stripping it can also remove location data, which helps privacy.</div>
+                        </details>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>When resizing doesn't shrink a file the way you hoped, the pixels are only part of the picture. Check the quality setting, the format, the image content, and the metadata. Fix the factor that's holding you back, and compare at 100% zoom before you share.</p>
+                    <p>Ready to try? Resize your photo with the QuickToolsPK <a href="../img-resizer.html">Image Resizer</a>, then run it through the <a href="../img-compress.html">Image Compressor</a> if you need it smaller.</p>
+
+                    <div class="back-to-blog">
+                        <a href="../index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="../img-compress.html">Image Compressor</a></li>
+                        <li><a href="../img-resizer.html">Image Resizer</a></li>
+                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="../pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="../pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="../img-compress.html">Compressors</a></li>
+                        <li><a href="../img-resizer.html">Resizers</a></li>
+                        <li><a href="../index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
