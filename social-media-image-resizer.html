@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Image Resizer – Resize One Image for Many Platforms | QuickToolsPK</title>
+    <meta name="description" content="Free social media image resizer by QuickToolsPK. Resize one image for Instagram, Facebook, YouTube, TikTok, LinkedIn, X (Twitter) & Pinterest instantly. No upload to server – 100% private & fast.">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/social-media-image-resizer.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           DESIGN TOKENS (Same as Homepage)
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon { width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center; flex-shrink: 0;
+        }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           TOOL PAGE HERO
+           ============================================================ */
+        .tool-hero {
+            position: relative; overflow: hidden;
+            padding: clamp(3rem, 8vw, 5rem) 0 clamp(6rem, 10vw, 8rem);
+            background: var(--gradient-navy);
+            color: #fff; text-align: center;
+        }
+        .tool-hero::before, .tool-hero::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(80px);
+            pointer-events: none; z-index: 0;
+        }
+        .tool-hero::before {
+            width: 500px; height: 500px; top: -200px; left: -150px; opacity: 0.4;
+            background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+        }
+        .tool-hero::after {
+            width: 400px; height: 400px; bottom: -150px; right: -100px; opacity: 0.3;
+            background: radial-gradient(circle, #0d9488 0%, transparent 70%);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--teal); background: rgba(204, 251, 241, 0.15); border: 1px solid rgba(167, 243, 208, 0.3);
+            padding: 0.35rem 0.9rem; border-radius: var(--r-full); margin-bottom: 1.25rem;
+            backdrop-filter: blur(8px);
+        }
+        .tool-hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800;
+            margin-bottom: 1rem; line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .tool-hero p { font-size: clamp(1rem, 1.8vw, 1.15rem); color: #cbd5e1; max-width: 620px; margin: 0 auto; line-height: 1.7; }
+
+        /* ============================================================
+           MAIN TOOL AREA
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: var(--bg);
+            padding: 0 0 clamp(3rem, 6vw, 5rem);
+            position: relative;
+        }
+        .tool-shell { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Premium Tool Card */
+        .tool-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 3rem);
+            box-shadow: var(--shadow-lg); position: relative; z-index: 2;
+            margin-top: -5rem;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 2px dashed var(--border-strong); border-radius: var(--r-lg);
+            padding: 3rem 1.5rem; text-align: center; cursor: pointer;
+            background: var(--bg); transition: border-color var(--t-fast), background var(--t-fast);
+            position: relative;
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: var(--primary-soft);
+        }
+        .upload-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--primary-soft); color: var(--primary);
+            display: grid; place-items: center; font-size: 2rem;
+            margin-bottom: 1.25rem; transition: transform var(--t-med);
+        }
+        .upload-area:hover .upload-icon { transform: scale(1.05); }
+        .upload-area h3 { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+        .upload-area p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0; }
+        input[type=file]{display:none;}
+
+        /* Platform Selection */
+        .section-title {
+            font-size: 1.2rem; font-weight: 700; color: var(--navy);
+            margin: 2.5rem 0 1.25rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .section-title span { color: var(--text-subtle); font-weight: 500; font-size: 0.85rem; }
+
+        .platform-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;
+        }
+        .platform {
+            position: relative;
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1rem; display: flex; align-items: center; gap: 0.85rem;
+            cursor: pointer; transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+            background: var(--surface); user-select: none; overflow: hidden;
+        }
+        .platform::before {
+            content: ''; position: absolute; inset: 0; opacity: 0;
+            background: linear-gradient(135deg, rgba(37,99,235,0.03), rgba(13,148,136,0.03));
+            transition: opacity var(--t-fast); pointer-events: none;
+        }
+        .platform:hover {
+            transform: translateY(-3px);
+            border-color: #bfd4f7;
+            box-shadow: var(--shadow-sm);
+        }
+        .platform:hover::before { opacity: 1; }
+        
+        .platform.selected {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            box-shadow: 0 4px 14px rgba(37,99,235,.12);
+        }
+        .platform.selected::before { opacity: 1; }
+
+        .platform-emoji {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: grid; place-items: center; font-size: 1.4rem;
+            background: var(--bg); border: 1px solid var(--border);
+            transition: transform var(--t-fast); flex-shrink: 0;
+        }
+        .platform:hover .platform-emoji { transform: scale(1.1); }
+        .platform.selected .platform-emoji { background: #fff; border-color: transparent; }
+
+        .platform-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
+        .platform-info strong { display: block; font-size: 0.92rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
+        .platform-info small { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .platform-check {
+            width: 24px; height: 24px; border-radius: 50%;
+            border: 2px solid var(--border-strong);
+            display: grid; place-items: center; font-size: 0.7rem; color: transparent;
+            flex-shrink: 0; transition: all var(--t-fast); position: relative; z-index: 1;
+        }
+        .platform.selected .platform-check {
+            background: var(--primary); border-color: var(--primary); color: #fff;
+        }
+
+        /* Actions */
+        .actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.9rem 1.75rem; font-family: inherit; font-size: 1rem; font-weight: 600;
+            border-radius: var(--r-full); border: 1px solid transparent; cursor: pointer;
+            text-decoration: none; white-space: nowrap; transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); flex: 1; min-width: 220px; }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover:not(:disabled) { background: var(--bg); border-color: #bfd4f7; }
+
+        /* Results */
+        #results { margin-top: 2rem; }
+        .result-item {
+            display: flex; align-items: center; gap: 1rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); padding: 1rem; margin-bottom: 1rem;
+            flex-wrap: wrap; box-shadow: var(--shadow-xs);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .result-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .result-item img {
+            width: 80px; height: 80px; object-fit: cover;
+            border-radius: var(--r-sm); background: #e2e8f0; flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .result-info { flex: 1; min-width: 160px; }
+        .result-info strong { display: block; font-size: 0.95rem; color: var(--navy); font-weight: 700; }
+        .result-info small { color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 2px; }
+        
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--teal); color: #fff; padding: 0.65rem 1.25rem; font-size: 0.88rem;
+            border-radius: var(--r-full); border: none; cursor: pointer; font-family: inherit;
+            font-weight: 600; transition: var(--t-fast); white-space: nowrap;
+        }
+        .btn-download:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
+
+        /* ============================================================
+           CONTENT SECTION
+           ============================================================ */
+        .content-block {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-xs); margin-top: 3rem;
+        }
+        .content-block h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .content-block h3 { font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        .content-block p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 1rem; line-height: 1.75; }
+        .content-block ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .content-block li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+        .content-block strong { color: var(--navy); }
+
+        /* FAQ */
+        .faq-item { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item p strong { color: var(--navy); display: block; margin-bottom: 0.4rem; font-size: 1rem; }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .tool-hero { padding: 2.5rem 0 6rem; }
+            .tool-card { margin-top: -4rem; padding: 1.25rem; }
+            .actions { flex-direction: column; }
+            .actions .btn { width: 100%; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .upload-area { padding: 2rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .result-item { flex-direction: column; text-align: center; }
+            .result-info { min-width: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="../index.html">Home</a></li>
+                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link is-active" href="../index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="../about.html">About</a></li>
+                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="../blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= TOOL HERO ================= -->
+    <section class="tool-hero">
+        <div class="container hero-content">
+            <span class="hero-badge"><i class="fas fa-bolt"></i> Free · No sign-up · 100% private</span>
+            <h1>Social Media Image Resizer</h1>
+            <p>Resize one image for many platforms at once — Instagram, Facebook, YouTube, TikTok, LinkedIn, X & Pinterest. All in your browser.</p>
+        </div>
+    </section>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="tool-shell">
+
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="../index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>Social Media Image Resizer</span>
+            </nav>
+
+            <div class="tool-card">
+                <label class="upload-area" id="uploadArea" for="fileInput">
+                    <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <h3>Click to upload or drag &amp; drop your image</h3>
+                    <p>JPG, PNG or WebP — up to 20 MB</p>
+                    <input type="file" id="fileInput" accept="image/*">
+                </label>
+
+                <h2 class="section-title"><i class="fas fa-check-square" style="color:var(--primary)"></i> Select Platforms <span>(pick as many as you need)</span></h2>
+                <div class="platform-grid" id="platformGrid"></div>
+
+                <div class="actions">
+                    <button class="btn btn-primary" id="resizeBtn" disabled><i class="fas fa-magic"></i> Resize for Selected Platforms</button>
+                    <button class="btn btn-ghost" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+
+                <div id="results"></div>
+            </div>
+
+            <!-- SEO CONTENT -->
+            <section class="content-block">
+                <h2>Why Use QuickToolsPK's Social Media Image Resizer?</h2>
+                <p>Creating content for every platform is time-consuming — each social network demands a different image size, aspect ratio, and resolution. QuickToolsPK's <strong>social media image resizer</strong> lets you upload one image and instantly generate perfectly sized versions for Instagram, Facebook, YouTube, TikTok, LinkedIn, X (Twitter), and Pinterest — all at once.</p>
+                <p>Unlike most online tools, your images never leave your device. Everything runs securely in your browser, making it one of the most private and fastest image resizers available online.</p>
+
+                <h3>Supported Platform Sizes</h3>
+                <ul>
+                    <li><strong>Instagram Post</strong> — 1080 × 1080 px (1:1)</li>
+                    <li><strong>Instagram Story / Reel</strong> — 1080 × 1920 px (9:16)</li>
+                    <li><strong>Facebook Post</strong> — 1200 × 630 px</li>
+                    <li><strong>Facebook Cover</strong> — 851 × 315 px</li>
+                    <li><strong>YouTube Thumbnail</strong> — 1280 × 720 px</li>
+                    <li><strong>TikTok Video / Cover</strong> — 1080 × 1920 px</li>
+                    <li><strong>LinkedIn Post</strong> — 1200 × 627 px</li>
+                    <li><strong>X (Twitter) Post</strong> — 1600 × 900 px</li>
+                    <li><strong>Pinterest Pin</strong> — 1000 × 1500 px</li>
+                </ul>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li>✅ Resize one image for multiple platforms in a single click</li>
+                    <li>✅ 100% browser-based — no uploads to any server</li>
+                    <li>✅ High-quality, pixel-perfect output</li>
+                    <li>✅ Free forever — no watermark, no sign-up</li>
+                    <li>✅ Works on desktop, tablet & mobile</li>
+                </ul>
+
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <p><strong>Is this image resizer free?</strong> Yes — QuickToolsPK is completely free with no hidden limits.</p>
+                </div>
+                <div class="faq-item">
+                    <p><strong>Are my images uploaded anywhere?</strong> No. All resizing happens locally in your browser, so your files stay private.</p>
+                </div>
+                <div class="faq-item">
+                    <p><strong>Can I resize for multiple platforms at once?</strong> Absolutely — select as many platforms as you want and download each size with one click.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="pdf-merge.html">Merge PDF</a></li>
+                        <li><a href="pdf-compression.html">PDF Compressor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="../index.html#image-tools">Image Tools</a></li>
+                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="../index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="img-resizer.html">Resizers</a></li>
+                        <li><a href="../blog/index.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPT (Core logic unchanged) ================= -->
+    <script>
+    (function () {
+        'use strict';
+
+        /* ---- Header: sticky shadow + mobile menu ---- */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ---- Platform Presets (Core data unchanged) ---- */
+        const PLATFORMS = [
+            { id:'ig-post',    name:'Instagram Post',      size:'1080×1080', w:1080, h:1080, emoji:'📸' },
+            { id:'ig-story',   name:'Instagram Story',     size:'1080×1920', w:1080, h:1920, emoji:'📱' },
+            { id:'fb-post',    name:'Facebook Post',       size:'1200×630',  w:1200, h:630,  emoji:'👍' },
+            { id:'fb-cover',   name:'Facebook Cover',      size:'851×315',   w:851,  h:315,  emoji:'🖼️' },
+            { id:'yt-thumb',   name:'YouTube Thumbnail',   size:'1280×720',  w:1280, h:720,  emoji:'▶️' },
+            { id:'tiktok',     name:'TikTok Cover',        size:'1080×1920', w:1080, h:1920, emoji:'🎵' },
+            { id:'linkedin',   name:'LinkedIn Post',       size:'1200×627',  w:1200, h:627,  emoji:'💼' },
+            { id:'x-post',     name:'X (Twitter) Post',    size:'1600×900',  w:1600, h:900,  emoji:'🐦' },
+            { id:'pinterest',  name:'Pinterest Pin',       size:'1000×1500', w:1000, h:1500, emoji:'📌' },
+        ];
+
+        const grid       = document.getElementById('platformGrid');
+        const fileInput  = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const resizeBtn  = document.getElementById('resizeBtn');
+        const resetBtn   = document.getElementById('resetBtn');
+        const resultsBox = document.getElementById('results');
+
+        let selectedFile = null;
+        const selectedPlatforms = new Set(['ig-post','yt-thumb','fb-post']);
+
+        function renderPlatforms(){
+            grid.innerHTML = '';
+            PLATFORMS.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'platform' + (selectedPlatforms.has(p.id) ? ' selected' : '');
+                div.innerHTML = `
+                    <div class="platform-emoji">${p.emoji}</div>
+                    <div class="platform-info">
+                        <strong>${p.name}</strong>
+                        <small>${p.size} px</small>
+                    </div>
+                    <span class="platform-check"><i class="fas fa-check"></i></span>`;
+                div.addEventListener('click', () => {
+                    if (selectedPlatforms.has(p.id)) selectedPlatforms.delete(p.id);
+                    else selectedPlatforms.add(p.id);
+                    div.classList.toggle('selected');
+                });
+                grid.appendChild(div);
+            });
+        }
+        renderPlatforms();
+
+        function handleFile(file){
+            if (!file || !file.type.startsWith('image/')) {
+                alert('Please choose a valid image file (JPG, PNG, WebP).');
+                return;
+            }
+            selectedFile = file;
+            uploadArea.innerHTML = `
+                <span class="upload-icon" style="background:var(--teal-soft);color:var(--teal);"><i class="fas fa-check-circle"></i></span>
+                <h3>${file.name}</h3>
+                <p>${(file.size/1024/1024).toFixed(2)} MB — ready to resize</p>`;
+            resizeBtn.disabled = false;
+        }
+
+        uploadArea.addEventListener('click', e => {
+            if (e.target.tagName !== 'INPUT') fileInput.click();
+        });
+        fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
+
+        ['dragover','dragenter'].forEach(ev =>
+            uploadArea.addEventListener(ev, e => { e.preventDefault(); uploadArea.classList.add('dragover'); }));
+        ['dragleave','drop'].forEach(ev =>
+            uploadArea.addEventListener(ev, e => { e.preventDefault(); uploadArea.classList.remove('dragover'); }));
+        uploadArea.addEventListener('drop', e => handleFile(e.dataTransfer.files[0]));
+
+        function loadImage(file){
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+                img.onerror = reject;
+                img.src = url;
+            });
+        }
+
+        function drawCover(img, w, h){
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingQuality = 'high';
+
+            const scale = Math.max(w / img.width, h / img.height);
+            const sw = w / scale, sh = h / scale;
+            const sx = (img.width - sw) / 2;
+            const sy = (img.height - sh) / 2;
+
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+            return canvas;
+        }
+
+        resizeBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+            if (selectedPlatforms.size === 0){
+                alert('Please select at least one platform.');
+                return;
+            }
+
+            resizeBtn.disabled = true;
+            resizeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resizing…';
+            resultsBox.innerHTML = '';
+
+            try{
+                const img = await loadImage(selectedFile);
+                const chosen = PLATFORMS.filter(p => selectedPlatforms.has(p.id));
+
+                chosen.forEach(p => {
+                    const canvas = drawCover(img, p.w, p.h);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+                    const item = document.createElement('div');
+                    item.className = 'result-item';
+                    item.innerHTML = `
+                        <img src="${dataUrl}" alt="${p.name} preview">
+                        <div class="result-info">
+                            <strong>${p.emoji} ${p.name}</strong>
+                            <small>${p.w} × ${p.h} px • JPEG</small>
+                        </div>
+                        <button class="btn-download"><i class="fas fa-download"></i> Download</button>`;
+
+                    item.querySelector('.btn-download').addEventListener('click', () => {
+                        const a = document.createElement('a');
+                        a.href = dataUrl;
+                        a.download = `quicktoolspk-${p.id}-${p.w}x${p.h}.jpg`;
+                        a.click();
+                    });
+
+                    resultsBox.appendChild(item);
+                });
+            } catch(err){
+                alert('Something went wrong while resizing. Please try another image.');
+                console.error(err);
+            } finally {
+                resizeBtn.disabled = false;
+                resizeBtn.innerHTML = '<i class="fas fa-magic"></i> Resize for Selected Platforms';
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            resultsBox.innerHTML = '';
+            resizeBtn.disabled = true;
+            uploadArea.innerHTML = `
+                <span class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                <h3>Click to upload or drag &amp; drop your image</h3>
+                <p>JPG, PNG or WebP — up to 20 MB</p>
+                <input type="file" id="fileInput" accept="image/*">`;
+            const newInput = uploadArea.querySelector('#fileInput');
+            newInput.addEventListener('change', e => handleFile(e.target.files[0]));
+        });
+
+    })();
+    </script>
+</body>
+</html>
