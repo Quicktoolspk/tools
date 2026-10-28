@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Passport Size Photo Maker Online | QuickToolsPK</title>
+    <meta name="description" content="Create a passport or visa size photo with QuickToolsPK. Prepare your image for the required dimensions and check official photo rules before submitting.">
+    <meta name="keywords" content="passport size photo maker, passport photo maker online, visa photo maker, passport size photo editor, passport photo resizer, make passport size photo online, ID photo maker, passport photo cropper">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/passport-size-photo-maker.html">
+
+    <meta property="og:title" content="Passport Size Photo Maker Online">
+    <meta property="og:description" content="Prepare a photo for passport, visa and ID applications with QuickToolsPK. Always verify the official photo requirements before submission.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolspk.com/tools/passport-size-photo-maker.html">
+    <meta property="og:image" content="https://quicktoolspk.com/assets/passport-size-photo-maker.webp">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Passport Size Photo Maker Online">
+    <meta name="twitter:description" content="Create passport or visa size photos quickly with QuickToolsPK.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           BACKGROUND ELEMENTS & ANIMATIONS
+           ============================================================ */
+        .bg-decoration {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .deco-shape {
+            position: absolute; opacity: 0.4; animation: floatShape 15s ease-in-out infinite;
+        }
+        .deco-shape-1 { top: 10%; left: 5%; width: 120px; height: 120px; color: var(--primary-soft); animation-delay: 0s; }
+        .deco-shape-2 { top: 40%; right: 5%; width: 80px; height: 80px; color: var(--teal-soft); animation-delay: -5s; }
+        .deco-shape-3 { bottom: 15%; left: 10%; width: 60px; height: 60px; color: #fce7f3; animation-delay: -10s; }
+        .deco-shape-4 { bottom: 30%; right: 15%; width: 100px; height: 100px; color: var(--primary-soft); animation-delay: -7s; }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.05); }
+        }
+
+        .sparkle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; opacity: 0; box-shadow: 0 0 8px 1px rgba(37,99,235,0.6);
+            animation: sparkleRise linear infinite;
+        }
+        @keyframes sparkleRise {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & TOOL UI
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        .page-head { margin-bottom: 1.75rem; max-width: 820px; }
+        .page-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+        .page-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+        .page-head .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            font-size: 0.78rem; font-weight: 600;
+            background: var(--primary-soft); color: var(--primary-dark);
+        }
+        .badge.teal { background: var(--teal-soft); color: #0f766e; }
+
+        .tool-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.75rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .tool-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+        }
+        .tool-card {
+            padding: 1.75rem; position: relative; overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-brand);
+        }
+
+        /* Notice Banner */
+        .notice-banner {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            padding: 0.9rem 1rem; margin-bottom: 1.25rem;
+            background: var(--warning-soft); border: 1px solid #fde68a;
+            border-radius: var(--r-md); font-size: 0.85rem; color: #92400e;
+            line-height: 1.6;
+        }
+        .notice-banner i { color: var(--warning); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+        .notice-banner strong { color: #78350f; }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border-strong); border-radius: var(--r-md);
+            padding: 2.25rem 1.5rem; text-align: center; cursor: pointer;
+            background: var(--bg);
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast), transform var(--t-med);
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: var(--primary-soft); box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .upload-icon {
+            font-size: 2.2rem; color: var(--primary); margin-bottom: 0.85rem;
+            background: var(--primary-soft); width: 76px; height: 76px; line-height: 76px;
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            transition: transform var(--t-med);
+        }
+        .upload-area:hover .upload-icon { transform: scale(1.1) rotate(5deg); }
+        .upload-area h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .upload-area p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem; }
+        #file-input { display: none; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
+            border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+            position: relative; overflow: hidden;
+        }
+        .btn::after {
+            content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn:hover::after { left: 130%; }
+        .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover:not(:disabled) { background: var(--primary-soft); border-color: #bfd4f7; }
+        .btn-success { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #fff; box-shadow: 0 8px 22px -6px rgba(5,150,105,0.4); }
+        .btn-success:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(5,150,105,0.5); }
+
+        /* Settings Panel */
+        .settings {
+            margin-top: 1.5rem; padding: 1.25rem 1.35rem;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            transition: box-shadow var(--t-med);
+        }
+        .settings:hover { box-shadow: var(--shadow-sm); }
+        .settings h3 { font-size: 1rem; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .settings h3 i { color: var(--primary); }
+
+        .setting-group { margin-bottom: 1rem; }
+        .setting-group:last-child { margin-bottom: 0; }
+        .setting-group label {
+            display: block; font-size: 0.82rem; font-weight: 600;
+            color: var(--text-muted); margin-bottom: 0.4rem;
+        }
+
+        .preset-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem;
+        }
+        .preset-btn {
+            padding: 0.55rem 0.65rem; font-size: 0.78rem; font-weight: 600;
+            background: var(--surface); border: 1px solid var(--border-strong);
+            border-radius: var(--r-sm); cursor: pointer; color: var(--text);
+            transition: all var(--t-fast); text-align: left; line-height: 1.35;
+        }
+        .preset-btn:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary-dark); }
+        .preset-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+        .preset-btn small { display: block; font-weight: 400; font-size: 0.68rem; opacity: 0.8; margin-top: 1px; }
+
+        .custom-size-row {
+            display: grid; grid-template-columns: 1fr auto 1fr auto; gap: 0.5rem; align-items: center;
+        }
+        .custom-size-row input, .custom-size-row select {
+            width: 100%; padding: 0.6rem 0.7rem; font-size: 0.9rem;
+            border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+            background: var(--surface); color: var(--text); font-family: inherit;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .custom-size-row input:focus, .custom-size-row select:focus {
+            outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+        }
+        .custom-size-row .times { color: var(--text-subtle); font-weight: 600; font-size: 0.85rem; }
+
+        .bg-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .bg-swatch {
+            width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border-strong);
+            cursor: pointer; transition: transform var(--t-fast), border-color var(--t-fast);
+            position: relative;
+        }
+        .bg-swatch:hover { transform: scale(1.1); }
+        .bg-swatch.active { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.2); }
+        .bg-swatch.active::after {
+            content: '✓'; position: absolute; inset: 0; display: grid; place-items: center;
+            color: var(--primary); font-weight: 700; font-size: 0.9rem; text-shadow: 0 0 3px #fff;
+        }
+
+        /* Previews */
+        .previews-section { margin-top: 1.5rem; }
+        .previews-title {
+            font-size: 0.98rem; font-weight: 700; color: var(--navy);
+            margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .previews-title i { color: var(--primary); }
+        .photo-preview-container {
+            display: grid; grid-template-columns: 1fr; gap: 1rem;
+            place-items: center; padding: 1.25rem;
+            background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-md); min-height: 220px;
+        }
+        .photo-preview-container.has-photo {
+            background: repeating-conic-gradient(#e5ecf5 0% 25%, #f8fafc 0% 50%) 50% / 20px 20px;
+        }
+        .photo-frame {
+            position: relative; border: 2px solid var(--primary);
+            box-shadow: var(--shadow-md); border-radius: 4px; overflow: hidden;
+            background: #fff; max-width: 100%;
+        }
+        .photo-frame img { display: block; max-height: 320px; width: auto; }
+        .photo-frame .face-guide {
+            position: absolute; inset: 0; pointer-events: none;
+            border: 2px dashed rgba(37,99,235,0.4); border-radius: 4px;
+        }
+        .photo-frame .face-guide::before {
+            content: ''; position: absolute;
+            left: 50%; top: 12%; width: 55%; height: 55%;
+            transform: translateX(-50%);
+            border: 2px dashed rgba(220,38,38,0.45); border-radius: 50%;
+        }
+        .photo-meta {
+            margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
+            justify-content: center; font-size: 0.8rem; color: var(--text-muted);
+        }
+        .photo-meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+        .photo-meta i { color: var(--primary); }
+        .empty-note {
+            text-align: center; padding: 1.5rem 1rem;
+            color: var(--text-subtle); font-size: 0.9rem;
+        }
+
+        /* Actions */
+        .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+        @media (max-width: 520px) { .actions .btn { width: 100%; } }
+
+        /* Loading */
+        .loading { display: none; text-align: center; padding: 1.5rem 0; }
+        .loading.is-visible { display: block; }
+        .loading-spinner {
+            width: 46px; height: 46px; border: 4px solid var(--primary-soft);
+            border-top-color: var(--primary); border-radius: 50%;
+            animation: spin 0.9s linear infinite; margin: 0 auto 0.75rem;
+        }
+        .loading p { color: var(--text-muted); font-size: 0.9rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ad-space {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
+        }
+        .ad-label {
+            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
+            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
+        }
+        .ad-example {
+            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
+        }
+
+        /* ============================================================
+           REDESIGNED CONTENT SECTIONS
+           ============================================================ */
+        .content-shell { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+
+        .content-block {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: clamp(1.5rem, 3vw, 2.25rem);
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--t-med), border-color var(--t-med);
+        }
+        .content-block:hover { box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+        /* Accent line top */
+        .content-block::before {
+            content: "";
+            position: absolute; top: 0; left: clamp(1.5rem, 3vw, 2.25rem);
+            width: 44px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+            border-radius: 0 0 3px 3px;
+            transition: width 0.4s var(--ease);
+        }
+        .content-block:hover::before { width: 72px; }
+
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--primary-dark);
+            background: var(--primary-soft); padding: 0.3rem 0.7rem;
+            border-radius: var(--r-full); margin-bottom: 0.85rem;
+        }
+        .section-eyebrow i { font-size: 0.75rem; }
+
+        .content-block h2 {
+            font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+        }
+        .content-block h3 {
+            font-size: 1rem; margin: 1.5rem 0 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--navy);
+        }
+        .content-block h3::before {
+            content: ""; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--primary); flex-shrink: 0;
+        }
+        .content-block h3:first-of-type { margin-top: 0.5rem; }
+        .content-block p {
+            font-size: 0.95rem; color: var(--text-muted); line-height: 1.75;
+            margin-bottom: 0.85rem;
+        }
+        .content-block p:last-child { margin-bottom: 0; }
+        .content-block strong { color: var(--navy); font-weight: 600; }
+
+        /* Step list (How to) */
+        .step-list {
+            list-style: none; counter-reset: step; padding: 0; margin: 1.25rem 0 0;
+            display: grid; gap: 0.75rem;
+        }
+        .step-list li {
+            counter-increment: step;
+            position: relative;
+            padding: 0.9rem 1rem 0.9rem 3.4rem;
+            background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute; left: 0.9rem; top: 0.85rem;
+            width: 30px; height: 30px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            box-shadow: 0 4px 10px -3px rgba(37,99,235,0.45);
+        }
+        .step-list li:hover {
+            transform: translateY(-1px);
+            border-color: #c7d8f2;
+            box-shadow: var(--shadow-sm);
+        }
+        .step-list li strong { color: var(--navy); display: inline; }
+
+        /* Bullet list */
+        .bullet-list {
+            list-style: none; padding: 0; margin: 0.75rem 0 0;
+            display: grid; gap: 0.5rem;
+        }
+        .bullet-list li {
+            position: relative;
+            padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: border-color var(--t-fast), background var(--t-fast);
+        }
+        .bullet-list li::before {
+            content: "";
+            position: absolute; left: 1rem; top: 1.05rem;
+            width: 8px; height: 8px; border-radius: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+        .bullet-list li:hover { border-color: #c7d8f2; background: #fbfdff; }
+        .bullet-list li strong { color: var(--navy); }
+
+        /* Tip / callout box */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.1rem; margin-top: 1rem;
+            background: var(--primary-soft);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--r-sm);
+            font-size: 0.9rem; color: var(--navy-soft); line-height: 1.7;
+        }
+        .callout i { color: var(--primary); font-size: 1.05rem; margin-top: 3px; flex-shrink: 0; }
+        .callout strong { color: var(--navy); }
+
+        /* Size table */
+        .size-table-wrap {
+            overflow-x: auto; margin-top: 1rem;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        table.size-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        table.size-table th, table.size-table td {
+            padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
+        }
+        table.size-table th {
+            background: linear-gradient(180deg, #eef4fd 0%, #e3ecfb 100%);
+            font-weight: 700; color: var(--navy); font-size: 0.78rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        table.size-table tr:last-child td { border-bottom: none; }
+        table.size-table tbody tr { transition: background var(--t-fast); }
+        table.size-table tbody tr:hover { background: var(--primary-soft); }
+        table.size-table td:first-child { font-weight: 600; color: var(--navy); }
+
+        .sources-note {
+            margin-top: 0.9rem; font-size: 0.85rem; color: var(--text-subtle);
+        }
+        .sources-note a {
+            color: var(--primary-dark); text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid transparent; transition: border-color var(--t-fast);
+        }
+        .sources-note a:hover { border-bottom-color: var(--primary-dark); }
+
+        /* Problem cards grid */
+        .problem-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 0.85rem; margin-top: 1rem;
+        }
+        .problem-card {
+            background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 1rem 1.1rem;
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .problem-card:hover {
+            transform: translateY(-2px);
+            border-color: #c7d8f2;
+            box-shadow: var(--shadow-sm);
+        }
+        .problem-card h4 {
+            font-size: 0.92rem; margin-bottom: 0.35rem;
+            display: flex; align-items: center; gap: 0.45rem;
+            color: var(--navy);
+        }
+        .problem-card h4 i {
+            color: var(--warning); font-size: 0.9rem;
+        }
+        .problem-card p {
+            font-size: 0.86rem; color: var(--text-muted);
+            line-height: 1.6; margin: 0;
+        }
+
+        /* Checklist */
+        .checklist-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); padding: 1.25rem; margin-top: 1rem;
+        }
+        .checklist-header {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; margin-bottom: 0.9rem; flex-wrap: wrap;
+        }
+        .checklist-header h3 {
+            margin: 0; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .checklist-header h3::before { display: none; }
+        .checklist-header h3 i { color: var(--primary); }
+        .checklist-progress {
+            font-size: 0.8rem; font-weight: 700; color: var(--primary-dark);
+            background: var(--primary-soft); padding: 0.3rem 0.8rem; border-radius: var(--r-full);
+        }
+        .checklist-items {
+            list-style: none; padding: 0; margin: 0;
+            display: grid; gap: 0.4rem;
+        }
+        .checklist-items li {
+            display: flex; align-items: flex-start; gap: 0.65rem;
+            font-size: 0.9rem; color: var(--text); margin: 0 !important;
+            padding: 0.6rem 0.75rem; border-radius: var(--r-sm);
+            background: var(--bg); border: 1px solid transparent;
+            transition: background var(--t-fast), border-color var(--t-fast);
+            cursor: pointer;
+        }
+        .checklist-items li:hover { background: #fbfdff; border-color: var(--border); }
+        .checklist-items input[type="checkbox"] {
+            margin-top: 3px; width: 16px; height: 16px;
+            accent-color: var(--primary); cursor: pointer; flex-shrink: 0;
+        }
+        .checklist-items li.checked label { text-decoration: line-through; color: var(--text-subtle); }
+        .checklist-actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+        .checklist-actions button {
+            padding: 0.5rem 0.95rem; font-size: 0.8rem; font-weight: 600;
+            border: 1px solid var(--border-strong); background: var(--surface);
+            color: var(--text); border-radius: var(--r-full); cursor: pointer;
+            transition: all var(--t-fast); font-family: inherit;
+        }
+        .checklist-actions button:hover {
+            border-color: var(--primary); color: var(--primary-dark); background: var(--primary-soft);
+        }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+            transition: box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .faq-item:hover { border-color: #c7d8f2; }
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); background: var(--surface); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 0.9rem 1.1rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 0.92rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; flex-shrink: 0; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.1rem 1rem;
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.75;
+            animation: fadeInFaq 0.4s ease;
+        }
+        @keyframes fadeInFaq { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Related */
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem; margin-top: 1rem;
+        }
+        .related-link {
+            display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1rem;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .related-link:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-sm);
+            border-color: #bfd4f7; color: var(--primary-dark);
+        }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; transition: transform 0.3s ease; }
+        .related-link:hover i { transform: scale(1.15); }
+
+        /* CTA block */
+        .cta-block {
+            background: linear-gradient(135deg, #eff6ff 0%, #ecfdf5 100%);
+            border: 1px solid #c7d8f2;
+            text-align: center;
+            padding: clamp(1.75rem, 4vw, 2.5rem);
+        }
+        .cta-block::before { background: linear-gradient(90deg, var(--primary), var(--teal)); }
+        .cta-block h2 { margin-bottom: 0.6rem; }
+        .cta-block p { max-width: 620px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--surface); color: var(--text);
+            padding: 0.9rem 1.2rem; border-radius: var(--r-md);
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 2000; transform: translateY(120px); opacity: 0;
+            transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+            border: 1px solid var(--border); border-left: 4px solid var(--success);
+            max-width: 380px; font-size: 0.9rem;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.error i { color: var(--danger); }
+        @media (max-width: 480px) {
+            .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .tool-card { padding: 1.25rem; }
+            .upload-area { padding: 1.6rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .custom-size-row { grid-template-columns: 1fr auto 1fr; }
+            .custom-size-row select { grid-column: 1 / -1; }
+            .step-list li { padding: 0.8rem 0.9rem 0.8rem 3.1rem; }
+            .step-list li::before { left: 0.8rem; top: 0.75rem; width: 26px; height: 26px; font-size: 0.8rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND DECORATIONS -->
+    <div class="bg-decoration" aria-hidden="true">
+        <svg class="deco-shape deco-shape-1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/></svg>
+        <svg class="deco-shape deco-shape-2" viewBox="0 0 100 100"><path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10 Z" fill="currentColor"/></svg>
+        <svg class="deco-shape deco-shape-3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="currentColor" opacity="0.3"/></svg>
+        <svg class="deco-shape deco-shape-4" viewBox="0 0 100 100"><path d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+
+        <span class="sparkle" style="left: 15%; top: 90%; animation-duration: 12s; animation-delay: 0s;"></span>
+        <span class="sparkle" style="left: 35%; top: 85%; animation-duration: 16s; animation-delay: 3s;"></span>
+        <span class="sparkle" style="left: 55%; top: 95%; animation-duration: 14s; animation-delay: 1s;"></span>
+        <span class="sparkle" style="left: 75%; top: 88%; animation-duration: 18s; animation-delay: 4s;"></span>
+        <span class="sparkle" style="left: 90%; top: 92%; animation-duration: 15s; animation-delay: 2s;"></span>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>Passport Size Photo Maker</span>
+            </nav>
+
+            <div class="page-head reveal">
+                <h1>Passport Size Photo Maker</h1>
+                <p>Create passport or visa size photos quickly with QuickToolsPK. Prepare your image for the required dimensions and check that it meets the guidelines for your application before submitting it.</p>
+                <div class="badges">
+                    <span class="badge"><i class="fas fa-bolt"></i> Easy to use</span>
+                    <span class="badge teal"><i class="fas fa-passport"></i> Passport &amp; visa photos</span>
+                    <span class="badge"><i class="fas fa-image"></i> Photo preparation</span>
+                </div>
+            </div>
+
+            <div class="tool-layout">
+                <div>
+                    <div class="card tool-card reveal">
+
+                        <div class="notice-banner" role="note">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Important:</strong> Passport and visa photo rules differ by country and application type. Always verify the official requirements of the authority receiving your photo before submitting.</span>
+                        </div>
+
+                        <!-- Upload -->
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <h3>Upload Your Photo</h3>
+                            <p>Choose a clear photo from your device. Use a recent, sharp image with your face fully visible and even lighting.</p>
+                            <button class="btn btn-primary" id="select-file-btn" type="button">
+                                <i class="fas fa-file-image"></i> Choose Photo
+                            </button>
+                            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" aria-label="Choose a photo from your device">
+                        </div>
+
+                        <!-- Settings -->
+                        <div class="settings reveal" id="settings-panel" style="display:none;">
+                            <h3><i class="fas fa-sliders-h"></i> Photo Settings</h3>
+
+                            <div class="setting-group">
+                                <label>Select Photo Size (common examples)</label>
+                                <div class="preset-grid" id="preset-grid">
+                                    <button type="button" class="preset-btn" data-w="2" data-h="2" data-unit="in" data-label="US printed passport">
+                                        US printed passport<small>2 × 2 in (51 × 51 mm)</small>
+                                    </button>
+                                    <button type="button" class="preset-btn" data-w="35" data-h="45" data-unit="mm" data-label="UK printed passport">
+                                        UK printed passport<small>35 × 45 mm</small>
+                                    </button>
+                                    <button type="button" class="preset-btn" data-w="50" data-h="70" data-unit="mm" data-label="Canada printed passport">
+                                        Canada printed passport<small>50 × 70 mm</small>
+                                    </button>
+                                    <button type="button" class="preset-btn" data-w="33" data-h="48" data-unit="mm" data-label="India-style">
+                                        India-style (common)<small>33 × 48 mm</small>
+                                    </button>
+                                    <button type="button" class="preset-btn" data-w="35" data-h="45" data-unit="mm" data-label="Schengen-style">
+                                        Schengen-style<small>35 × 45 mm</small>
+                                    </button>
+                                    <button type="button" class="preset-btn" data-w="600" data-h="600" data-unit="px" data-label="Square digital ID">
+                                        Square digital ID<small>600 × 600 px</small>
+                                    </button>
+                                </div>
+                                <p style="font-size:0.78rem; color:var(--text-subtle); margin-top:0.5rem; margin-bottom:0;">
+                                    These are examples only — not universal presets. Check the official instructions for your specific application.
+                                </p>
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="custom-w">Custom Width and Height</label>
+                                <div class="custom-size-row">
+                                    <input type="number" id="custom-w" min="1" step="any" placeholder="Width" aria-label="Custom width">
+                                    <span class="times">×</span>
+                                    <input type="number" id="custom-h" min="1" step="any" placeholder="Height" aria-label="Custom height">
+                                    <select id="custom-unit" aria-label="Measurement unit">
+                                        <option value="px">px</option>
+                                        <option value="mm">mm</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                </div>
+                                <p style="font-size:0.78rem; color:var(--text-subtle); margin-top:0.5rem; margin-bottom:0;">
+                                    Printed dimensions and digital pixel requirements are not the same. Use the unit that matches your application form.
+                                </p>
+                            </div>
+
+                            <div class="setting-group">
+                                <label>Background color (visual only)</label>
+                                <div class="bg-options" id="bg-options" role="group" aria-label="Preview background color">
+                                    <button type="button" class="bg-swatch active" data-color="#ffffff" style="background:#fff;" aria-label="White"></button>
+                                    <button type="button" class="bg-swatch" data-color="#f1f5fb" style="background:#f1f5fb;" aria-label="Light gray"></button>
+                                    <button type="button" class="bg-swatch" data-color="#e5e7eb" style="background:#e5e7eb;" aria-label="Gray"></button>
+                                    <button type="button" class="bg-swatch" data-color="#cbd5e1" style="background:#cbd5e1;" aria-label="Darker gray"></button>
+                                </div>
+                                <p style="font-size:0.78rem; color:var(--text-subtle); margin-top:0.5rem; margin-bottom:0;">
+                                    Preview-only. Do not digitally change the background if edits are prohibited by the receiving authority.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="previews-section reveal" id="preview-section" style="display:none;">
+                            <div class="previews-title"><i class="fas fa-image"></i> Photo Preview</div>
+                            <div class="photo-preview-container" id="photo-preview-container">
+                                <div class="empty-note">Upload a photo to get started.</div>
+                            </div>
+                            <div class="photo-meta" id="photo-meta"></div>
+                        </div>
+
+                        <!-- Loading -->
+                        <div class="loading" id="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Preparing your photo…</p>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="actions" id="action-buttons" style="display:none;">
+                            <button class="btn btn-success" id="create-btn">
+                                <i class="fas fa-magic"></i> Create Photo
+                            </button>
+                            <button class="btn btn-ghost" id="download-btn" style="display:none;">
+                                <i class="fas fa-download"></i> Download Photo
+                            </button>
+                            <button class="btn btn-ghost" id="reset-btn" type="button">
+                                <i class="fas fa-redo"></i> Start Over
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Advertisement">
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×250</div>
+                    </div>
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×600</div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- ============================================================
+                 REDESIGNED CONTENT SECTIONS
+                 ============================================================ -->
+            <div class="content-shell">
+
+                <!-- HOW TO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-shoe-prints"></i> Step by step</span>
+                    <h2>How to Make a Passport Size Photo</h2>
+                    <p>Follow these steps as a general workflow. The exact controls depend on the features available in the published tool.</p>
+                    <ol class="step-list">
+                        <li><strong>Choose a clear photo.</strong> Use a recent, sharp image with your face fully visible and even lighting.</li>
+                        <li><strong>Open the Passport Size Photo Maker.</strong> Use the upload option provided in the tool interface.</li>
+                        <li><strong>Select the required dimensions.</strong> Choose a supported preset or enter the required dimensions if custom sizing is available.</li>
+                        <li><strong>Adjust the framing if supported.</strong> Make sure your head and face are positioned according to the relevant official guidelines.</li>
+                        <li><strong>Review the result.</strong> Check the dimensions, image orientation, background, sharpness and file specifications.</li>
+                        <li><strong>Export your photo.</strong> Use the available download or export option, if supported, and confirm that the saved file meets your application requirements.</li>
+                    </ol>
+                    <div class="callout">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span><strong>Important:</strong> Some official processes prohibit digital alteration of passport photos, even if an edited image looks correct. For example, the US Department of State says passport photos should be original and not digitally changed. Check the rules for your specific application before editing your image.</span>
+                    </div>
+                </section>
+
+                <!-- USE CASES -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-briefcase"></i> Use cases</span>
+                    <h2>What Can You Use a Passport Photo Maker For?</h2>
+                    <ul class="bullet-list">
+                        <li><strong>Passport applications:</strong> Prepare an image for the relevant passport photo specifications.</li>
+                        <li><strong>Visa applications:</strong> Check the required dimensions and digital image rules for your destination.</li>
+                        <li><strong>ID cards:</strong> Prepare a photo for an identification card when the issuing organization allows it.</li>
+                        <li><strong>Job and educational applications:</strong> Get an image ready when an employer, school or institution requests a specific photo size.</li>
+                        <li><strong>Digital forms:</strong> Prepare an image for an online application that specifies photo dimensions and file requirements.</li>
+                    </ul>
+                    <p style="margin-top:1rem;">Requirements differ by application. Using a photo maker does not guarantee that a government agency, embassy, employer or institution will accept the result.</p>
+                </section>
+
+                <!-- SIZES -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-globe"></i> Around the world</span>
+                    <h2>Passport Photo Sizes Around the World</h2>
+                    <p>There is no single passport photo size accepted everywhere. Use the following examples as a starting point, then check the current instructions for your specific application.</p>
+                    <div class="size-table-wrap">
+                        <table class="size-table">
+                            <thead>
+                                <tr><th>Application example</th><th>Commonly specified dimensions</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>US passport, printed photo</td><td>2 × 2 inches (51 × 51 mm)</td></tr>
+                                <tr><td>UK passport, printed photo</td><td>35 × 45 mm</td></tr>
+                                <tr><td>Canadian passport, printed photo</td><td>50 × 70 mm</td></tr>
+                                <tr><td>Digital visa or passport application</td><td>Depends on the specific application</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="sources-note">Sources: <a href="https://travel.state.gov/en/passports/apply/help/photos.html" target="_blank" rel="noopener noreferrer">US Department of State</a>, <a href="https://www.gov.uk/photos-for-passports/photo-requirements" target="_blank" rel="noopener noreferrer">UK passport photo requirements</a>, <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports/photos.html" target="_blank" rel="noopener noreferrer">Government of Canada</a>.</p>
+                    <p style="margin-top:0.85rem;">Printed dimensions and digital pixel requirements are not the same thing. A photo intended for an online visa form may have a specific pixel range, file format and file-size limit. For example, the UK visa guidance and US visa digital-image guidance specify different technical requirements.</p>
+                </section>
+
+                <!-- TIPS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-lightbulb"></i> Best practices</span>
+                    <h2>Tips for Preparing a Better Photo</h2>
+                    <ul class="bullet-list">
+                        <li><strong>Use even lighting:</strong> Avoid harsh shadows on your face or behind your head.</li>
+                        <li><strong>Face the camera:</strong> Follow the head position and facial expression rules for your application.</li>
+                        <li><strong>Keep the image sharp:</strong> Avoid blurry, grainy or heavily compressed photos.</li>
+                        <li><strong>Check the background:</strong> Use the background color and appearance required by the relevant authority.</li>
+                        <li><strong>Avoid unnecessary edits:</strong> Do not use filters, retouching or AI changes if the application requires an unaltered photograph.</li>
+                        <li><strong>Check the saved file:</strong> Confirm the dimensions, orientation, file format and size before uploading or printing.</li>
+                        <li><strong>Verify the official rules:</strong> Requirements may differ even between applications in the same country.</li>
+                    </ul>
+                </section>
+
+                <!-- PROBLEMS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-triangle-exclamation"></i> Troubleshooting</span>
+                    <h2>Common Passport Photo Problems</h2>
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <h4><i class="fas fa-ruler-combined"></i> The photo is the wrong size</h4>
+                            <p>Check the exact width and height required for your application. Do not assume that a generic passport-size preset is suitable for every country.</p>
+                        </div>
+                        <div class="problem-card">
+                            <h4><i class="fas fa-user-circle"></i> The face looks too large or too small</h4>
+                            <p>Review the official head-size and framing rules. Correct overall image dimensions do not automatically mean that the face is correctly positioned.</p>
+                        </div>
+                        <div class="problem-card">
+                            <h4><i class="fas fa-low-vision"></i> The image looks blurry</h4>
+                            <p>Start with a higher-quality original photo. Resizing a low-resolution image cannot restore missing detail.</p>
+                        </div>
+                        <div class="problem-card">
+                            <h4><i class="fas fa-fill-drip"></i> The background does not meet the requirements</h4>
+                            <p>Check whether the receiving authority requires a plain light-colored, white or another specified background. Do not digitally change the background if edits are prohibited.</p>
+                        </div>
+                        <div class="problem-card">
+                            <h4><i class="fas fa-ban"></i> The upload is rejected</h4>
+                            <p>Read the rejection message and compare the image with the official requirements. Check file type, pixel dimensions, file size, orientation and photo composition.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CHECKLIST -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-clipboard-check"></i> Review before submitting</span>
+                    <h2>Before You Submit Your Photo</h2>
+                    <p>Use this checklist to review your image.</p>
+                    <div class="checklist-card">
+                        <div class="checklist-header">
+                            <h3><i class="fas fa-list-check"></i> Photo review checklist</h3>
+                            <span class="checklist-progress" id="checklist-progress">0 of 7</span>
+                        </div>
+                        <ul class="checklist-items" id="checklist-items">
+                            <li><input type="checkbox" id="chk1"><label for="chk1">I checked the official requirements for my application.</label></li>
+                            <li><input type="checkbox" id="chk2"><label for="chk2">The photo dimensions match the required specifications.</label></li>
+                            <li><input type="checkbox" id="chk3"><label for="chk3">My face and head are positioned correctly.</label></li>
+                            <li><input type="checkbox" id="chk4"><label for="chk4">The image is sharp, clear and properly lit.</label></li>
+                            <li><input type="checkbox" id="chk5"><label for="chk5">The background and expression meet the applicable rules.</label></li>
+                            <li><input type="checkbox" id="chk6"><label for="chk6">The saved file meets the required format and file-size limits.</label></li>
+                            <li><input type="checkbox" id="chk7"><label for="chk7">I checked whether digital editing is allowed.</label></li>
+                        </ul>
+                        <div class="checklist-actions">
+                            <button type="button" id="checklist-reset">Reset checklist</button>
+                            <button type="button" id="checklist-copy">Copy checklist</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-circle-question"></i> Answers</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>What is a passport size photo maker?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">A passport size photo maker is a tool intended to help prepare an image for passport photo dimensions. Depending on the tool, it may support resizing, cropping or other photo-preparation options.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I make a visa size photo online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">You can prepare a visa photo using a suitable photo tool, provided its available options meet your application's requirements. Always check the destination authority's current instructions.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is the standard passport photo size?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">There is no universal standard for all countries and applications. For example, a US printed passport photo is generally 2 × 2 inches, while a UK printed passport photo is 35 × 45 mm.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I use the same photo for every country?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Not necessarily. Countries and application types may require different dimensions, facial framing, backgrounds, file formats or image-editing rules.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I use a photo taken with my phone?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">A phone photo may be suitable if it meets the specific requirements for your application. Check image clarity, lighting, background, framing and file specifications.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Does resizing guarantee that my photo will be accepted?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">No. Correct dimensions are only one part of photo compliance. The receiving authority makes the final decision, and other rules may apply.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I change the background or retouch my face?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Only if the rules for your particular application allow it. Some official passport and visa processes restrict digital alterations. Check the relevant authority's guidance before editing.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What should I do if my photo is rejected?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Review the rejection reason and the official photo guidelines. You may need to take a new photo with better lighting, framing or background, or provide a file with the correct dimensions and format.</div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- CTA -->
+                <section class="content-block cta-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-rocket"></i> Get started</span>
+                    <h2>Prepare Your Passport Photo with QuickToolsPK</h2>
+                    <p>Start with a clear image, check the required photo dimensions and review the official guidelines for your destination. Use the QuickToolsPK Passport Size Photo Maker to prepare your photo with the options available on the page, then verify the saved result before submitting it.</p>
+                    <div class="cta-actions">
+                        <a href="#upload-area" class="btn btn-primary"><i class="fas fa-arrow-up"></i> Open the Photo Tool</a>
+                        <a href="index.html#image-tools" class="btn btn-ghost"><i class="fas fa-images"></i> Browse Image Tools</a>
+                    </div>
+                </section>
+
+                <!-- RELATED -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-link"></i> Keep exploring</span>
+                    <h2>Related Tools</h2>
+                    <div class="related-grid">
+                        <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Image Compressor</a>
+                        <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a>
+                        <a class="related-link" href="img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
+                        <a class="related-link" href="JPG-to-PDF-Converter.html"><i class="fas fa-file-pdf"></i> JPG to PDF Converter</a>
+                        <a class="related-link" href="index.html#image-tools"><i class="fas fa-images"></i> All Image Tools</a>
+                    </div>
+                </section>
+
+            </div>
+            <!-- end content-shell -->
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="passport-size-photo-maker.html">Passport Photo Maker</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="index.html#image-tools">Image Tools</a></li>
+                        <li><a href="index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal on scroll ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+
+        /* ===== Tool Logic ===== */
+        const fileInput = document.getElementById('file-input');
+        const selectFileBtn = document.getElementById('select-file-btn');
+        const uploadArea = document.getElementById('upload-area');
+        const settingsPanel = document.getElementById('settings-panel');
+        const previewSection = document.getElementById('preview-section');
+        const photoPreviewContainer = document.getElementById('photo-preview-container');
+        const photoMeta = document.getElementById('photo-meta');
+        const actionButtons = document.getElementById('action-buttons');
+        const createBtn = document.getElementById('create-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const loading = document.getElementById('loading');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        const presetGrid = document.getElementById('preset-grid');
+        const customW = document.getElementById('custom-w');
+        const customH = document.getElementById('custom-h');
+        const customUnit = document.getElementById('custom-unit');
+        const bgOptions = document.getElementById('bg-options');
+
+        let uploadedImage = null;
+        let uploadedFile = null;
+        let uploadedDataUrl = null;
+        let targetW = null, targetH = null, targetUnit = 'mm';
+        let selectedBg = '#ffffff';
+        let outputDataUrl = null;
+
+        const MM_PER_INCH = 25.4;
+        const DPI = 300;
+
+        selectFileBtn.addEventListener('click', function () { fileInput.click(); });
+        fileInput.addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+        });
+        uploadArea.addEventListener('dragover', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover'); });
+        uploadArea.addEventListener('drop', function (e) {
+            e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+        });
+
+        presetGrid.addEventListener('click', function (e) {
+            const btn = e.target.closest('.preset-btn');
+            if (!btn) return;
+            presetGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            customW.value = '';
+            customH.value = '';
+            targetW = parseFloat(btn.dataset.w);
+            targetH = parseFloat(btn.dataset.h);
+            targetUnit = btn.dataset.unit;
+            customUnit.value = targetUnit === 'px' ? 'px' : targetUnit;
+            updatePreviewFrame();
+        });
+
+        [customW, customH, customUnit].forEach(el => {
+            el.addEventListener('input', function () {
+                const w = parseFloat(customW.value);
+                const h = parseFloat(customH.value);
+                if (w > 0 && h > 0) {
+                    targetW = w; targetH = h;
+                    targetUnit = customUnit.value;
+                    presetGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    updatePreviewFrame();
+                }
+            });
+        });
+
+        bgOptions.addEventListener('click', function (e) {
+            const sw = e.target.closest('.bg-swatch');
+            if (!sw) return;
+            bgOptions.querySelectorAll('.bg-swatch').forEach(b => b.classList.remove('active'));
+            sw.classList.add('active');
+            selectedBg = sw.dataset.color;
+            updatePreviewFrame();
+        });
+
+        function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+            if (validTypes.indexOf(file.type) === -1) {
+                showNotification('This file could not be opened. Try another supported image.', 'error');
+                return;
+            }
+            if (file.size > 20 * 1024 * 1024) {
+                showNotification('File is too large. Please choose an image under 20 MB.', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedDataUrl = e.target.result;
+                uploadedFile = file;
+                const img = new Image();
+                img.onload = function () {
+                    uploadedImage = img;
+                    uploadArea.style.display = 'none';
+                    settingsPanel.style.display = 'block';
+                    previewSection.style.display = 'block';
+                    actionButtons.style.display = 'flex';
+                    downloadBtn.style.display = 'none';
+                    if (targetW === null) {
+                        const first = presetGrid.querySelector('.preset-btn');
+                        if (first) first.click();
+                    }
+                    renderPreview();
+                    showNotification('Photo loaded. Choose a size and create your photo.');
+                };
+                img.onerror = function () {
+                    showNotification('This file could not be opened. Try another supported image.', 'error');
+                };
+                img.src = uploadedDataUrl;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderPreview() {
+            if (!uploadedImage) return;
+            photoPreviewContainer.classList.add('has-photo');
+            photoPreviewContainer.style.background = selectedBg;
+            photoPreviewContainer.innerHTML = '';
+
+            const frame = document.createElement('div');
+            frame.className = 'photo-frame';
+            frame.style.background = selectedBg;
+
+            const img = document.createElement('img');
+            img.src = uploadedDataUrl;
+            img.alt = 'Photo preview';
+
+            const guide = document.createElement('div');
+            guide.className = 'face-guide';
+
+            frame.appendChild(img);
+            frame.appendChild(guide);
+            photoPreviewContainer.appendChild(frame);
+
+            updatePreviewFrame();
+        }
+
+        function updatePreviewFrame() {
+            if (!uploadedImage || !targetW || !targetH) return;
+            const frame = photoPreviewContainer.querySelector('.photo-frame');
+            if (!frame) return;
+            frame.style.background = selectedBg;
+
+            const ratio = targetW / targetH;
+            const maxH = 320;
+            const maxW = photoPreviewContainer.clientWidth - 60;
+            let h = maxH;
+            let w = h * ratio;
+            if (w > maxW) { w = maxW; h = w / ratio; }
+            frame.style.width = w + 'px';
+            frame.style.height = h + 'px';
+            const img = frame.querySelector('img');
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+
+            let displayW = targetW, displayH = targetH, unitLabel = targetUnit;
+            if (targetUnit === 'in') { displayW = (targetW * 25.4).toFixed(0); displayH = (targetH * 25.4).toFixed(0); }
+            photoMeta.innerHTML =
+                '<span><i class="fas fa-ruler-combined"></i> ' + targetW + ' × ' + targetH + ' ' + targetUnit + '</span>' +
+                (targetUnit === 'in' ? '<span><i class="fas fa-ruler"></i> ' + displayW + ' × ' + displayH + ' mm</span>' : '') +
+                '<span><i class="fas fa-palette"></i> Background preview</span>';
+        }
+
+        createBtn.addEventListener('click', function () {
+            if (!uploadedImage) return;
+            if (!targetW || !targetH) {
+                showNotification('Select the required photo dimensions first.', 'error');
+                return;
+            }
+            loading.classList.add('is-visible');
+            createBtn.disabled = true;
+
+            setTimeout(function () {
+                try {
+                    let pxW, pxH;
+                    if (targetUnit === 'px') {
+                        pxW = Math.round(targetW);
+                        pxH = Math.round(targetH);
+                    } else if (targetUnit === 'mm') {
+                        pxW = Math.round((targetW / MM_PER_INCH) * DPI);
+                        pxH = Math.round((targetH / MM_PER_INCH) * DPI);
+                    } else if (targetUnit === 'in') {
+                        pxW = Math.round(targetW * DPI);
+                        pxH = Math.round(targetH * DPI);
+                    } else {
+                        pxW = Math.round(targetW);
+                        pxH = Math.round(targetH);
+                    }
+
+                    const MAXDIM = 4000;
+                    if (pxW > MAXDIM || pxH > MAXDIM) {
+                        const scale = MAXDIM / Math.max(pxW, pxH);
+                        pxW = Math.round(pxW * scale);
+                        pxH = Math.round(pxH * scale);
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = pxW;
+                    canvas.height = pxH;
+                    const ctx = canvas.getContext('2d');
+
+                    ctx.fillStyle = selectedBg;
+                    ctx.fillRect(0, 0, pxW, pxH);
+
+                    const img = uploadedImage;
+                    const srcRatio = img.width / img.height;
+                    const dstRatio = pxW / pxH;
+                    let sx, sy, sw, sh;
+                    if (srcRatio > dstRatio) {
+                        sh = img.height;
+                        sw = sh * dstRatio;
+                        sx = (img.width - sw) / 2;
+                        sy = 0;
+                    } else {
+                        sw = img.width;
+                        sh = sw / dstRatio;
+                        sx = 0;
+                        sy = (img.height - sh) / 2;
+                    }
+                    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, pxW, pxH);
+
+                    outputDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+                    downloadBtn.style.display = 'inline-flex';
+                    showNotification('Your photo is ready to review.');
+                } catch (err) {
+                    console.error(err);
+                    showNotification('Something went wrong. Please try again.', 'error');
+                } finally {
+                    loading.classList.remove('is-visible');
+                    createBtn.disabled = false;
+                }
+            }, 300);
+        });
+
+        downloadBtn.addEventListener('click', function () {
+            if (!outputDataUrl) return;
+            const link = document.createElement('a');
+            const unitPart = targetUnit || 'custom';
+            link.download = 'passport-photo-' + targetW + 'x' + targetH + unitPart + '.jpg';
+            link.href = outputDataUrl;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showNotification('Photo downloaded.');
+        });
+
+        resetBtn.addEventListener('click', function () {
+            uploadedImage = null;
+            uploadedFile = null;
+            uploadedDataUrl = null;
+            outputDataUrl = null;
+            targetW = null; targetH = null; targetUnit = 'mm';
+            selectedBg = '#ffffff';
+            fileInput.value = '';
+            customW.value = ''; customH.value = ''; customUnit.value = 'px';
+            presetGrid.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            bgOptions.querySelectorAll('.bg-swatch').forEach(b => b.classList.remove('active'));
+            const whiteSwatch = bgOptions.querySelector('[data-color="#ffffff"]');
+            if (whiteSwatch) whiteSwatch.classList.add('active');
+
+            uploadArea.style.display = 'block';
+            settingsPanel.style.display = 'none';
+            previewSection.style.display = 'none';
+            actionButtons.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            photoPreviewContainer.classList.remove('has-photo');
+            photoPreviewContainer.style.background = '';
+            photoPreviewContainer.innerHTML = '<div class="empty-note">Upload a photo to get started.</div>';
+            photoMeta.innerHTML = '';
+            showNotification('Tool reset.');
+        });
+
+        function showNotification(message, type) {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.classList.add('show');
+            clearTimeout(showNotification._t);
+            showNotification._t = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 3200);
+        }
+
+        /* ===== Checklist ===== */
+        const checklistItems = document.getElementById('checklist-items');
+        const checklistProgress = document.getElementById('checklist-progress');
+        const checklistReset = document.getElementById('checklist-reset');
+        const checklistCopy = document.getElementById('checklist-copy');
+
+        function updateChecklistProgress() {
+            const boxes = checklistItems.querySelectorAll('input[type="checkbox"]');
+            let checked = 0;
+            boxes.forEach(b => {
+                if (b.checked) checked++;
+                b.closest('li').classList.toggle('checked', b.checked);
+            });
+            checklistProgress.textContent = checked + ' of ' + boxes.length;
+        }
+        checklistItems.addEventListener('change', updateChecklistProgress);
+        checklistReset.addEventListener('click', function () {
+            checklistItems.querySelectorAll('input[type="checkbox"]').forEach(b => b.checked = false);
+            updateChecklistProgress();
+            showNotification('Checklist reset.');
+        });
+        checklistCopy.addEventListener('click', function () {
+            const lines = [];
+            checklistItems.querySelectorAll('li').forEach(function (li) {
+                const box = li.querySelector('input[type="checkbox"]');
+                const label = li.querySelector('label').textContent.trim();
+                lines.push((box.checked ? '[x] ' : '[ ] ') + label);
+            });
+            const text = 'Passport photo review checklist\n\n' + lines.join('\n');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function () {
+                    showNotification('Checklist copied to clipboard.');
+                }).catch(function () {
+                    showNotification('Could not copy checklist.', 'error');
+                });
+            } else {
+                showNotification('Clipboard not available in this browser.', 'error');
+            }
+        });
+        updateChecklistProgress();
+    })();
+    </script>
+</body>
+</html>
