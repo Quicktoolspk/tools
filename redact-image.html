@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Redact Image Online Free | QuickToolsPK</title>
+    <meta name="description" content="Redact images online by covering sensitive text and details. Learn how to hide private information in screenshots, photos, and documents with QuickToolsPK.">
+    <meta name="keywords" content="redact image online, redact photo online, hide sensitive information in images, black out text in image, redact screenshot, cover private information in photo">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/redact-image.html">
+
+    <meta property="og:title" content="Redact Image Online Free">
+    <meta property="og:description" content="Cover sensitive information before sharing an image with QuickToolsPK.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolspk.com/tools/redact-image.html">
+    <meta property="og:image" content="https://quicktoolspk.com/assets/redact-image-online-preview.webp">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Redact Image Online Free">
+    <meta name="twitter:description" content="Cover sensitive information before sharing an image with QuickToolsPK.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           BACKGROUND ELEMENTS & ANIMATIONS
+           ============================================================ */
+        .bg-decoration {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .deco-shape {
+            position: absolute; opacity: 0.4; animation: floatShape 15s ease-in-out infinite;
+        }
+        .deco-shape-1 { top: 10%; left: 5%; width: 120px; height: 120px; color: var(--primary-soft); animation-delay: 0s; }
+        .deco-shape-2 { top: 40%; right: 5%; width: 80px; height: 80px; color: var(--teal-soft); animation-delay: -5s; }
+        .deco-shape-3 { bottom: 15%; left: 10%; width: 60px; height: 60px; color: #fce7f3; animation-delay: -10s; }
+        .deco-shape-4 { bottom: 30%; right: 15%; width: 100px; height: 100px; color: var(--primary-soft); animation-delay: -7s; }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.05); }
+        }
+
+        .sparkle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; opacity: 0; box-shadow: 0 0 8px 1px rgba(37,99,235,0.6);
+            animation: sparkleRise linear infinite;
+        }
+        @keyframes sparkleRise {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & TOOL UI
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        .page-head { margin-bottom: 1.75rem; max-width: 820px; }
+        .page-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+        .page-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+        .page-head .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            font-size: 0.78rem; font-weight: 600;
+            background: var(--primary-soft); color: var(--primary-dark);
+        }
+        .badge.teal { background: var(--teal-soft); color: #0f766e; }
+
+        .tool-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.75rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .tool-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+        }
+        .tool-card {
+            padding: 1.75rem; position: relative; overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-brand);
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #d3dfed; border-radius: var(--r-md);
+            padding: 3rem 1.5rem; text-align: center; cursor: pointer;
+            background: #f8fafc;
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: #f0f6ff; box-shadow: var(--shadow-sm);
+        }
+        .upload-icon-wrapper {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--primary-soft); color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.25rem; transition: transform var(--t-med);
+        }
+        .upload-area:hover .upload-icon-wrapper { transform: scale(1.05); }
+        .upload-icon-wrapper i { font-size: 2rem; }
+        .upload-area h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--navy); }
+        .upload-area p { color: var(--text-subtle); font-size: 0.95rem; margin-bottom: 0; }
+        #file-input { display: none; }
+
+        /* Editor Layout */
+        .editor-layout {
+            display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .editor-layout { grid-template-columns: 1fr 280px; }
+        }
+
+        /* Canvas Container */
+        .canvas-container {
+            position: relative;
+            background: repeating-conic-gradient(#eef2f8 0% 25%, #f8fafc 0% 50%) 50% / 20px 20px;
+            border: 1px solid var(--border-strong); border-radius: var(--r-md);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem; min-height: 400px; overflow: hidden;
+            cursor: crosshair;
+            user-select: none;
+        }
+        
+        .canvas-wrapper {
+            position: relative;
+            box-shadow: var(--shadow-md);
+            background: #fff;
+            max-width: 100%;
+            max-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .canvas-wrapper img {
+            display: block;
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        /* Redaction Shapes */
+        .redaction-box {
+            position: absolute;
+            background: #000;
+            border: 1px dashed rgba(255,255,255,0.5);
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem;
+        }
+        
+        .control-group h4 {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: var(--text-subtle); margin-bottom: 0.75rem; font-weight: 700;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .control-group h4 i { color: var(--primary); }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        .btn-grid.full {
+            grid-template-columns: 1fr;
+        }
+        .tool-btn {
+            display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem;
+            padding: 0.75rem 0.5rem; background: var(--surface); border: 1px solid var(--border-strong);
+            border-radius: var(--r-sm); cursor: pointer; color: var(--text); font-family: inherit;
+            font-size: 0.78rem; font-weight: 600; transition: all var(--t-fast);
+            text-align: center; line-height: 1.2;
+        }
+        .tool-btn i { font-size: 1.1rem; color: var(--text-muted); transition: color var(--t-fast); margin-bottom: 0.15rem; }
+        .tool-btn:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary-dark); }
+        .tool-btn:hover i { color: var(--primary); }
+        .tool-btn:active { transform: scale(0.96); }
+        .tool-btn.active { border-color: var(--primary); background: var(--primary); color: #fff; }
+        .tool-btn.active i { color: #fff; }
+        .tool-btn.danger:hover { border-color: var(--danger); background: var(--danger-soft); color: var(--danger); }
+        .tool-btn.danger:hover i { color: var(--danger); }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto;
+        }
+        .btn-download {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.9rem 1.25rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-md);
+            border: none; cursor: pointer; color: #fff;
+            background: var(--gradient-brand);
+            box-shadow: var(--shadow-brand);
+            transition: transform var(--t-fast), box-shadow var(--t-fast), opacity var(--t-fast);
+        }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-reset {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.7rem 1rem; font-size: 0.85rem; font-weight: 600; border-radius: var(--r-md);
+            background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted);
+            cursor: pointer; transition: all var(--t-fast); font-family: inherit;
+        }
+        .btn-reset:hover { background: var(--border); color: var(--navy); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ad-space {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
+        }
+        .ad-label {
+            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
+            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
+        }
+        .ad-example {
+            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
+        }
+
+        /* ============================================================
+           CONTENT SECTIONS
+           ============================================================ */
+        .content-shell { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+
+        .content-block {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: clamp(1.5rem, 3vw, 2.25rem);
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--t-med), border-color var(--t-med);
+        }
+        .content-block:hover { box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+        .content-block::before {
+            content: "";
+            position: absolute; top: 0; left: clamp(1.5rem, 3vw, 2.25rem);
+            width: 44px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+            border-radius: 0 0 3px 3px;
+            transition: width 0.4s var(--ease);
+        }
+        .content-block:hover::before { width: 72px; }
+
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--primary-dark);
+            background: var(--primary-soft); padding: 0.3rem 0.7rem;
+            border-radius: var(--r-full); margin-bottom: 0.85rem;
+        }
+        .section-eyebrow i { font-size: 0.75rem; }
+
+        .content-block h2 {
+            font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+        }
+        .content-block h3 {
+            font-size: 1rem; margin: 1.5rem 0 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--navy);
+        }
+        .content-block h3::before {
+            content: ""; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--primary); flex-shrink: 0;
+        }
+        .content-block h3:first-of-type { margin-top: 0.5rem; }
+        .content-block p {
+            font-size: 0.95rem; color: var(--text-muted); line-height: 1.75;
+            margin-bottom: 0.85rem;
+        }
+        .content-block p:last-child { margin-bottom: 0; }
+        .content-block strong { color: var(--navy); font-weight: 600; }
+
+        .step-list {
+            list-style: none; counter-reset: step; padding: 0; margin: 1.25rem 0 0;
+            display: grid; gap: 0.75rem;
+        }
+        .step-list li {
+            counter-increment: step;
+            position: relative;
+            padding: 0.9rem 1rem 0.9rem 3.4rem;
+            background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute; left: 0.9rem; top: 0.85rem;
+            width: 30px; height: 30px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            box-shadow: 0 4px 10px -3px rgba(37,99,235,0.45);
+        }
+        .step-list li:hover {
+            transform: translateY(-1px);
+            border-color: #c7d8f2;
+            box-shadow: var(--shadow-sm);
+        }
+        .step-list li strong { color: var(--navy); display: inline; }
+
+        .bullet-list {
+            list-style: none; padding: 0; margin: 0.75rem 0 0;
+            display: grid; gap: 0.5rem;
+        }
+        .bullet-list li {
+            position: relative;
+            padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: border-color var(--t-fast), background var(--t-fast);
+        }
+        .bullet-list li::before {
+            content: "";
+            position: absolute; left: 1rem; top: 1.05rem;
+            width: 8px; height: 8px; border-radius: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+        .bullet-list li:hover { border-color: #c7d8f2; background: #fbfdff; }
+        .bullet-list li strong { color: var(--navy); }
+
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.1rem; margin-top: 1rem;
+            background: var(--primary-soft);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--r-sm);
+            font-size: 0.9rem; color: var(--navy-soft); line-height: 1.7;
+        }
+        .callout i { color: var(--primary); font-size: 1.05rem; margin-top: 3px; flex-shrink: 0; }
+        .callout strong { color: var(--navy); }
+
+        .size-table-wrap {
+            overflow-x: auto; margin-top: 1rem;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        table.size-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        table.size-table th, table.size-table td {
+            padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
+        }
+        table.size-table th {
+            background: linear-gradient(180deg, #eef4fd 0%, #e3ecfb 100%);
+            font-weight: 700; color: var(--navy); font-size: 0.78rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        table.size-table tr:last-child td { border-bottom: none; }
+        table.size-table tbody tr { transition: background var(--t-fast); }
+        table.size-table tbody tr:hover { background: var(--primary-soft); }
+        table.size-table td:first-child { font-weight: 600; color: var(--navy); }
+
+        .faq-list { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+            transition: box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .faq-item:hover { border-color: #c7d8f2; }
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); background: var(--surface); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 0.9rem 1.1rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 0.92rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; flex-shrink: 0; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.1rem 1rem;
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.75;
+            animation: fadeInFaq 0.4s ease;
+        }
+        @keyframes fadeInFaq { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem; margin-top: 1rem;
+        }
+        .related-link {
+            display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1rem;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .related-link:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-sm);
+            border-color: #bfd4f7; color: var(--primary-dark);
+        }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; transition: transform 0.3s ease; }
+        .related-link:hover i { transform: scale(1.15); }
+
+        .cta-block {
+            background: linear-gradient(135deg, #eff6ff 0%, #ecfdf5 100%);
+            border: 1px solid #c7d8f2;
+            text-align: center;
+            padding: clamp(1.75rem, 4vw, 2.5rem);
+        }
+        .cta-block::before { background: linear-gradient(90deg, var(--primary), var(--teal)); }
+        .cta-block h2 { margin-bottom: 0.6rem; }
+        .cta-block p { max-width: 620px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+        
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
+            border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+            position: relative; overflow: hidden;
+        }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--surface); color: var(--text);
+            padding: 0.9rem 1.2rem; border-radius: var(--r-md);
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 2000; transform: translateY(120px); opacity: 0;
+            transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+            border: 1px solid var(--border); border-left: 4px solid var(--success);
+            max-width: 380px; font-size: 0.9rem;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.error i { color: var(--danger); }
+        @media (max-width: 480px) {
+            .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+        }
+
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .tool-card { padding: 1.25rem; }
+            .upload-area { padding: 2rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .step-list li { padding: 0.8rem 0.9rem 0.8rem 3.1rem; }
+            .step-list li::before { left: 0.8rem; top: 0.75rem; width: 26px; height: 26px; font-size: 0.8rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND DECORATIONS -->
+    <div class="bg-decoration" aria-hidden="true">
+        <svg class="deco-shape deco-shape-1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/></svg>
+        <svg class="deco-shape deco-shape-2" viewBox="0 0 100 100"><path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10 Z" fill="currentColor"/></svg>
+        <svg class="deco-shape deco-shape-3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="currentColor" opacity="0.3"/></svg>
+        <svg class="deco-shape deco-shape-4" viewBox="0 0 100 100"><path d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+
+        <span class="sparkle" style="left: 15%; top: 90%; animation-duration: 12s; animation-delay: 0s;"></span>
+        <span class="sparkle" style="left: 35%; top: 85%; animation-duration: 16s; animation-delay: 3s;"></span>
+        <span class="sparkle" style="left: 55%; top: 95%; animation-duration: 14s; animation-delay: 1s;"></span>
+        <span class="sparkle" style="left: 75%; top: 88%; animation-duration: 18s; animation-delay: 4s;"></span>
+        <span class="sparkle" style="left: 90%; top: 92%; animation-duration: 15s; animation-delay: 2s;"></span>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>Redact Image</span>
+            </nav>
+
+            <div class="page-head reveal">
+                <h1>Redact Image Online</h1>
+                <p>Cover sensitive information before sharing an image. Draw opaque blocks over private details to permanently hide them in the exported file.</p>
+                <div class="badges">
+                    <span class="badge"><i class="fas fa-user-shield"></i> Permanent Redaction</span>
+                    <span class="badge teal"><i class="fas fa-eye-slash"></i> Flattened Export</span>
+                    <span class="badge"><i class="fas fa-lock"></i> Privacy First</span>
+                </div>
+            </div>
+
+            <div class="tool-layout">
+                <div>
+                    <div class="card tool-card reveal" id="tool-card">
+                        
+                        <!-- Upload Area -->
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon-wrapper">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Upload an Image to Redact</h3>
+                            <p>Select a screenshot, photograph, or document image. (JPG, PNG, WEBP — up to 20 MB)</p>
+                            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" aria-label="Choose an image from your device">
+                        </div>
+
+                        <!-- Editor Panel (Hidden initially) -->
+                        <div class="reveal" id="editor-panel" style="display:none;">
+                            
+                            <div class="editor-layout">
+                                <!-- Left: Canvas Area -->
+                                <div class="canvas-container" id="canvas-container">
+                                    <div class="canvas-wrapper" id="canvas-wrapper">
+                                        <img id="preview-img" src="" alt="Image preview" draggable="false">
+                                        <!-- Redaction boxes will be injected here -->
+                                    </div>
+                                </div>
+
+                                <!-- Right: Controls -->
+                                <div class="controls-panel">
+                                    
+                                    <!-- Tools -->
+                                    <div class="control-group">
+                                        <h4><i class="fas fa-tools"></i> Redaction Tools</h4>
+                                        <div class="btn-grid">
+                                            <button class="tool-btn active" id="tool-draw" title="Draw rectangles to redact">
+                                                <i class="fas fa-square"></i> Draw Box
+                                            </button>
+                                            <button class="tool-btn danger" id="tool-undo" title="Undo last box">
+                                                <i class="fas fa-undo"></i> Undo
+                                            </button>
+                                        </div>
+                                        <div class="btn-grid full" style="margin-top: 0.5rem;">
+                                            <button class="tool-btn danger" id="tool-clear" title="Clear all redactions">
+                                                <i class="fas fa-trash-alt"></i> Clear All
+                                            </button>
+                                        </div>
+                                        <p style="font-size:0.75rem; color:var(--text-subtle); text-align:center; margin-top:0.75rem;">
+                                            Click and drag on the image to draw a redaction box.
+                                        </p>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="action-bar">
+                                        <button class="btn-download" id="download-btn">
+                                            <i class="fas fa-download"></i> Export Redacted Image
+                                        </button>
+                                        <button class="btn-reset" id="reset-tool-btn">
+                                            <i class="fas fa-redo"></i> Start Over
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Advertisement">
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×250</div>
+                    </div>
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×600</div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- ============================================================
+                 CONTENT SECTIONS
+                 ============================================================ -->
+            <div class="content-shell">
+
+                <!-- INTRO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-bullseye"></i> Overview</span>
+                    <h2>Redact Image Online</h2>
+                    <p>Need to hide private information in a screenshot, photograph, or document image? An image redaction tool helps you cover sensitive details before sharing a file publicly or sending it to someone else.</p>
+                    <p>You might need to hide an address, phone number, account number, email address, identification detail, confidential message, or another private element. QuickToolsPK's Redact Image tool is designed around the task of marking sensitive areas and preparing a redacted image for sharing.</p>
+                    <p>The key is to ensure the information is actually removed from the exported image, not merely covered by a temporary layer.</p>
+                </section>
+
+                <!-- WHAT IS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-info-circle"></i> Explanation</span>
+                    <h2>What Is Image Redaction?</h2>
+                    <p>Image redaction is the process of permanently obscuring or removing selected visual information from an image.</p>
+                    <p>Unlike ordinary annotations, redaction is intended to prevent viewers from reading the covered content in the resulting file. Common methods include filling a selected region with a solid color or replacing the pixels within that region.</p>
+                    <p>Redaction can be useful when sharing screenshots, business documents, forms, receipts, and other images that contain private information.</p>
+                </section>
+
+                <!-- WHAT INFO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-list-check"></i> Use cases</span>
+                    <h2>What Information Can You Redact From an Image?</h2>
+                    
+                    <h3>Personal Information</h3>
+                    <p>Cover details such as names, addresses, telephone numbers, email addresses, and other personal information that should not be visible to the recipient.</p>
+                    
+                    <h3>Financial Details</h3>
+                    <p>Before sharing a financial screenshot or receipt, consider redacting account numbers, transaction references, balances, or other confidential details that are not necessary for the recipient.</p>
+                    
+                    <h3>Screenshots and Messages</h3>
+                    <p>Screenshots may reveal private conversations, usernames, notifications, email addresses, or information in the surrounding interface. Review the entire screenshot rather than focusing only on the main content.</p>
+                    
+                    <h3>Identification and Document Details</h3>
+                    <p>Images of forms and identification documents may contain identifying numbers, dates, addresses, or other sensitive fields. Only share the information needed for your purpose, and check whether the recipient requires an unaltered document.</p>
+                    
+                    <h3>Confidential Business Information</h3>
+                    <p>Business screenshots and documents can contain internal notes, customer information, private project details, and confidential figures. Redaction can help limit what is visible when an image needs to be shared externally.</p>
+                </section>
+
+                <!-- HOW TO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-shoe-prints"></i> Step by step</span>
+                    <h2>How to Redact an Image Online</h2>
+                    <ol class="step-list">
+                        <li><strong>Select Your Image.</strong> Choose the image you want to redact. Keep an untouched original in a secure location if you may need it later.</li>
+                        <li><strong>Identify Sensitive Areas.</strong> Inspect the image carefully and identify every detail that should not be shared. Include surrounding information that could reveal private data indirectly.</li>
+                        <li><strong>Mark the Content.</strong> Use a redaction rectangle to mark the relevant areas. Ensure the selected region covers the entire text, number, or object, including any visible edges.</li>
+                        <li><strong>Review the Preview.</strong> Check the full image at a suitable zoom level. Make sure no characters, digits, or fragments remain visible around the redaction boundaries.</li>
+                        <li><strong>Export the Redacted Image.</strong> Export a flattened image in a supported format. The final file should contain the redacted pixels rather than editable shapes that can be moved or removed to reveal the original content.</li>
+                        <li><strong>Verify Before Sharing.</strong> Open the exported file separately and inspect the redacted areas. If the information is highly sensitive, verify that the export does not retain the original image in hidden layers, annotations, or embedded previews.</li>
+                    </ol>
+                </section>
+
+                <!-- PERMANENT -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-shield-alt"></i> Importance</span>
+                    <h2>Why Is Permanent Redaction Important?</h2>
+                    <p>A black rectangle placed over sensitive text does not always mean that the information has been removed.</p>
+                    <p>In an image editor, a shape may sit above the original image as a separate layer. In other workflows, a document may preserve the underlying text or image even when a dark overlay makes it appear hidden.</p>
+                    <p>A secure redaction workflow should:</p>
+                    <ul class="bullet-list">
+                        <li>Apply the redaction directly to the exported image pixels.</li>
+                        <li>Flatten the final image rather than retaining removable overlays.</li>
+                        <li>Check for hidden content and embedded previews where relevant.</li>
+                        <li>Remove unnecessary sensitive metadata when supported.</li>
+                        <li>Preserve an untouched original separately if required for records.</li>
+                    </ul>
+                    <div class="callout">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Flattening is an important safeguard, but it should not be treated as a guarantee that every possible source of information has been removed. The final file must be checked for the risks relevant to its format and use.</span>
+                    </div>
+                </section>
+
+                <!-- VS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-code-compare"></i> Compare</span>
+                    <h2>Redaction vs. Blurring vs. Cropping</h2>
+                    <div class="size-table-wrap">
+                        <table class="size-table">
+                            <thead>
+                                <tr><th>Method</th><th>Best Use</th><th>Privacy Consideration</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Redaction</td><td>Hiding sensitive details permanently</td><td>Use an opaque fill and verify the exported pixels.</td></tr>
+                                <tr><td>Blurring</td><td>Reducing the visibility of noncritical details</td><td>Weak blur may leave information recognizable or recoverable.</td></tr>
+                                <tr><td>Cropping</td><td>Removing unwanted edges or surrounding content</td><td>Confirm that the exported file does not retain the uncropped original elsewhere.</td></tr>
+                                <tr><td>Pixelation</td><td>Stylized concealment of selected areas</td><td>Coarse pixelation may still reveal information; it is not the safest choice for highly sensitive text.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top:1rem;">For account numbers, passwords, identification numbers, and similarly sensitive text, an opaque redaction is generally preferable to a light blur or decorative effect.</p>
+                </section>
+
+                <!-- TIPS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-lightbulb"></i> Best practices</span>
+                    <h2>Tips for Safer Image Redaction</h2>
+                    <ul class="bullet-list">
+                        <li>Cover all sensitive characters, not just the center of the text.</li>
+                        <li>Check for repeated information elsewhere in the image.</li>
+                        <li>Inspect notifications, browser tabs, filenames, and surrounding interface elements.</li>
+                        <li>Avoid semi-transparent overlays for confidential information.</li>
+                        <li>Verify the final exported file independently.</li>
+                        <li>Consider whether metadata contains location or other private details.</li>
+                        <li>Do not share the original image alongside the redacted version unless necessary.</li>
+                        <li>For highly sensitive legal, financial, or identity documents, use an appropriate verified workflow and retain required records securely.</li>
+                    </ul>
+                </section>
+
+                <!-- FAQ -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-circle-question"></i> Answers</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>What does it mean to redact an image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">It means obscuring or removing selected information so that viewers cannot read or see it in the final output.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I redact text from a screenshot?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Yes. A screenshot can be redacted by covering the relevant text or region, provided the editing tool supports the operation and the exported image permanently contains the redacted pixels.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Is placing a black box over text enough?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Not always. If the black box is a separate editable layer or overlay, the original content may remain underneath. Verify that the exported file is flattened and that the sensitive pixels are no longer present in the output.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Is blurring safe for passwords or account numbers?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Blurring is not the safest choice for highly sensitive text. Use an opaque redaction and verify the final exported image.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Does redacting an image remove its metadata?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Not automatically. Metadata handling depends on the tool and export process. If privacy matters, check whether the final image contains GPS coordinates, identifying details, or other unnecessary metadata.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I undo a redaction?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">During editing, undo can help correct a mark before export. Once you have created a properly flattened output, the covered original pixels should not be recoverable from that output. Keep a separate original if you need to preserve the unredacted version.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Does image redaction work on PDFs?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">That depends on the tool. An image-only redactor should not be advertised as a PDF redaction tool. PDF redaction requires separate handling to ensure that underlying text, images, and other document content are removed.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>How do I know if a redaction is permanent?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Inspect the exported file, confirm that the covered content is no longer present in its pixels, and check for retained layers, annotations, or other embedded content relevant to the format.</div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- CTA -->
+                <section class="content-block cta-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-rocket"></i> Get started</span>
+                    <h2>Protect Your Privacy with Redaction</h2>
+                    <p>Cover sensitive details before sharing images online. Ensure the information is permanently removed from the exported file.</p>
+                    <div class="cta-actions">
+                        <a href="#tool-card" class="btn btn-primary"><i class="fas fa-arrow-up"></i> Upload Your Image</a>
+                        <a href="index.html#image-tools" class="btn btn-ghost"><i class="fas fa-images"></i> Browse Image Tools</a>
+                    </div>
+                </section>
+
+                <!-- RELATED TOOLS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-link"></i> Keep exploring</span>
+                    <h2>Related Image Tools</h2>
+                    <div class="related-grid">
+                        <a class="related-link" href="image-information-metadata.html"><i class="fas fa-info-circle"></i> Inspect image metadata</a>
+                        <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Compress an image online</a>
+                        <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Convert an image format</a>
+                        <a class="related-link" href="circle-crop-image.html"><i class="fas fa-circle"></i> Crop an image online</a>
+                        <a class="related-link" href="remove-image-metadata.html"><i class="fas fa-user-shield"></i> Remove image metadata</a>
+                        <a class="related-link" href="index.html#image-tools"><i class="fas fa-images"></i> All Image Tools</a>
+                    </div>
+                </section>
+
+            </div>
+            <!-- end content-shell -->
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="redact-image.html">Redact Image</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="index.html#image-tools">Image Tools</a></li>
+                        <li><a href="index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+
+        /* ===== Tool Logic ===== */
+        const fileInput = document.getElementById('file-input');
+        const uploadArea = document.getElementById('upload-area');
+        const editorPanel = document.getElementById('editor-panel');
+        const previewImg = document.getElementById('preview-img');
+        const canvasContainer = document.getElementById('canvas-container');
+        const canvasWrapper = document.getElementById('canvas-wrapper');
+        const downloadBtn = document.getElementById('download-btn');
+        const resetToolBtn = document.getElementById('reset-tool-btn');
+        const undoBtn = document.getElementById('tool-undo');
+        const clearBtn = document.getElementById('tool-clear');
+        const drawBtn = document.getElementById('tool-draw');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        let uploadedImage = null;
+        let uploadedFile = null;
+        let redactionBoxes = []; // Array of {x, y, w, h} in original image coordinates
+        let isDrawing = false;
+        let startX = 0, startY = 0;
+        let currentBox = null;
+
+        // Upload interactions
+        uploadArea.addEventListener('click', function () { fileInput.click(); });
+        fileInput.addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+        });
+        uploadArea.addEventListener('dragover', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover'); });
+        uploadArea.addEventListener('drop', function (e) {
+            e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+            if (validTypes.indexOf(file.type) === -1) {
+                showNotification('Unable to process this image. Try another supported file.', 'error');
+                return;
+            }
+            if (file.size > 20 * 1024 * 1024) {
+                showNotification('File is too large. Please choose an image under 20 MB.', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedFile = file;
+                const img = new Image();
+                img.onload = function () {
+                    uploadedImage = img;
+                    previewImg.src = e.target.result;
+                    
+                    uploadArea.style.display = 'none';
+                    editorPanel.style.display = 'block';
+                    
+                    // Reset
+                    redactionBoxes = [];
+                    updateCanvasUI();
+                    
+                    showNotification('Image loaded. Draw boxes to redact.');
+                };
+                img.onerror = function () {
+                    showNotification('Unable to process this image. Try another supported file.', 'error');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drawing logic
+        canvasWrapper.addEventListener('mousedown', startDraw);
+        canvasWrapper.addEventListener('touchstart', startDraw, {passive: false});
+
+        function startDraw(e) {
+            if (!previewImg.src) return;
+            e.preventDefault();
+            
+            // Ensure we are using the correct coordinates relative to the image
+            const rect = previewImg.getBoundingClientRect();
+            const scaleX = uploadedImage.width / rect.width;
+            const scaleY = uploadedImage.height / rect.height;
+
+            const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
+
+            // Calculate start position in original image pixels
+            startX = (clientX - rect.left) * scaleX;
+            startY = (clientY - rect.top) * scaleY;
+
+            // Clamp to image bounds
+            startX = Math.max(0, Math.min(startX, uploadedImage.width));
+            startY = Math.max(0, Math.min(startY, uploadedImage.height));
+
+            isDrawing = true;
+            currentBox = document.createElement('div');
+            currentBox.className = 'redaction-box';
+            canvasWrapper.appendChild(currentBox);
+        }
+
+        window.addEventListener('mousemove', draw);
+        window.addEventListener('touchmove', draw, {passive: false});
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+
+            const rect = previewImg.getBoundingClientRect();
+            const scaleX = uploadedImage.width / rect.width;
+            const scaleY = uploadedImage.height / rect.height;
+
+            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
+
+            let currentX = (clientX - rect.left) * scaleX;
+            let currentY = (clientY - rect.top) * scaleY;
+
+            // Clamp
+            currentX = Math.max(0, Math.min(currentX, uploadedImage.width));
+            currentY = Math.max(0, Math.min(currentY, uploadedImage.height));
+
+            // Calculate box dimensions in original pixels
+            const x = Math.min(startX, currentX);
+            const y = Math.min(startY, currentY);
+            const w = Math.abs(currentX - startX);
+            const h = Math.abs(currentY - startY);
+
+            // Convert back to display pixels for CSS
+            const displayX = x / scaleX;
+            const displayY = y / scaleY;
+            const displayW = w / scaleX;
+            const displayH = h / scaleY;
+
+            currentBox.style.left = displayX + 'px';
+            currentBox.style.top = displayY + 'px';
+            currentBox.style.width = displayW + 'px';
+            currentBox.style.height = displayH + 'px';
+        }
+
+        window.addEventListener('mouseup', endDraw);
+        window.addEventListener('touchend', endDraw);
+
+        function endDraw() {
+            if (!isDrawing) return;
+            isDrawing = false;
+            
+            if (currentBox) {
+                const rect = previewImg.getBoundingClientRect();
+                const scaleX = uploadedImage.width / rect.width;
+                const scaleY = uploadedImage.height / rect.height;
+
+                const style = currentBox.style;
+                if (parseFloat(style.width) > 5 && parseFloat(style.height) > 5) {
+                    // Save box in original coordinates
+                    const x = parseFloat(style.left) * scaleX;
+                    const y = parseFloat(style.top) * scaleY;
+                    const w = parseFloat(style.width) * scaleX;
+                    const h = parseFloat(style.height) * scaleY;
+                    
+                    redactionBoxes.push({x, y, w, h});
+                    currentBox.remove(); // Remove temp box
+                    updateCanvasUI(); // Re-render
+                } else {
+                    currentBox.remove(); // Too small, discard
+                }
+                currentBox = null;
+            }
+        }
+
+        function updateCanvasUI() {
+            // Remove existing boxes
+            canvasWrapper.querySelectorAll('.redaction-box').forEach(el => el.remove());
+            
+            const rect = previewImg.getBoundingClientRect();
+            const scaleX = rect.width / uploadedImage.width;
+            const scaleY = rect.height / uploadedImage.height;
+
+            redactionBoxes.forEach(box => {
+                const el = document.createElement('div');
+                el.className = 'redaction-box';
+                el.style.left = (box.x * scaleX) + 'px';
+                el.style.top = (box.y * scaleY) + 'px';
+                el.style.width = (box.w * scaleX) + 'px';
+                el.style.height = (box.h * scaleY) + 'px';
+                canvasWrapper.appendChild(el);
+            });
+        }
+
+        // Undo/Clear
+        undoBtn.addEventListener('click', function() {
+            if (redactionBoxes.length > 0) {
+                redactionBoxes.pop();
+                updateCanvasUI();
+                showNotification('Undone.');
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            redactionBoxes = [];
+            updateCanvasUI();
+            showNotification('Cleared all marks.');
+        });
+
+        // Download
+        downloadBtn.addEventListener('click', function() {
+            if (!uploadedImage) return;
+            
+            // Warn if no boxes
+            if (redactionBoxes.length === 0) {
+                showNotification('No redaction boxes drawn. Please draw boxes over sensitive areas.', 'error');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const w = uploadedImage.width;
+            const h = uploadedImage.height;
+            
+            canvas.width = w;
+            canvas.height = h;
+            
+            // Draw original image
+            ctx.drawImage(uploadedImage, 0, 0);
+            
+            // Draw black rectangles
+            ctx.fillStyle = '#000000';
+            redactionBoxes.forEach(box => {
+                ctx.fillRect(box.x, box.y, box.w, box.h);
+            });
+            
+            // Export as JPEG
+            const link = document.createElement('a');
+            const originalName = uploadedFile.name.replace(/\.[^.]+$/, '');
+            link.download = originalName + '-redacted.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Redacted image exported. Review the saved file before sharing.');
+        });
+
+        // Reset tool
+        resetToolBtn.addEventListener('click', function() {
+            uploadedImage = null;
+            uploadedFile = null;
+            fileInput.value = '';
+            redactionBoxes = [];
+            
+            uploadArea.style.display = 'block';
+            editorPanel.style.display = 'none';
+            previewImg.src = '';
+            canvasWrapper.querySelectorAll('.redaction-box').forEach(el => el.remove());
+            
+            showNotification('Tool reset.');
+        });
+
+        function showNotification(message, type) {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.classList.add('show');
+            clearTimeout(showNotification._t);
+            showNotification._t = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 3200);
+        }
+    })();
+    </script>
+</body>
+</html>
