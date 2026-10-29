@@ -13,7 +13,7 @@
     <meta property="og:description" content="The Chicago Bears are acquiring Jeffery Simmons from the Tennessee Titans. Explore the reported trade terms, contract, age, stats, and what the deal means for both teams.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://quicktoolspk.com/blog/jeffery-simmons-bears-titans-trade/">
-    <meta property="og:image" content="https://quicktoolspk.com/assets/jeffery-simmons-bears-titans-trade-2026.jpg">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Jeffery Simmons Trade: Bears Acquire Titans Star">
@@ -355,6 +355,8 @@
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow-sm);
             background-color: var(--bg);
+            aspect-ratio: 16/9;
+            object-fit: cover;
         }
         .image-caption {
             font-size: 0.8rem;
@@ -380,21 +382,6 @@
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--bg-alt);
-        }
-        
-        .ad-space {
-            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
-            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
-        }
-        .ad-label {
-            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
-            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
-            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
-        }
-        .ad-example {
-            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
-            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
-            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
         }
 
         /* Related Tools Section */
@@ -580,7 +567,8 @@
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
         <div class="header-inner container">
-            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+            <!-- HOME LINK -->
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
                 <span class="brand-mark" aria-hidden="true">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </span>
@@ -597,14 +585,15 @@
 
             <nav class="primary-nav" id="primaryNav" aria-label="Primary">
                 <ul class="nav-list">
-                    <li><a class="nav-link" href="../index.html">Home</a></li>
-                    <li><a class="nav-link" href="../index.html#tools">All Tools</a></li>
-                    <li><a class="nav-link" href="../index.html#image-tools">Image Tools</a></li>
-                    <li><a class="nav-link" href="../index.html#more-tools">PDF Tools</a></li>
-                    <li><a class="nav-link" href="../about.html">About</a></li>
-                    <li><a class="nav-link" href="../contact.html">Contact</a></li>
+                    <!-- NAV LINKS FIXED TO ROOT -->
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
                     <li>
-                        <a class="nav-cta" href="index.html">
+                        <a class="nav-cta" href="/blog/index.html">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                             Blog
                         </a>
@@ -619,9 +608,9 @@
         <div class="container">
 
             <nav class="breadcrumb reveal" aria-label="Breadcrumb">
-                <a href="../index.html">Home</a>
+                <a href="/index.html">Home</a>
                 <span class="sep">/</span>
-                <a href="index.html">Blog</a>
+                <a href="/blog/index.html">Blog</a>
                 <span class="sep">/</span>
                 <span>NFL News</span>
             </nav>
@@ -640,8 +629,8 @@
                     </header>
 
                     <div class="article-content reveal">
-                        <!-- FIXED: Featured Image now uses a reliable external URL -->
-                        <img src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="American football stadium during a game" class="featured-image">
+                        <!-- FIXED IMAGE: Working external URL -->
+                        <img src="../assets/images/blog/14.jpg" alt="American football stadium during a game" class="featured-image">
                         <p class="image-caption">Jeffery Simmons during his time with the Tennessee Titans. (Illustrative image)</p>
 
                         <p>The Chicago Bears are making a major move ahead of the NFL trade deadline, reportedly acquiring star defensive tackle <strong>Jeffery Simmons</strong> from the Tennessee Titans in a deal involving two first-round draft picks. The move gives Chicago a proven interior defender as the team looks to strengthen its roster, while Tennessee receives valuable draft capital for the future.</p>
@@ -892,22 +881,23 @@
                         </div>
                     </div>
 
-                    <!-- FIXED: Related Tools Section - Links updated to point to correct relative paths -->
+                    <!-- RELATED TOOLS SECTION -->
                     <div class="related-tools-section reveal">
                         <h2>QuickToolsPK: Create graphics for your sports posts</h2>
                         <p>If you want to share this NFL story on social media, QuickToolsPK's image tools can help prepare supporting graphics. They do not verify NFL news or automatically create a finished sports article image.</p>
                         <div class="related-grid">
-                            <a href="../youtube-thumbnail-banner-maker.html" class="related-card">
+                            <!-- LINKS FIXED TO // -->
+                            <a href="www.quicktoolspk.com/youtube-thumbnail-banner-maker" class="related-card">
                                 <div class="related-card-icon"><i class="fab fa-youtube"></i></div>
                                 <h4>YouTube Thumbnail & Banner Maker</h4>
                                 <p>Useful for designing a video thumbnail about the Bears-Titans trade.</p>
                             </a>
-                            <a href="facebook-cover-post-resizer.html" class="related-card">
+                            <a href="www.quicktoolspk.com/facebook-cover-post-resizer" class="related-card">
                                 <div class="related-card-icon"><i class="fab fa-facebook"></i></div>
                                 <h4>Facebook Cover & Post Resizer</h4>
                                 <p>Prepare a sports-news graphic for a Facebook post or page.</p>
                             </a>
-                            <a href="x-twitter-image-resizer.html" class="related-card">
+                            <a href="www.quicktoolspk.com/x-twitter-image-resizer" class="related-card">
                                 <div class="related-card-icon"><i class="fab fa-twitter"></i></div>
                                 <h4>X (Twitter) Image Resizer</h4>
                                 <p>Resize a trade-news graphic for sharing on X.</p>
@@ -917,7 +907,7 @@
                     </div>
                 </article>
 
-                <!-- Sidebar -->
+                <!-- Sidebar (ADS REMOVED) -->
                 <aside class="sidebar reveal" aria-label="Sidebar">
                     <div class="sidebar-widget">
                         <h3>About this article</h3>
@@ -926,15 +916,6 @@
                             <p><strong>Category:</strong> NFL News</p>
                             <p><strong>Tags:</strong> Chicago Bears, Tennessee Titans, Jeffery Simmons, Trade Deadline</p>
                         </div>
-                    </div>
-
-                    <div class="ad-space">
-                        <span class="ad-label">Advertisement</span>
-                        <div class="ad-example">Ad space 300×250</div>
-                    </div>
-                    <div class="ad-space">
-                        <span class="ad-label">Advertisement</span>
-                        <div class="ad-example">Ad space 300×600</div>
                     </div>
                 </aside>
             </div>
@@ -947,7 +928,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
-                    <a href="../index.html" class="brand" aria-label="QuickToolsPK home">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
                         <span class="brand-mark" aria-hidden="true">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                         </span>
@@ -962,32 +943,32 @@
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="../img-compress.html">Image Compressor</a></li>
-                        <li><a href="../img-resizer.html">Image Resizer</a></li>
-                        <li><a href="../img-fmt-converter.html">Image Format Converter</a></li>
-                        <li><a href="../JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
-                        <li><a href="../social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                        <li><a href="/tools/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/tools/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/tools/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/tools/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/tools/social-media-image-resizer.html">Social Media Image Resizer</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Popular Categories</h4>
                     <ul>
-                        <li><a href="../index.html#image-tools">Image Tools</a></li>
-                        <li><a href="../index.html#more-tools">PDF Tools</a></li>
-                        <li><a href="../index.html#image-tools">Converters</a></li>
-                        <li><a href="../img-compress.html">Compressors</a></li>
-                        <li><a href="../index.html" target="_blank" rel="noopener">Blog</a></li>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/tools/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="../about.html">About Us</a></li>
-                        <li><a href="../contact.html">Contact</a></li>
-                        <li><a href="../index.html#faq">FAQ</a></li>
-                        <li><a href="../index.html#faq">How It Works</a></li>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
                     </ul>
                 </div>
 
