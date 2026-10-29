@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Round Image Corners Online Free | QuickToolsPK</title>
+    <meta name="description" content="Round the corners of any image with QuickToolsPK. Customize the corner radius and create clean images for websites, product photos, and designs.">
+    <meta name="keywords" content="round image corners online, rounded corner image tool, round corners of a photo, image corner radius, round photo corners online, rounded picture corners, soften image corners">
+    <link rel="canonical" href="https://quicktoolspk.com/tools/rounded-corners-image.html">
+
+    <meta property="og:title" content="Round Image Corners Online Free">
+    <meta property="og:description" content="Give your images smooth, rounded corners with QuickToolsPK.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolspk.com/tools/rounded-corners-image.html">
+    <meta property="og:image" content="https://quicktoolspk.com/assets/round-image-corners-example.webp">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Round Image Corners Online Free">
+    <meta name="twitter:description" content="Give your images smooth, rounded corners with QuickToolsPK.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           BACKGROUND ELEMENTS & ANIMATIONS
+           ============================================================ */
+        .bg-decoration {
+            position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .deco-shape {
+            position: absolute; opacity: 0.4; animation: floatShape 15s ease-in-out infinite;
+        }
+        .deco-shape-1 { top: 10%; left: 5%; width: 120px; height: 120px; color: var(--primary-soft); animation-delay: 0s; }
+        .deco-shape-2 { top: 40%; right: 5%; width: 80px; height: 80px; color: var(--teal-soft); animation-delay: -5s; }
+        .deco-shape-3 { bottom: 15%; left: 10%; width: 60px; height: 60px; color: #fce7f3; animation-delay: -10s; }
+        .deco-shape-4 { bottom: 30%; right: 15%; width: 100px; height: 100px; color: var(--primary-soft); animation-delay: -7s; }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(10deg) scale(1.05); }
+        }
+
+        .sparkle {
+            position: absolute; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; opacity: 0; box-shadow: 0 0 8px 1px rgba(37,99,235,0.6);
+            animation: sparkleRise linear infinite;
+        }
+        @keyframes sparkleRise {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+        }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & TOOL UI
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        .page-head { margin-bottom: 1.75rem; max-width: 820px; }
+        .page-head h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 0.6rem; }
+        .page-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+        .page-head .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            font-size: 0.78rem; font-weight: 600;
+            background: var(--primary-soft); color: var(--primary-dark);
+        }
+        .badge.teal { background: var(--teal-soft); color: #0f766e; }
+
+        .tool-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 1.75rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .tool-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); box-shadow: var(--shadow-xs);
+        }
+        .tool-card {
+            padding: 1.75rem; position: relative; overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-brand);
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #d3dfed; border-radius: var(--r-md);
+            padding: 3rem 1.5rem; text-align: center; cursor: pointer;
+            background: #f8fafc;
+            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--primary); background: #f0f6ff; box-shadow: var(--shadow-sm);
+        }
+        .upload-icon-wrapper {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--primary-soft); color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.25rem; transition: transform var(--t-med);
+        }
+        .upload-area:hover .upload-icon-wrapper { transform: scale(1.05); }
+        .upload-icon-wrapper i { font-size: 2rem; }
+        .upload-area h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--navy); }
+        .upload-area p { color: var(--text-subtle); font-size: 0.95rem; margin-bottom: 0; }
+        #file-input { display: none; }
+
+        /* Editor Layout */
+        .editor-layout {
+            display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .editor-layout { grid-template-columns: 1fr 280px; }
+        }
+
+        /* Image Preview Box */
+        .image-preview-box {
+            background: repeating-conic-gradient(#eef2f8 0% 25%, #f8fafc 0% 50%) 50% / 20px 20px;
+            border: 1px solid var(--border-strong); border-radius: var(--r-md);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem; min-height: 320px; overflow: hidden;
+            position: relative;
+        }
+        
+        .preview-img-wrapper {
+            box-shadow: var(--shadow-md);
+            background: #fff;
+            /* Border radius applied via JS */
+            overflow: hidden;
+            transition: border-radius 0.1s ease;
+        }
+        .preview-img-wrapper img {
+            display: block;
+            max-width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; display: flex; flex-direction: column; gap: 1.25rem;
+        }
+        .control-group h4 {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: var(--text-subtle); margin-bottom: 0.75rem; font-weight: 700;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .control-group h4 i { color: var(--primary); }
+        
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .input-row:last-child { margin-bottom: 0; }
+        .input-row label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text);
+            flex: 1;
+        }
+        .input-row input[type="range"] {
+            flex: 1.5;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        .input-row input[type="number"] {
+            width: 60px;
+            padding: 0.4rem;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--r-sm);
+            text-align: center;
+            font-family: inherit;
+        }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto;
+        }
+        .btn-download {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.9rem 1.25rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-md);
+            border: none; cursor: pointer; color: #fff;
+            background: var(--gradient-brand);
+            box-shadow: var(--shadow-brand);
+            transition: transform var(--t-fast), box-shadow var(--t-fast), opacity var(--t-fast);
+        }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-reset {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.7rem 1rem; font-size: 0.85rem; font-weight: 600; border-radius: var(--r-md);
+            background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted);
+            cursor: pointer; transition: all var(--t-fast); font-family: inherit;
+        }
+        .btn-reset:hover { background: var(--border); color: var(--navy); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+        .ad-space {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-align: center; box-shadow: var(--shadow-xs);
+        }
+        .ad-label {
+            font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem; background: var(--bg);
+            padding: 0.25rem 0.7rem; border-radius: var(--r-full); display: inline-block; font-weight: 600;
+        }
+        .ad-example {
+            width: 100%; height: 200px; background: var(--bg); border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
+            color: var(--text-subtle); font-size: 0.82rem; font-weight: 500;
+        }
+
+        /* ============================================================
+           CONTENT SECTIONS
+           ============================================================ */
+        .content-shell { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+
+        .content-block {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: clamp(1.5rem, 3vw, 2.25rem);
+            box-shadow: var(--shadow-xs);
+            transition: box-shadow var(--t-med), border-color var(--t-med);
+        }
+        .content-block:hover { box-shadow: var(--shadow-sm); border-color: var(--border-strong); }
+
+        .content-block::before {
+            content: "";
+            position: absolute; top: 0; left: clamp(1.5rem, 3vw, 2.25rem);
+            width: 44px; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--teal));
+            border-radius: 0 0 3px 3px;
+            transition: width 0.4s var(--ease);
+        }
+        .content-block:hover::before { width: 72px; }
+
+        .section-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--primary-dark);
+            background: var(--primary-soft); padding: 0.3rem 0.7rem;
+            border-radius: var(--r-full); margin-bottom: 0.85rem;
+        }
+        .section-eyebrow i { font-size: 0.75rem; }
+
+        .content-block h2 {
+            font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+        }
+        .content-block h3 {
+            font-size: 1rem; margin: 1.5rem 0 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--navy);
+        }
+        .content-block h3::before {
+            content: ""; width: 6px; height: 6px; border-radius: 50%;
+            background: var(--primary); flex-shrink: 0;
+        }
+        .content-block h3:first-of-type { margin-top: 0.5rem; }
+        .content-block p {
+            font-size: 0.95rem; color: var(--text-muted); line-height: 1.75;
+            margin-bottom: 0.85rem;
+        }
+        .content-block p:last-child { margin-bottom: 0; }
+        .content-block strong { color: var(--navy); font-weight: 600; }
+
+        .step-list {
+            list-style: none; counter-reset: step; padding: 0; margin: 1.25rem 0 0;
+            display: grid; gap: 0.75rem;
+        }
+        .step-list li {
+            counter-increment: step;
+            position: relative;
+            padding: 0.9rem 1rem 0.9rem 3.4rem;
+            background: linear-gradient(180deg, #fbfdff 0%, var(--bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute; left: 0.9rem; top: 0.85rem;
+            width: 30px; height: 30px; border-radius: 50%;
+            display: grid; place-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem; font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--teal));
+            box-shadow: 0 4px 10px -3px rgba(37,99,235,0.45);
+        }
+        .step-list li:hover {
+            transform: translateY(-1px);
+            border-color: #c7d8f2;
+            box-shadow: var(--shadow-sm);
+        }
+        .step-list li strong { color: var(--navy); display: inline; }
+
+        .bullet-list {
+            list-style: none; padding: 0; margin: 0.75rem 0 0;
+            display: grid; gap: 0.5rem;
+        }
+        .bullet-list li {
+            position: relative;
+            padding: 0.65rem 0.9rem 0.65rem 2.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+            transition: border-color var(--t-fast), background var(--t-fast);
+        }
+        .bullet-list li::before {
+            content: "";
+            position: absolute; left: 1rem; top: 1.05rem;
+            width: 8px; height: 8px; border-radius: 2px;
+            background: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+        .bullet-list li:hover { border-color: #c7d8f2; background: #fbfdff; }
+        .bullet-list li strong { color: var(--navy); }
+
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.1rem; margin-top: 1rem;
+            background: var(--primary-soft);
+            border-left: 3px solid var(--primary);
+            border-radius: var(--r-sm);
+            font-size: 0.9rem; color: var(--navy-soft); line-height: 1.7;
+        }
+        .callout i { color: var(--primary); font-size: 1.05rem; margin-top: 3px; flex-shrink: 0; }
+        .callout strong { color: var(--navy); }
+
+        .size-table-wrap {
+            overflow-x: auto; margin-top: 1rem;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+            background: var(--surface);
+        }
+        table.size-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        table.size-table th, table.size-table td {
+            padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
+        }
+        table.size-table th {
+            background: linear-gradient(180deg, #eef4fd 0%, #e3ecfb 100%);
+            font-weight: 700; color: var(--navy); font-size: 0.78rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        table.size-table tr:last-child td { border-bottom: none; }
+        table.size-table tbody tr { transition: background var(--t-fast); }
+        table.size-table tbody tr:hover { background: var(--primary-soft); }
+        table.size-table td:first-child { font-weight: 600; color: var(--navy); }
+
+        .faq-list { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+            transition: box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .faq-item:hover { border-color: #c7d8f2; }
+        .faq-item[open] { border-color: #cddcf0; box-shadow: var(--shadow-xs); background: var(--surface); }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 0.9rem 1.1rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            font-weight: 600; font-size: 0.92rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; flex-shrink: 0; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.1rem 1rem;
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.75;
+            animation: fadeInFaq 0.4s ease;
+        }
+        @keyframes fadeInFaq { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem; margin-top: 1rem;
+        }
+        .related-link {
+            display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1rem;
+            background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md);
+            text-decoration: none; color: var(--navy); font-weight: 600; font-size: 0.9rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+        }
+        .related-link:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-sm);
+            border-color: #bfd4f7; color: var(--primary-dark);
+        }
+        .related-link i { color: var(--primary); width: 1.1em; text-align: center; transition: transform 0.3s ease; }
+        .related-link:hover i { transform: scale(1.15); }
+
+        .cta-block {
+            background: linear-gradient(135deg, #eff6ff 0%, #ecfdf5 100%);
+            border: 1px solid #c7d8f2;
+            text-align: center;
+            padding: clamp(1.75rem, 4vw, 2.5rem);
+        }
+        .cta-block::before { background: linear-gradient(90deg, var(--primary), var(--teal)); }
+        .cta-block h2 { margin-bottom: 0.6rem; }
+        .cta-block p { max-width: 620px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+        
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 1.5rem; font-size: 0.95rem; font-weight: 600; border-radius: var(--r-full);
+            border: 1px solid transparent; cursor: pointer; text-decoration: none; white-space: nowrap;
+            transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+            position: relative; overflow: hidden;
+        }
+        .btn-primary { background: var(--gradient-brand); color: #fff; box-shadow: var(--shadow-brand); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(37,99,235,0.45); }
+        .btn-ghost { background: var(--surface); color: var(--navy); border-color: var(--border-strong); }
+        .btn-ghost:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+
+        .toast {
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--surface); color: var(--text);
+            padding: 0.9rem 1.2rem; border-radius: var(--r-md);
+            box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 0.7rem;
+            z-index: 2000; transform: translateY(120px); opacity: 0;
+            transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+            border: 1px solid var(--border); border-left: 4px solid var(--success);
+            max-width: 380px; font-size: 0.9rem;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast i { font-size: 1.1rem; color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.error i { color: var(--danger); }
+        @media (max-width: 480px) {
+            .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+        }
+
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 0; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .tool-card { padding: 1.25rem; }
+            .upload-area { padding: 2rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .step-list li { padding: 0.8rem 0.9rem 0.8rem 3.1rem; }
+            .step-list li::before { left: 0.8rem; top: 0.75rem; width: 26px; height: 26px; font-size: 0.8rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND DECORATIONS -->
+    <div class="bg-decoration" aria-hidden="true">
+        <svg class="deco-shape deco-shape-1" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 6"/></svg>
+        <svg class="deco-shape deco-shape-2" viewBox="0 0 100 100"><path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10 Z" fill="currentColor"/></svg>
+        <svg class="deco-shape deco-shape-3" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="currentColor" opacity="0.3"/></svg>
+        <svg class="deco-shape deco-shape-4" viewBox="0 0 100 100"><path d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+
+        <span class="sparkle" style="left: 15%; top: 90%; animation-duration: 12s; animation-delay: 0s;"></span>
+        <span class="sparkle" style="left: 35%; top: 85%; animation-duration: 16s; animation-delay: 3s;"></span>
+        <span class="sparkle" style="left: 55%; top: 95%; animation-duration: 14s; animation-delay: 1s;"></span>
+        <span class="sparkle" style="left: 75%; top: 88%; animation-duration: 18s; animation-delay: 4s;"></span>
+        <span class="sparkle" style="left: 90%; top: 92%; animation-duration: 15s; animation-delay: 2s;"></span>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html#tools">Image Tools</a>
+                <span class="sep">/</span>
+                <span>Rounded Corners</span>
+            </nav>
+
+            <div class="page-head reveal">
+                <h1>Round Image Corners Online</h1>
+                <p>Give your images smooth, rounded corners. Adjust the corner radius and create a polished look for photos, product images, and graphics.</p>
+                <div class="badges">
+                    <span class="badge"><i class="fas fa-vector-square"></i> Adjustable Radius</span>
+                    <span class="badge teal"><i class="fas fa-magic"></i> Instant Preview</span>
+                    <span class="badge"><i class="fas fa-file-image"></i> Transparent PNG</span>
+                </div>
+            </div>
+
+            <div class="tool-layout">
+                <div>
+                    <div class="card tool-card reveal" id="tool-card">
+                        
+                        <!-- Upload Area -->
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon-wrapper">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h3>Upload Your Image</h3>
+                            <p>Drag and drop your image here or browse files. (JPG, PNG, WEBP — up to 20 MB)</p>
+                            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" aria-label="Choose an image from your device">
+                        </div>
+
+                        <!-- Editor Panel (Hidden initially) -->
+                        <div class="reveal" id="editor-panel" style="display:none;">
+                            
+                            <div class="editor-layout">
+                                <!-- Left: Image Preview -->
+                                <div class="image-preview-box">
+                                    <div class="preview-img-wrapper" id="preview-img-wrapper">
+                                        <img id="preview-img" src="" alt="Image preview">
+                                    </div>
+                                </div>
+
+                                <!-- Right: Controls -->
+                                <div class="controls-panel">
+                                    
+                                    <!-- Radius Controls -->
+                                    <div class="control-group">
+                                        <h4><i class="fas fa-circle-notch"></i> Corner Radius</h4>
+                                        <div class="input-row">
+                                            <label>Slightly rounded</label>
+                                            <input type="range" id="radius-slider" min="0" max="150" value="20">
+                                            <input type="number" id="radius-num" min="0" max="150" value="20">
+                                        </div>
+                                        <p style="font-size:0.75rem; color:var(--text-subtle); text-align:right; margin-top:0.5rem;">More rounded &rarr;</p>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="action-bar">
+                                        <button class="btn-download" id="download-btn">
+                                            <i class="fas fa-download"></i> Download Image
+                                        </button>
+                                        <button class="btn-reset" id="reset-tool-btn">
+                                            <i class="fas fa-rotate-right"></i> Reset Changes
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Advertisement">
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×250</div>
+                    </div>
+                    <div class="ad-space">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-example">Ad space 300×600</div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- ============================================================
+                 CONTENT SECTIONS
+                 ============================================================ -->
+            <div class="content-shell">
+
+                <!-- INTRO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-bullseye"></i> Overview</span>
+                    <h2>Round Image Corners Online</h2>
+                    <p>Want to give your photos a softer, more modern appearance? QuickToolsPK's Rounded Corners tool is designed to help you round the corners of an image for websites, online stores, social media graphics, and other creative projects.</p>
+                    <p>Instead of leaving every image with sharp, square corners, you can use a rounded-corner effect to create a cleaner visual style. A subtle radius works well for product photos and website cards, while more pronounced rounding can suit profile graphics and decorative designs.</p>
+                    <p>Upload your image, adjust the corner radius if available, review the preview, and download the result using the tool's supported export options.</p>
+                </section>
+
+                <!-- WHAT ARE -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-info-circle"></i> Explanation</span>
+                    <h2>What are rounded image corners?</h2>
+                    <p>Rounded corners replace the sharp corners of a rectangular image with smooth curves. The image remains generally rectangular, but the corners become less angular.</p>
+                    <p>Rounded images are commonly used in:</p>
+                    <ul class="bullet-list">
+                        <li>Website cards and blog thumbnails.</li>
+                        <li>E-commerce product galleries.</li>
+                        <li>Social media graphics and promotional posts.</li>
+                        <li>Presentations and portfolio layouts.</li>
+                        <li>App interfaces and profile graphics.</li>
+                        <li>Digital invitations and creative designs.</li>
+                    </ul>
+                    <p style="margin-top:1rem;">The amount of rounding is often called the corner radius. A small radius creates a subtle effect, while a larger radius produces more prominent curves.</p>
+                </section>
+
+                <!-- HOW TO -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-shoe-prints"></i> Step by step</span>
+                    <h2>How to round the corners of an image</h2>
+                    <ol class="step-list">
+                        <li><strong>Upload your image:</strong> Choose the photo or graphic you want to edit.</li>
+                        <li><strong>Adjust the corner radius:</strong> Select the desired amount of rounding if a radius control is available.</li>
+                        <li><strong>Preview the image:</strong> Check that the curves look balanced and suit the design.</li>
+                        <li><strong>Check the background:</strong> If you need transparent corners, confirm that transparency is supported by the export option.</li>
+                        <li><strong>Download the result:</strong> Save the edited image using the available download control.</li>
+                    </ol>
+                    <div class="callout">
+                        <i class="fas fa-info-circle"></i>
+                        <span>The exact settings, supported formats, and export options depend on the implementation of the tool.</span>
+                    </div>
+                </section>
+
+                <!-- HOW MUCH -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-adjust"></i> Design guidance</span>
+                    <h2>How much should you round the corners?</h2>
+                    <p>Different designs call for different amounts of rounding. Use these guidelines as a starting point rather than fixed requirements.</p>
+                    
+                    <h3>Subtle rounding</h3>
+                    <p>Ideal for product photography, professional websites, blog thumbnails, and business presentations where you want a softer appearance without making the image look like a pill or circle.</p>
+                    
+                    <h3>Moderate rounding</h3>
+                    <p>Useful for image cards, portfolio previews, promotional graphics, and app-style layouts. It provides a noticeable curve while preserving the rectangular shape.</p>
+                    
+                    <h3>Pronounced rounding</h3>
+                    <p>Works for playful graphics, decorative layouts, and designs where rounded shapes are part of the overall visual identity. Check that the corners do not hide important content.</p>
+                </section>
+
+                <!-- VS CIRCLE CROP -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-code-compare"></i> Compare</span>
+                    <h2>Rounded corners vs. circle cropping</h2>
+                    <p>Rounded corners and circle cropping are different effects.</p>
+                    <div class="size-table-wrap">
+                        <table class="size-table">
+                            <thead>
+                                <tr><th>Feature</th><th>Rounded corners</th><th>Circle crop</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Image shape</td><td>Rounded rectangle</td><td>Circle</td></tr>
+                                <tr><td>Best for</td><td>Product photos, cards, thumbnails</td><td>Avatars, profile photos, badges</td></tr>
+                                <tr><td>Original rectangular shape</td><td>Mostly preserved</td><td>Replaced by a circular boundary</td></tr>
+                                <tr><td>Corner adjustment</td><td>Changes the curve of each corner</td><td>Changes the circular crop or framing</td></tr>
+                                <tr><td>Transparency outside the shape</td><td>Depends on export settings</td><td>Depends on export settings</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top:1rem;">If you want to preserve most of the original image while softening its edges, use rounded corners. If you want a completely circular picture, use the Circle Crop tool.</p>
+                </section>
+
+                <!-- TIPS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-star"></i> Best practices</span>
+                    <h2>Tips for better results</h2>
+                    <ul class="bullet-list">
+                        <li><strong>Keep the style consistent:</strong> Apply similar corner radii to images that appear together in a gallery or website.</li>
+                        <li><strong>Consider the image dimensions:</strong> A radius that looks subtle on a large image may look excessive on a small thumbnail.</li>
+                        <li><strong>Protect important details:</strong> Keep text, faces, and product edges away from the corners.</li>
+                        <li><strong>Check transparency:</strong> If the image will sit on a colored website background, verify that the corners are transparent rather than filled with white.</li>
+                        <li><strong>Use a suitable output format:</strong> PNG supports transparency; JPEG does not support transparent pixels.</li>
+                        <li><strong>Preview at the final size:</strong> An effect that looks good when zoomed in may appear different when displayed as a small card or thumbnail.</li>
+                    </ul>
+                </section>
+
+                <!-- FAQ -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-circle-question"></i> Answers</span>
+                    <h2>Frequently asked questions</h2>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>How do I round image corners online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Upload your image to the QuickToolsPK Rounded Corners tool, adjust the corner radius if supported, preview the result, and download the edited image.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I round the corners of a JPG image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">You can use a JPG if it is supported by the tool. However, JPG does not support transparent corners. If you need transparency, export to a format such as PNG if available.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I control how rounded the corners are?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">If the tool includes a corner-radius control, you can adjust the curve from subtle to more pronounced. Preview the image at its intended display size before exporting.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Will rounding the corners crop my photo?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">The effect should round the corners rather than unnecessarily crop the main image. However, the actual output depends on how the tool is implemented, so check the preview and exported image.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>How can I make the corners transparent?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Use an export option that supports transparency, such as PNG with an alpha channel, if the tool provides it. Confirm that the exported file actually contains transparent corners.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is the best corner radius for product images?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">A subtle or moderate radius is a good starting point for many product images. The best choice depends on the product, the layout, and the visual style of your store.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I use rounded images on my website?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Yes. Rounded images are commonly used in website cards, galleries, blog thumbnails, and portfolio layouts. Make sure the output fits the dimensions and background of the intended design.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Does rounding corners reduce image quality?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">Rounding corners does not inherently require reducing image resolution. The final quality can still depend on resizing, export format, and compression settings.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I turn a rounded rectangle into a circle?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">A circle is a different shape from a rounded rectangle. For a circular image, use a dedicated Circle Crop tool rather than simply increasing the corner radius.</div>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Can I round the corners of a transparent PNG?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                            <div class="faq-answer">If the tool supports PNG input, you can apply rounded corners to an image that already has transparency. Verify that the export preserves the original transparent areas as intended.</div>
+                        </details>
+                    </div>
+                </section>
+
+                <!-- RELATED TOOLS -->
+                <section class="content-block reveal">
+                    <span class="section-eyebrow"><i class="fas fa-link"></i> Keep exploring</span>
+                    <h2>Related Image Tools</h2>
+                    <div class="related-grid">
+                        <a class="related-link" href="circle-crop-image.html"><i class="fas fa-circle"></i> Crop an image into a circle</a>
+                        <a class="related-link" href="image-borders-padding.html"><i class="fas fa-border-all"></i> Add borders or padding</a>
+                        <a class="related-link" href="img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Resize an image</a>
+                        <a class="related-link" href="img-compress.html"><i class="fas fa-compress-arrows-alt"></i> Compress an image</a>
+                        <a class="related-link" href="img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Convert image formats</a>
+                        <a class="related-link" href="index.html#image-tools"><i class="fas fa-images"></i> All Image Tools</a>
+                    </div>
+                </section>
+
+            </div>
+            <!-- end content-shell -->
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="img-compress.html">Image Compressor</a></li>
+                        <li><a href="img-resizer.html">Image Resizer</a></li>
+                        <li><a href="img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="rounded-corners-image.html">Rounded Corners</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="index.html#image-tools">Image Tools</a></li>
+                        <li><a href="index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="index.html#image-tools">Converters</a></li>
+                        <li><a href="img-compress.html">Compressors</a></li>
+                        <li><a href="blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+
+        /* ===== Tool Logic ===== */
+        const fileInput = document.getElementById('file-input');
+        const uploadArea = document.getElementById('upload-area');
+        const editorPanel = document.getElementById('editor-panel');
+        const previewImg = document.getElementById('preview-img');
+        const previewImgWrapper = document.getElementById('preview-img-wrapper');
+        const downloadBtn = document.getElementById('download-btn');
+        const resetToolBtn = document.getElementById('reset-tool-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Controls
+        const radiusSlider = document.getElementById('radius-slider');
+        const radiusNum = document.getElementById('radius-num');
+
+        let uploadedImage = null;
+        let uploadedFile = null;
+        let originalDataUrl = null;
+        let currentRadius = 20;
+
+        // Upload interactions
+        uploadArea.addEventListener('click', function () { fileInput.click(); });
+        fileInput.addEventListener('change', function (e) {
+            if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+        });
+        uploadArea.addEventListener('dragover', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', function (e) { e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover'); });
+        uploadArea.addEventListener('drop', function (e) {
+            e.preventDefault(); e.stopPropagation(); uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+            if (validTypes.indexOf(file.type) === -1) {
+                showNotification('We couldn\'t open this image. Try another supported file.', 'error');
+                return;
+            }
+            if (file.size > 20 * 1024 * 1024) {
+                showNotification('File is too large. Please choose an image under 20 MB.', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                originalDataUrl = e.target.result;
+                uploadedFile = file;
+                const img = new Image();
+                img.onload = function () {
+                    uploadedImage = img;
+                    uploadArea.style.display = 'none';
+                    editorPanel.style.display = 'block';
+                    
+                    // Reset controls
+                    currentRadius = 20;
+                    radiusSlider.value = currentRadius;
+                    radiusNum.value = currentRadius;
+                    
+                    updatePreview();
+                    showNotification('Image loaded. Adjust the corner radius.');
+                };
+                img.onerror = function () {
+                    showNotification('We couldn\'t open this image. Try another supported file.', 'error');
+                };
+                img.src = originalDataUrl;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Sync inputs
+        function updateRadius(val) {
+            currentRadius = val;
+            radiusSlider.value = val;
+            radiusNum.value = val;
+            updatePreview();
+        }
+
+        radiusSlider.addEventListener('input', function() {
+            updateRadius(parseInt(this.value, 10));
+        });
+
+        radiusNum.addEventListener('change', function() {
+            let val = parseInt(this.value, 10);
+            if (isNaN(val)) val = 0;
+            if (val < 0) val = 0;
+            if (val > 150) val = 150;
+            updateRadius(val);
+        });
+
+        function updatePreview() {
+            if (!uploadedImage) return;
+            
+            previewImg.src = originalDataUrl;
+            
+            // Apply border radius to the wrapper
+            // To make it scale properly, we use percentages or exact pixels.
+            // Using exact pixels mapped to the displayed size.
+            // But CSS border-radius in px will look different on different screen sizes.
+            // Instead, we can apply it directly and scale visually.
+            const maxPreviewDim = 350;
+            const ratio = Math.min(maxPreviewDim / uploadedImage.width, maxPreviewDim / uploadedImage.height, 1);
+            
+            // Limit displayed size
+            previewImg.style.maxWidth = (uploadedImage.width * ratio) + 'px';
+            previewImg.style.maxHeight = (uploadedImage.height * ratio) + 'px';
+            
+            // Apply radius (scaled to the display size)
+            // The radius input is 0-150. We apply it to the displayed image.
+            // Wait, if we want it to be exact to the image pixels, we should use percentages
+            // or calculate the scaled radius.
+            // Let's use scaled radius so WYSIWYG matches the slider.
+            const displayRadius = currentRadius * ratio;
+            previewImgWrapper.style.borderRadius = displayRadius + 'px';
+        }
+
+        // Download logic
+        downloadBtn.addEventListener('click', function() {
+            if (!uploadedImage) return;
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const w = uploadedImage.width;
+            const h = uploadedImage.height;
+            
+            canvas.width = w;
+            canvas.height = h;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, w, h);
+            
+            // Draw rounded rectangle path
+            const r = currentRadius;
+            
+            ctx.beginPath();
+            if (r > 0) {
+                if (w < 2 * r) r = w / 2;
+                if (h < 2 * r) r = h / 2;
+                ctx.moveTo(r, 0);
+                ctx.arcTo(w, 0, w, h, r);
+                ctx.arcTo(w, h, 0, h, r);
+                ctx.arcTo(0, h, 0, 0, r);
+                ctx.arcTo(0, 0, w, 0, r);
+            } else {
+                ctx.rect(0, 0, w, h);
+            }
+            ctx.closePath();
+            ctx.clip();
+            
+            // Draw image
+            ctx.drawImage(uploadedImage, 0, 0);
+            
+            // Export as PNG to preserve transparency
+            const link = document.createElement('a');
+            const originalName = uploadedFile.name.replace(/\.[^.]+$/, '');
+            link.download = originalName + '-rounded.png';
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('Your rounded-corner image is ready to download.');
+        });
+
+        // Reset tool
+        resetToolBtn.addEventListener('click', function() {
+            uploadedImage = null;
+            uploadedFile = null;
+            originalDataUrl = null;
+            fileInput.value = '';
+            
+            currentRadius = 20;
+            radiusSlider.value = 20;
+            radiusNum.value = 20;
+            
+            uploadArea.style.display = 'block';
+            editorPanel.style.display = 'none';
+            previewImg.src = '';
+            previewImgWrapper.style.borderRadius = '0';
+            
+            showNotification('Tool reset.');
+        });
+
+        function showNotification(message, type) {
+            toastMessage.textContent = message;
+            toast.className = 'toast';
+            if (type === 'error') toast.classList.add('error');
+            toast.classList.add('show');
+            clearTimeout(showNotification._t);
+            showNotification._t = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 3200);
+        }
+    })();
+    </script>
+</body>
+</html>
