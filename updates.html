@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Updates & Changelog | QuickToolsPK</title>
+    <meta name="description" content="Discover the latest updates, new tools, and features added to QuickToolsPK.">
+    <meta name="keywords" content="QuickToolsPK updates, changelog, new tools, site updates">
+    <link rel="canonical" href="https://quicktoolspk.com/updates.html">
+
+    <meta property="og:title" content="Updates & Changelog | QuickToolsPK">
+    <meta property="og:description" content="Discover the latest updates, new tools, and features added to QuickToolsPK.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolspk.com/updates.html">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (DARK BACKGROUNDS)
+           ============================================================ */
+        .sky-bg {
+            position: relative; overflow: hidden;
+        }
+        
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+
+        .page-head {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        .page-head h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        .page-head p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .badge-new {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--success-soft); color: var(--success);
+            padding: 0.4rem 1rem; border-radius: var(--r-full);
+            font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* ============================================================
+           TIMELINE LAYOUT
+           ============================================================ */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 2rem;
+            width: 2px;
+            background: var(--border-strong);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 5rem;
+            margin-bottom: 3rem;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        /* Timeline dot */
+        .timeline-dot {
+            position: absolute;
+            left: 1.35rem;
+            top: 0.25rem;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 3px solid var(--primary);
+            z-index: 2;
+            box-shadow: 0 0 0 4px var(--bg);
+        }
+        .timeline-item:nth-child(even) .timeline-dot {
+            border-color: var(--teal);
+        }
+
+        /* Date Tag */
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: var(--primary-soft);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--r-full);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .timeline-item:nth-child(even) .timeline-date {
+            color: #0f766e;
+            background: var(--teal-soft);
+        }
+
+        /* Card */
+        .timeline-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .timeline-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: #bfd4f7;
+        }
+
+        .timeline-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--navy);
+        }
+        .timeline-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+        
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-subtle);
+            background: var(--bg);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border);
+        }
+        .tag.tool { color: var(--primary-dark); background: var(--primary-soft); border-color: transparent; }
+        .tag.blog { color: var(--warning); background: var(--warning-soft); border-color: transparent; }
+
+        /* Dark Update Card */
+        .timeline-card.dark-card {
+            background: var(--gradient-navy);
+            border-color: transparent;
+            color: #fff;
+        }
+        .timeline-card.dark-card h2 { color: #fff; }
+        .timeline-card.dark-card p { color: #c7d3e6; }
+        .timeline-card.dark-card .tag { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #e2e8f0; }
+
+        /* Read Article Button */
+        .read-article-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; 
+            padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 600;
+            text-decoration: none; border-radius: var(--r-full); 
+            border: 1px solid var(--border-strong); background: transparent; 
+            color: var(--primary-dark); transition: all var(--t-fast);
+            margin-top: 1rem;
+        }
+        .read-article-btn:hover {
+            background: var(--primary-soft); border-color: var(--primary);
+        }
+        .dark-card .read-article-btn {
+            color: #fff; border-color: rgba(255,255,255,0.3);
+        }
+        .dark-card .read-article-btn:hover {
+            background: rgba(255,255,255,0.1); border-color: #fff;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 0; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .timeline::before { left: 1.5rem; }
+            .timeline-item { padding-left: 3.5rem; }
+            .timeline-dot { left: 0.85rem; width: 1.1rem; height: 1.1rem; }
+            .timeline-card { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <div class="page-head reveal">
+                <span class="badge-new"><i class="fas fa-sparkles"></i> Changelog</span>
+                <h1>What's New on QuickToolsPK</h1>
+                <p>Discover the latest tools, features, and improvements we've added to make your workflow faster and easier.</p>
+            </div>
+
+            <div class="timeline reveal">
+                
+                <!-- Update 1 (Latest - WNBA) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 29, 2026</span>
+                    <div class="timeline-card dark-card">
+                        <h2>WNBA Finals: Valkyries vs Dream Game 6</h2>
+                        <p>We published a live match report for Game 6 of the WNBA Finals. Check out the details on the score, where to watch, Allisha Gray's performance, and whether the series will go to a Game 7.</p>
+                        <div class="timeline-tags">
+                            <span class="tag blog">Blog</span>
+                            <span class="tag blog">WNBA</span>
+                            <span class="tag blog">Basketball</span>
+                        </div>
+                        <a href="/blog/update/valkyries-vs-dream-game-6.html" class="read-article-btn">
+                            Read Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Update 2 (Saudi Pro League) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 29, 2026</span>
+                    <div class="timeline-card">
+                        <h2>Saudi Pro League: Al Nassr vs Al Kholood</h2>
+                        <p>Read our full match report for Al Nassr's 2-0 victory over Al Kholood. We cover Sadio Mané and Iñigo Martínez's goals, Cristiano Ronaldo's performance, and the late penalty save.</p>
+                        <div class="timeline-tags">
+                            <span class="tag blog">Blog</span>
+                            <span class="tag blog">Football</span>
+                            <span class="tag blog">Saudi Pro League</span>
+                        </div>
+                        <a href="/blog/update/al-nassr-vs-al-kholood.html" class="read-article-btn">
+                            Read Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Update 3 (NFL) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 29, 2026</span>
+                    <div class="timeline-card">
+                        <h2>NFL Blockbuster Trade: Jeffery Simmons</h2>
+                        <p>The Chicago Bears acquired star defensive tackle Jeffery Simmons from the Tennessee Titans. Read our deep-dive analysis on the trade terms, contract details, and what it means for both teams.</p>
+                        <div class="timeline-tags">
+                            <span class="tag blog">Blog</span>
+                            <span class="tag blog">NFL</span>
+                            <span class="tag blog">Football</span>
+                        </div>
+                        <a href="/blog/update/jeffery-simmons-bears-titans-trade.html" class="read-article-btn">
+                            Read Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Update 4 (Design Refresh) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 29, 2026</span>
+                    <div class="timeline-card">
+                        <h2>Sports News & New Design Refresh</h2>
+                        <p>We've launched a dedicated sports news section! Check out our deep-dive match reports and breaking stories. We also introduced a fresh, modern design for all our articles with alternating light and dark sections, plus an animated sky background.</p>
+                        <div class="timeline-tags">
+                            <span class="tag blog">Blog</span>
+                            <span class="tag">UI Update</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update 5 (New Tools) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 28, 2026</span>
+                    <div class="timeline-card">
+                        <h2>New Image Tools Added</h2>
+                        <p>We added two highly requested tools to our image suite: the <strong>Image Requirement Checker</strong> to help you verify dimensions before uploads, and the <strong>Redact Image</strong> tool for securely hiding sensitive information.</p>
+                        <div class="timeline-tags">
+                            <span class="tag tool">New Tool</span>
+                            <span class="tag">Image Tools</span>
+                            <span class="tag">Privacy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update 6 (Social Media) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 25, 2026</span>
+                    <div class="timeline-card">
+                        <h2>Social Media Resizer Suite Expanded</h2>
+                        <p>You can now create perfectly sized images for LinkedIn, X (Twitter), and Facebook directly on QuickToolsPK. We've added custom presets for banners, profile photos, and feed posts.</p>
+                        <div class="timeline-tags">
+                            <span class="tag tool">New Tool</span>
+                            <span class="tag">Social Media</span>
+                            <span class="tag">Resizers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update 7 (Performance) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 20, 2026</span>
+                    <div class="timeline-card">
+                        <h2>Performance & Speed Improvements</h2>
+                        <p>We've optimized the backend and frontend of QuickToolsPK. Tools like the <strong>Image Compressor</strong> and <strong>Image Format Converter</strong> now process files up to 40% faster while using less memory.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Performance</span>
+                            <span class="tag">Bug Fixes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update 8 (Passport) -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">October 15, 2026</span>
+                    <div class="timeline-card">
+                        <h2>Passport & Visa Photo Makers</h2>
+                        <p>Preparing for travel is now easier. Our new Passport and Visa photo makers let you crop your photos to exact country-specific dimensions (like 2x2 inches or 35x45 mm) with a single click.</p>
+                        <div class="timeline-tags">
+                            <span class="tag tool">New Tool</span>
+                            <span class="tag">Photo Maker</span>
+                            <span class="tag">Travel</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
