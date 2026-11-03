@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>2026 Midterm Election Results: Live Senate, House &amp; Texas Updates | QuickToolsPK</title>
+    <meta name="description" content="Follow the 2026 US midterm election results with updates on Senate and House races, Republicans vs Democrats, Texas voting, poll closing times and when results will be announced.">
+    <meta name="keywords" content="2026 midterm election results, US midterm elections, election results 2026, midterm results, live election results, Republican vs Democrat, Texas election results, voting results, Election Day 2026, when will midterm results come out, poll closing times, Senate races, election updates">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/updates/2026-midterm-election-results.html">
+
+    <meta property="og:title" content="2026 Midterm Election Results: Live Senate, House & Texas Updates">
+    <meta property="og:description" content="Follow the 2026 US midterm election results with updates on Senate and House races, Republicans vs Democrats, Texas voting, poll closing times and when results will be announced.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quicktoolspk.com/blog/updates/2026-midterm-election-results.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="2026 Midterm Election Results: Live Senate, House & Texas Updates">
+    <meta name="twitter:description" content="Follow the 2026 US midterm election results, Senate and House races, and Texas voting updates.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+        .status-badge {
+            background: var(--danger-soft); color: var(--danger);
+            padding: 0.15rem 0.5rem; border-radius: 4px;
+            font-weight: 600; font-size: 0.75rem;
+        }
+        .status-badge.live {
+            background: var(--danger); color: #fff;
+            animation: pulseLive 2s infinite;
+        }
+        @keyframes pulseLive {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.65; }
+        }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; }
+        .article-content a:hover { color: var(--primary); }
+
+        /* ============================================================
+           IMAGE STYLES (only featured)
+           ============================================================ */
+        .img-large {
+            width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm); background-color: var(--bg);
+            aspect-ratio: 16/9; object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem; color: var(--text-subtle); text-align: center;
+            margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic;
+        }
+
+        /* ============================================================
+           LIVE UPDATE BANNER
+           ============================================================ */
+        .live-banner {
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 0.75rem;
+            background: var(--danger-soft); border: 1px solid #f5c6c6;
+            border-left: 4px solid var(--danger);
+            border-radius: var(--r-sm); padding: 0.85rem 1rem;
+            margin-bottom: 1.5rem; font-size: 0.92rem; color: var(--navy-soft);
+        }
+        .live-banner-left { display: flex; align-items: center; gap: 0.6rem; }
+        .live-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--danger); flex-shrink: 0;
+            animation: pulseLive 1.5s infinite;
+            box-shadow: 0 0 0 0 rgba(220,38,38,0.6);
+        }
+        .live-banner strong { color: var(--danger); }
+        .live-banner time {
+            font-size: 0.78rem; color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ============================================================
+           QUICK FACTS CARD (Election snapshot)
+           ============================================================ */
+        .election-snapshot {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 1.75rem 1.5rem; margin: 1.5rem 0; position: relative;
+            overflow: hidden;
+        }
+        .election-snapshot .stars { opacity: 0.4; }
+        .election-snapshot h3 {
+            color: #fff; font-size: 1.15rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.15);
+            position: relative; z-index: 2;
+        }
+        .election-snapshot .fact-row {
+            display: flex; justify-content: space-between; gap: 1rem;
+            padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: relative; z-index: 2; font-size: 0.9rem;
+        }
+        .election-snapshot .fact-row:last-child { border-bottom: none; }
+        .election-snapshot .fact-label { color: #a9b8ce; font-weight: 500; }
+        .election-snapshot .fact-value { color: #fff; font-weight: 600; text-align: right; }
+
+        /* ============================================================
+           PARTY COMPARISON CARDS
+           ============================================================ */
+        .party-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) { .party-grid { grid-template-columns: 1fr; } }
+        .party-card {
+            border-radius: var(--r-md); padding: 1.25rem; border: 1px solid var(--border);
+            background: var(--bg);
+        }
+        .party-card.republican { border-left: 4px solid #c0392b; }
+        .party-card.democrat { border-left: 4px solid #2563eb; }
+        .party-card .party-icon {
+            width: 38px; height: 38px; border-radius: 50%;
+            display: grid; place-items: center; color: #fff;
+            font-size: 1rem; margin-bottom: 0.75rem;
+        }
+        .party-card.republican .party-icon { background: #c0392b; }
+        .party-card.democrat .party-icon { background: #2563eb; }
+        .party-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .party-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+        /* ============================================================
+           SEAT CONTROL CARDS
+           ============================================================ */
+        .control-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem; margin: 1.5rem 0;
+        }
+        .control-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-md); padding: 1.25rem;
+            box-shadow: var(--shadow-xs);
+        }
+        .control-card h4 {
+            font-size: 0.95rem; margin-bottom: 0.6rem; color: var(--navy);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .control-card h4 i { color: var(--primary); font-size: 0.9rem; }
+        .control-card .control-big {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem; font-weight: 800; color: var(--primary-dark);
+            line-height: 1; margin: 0.4rem 0;
+        }
+        .control-card .control-label {
+            font-size: 0.72rem; color: var(--text-subtle); text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 600;
+        }
+        .control-card .control-note {
+            font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+            margin-top: 0.5rem;
+        }
+
+        /* ============================================================
+           RACE STATUS BADGES
+           ============================================================ */
+        .race-list { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.5rem 0; }
+        .race-row {
+            display: flex; align-items: center; gap: 0.75rem;
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-sm); padding: 0.7rem 0.95rem;
+            font-size: 0.92rem;
+        }
+        .race-state {
+            font-weight: 700; color: var(--navy); min-width: 100px;
+        }
+        .race-type { font-size: 0.78rem; color: var(--text-subtle); flex-shrink: 0; }
+        .race-status {
+            margin-left: auto; font-size: 0.7rem; font-weight: 700;
+            padding: 0.15rem 0.5rem; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 0.03em;
+            flex-shrink: 0;
+        }
+        .race-status.watch { background: var(--warning-soft); color: var(--warning); }
+        .race-status.call { background: var(--success-soft); color: var(--success); }
+        .race-status.pending { background: var(--bg-alt); color: var(--text-muted); }
+
+        /* ============================================================
+           POLL CLOSING TIMELINE
+           ============================================================ */
+        .poll-timeline { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+        .poll-row {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 0.65rem 0; border-bottom: 1px solid var(--border);
+        }
+        .poll-row:last-child { border-bottom: none; }
+        .poll-time {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; color: var(--primary-dark);
+            font-size: 0.9rem; min-width: 90px; flex-shrink: 0;
+        }
+        .poll-regions { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+
+        /* ============================================================
+           TERM DEFINITIONS
+           ============================================================ */
+        .term-list { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.5rem 0; }
+        .term-row {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-sm); padding: 0.7rem 1rem;
+            font-size: 0.92rem;
+        }
+        .term-row strong { color: var(--navy); margin-right: 0.5rem; }
+
+        /* ============================================================
+           INFO CALLOUTS
+           ============================================================ */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem; background: var(--primary-soft);
+            border-left: 4px solid var(--primary); border-radius: var(--r-sm);
+            margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+        .callout.success { background: var(--success-soft); border-left-color: var(--success); }
+        .callout.success i { color: var(--success); }
+
+        /* ============================================================
+           CANDIDATE CARDS
+           ============================================================ */
+        .candidate-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;
+        }
+        @media (max-width: 600px) { .candidate-grid { grid-template-columns: 1fr; } }
+        .candidate-card {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); padding: 1.25rem;
+            display: flex; align-items: center; gap: 0.85rem;
+        }
+        .candidate-avatar {
+            width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+            display: grid; place-items: center; color: #fff;
+            font-weight: 700; font-size: 1rem;
+        }
+        .candidate-card.republican .candidate-avatar { background: #c0392b; }
+        .candidate-card.democrat .candidate-avatar { background: #2563eb; }
+        .candidate-card h4 { font-size: 0.95rem; margin-bottom: 0.15rem; color: var(--navy); }
+        .candidate-card p {
+            font-size: 0.82rem; color: var(--text-muted); margin: 0;
+            text-transform: uppercase; letter-spacing: 0.03em;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 1.5rem 0;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-alt); font-weight: 700; color: var(--navy);
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .tracker-links { display: flex; flex-direction: column; gap: 0.5rem; }
+        .tracker-link {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.55rem 0.7rem; border-radius: var(--r-sm);
+            background: var(--bg); border: 1px solid var(--border);
+            text-decoration: none; font-size: 0.85rem; color: var(--text);
+            transition: border-color var(--t-fast), background var(--t-fast);
+        }
+        .tracker-link:hover { border-color: var(--primary); background: var(--primary-soft); color: var(--primary-dark); }
+        .tracker-link i { color: var(--primary); font-size: 0.8rem; flex-shrink: 0; }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .election-snapshot .fact-row { flex-direction: column; gap: 0.15rem; }
+            .election-snapshot .fact-value { text-align: left; }
+            .live-banner { flex-direction: column; align-items: flex-start; }
+            .poll-time { min-width: 75px; font-size: 0.82rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>US Elections</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">US Elections</span>
+                        <h1>2026 US Midterm Elections: Live Results, Voting Updates, Senate &amp; House Races</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Updated: November 3–4, 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min read</span>
+                            <span class="status-badge live">● Live Updates</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+
+                        <!-- ============ LIVE UPDATE BANNER ============ -->
+                        <div class="live-banner">
+                            <div class="live-banner-left">
+                                <span class="live-dot"></span>
+                                <span><strong>Election Day:</strong> Americans are voting in the 2026 midterms. Results are still being counted.</span>
+                            </div>
+                            <time><i class="far fa-clock"></i> Last updated: Nov 3, 2026 · ET</time>
+                        </div>
+
+                        <div class="callout warning">
+                            <i class="fas fa-globe"></i>
+                            <span><strong>Time zone note:</strong> Editorial status prepared for November 3, 2026 (US Election Day). Some American readers may see November 3, while readers in Pakistan see November 4 due to the time difference. This is not a final-results article.</span>
+                        </div>
+
+                        <!-- ============ LARGE FEATURED IMAGE ============ -->
+                        <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                             alt="2026 US midterm election results, with the United States Capitol and American flag"
+                             class="img-large">
+                        <p class="image-caption">Americans vote in the 2026 midterm elections as Republicans and Democrats compete for control of Congress. (Replace with a properly licensed editorial photograph.)</p>
+
+                        <h2>2026 Midterm Elections: What Is Happening Today?</h2>
+                        <p>Millions of Americans are voting in the <strong>2026 United States midterm elections</strong> on Tuesday, November 3. The elections will determine the balance of power in Congress, decide dozens of gubernatorial contests and shape political leadership across the country.</p>
+
+                        <p>All <strong>435 seats in the US House of Representatives</strong> are being contested, along with <strong>35 seats in the US Senate</strong>. Voters in <strong>36 states</strong> are also choosing governors. In addition, state and local elections and ballot measures are appearing on ballots around the country.</p>
+
+                        <p>The main national question is whether Republicans will retain control of Congress or Democrats will gain enough seats to take control of one or both chambers.</p>
+
+                        <p>President Donald Trump is not running for president in this election. However, his administration, policies and approval ratings are major issues in the political debate. Midterm elections often act as a public assessment of the party holding the White House.</p>
+
+                        <p>More than <strong>59 million Americans</strong> had already voted before Election Day, according to reporting citing the University of Florida Election Lab.</p>
+
+                        <!-- ============ ELECTION SNAPSHOT CARD ============ -->
+                        <div class="election-snapshot sky-bg">
+                            <div class="stars"></div>
+                            <h3><i class="fas fa-landmark" style="margin-right:6px;"></i> 2026 Midterms at a Glance</h3>
+                            <div class="fact-row"><span class="fact-label">Election Day</span><span class="fact-value">Tuesday, Nov 3, 2026</span></div>
+                            <div class="fact-row"><span class="fact-label">House seats</span><span class="fact-value">All 435</span></div>
+                            <div class="fact-row"><span class="fact-label">Senate seats</span><span class="fact-value">35</span></div>
+                            <div class="fact-row"><span class="fact-label">Governorships</span><span class="fact-value">36 states</span></div>
+                            <div class="fact-row"><span class="fact-label">House majority</span><span class="fact-value">218 seats</span></div>
+                            <div class="fact-row"><span class="fact-label">Senate before election</span><span class="fact-value">53–47 Republican</span></div>
+                            <div class="fact-row"><span class="fact-label">Early votes cast</span><span class="fact-value">59+ million</span></div>
+                        </div>
+
+                        <h2>What Are the 2026 Midterm Elections?</h2>
+                        <p>Midterm elections are nationwide elections held halfway through a US president's four-year term. They take place every two years after presidential elections, meaning the 2026 midterms fall between the 2024 and 2028 presidential elections.</p>
+
+                        <p>Unlike a presidential election, voters are not choosing a new president in the 2026 midterms. Instead, they are electing members of Congress, governors, state legislators and other public officials.</p>
+
+                        <p>The results matter because Congress makes federal laws, approves government spending, conducts oversight of the executive branch and votes on important national policies.</p>
+
+                        <p>The party that controls Congress can have a major influence on the president's legislative agenda.</p>
+
+                        <h3>What Are Americans Voting For?</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Election</th><th>What voters decide</th></tr></thead>
+                                <tbody>
+                                    <tr><td>US House of Representatives</td><td>All 435 voting seats</td></tr>
+                                    <tr><td>US Senate</td><td>35 seats</td></tr>
+                                    <tr><td>State governors</td><td>36 governorships</td></tr>
+                                    <tr><td>State legislatures</td><td>State Senate and House seats</td></tr>
+                                    <tr><td>Local elections</td><td>Mayors, county officials and other local offices</td></tr>
+                                    <tr><td>Ballot measures</td><td>State and local policy proposals</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>The 2026 ballot includes issues such as abortion rights, congressional redistricting and a proposed billionaire tax in California. What appears on an individual ballot depends on the voter's state, district and local jurisdiction.</p>
+
+                        <h2>Republican Party vs Democratic Party: What Is at Stake?</h2>
+                        <p>The two main political parties competing in the 2026 midterms are the <strong>Republican Party</strong> and the <strong>Democratic Party</strong>.</p>
+
+                        <div class="party-grid">
+                            <div class="party-card republican">
+                                <div class="party-icon"><i class="fas fa-elephant"></i></div>
+                                <h4>Republican Party</h4>
+                                <p>Often associated with conservative policies, lower taxes, limited federal regulation, stronger border enforcement and a larger role for states in some policy areas.</p>
+                            </div>
+                            <div class="party-card democrat">
+                                <div class="party-icon"><i class="fas fa-dove"></i></div>
+                                <h4>Democratic Party</h4>
+                                <p>Often associated with progressive or liberal policies, expanded public services, environmental protections, reproductive rights and stronger federal action in some areas.</p>
+                            </div>
+                        </div>
+
+                        <div class="callout">
+                            <i class="fas fa-info-circle"></i>
+                            <span>These are broad political descriptions, not complete summaries of every candidate. Individual candidates can have different positions, even within the same party.</span>
+                        </div>
+
+                        <h3>Why Are Republicans and Democrats Competing for Congress?</h3>
+                        <p>Before Election Day, Republicans held a <strong>53–47 advantage in the Senate</strong>. The House was closely divided, with Republicans holding a narrow working majority.</p>
+
+                        <p>Democrats are seeking to win enough seats to take control of Congress. Republicans are trying to defend their existing majorities.</p>
+
+                        <p>The House majority threshold is <strong>218 seats</strong>. Senate control is more complicated: Republicans can retain effective control with 50 seats because the vice president can break a tie, while Democrats need 51 seats to control the chamber independently.</p>
+
+                        <p>The Associated Press reported that the election outcome could take days to determine.</p>
+
+                        <h2>2026 Midterm Election Results: Senate, House and Governors</h2>
+                        <p>The election results are being counted across the country. The following table explains what needs to happen for each party to win control.</p>
+
+                        <!-- ============ CONTROL THRESHOLD CARDS ============ -->
+                        <div class="control-grid">
+                            <div class="control-card">
+                                <h4><i class="fas fa-users"></i> US House</h4>
+                                <div class="control-big">218</div>
+                                <div class="control-label">Seats for majority</div>
+                                <p class="control-note">All 435 voting seats are up. The party reaching 218 controls the chamber.</p>
+                            </div>
+                            <div class="control-card">
+                                <h4><i class="fas fa-university"></i> US Senate</h4>
+                                <div class="control-big">50 / 51</div>
+                                <div class="control-label">Control thresholds</div>
+                                <p class="control-note">50 seats for GOP (with VP tie-break) · 51 seats for Democrats.</p>
+                            </div>
+                            <div class="control-card">
+                                <h4><i class="fas fa-flag"></i> Governors</h4>
+                                <div class="control-big">36</div>
+                                <div class="control-label">States voting</div>
+                                <p class="control-note">Each race decided by highest vote total in that state.</p>
+                            </div>
+                        </div>
+
+                        <div class="callout danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Live-results note:</strong> At the time this article was researched, the available sources did not establish a final national winner or a confirmed post-election balance of power. Do not publish a Republican or Democratic victory claim until the relevant race has been called or officially declared.</span>
+                        </div>
+
+                        <h3>US Senate Elections 2026</h3>
+                        <p>Thirty-five Senate contests are on the 2026 ballot, including regular elections and special elections. Some of the most closely watched races include:</p>
+
+                        <!-- ============ KEY RACES LIST ============ -->
+                        <div class="race-list">
+                            <div class="race-row"><span class="race-state">Texas</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">Georgia</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">North Carolina</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">Maine</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">Michigan</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">Ohio</span><span class="race-type">Senate</span><span class="race-status watch">Key race</span></div>
+                            <div class="race-row"><span class="race-state">Iowa</span><span class="race-type">Senate</span><span class="race-status pending">Awaiting results</span></div>
+                            <div class="race-row"><span class="race-state">Kansas</span><span class="race-type">Senate</span><span class="race-status pending">Awaiting results</span></div>
+                            <div class="race-row"><span class="race-state">Alaska</span><span class="race-type">Senate</span><span class="race-status pending">Ranked-choice</span></div>
+                            <div class="race-row"><span class="race-state">New Hampshire</span><span class="race-type">Senate</span><span class="race-status pending">Awaiting results</span></div>
+                            <div class="race-row"><span class="race-state">South Carolina</span><span class="race-type">Senate</span><span class="race-status pending">Awaiting results</span></div>
+                        </div>
+
+                        <p>The Senate is particularly important because it confirms many presidential appointments, votes on legislation and plays a central role in approving treaties and other constitutional responsibilities.</p>
+
+                        <h3>US House of Representatives Elections 2026</h3>
+                        <p>All <strong>435 voting seats</strong> in the House are up for election. Every congressional district across the 50 states has a House contest.</p>
+
+                        <p>A party needs at least <strong>218 seats</strong> to hold a majority. Even a relatively small number of competitive districts can therefore determine which party controls the chamber.</p>
+
+                        <p>House results may take longer to become clear than some Senate contests because hundreds of individual districts are reporting results separately. Close races, mail ballots and state counting procedures can delay calls.</p>
+
+                        <h3>Governor Elections 2026</h3>
+                        <p>Voters in <strong>36 states</strong> are choosing governors. Governors lead state executive branches and have responsibilities that include state budgets, public safety, education policy and implementing state laws.</p>
+
+                        <p>The outcome of gubernatorial elections can influence state-level policy even when the same party does not control the federal government.</p>
+
+                        <h2>Who Is Winning the 2026 Midterm Elections Right Now?</h2>
+                        <p>This is one of the most searched questions during Election Day, but the answer depends on which races have reported enough votes to make a reliable assessment.</p>
+
+                        <p>There is <strong>no single national popular vote</strong> that determines the winner of the midterms. Senate, House and governor contests are decided separately.</p>
+
+                        <p>A candidate can be leading in the reported vote while a large number of ballots remain uncounted. A lead is not the same as a confirmed win.</p>
+
+                        <h3>Key Terms You Should Know</h3>
+                        <div class="term-list">
+                            <div class="term-row"><strong>Leading</strong> Candidate currently has more reported votes.</div>
+                            <div class="term-row"><strong>Projected winner</strong> A news organisation believes the remaining vote cannot change the outcome.</div>
+                            <div class="term-row"><strong>Race called</strong> A results organisation has determined a winner based on its standards.</div>
+                            <div class="term-row"><strong>Unofficial results</strong> Preliminary totals reported before certification.</div>
+                            <div class="term-row"><strong>Certified results</strong> Results formally approved by the relevant election authority.</div>
+                        </div>
+
+                        <p>The Associated Press says it declares a winner only when it determines there is no plausible scenario in which the trailing candidate could catch up. It does not require every ballot to be counted before calling a race.</p>
+
+                        <h2>When Will 2026 Midterm Election Results Be Announced?</h2>
+                        <p>There is <strong>no single time</strong> when all US midterm election results are announced.</p>
+
+                        <p>Results begin appearing after polling places close and election officials begin releasing unofficial vote totals. Media organisations then analyse the reported numbers and may call individual races when the outcome becomes clear.</p>
+
+                        <p>Some races may be called on Election Night. Others can take several days, particularly when the vote is close or when large numbers of mail ballots remain to be processed.</p>
+
+                        <p>In previous elections, the AP did not call control of the Senate until four days after the 2022 midterms, while control of the House took eight days. In 2024, Senate control was called the following day, while the House took eight days. These are historical examples, not a prediction of the 2026 timetable.</p>
+
+                        <h2>What Time Do Polls Close on Election Day 2026?</h2>
+                        <p>Poll closing times vary by state and sometimes by county or time zone. The following schedule uses Eastern Time (ET).</p>
+
+                        <!-- ============ POLL CLOSING TIMELINE ============ -->
+                        <div class="poll-timeline">
+                            <div class="poll-row"><span class="poll-time">6:00 PM ET</span><span class="poll-regions">Parts of Indiana and Kentucky</span></div>
+                            <div class="poll-row"><span class="poll-time">7:00 PM ET</span><span class="poll-regions">Georgia, South Carolina, Vermont, Virginia and other locations</span></div>
+                            <div class="poll-row"><span class="poll-time">7:30 PM ET</span><span class="poll-regions">North Carolina, Ohio and West Virginia</span></div>
+                            <div class="poll-row"><span class="poll-time">8:00 PM ET</span><span class="poll-regions">Many eastern and central states, including most Texas polling locations</span></div>
+                            <div class="poll-row"><span class="poll-time">8:30 PM ET</span><span class="poll-regions">Arkansas</span></div>
+                            <div class="poll-row"><span class="poll-time">9:00 PM ET</span><span class="poll-regions">Arizona, Colorado, Iowa, Minnesota, New York and other states</span></div>
+                            <div class="poll-row"><span class="poll-time">10:00 PM ET</span><span class="poll-regions">Montana, Nevada, Utah and some other locations</span></div>
+                            <div class="poll-row"><span class="poll-time">11:00 PM ET</span><span class="poll-regions">California, Washington and parts of other western states</span></div>
+                            <div class="poll-row"><span class="poll-time">Midnight ET</span><span class="poll-regions">Hawaii and most of Alaska</span></div>
+                            <div class="poll-row"><span class="poll-time">1:00 AM ET</span><span class="poll-regions">Final polling locations in Alaska's western Aleutian Islands</span></div>
+                        </div>
+
+                        <div class="callout">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>This is a national guide, not a substitute for checking an individual polling location. Some states span multiple time zones, and local closing times can differ.</span>
+                        </div>
+
+                        <h2>Texas Election Results 2026: Senate, Governor and Local Races</h2>
+                        <p><strong>Texas</strong> is one of the major states to watch in the 2026 midterm elections. Voters are deciding federal, statewide, legislative, judicial and local contests.</p>
+
+                        <p>The Texas ballot includes a closely watched <strong>US Senate race</strong> between Republican Ken Paxton and Democrat James Talarico.</p>
+
+                        <h3>Texas Senate Candidates</h3>
+                        <div class="candidate-grid">
+                            <div class="candidate-card republican">
+                                <div class="candidate-avatar">KP</div>
+                                <div>
+                                    <h4>Ken Paxton</h4>
+                                    <p>Republican · US Senate</p>
+                                </div>
+                            </div>
+                            <div class="candidate-card democrat">
+                                <div class="candidate-avatar">JT</div>
+                                <div>
+                                    <h4>James Talarico</h4>
+                                    <p>Democrat · US Senate</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>These candidates are listed on the Texas Secretary of State's November 3 election results page.</p>
+
+                        <h3>Texas Poll Closing Times</h3>
+                        <p>Texas polls generally open at <strong>7 a.m. local time</strong> and close at <strong>7 p.m. local time</strong>. Most of the state uses Central Time, while the westernmost part of Texas uses Mountain Time.</p>
+
+                        <p>In Eastern Time, most Texas polls close at <strong>9 p.m.</strong> and the westernmost locations close at <strong>10 p.m.</strong></p>
+
+                        <h2>What Are the Most Important Issues in the 2026 Midterms?</h2>
+                        <p>The election is not only about party control. Voters are also expressing their views on policy and the direction of the country.</p>
+
+                        <ul>
+                            <li><strong>Economy and cost of living:</strong> Prices, household budgets, housing costs, employment and economic conditions are important issues in national political coverage.</li>
+                            <li><strong>President Donald Trump's policies:</strong> The election is an important test of voter opinion about the President and the Republican administration.</li>
+                            <li><strong>Immigration and border policy:</strong> Immigration and border enforcement remain major points of disagreement between Republicans and Democrats.</li>
+                            <li><strong>Healthcare and reproductive rights:</strong> Healthcare costs, access to medical services and abortion policy are central issues in a number of state and national contests.</li>
+                            <li><strong>Foreign policy:</strong> Foreign policy, including the administration's approach to international conflicts, is part of the national political debate.</li>
+                            <li><strong>Redistricting and voting rules:</strong> Changes to congressional district boundaries and debates about election administration are also attracting attention in 2026.</li>
+                        </ul>
+
+                        <h2>Polls vs Voting Results: What's the Difference?</h2>
+                        <p>Many people search for terms such as "poll results today," "2026 polls" and "polls right now." These terms can refer to two different things.</p>
+
+                        <p><strong>Opinion polls</strong> ask a sample of people which candidate or party they support. They are conducted before or during a campaign to measure public opinion.</p>
+
+                        <p><strong>Voting results</strong> are based on actual ballots cast by eligible voters and counted by election officials.</p>
+
+                        <div class="callout warning">
+                            <i class="fas fa-balance-scale"></i>
+                            <span>A candidate leading in an opinion poll has <strong>not won</strong> an election. Likewise, a candidate leading in early vote returns may lose the lead as additional ballots are counted.</span>
+                        </div>
+
+                        <h2>How Are Votes Counted in the United States?</h2>
+                        <p>The voting and counting process varies by state, but generally includes several steps.</p>
+
+                        <ol>
+                            <li><strong>Ballot submission:</strong> Voters cast ballots in person, by mail or through an approved early voting process.</li>
+                            <li><strong>Voter verification:</strong> Election officials check eligibility and follow the state's procedures.</li>
+                            <li><strong>Ballot processing:</strong> Mail ballots and other ballots are prepared for counting under state rules.</li>
+                            <li><strong>Vote tabulation:</strong> Voting machines or approved counting procedures record the votes.</li>
+                            <li><strong>Unofficial reporting:</strong> Local election officials release preliminary totals.</li>
+                            <li><strong>Race calls:</strong> News organisations assess the reported results and determine whether a winner can be called.</li>
+                            <li><strong>Certification:</strong> Election authorities complete the formal canvass and certify the results according to state law.</li>
+                        </ol>
+
+                        <p>A reported result can change as more ballots are processed. This is why an early lead should not automatically be treated as a victory.</p>
+
+                        <h2>Frequently Asked Questions About the 2026 Midterm Elections</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. When were the 2026 US midterm elections?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">The 2026 US midterm elections took place on Tuesday, November 3, 2026.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. What are midterm elections?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Midterm elections are elections held halfway through a US president's four-year term. They determine congressional seats and include many state and local elections.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Who is winning the 2026 midterm elections?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">There is no single national winner. Senate, House and governor races are decided individually. Check the live results trackers for the latest reported counts and race calls.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. When will the midterm election results be announced?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Some results can be reported on Election Night, while close races may take several days. The final certification process can take longer.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. What time do polls close on Election Day?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Poll closing times vary by state and local jurisdiction. The first polling locations close at 6 p.m. ET, while the final locations in Alaska close at approximately 1 a.m. ET on Wednesday.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. What time do polls close in Texas?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Most Texas polling locations close at 7 p.m. Central Time. Western Texas uses Mountain Time, so its polling locations close later in Eastern Time.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. What are Americans voting for in 2026?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Americans are voting for all 435 House seats, 35 Senate seats, 36 governorships, state and local offices and various ballot measures.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Is Donald Trump running in the 2026 midterm elections?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Donald Trump is the sitting president, and the 2026 midterms are not a presidential election. His administration's policies are nevertheless major campaign issues.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>9. How many Senate seats are up for election in 2026?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Thirty-five Senate seats are being contested, including regular and special elections.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>10. How many House seats are being contested?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">All 435 voting seats in the US House of Representatives are up for election.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>11. Why are some election results delayed?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Results can be delayed because of close races, mail ballot processing, provisional ballots, recounts, local reporting schedules and ranked-choice voting.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>12. Are election polls the same as voting results?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Opinion polls measure public preferences through surveys. Voting results are based on actual ballots cast and counted.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>13. When will we know which party controls Congress?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Congressional control may not be known until several days after Election Day. The result depends on the number of House and Senate seats won by each party.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>14. What is a blue wave in US elections?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">A blue wave is an informal political term used when Democratic candidates achieve significant electoral gains. It is not an official election classification.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>15. What is the Associated Press election result?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">The Associated Press (AP) is a news organisation that independently analyses election returns and declares winners when its standards for calling a race are met. Its race calls are not the same as official state certification.</div>
+                            </details>
+                        </div>
+
+                        <h2>Final Thoughts: What to Watch in the 2026 Midterm Results</h2>
+                        <p>The 2026 United States midterm elections are an important test of political support for both Republicans and Democrats.</p>
+
+                        <p>The main outcome to watch is <strong>control of Congress</strong>. Democrats are trying to gain enough seats to take control, while Republicans are seeking to retain their majorities. Senate battlegrounds, competitive House districts and gubernatorial contests will all contribute to the national picture.</p>
+
+                        <p>The Texas Senate race between Ken Paxton and James Talarico is one of the contests attracting national attention. Meanwhile, voters across the country are deciding local offices and ballot measures that could shape state policies for years.</p>
+
+                        <p>Although early results may appear quickly after polls close, the final picture can take days to emerge. Readers should follow verified election returns, distinguish a candidate's lead from a race call and wait for official certification before treating preliminary figures as final.</p>
+
+                        <p style="font-style: italic; color: var(--text-subtle); font-size: 0.9rem; margin-top: 1.5rem; margin-bottom: 0;">This article reflects reporting available on November 3, 2026 (US Election Day). It should be updated as new vote counts, race calls and official certifications are released.</p>
+                    </div>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>For readers who want to create election graphics, result cards or shareable summary images, these QuickToolsPK tools may be useful.</p>
+                        <div class="related-grid">
+                            <a href="/add-text-to-image.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-font"></i></div>
+                                <h4>Add Text to Image</h4>
+                                <p>Add race labels, candidate names or vote totals to election graphics.</p>
+                            </a>
+                            <a href="/youtube-thumbnail-banner-maker.html" class="related-card">
+                                <div class="related-card-icon"><i class="fab fa-youtube"></i></div>
+                                <h4>YouTube Thumbnail &amp; Banner Maker</h4>
+                                <p>Create thumbnails for election analysis videos and results explainers.</p>
+                            </a>
+                            <a href="/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress"></i></div>
+                                <h4>Image Compressor</h4>
+                                <p>Reduce the size of election images and charts for faster-loading articles.</p>
+                            </a>
+                        </div>
+                        <p style="font-size: 0.8rem; color: var(--text-subtle); margin-top: 1.5rem; margin-bottom: 0;">Verify these links against your live website before publishing. Use editorially licensed photographs or official graphics for election coverage.</p>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Election Day guide based on publicly available reporting from the Associated Press, CBS News and official state election sources.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> US Elections</p>
+                            <p><strong>Tags:</strong> 2026 midterms, Senate, House, Texas, Republicans vs Democrats, Election Day, Results</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Election snapshot</h3>
+                        <div class="table-wrap" style="border:none;margin:0;">
+                            <table style="font-size:0.88rem;">
+                                <tbody>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;border-bottom:1px solid var(--border);"><strong>Election Day</strong></td><td style="padding:0.5rem 0;border-bottom:1px solid var(--border);text-align:right;">Nov 3, 2026</td></tr>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;border-bottom:1px solid var(--border);"><strong>House seats</strong></td><td style="padding:0.5rem 0;border-bottom:1px solid var(--border);text-align:right;">435</td></tr>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;border-bottom:1px solid var(--border);"><strong>Senate seats</strong></td><td style="padding:0.5rem 0;border-bottom:1px solid var(--border);text-align:right;">35</td></tr>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;border-bottom:1px solid var(--border);"><strong>Governorships</strong></td><td style="padding:0.5rem 0;border-bottom:1px solid var(--border);text-align:right;">36</td></tr>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;border-bottom:1px solid var(--border);"><strong>Senate balance</strong></td><td style="padding:0.5rem 0;border-bottom:1px solid var(--border);text-align:right;">53–47 R</td></tr>
+                                    <tr><td style="color:var(--text-muted);padding:0.5rem 0;"><strong>House majority</strong></td><td style="padding:0.5rem 0;text-align:right;">218</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Live results trackers</h3>
+                        <div class="tracker-links">
+                            <a class="tracker-link" href="https://apps.npr.org/2026-election-results/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> NPR / AP Results</a>
+                            <a class="tracker-link" href="https://www.theguardian.com/us-news/ng-interactive/2026/nov/03/midterm-elections-full-results-senate-house-governor-races" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Guardian Results</a>
+                            <a class="tracker-link" href="https://www.cbsnews.com/live-updates/election-day-2026-midterms/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> CBS News Live</a>
+                            <a class="tracker-link" href="https://electionresults.sos.state.tx.us/results.html" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Texas Official Results</a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Editorial note</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">Do not publish a winner claim until the relevant race has been called or officially declared. Distinguish projected winners from certified results.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
