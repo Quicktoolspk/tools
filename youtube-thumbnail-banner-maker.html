@@ -296,6 +296,19 @@
             object-fit: cover;
             display: block;
         }
+        
+        #canvas-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+        .canvas-bg.blur-mode { filter: blur(10px); transform: scale(1.1); }
+        .canvas-bg.contain-mode { object-fit: contain; background: #000; }
+
         .canvas-overlay {
             position: absolute;
             inset: 0;
@@ -307,6 +320,12 @@
             text-align: center;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            z-index: 2; /* Above background */
+            transition: opacity 0.3s ease;
+        }
+        .canvas-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         .canvas-overlay h2 {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -330,13 +349,14 @@
         /* Safe Area Guide */
         .safe-area-guide {
             position: absolute;
-            inset: 15% 10%; /* Roughly central area */
+            inset: 15% 10%;
             border: 2px dashed rgba(255,255,255,0.6);
             border-radius: var(--r-md);
             pointer-events: none;
-            display: none; /* Only show for banner */
+            display: none;
             align-items: center;
             justify-content: center;
+            z-index: 3;
         }
         .safe-area-guide::after {
             content: 'Safe Area';
@@ -382,7 +402,9 @@
             font-weight: 600;
             color: var(--text);
         }
-        .input-row input[type="text"] {
+        
+        /* Generic Form Inputs */
+        .form-select, .form-color {
             width: 100%;
             padding: 0.6rem;
             font-size: 0.9rem;
@@ -391,8 +413,14 @@
             font-family: inherit;
             background: var(--surface);
             transition: border-color var(--t-fast);
+            color: var(--text);
+            cursor: pointer;
         }
-        .input-row input[type="text"]:focus {
+        .form-color {
+            padding: 0.2rem;
+            height: 40px;
+        }
+        .form-select:focus, .form-color:focus {
             outline: none;
             border-color: var(--primary);
         }
@@ -419,9 +447,61 @@
             color: var(--primary-dark);
         }
 
+        /* Toggle Switch */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+            margin-top: 0.5rem;
+        }
+        .toggle-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .3s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
         /* Action Bar */
         .action-bar {
             display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto;
+            padding-top: 1rem; border-top: 1px solid var(--border);
         }
         .btn-download {
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -580,25 +660,6 @@
         .callout i { color: var(--primary); font-size: 1.05rem; margin-top: 3px; flex-shrink: 0; }
         .callout strong { color: var(--navy); }
 
-        .size-table-wrap {
-            overflow-x: auto; margin-top: 1rem;
-            border-radius: var(--r-md); border: 1px solid var(--border);
-            background: var(--surface);
-        }
-        table.size-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        table.size-table th, table.size-table td {
-            padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border);
-        }
-        table.size-table th {
-            background: linear-gradient(180deg, #eef4fd 0%, #e3ecfb 100%);
-            font-weight: 700; color: var(--navy); font-size: 0.78rem;
-            text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        table.size-table tr:last-child td { border-bottom: none; }
-        table.size-table tbody tr { transition: background var(--t-fast); }
-        table.size-table tbody tr:hover { background: var(--primary-soft); }
-        table.size-table td:first-child { font-weight: 600; color: var(--navy); }
-
         .faq-list { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
         .faq-item {
             background: var(--bg); border: 1px solid var(--border);
@@ -732,7 +793,6 @@
         }
         @media (max-width: 600px) {
             .tool-card { padding: 1.25rem; }
-            .upload-area { padding: 2rem 1rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
             .footer-brand { grid-column: auto; }
             .footer-bottom { flex-direction: column; text-align: center; }
@@ -816,11 +876,11 @@
 
             <div class="page-head reveal">
                 <h1>YouTube Thumbnail & Banner Maker</h1>
-                <p>Create custom visuals for your videos and channel. Design thumbnails and channel banners with text and background images in one workspace.</p>
+                <p>Create custom visuals for your videos and channel. Design thumbnails and channel banners with background images and styling options in one workspace.</p>
                 <div class="badges">
                     <span class="badge"><i class="fab fa-youtube"></i> Thumbnails</span>
                     <span class="badge teal"><i class="fas fa-image"></i> Channel Banners</span>
-                    <span class="badge"><i class="fas fa-text-width"></i> Text Overlays</span>
+                    <span class="badge"><i class="fas fa-palette"></i> Styling Options</span>
                 </div>
             </div>
 
@@ -843,15 +903,18 @@
                             <!-- Left: Canvas Area -->
                             <div class="canvas-container">
                                 <div class="canvas-wrapper thumbnail" id="canvas-wrapper">
-                                    <!-- Default Background -->
+                                    <!-- Default Background (Color / Gradient) -->
                                     <div class="canvas-bg" style="background: linear-gradient(135deg, #0b1a33 0%, #1d4ed8 100%);" id="canvas-bg-div"></div>
-                                    <!-- Image Overlay -->
+                                    
+                                    <!-- Image Overlay (For uploaded backgrounds) -->
                                     <img id="canvas-bg-img" class="canvas-bg" src="" alt="Background" style="display:none;">
+                                    
                                     <!-- Text Overlay -->
-                                    <div class="canvas-overlay" id="canvas-text-overlay">
-                                        <h2 id="preview-headline">YOUR NEXT BIG IDEA</h2>
-                                        <p id="preview-subtitle">NEW VIDEO</p>
+                                    <div class="canvas-overlay hidden" id="canvas-text-overlay">
+                                        <h2>YOUR NEXT BIG IDEA</h2>
+                                        <p>NEW VIDEO</p>
                                     </div>
+                                    
                                     <!-- Safe Area Guide -->
                                     <div class="safe-area-guide"></div>
                                 </div>
@@ -860,25 +923,53 @@
                             <!-- Right: Controls -->
                             <div class="controls-panel">
                                 
-                                <!-- Background Upload -->
+                                <!-- Background Upload Section -->
                                 <div class="control-group">
                                     <h4><i class="fas fa-image"></i> Background</h4>
                                     <label class="btn-upload-bg" for="bg-upload">
-                                        <i class="fas fa-upload"></i> Upload Background Image
+                                        <i class="fas fa-upload"></i> Upload Image
                                     </label>
                                     <input type="file" id="bg-upload" accept="image/*" style="display:none;">
+                                    
+                                    <div class="input-row" style="margin-top: 0.75rem;">
+                                        <label>Canvas Base Color</label>
+                                        <input type="color" id="bg-color" class="form-color" value="#1d4ed8" title="Choose base color">
+                                    </div>
+
+                                    <div class="input-row">
+                                        <label>Image Fit Mode</label>
+                                        <select id="bg-fit" class="form-select">
+                                            <option value="cover">Cover (Fill Canvas)</option>
+                                            <option value="contain">Contain (Fit Image)</option>
+                                            <option value="blur">Blurred Fill</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <!-- Text Settings -->
+                                <!-- Text Settings Toggle -->
                                 <div class="control-group">
-                                    <h4><i class="fas fa-font"></i> Text Settings</h4>
-                                    <div class="input-row">
-                                        <label for="input-headline">Headline</label>
-                                        <input type="text" id="input-headline" value="YOUR NEXT BIG IDEA" placeholder="Enter headline">
+                                    <h4><i class="fas fa-font"></i> Text Overlay</h4>
+                                    <div class="toggle-row">
+                                        <span class="toggle-label">Enable Text Overlay</span>
+                                        <label class="switch">
+                                            <input type="checkbox" id="text-toggle">
+                                            <span class="slider"></span>
+                                        </label>
                                     </div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
+                                        Toggle on to add default text (Note: Text inputs removed).
+                                    </div>
+                                </div>
+
+                                <!-- Export Settings -->
+                                <div class="control-group">
+                                    <h4><i class="fas fa-download"></i> Export</h4>
                                     <div class="input-row">
-                                        <label for="input-subtitle">Subtitle</label>
-                                        <input type="text" id="input-subtitle" value="NEW VIDEO" placeholder="Enter subtitle">
+                                        <label>Format</label>
+                                        <select id="export-format" class="form-select">
+                                            <option value="image/jpeg">JPG (Standard)</option>
+                                            <option value="image/png">PNG (High Quality)</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -912,7 +1003,7 @@
             </div>
 
             <!-- ============================================================
-                 CONTENT SECTIONS
+                 CONTENT SECTIONS (Same as original)
                  ============================================================ -->
             <div class="content-shell">
 
@@ -1211,17 +1302,20 @@
         const canvasWrapper = document.getElementById('canvas-wrapper');
         const canvasBgDiv = document.getElementById('canvas-bg-div');
         const canvasBgImg = document.getElementById('canvas-bg-img');
-        const previewHeadline = document.getElementById('preview-headline');
-        const previewSubtitle = document.getElementById('preview-subtitle');
-        const inputHeadline = document.getElementById('input-headline');
-        const inputSubtitle = document.getElementById('input-subtitle');
+        const textOverlay = document.getElementById('canvas-text-overlay');
+        
+        const bgColorInput = document.getElementById('bg-color');
+        const bgFitInput = document.getElementById('bg-fit');
+        const textToggle = document.getElementById('text-toggle');
+        const exportFormatInput = document.getElementById('export-format');
+        
         const bgUpload = document.getElementById('bg-upload');
         const downloadBtn = document.getElementById('download-btn');
         const resetToolBtn = document.getElementById('reset-tool-btn');
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toast-message');
 
-        let currentMode = 'thumbnail'; // 'thumbnail' or 'banner'
+        let currentMode = 'thumbnail';
         let uploadedBgImage = null;
 
         // Mode switching
@@ -1240,12 +1334,33 @@
             });
         });
 
-        // Text inputs
-        inputHeadline.addEventListener('input', function() {
-            previewHeadline.textContent = this.value || 'HEADLINE';
+        // Background color change
+        bgColorInput.addEventListener('input', function() {
+            if (canvasBgDiv.style.display !== 'none') {
+                // If no image is uploaded, show solid color gradient
+                canvasBgDiv.style.background = `linear-gradient(135deg, #0b1a33 0%, ${this.value} 100%)`;
+            }
         });
-        inputSubtitle.addEventListener('input', function() {
-            previewSubtitle.textContent = this.value || 'SUBTITLE';
+
+        // Image Fit Mode logic
+        bgFitInput.addEventListener('change', function() {
+            const mode = this.value;
+            canvasBgImg.classList.remove('contain-mode', 'blur-mode');
+            
+            if (mode === 'contain') {
+                canvasBgImg.classList.add('contain-mode');
+            } else if (mode === 'blur') {
+                canvasBgImg.classList.add('blur-mode');
+            }
+        });
+
+        // Text Toggle logic
+        textToggle.addEventListener('change', function() {
+            if (this.checked) {
+                textOverlay.classList.remove('hidden');
+            } else {
+                textOverlay.classList.add('hidden');
+            }
         });
 
         // Background upload
@@ -1258,6 +1373,11 @@
                         canvasBgImg.src = event.target.result;
                         canvasBgImg.style.display = 'block';
                         canvasBgDiv.style.display = 'none';
+                        
+                        // Reset fit classes
+                        canvasBgImg.className = 'canvas-bg';
+                        bgFitInput.dispatchEvent(new Event('change'));
+                        
                         showNotification('Background image updated.');
                     };
                     uploadedBgImage.src = event.target.result;
@@ -1268,124 +1388,170 @@
 
         // Download
         downloadBtn.addEventListener('click', function() {
-            // Create canvas for export
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
 
-            // Determine output resolution based on mode
-            // Thumbnail: 1280x720
-            // Banner: 2560x1440
-            let outW = 1280, outH = 720;
-            if (currentMode === 'banner') {
-                outW = 2560;
-                outH = 1440;
-            }
+            let outW = currentMode === 'banner' ? 2560 : 1280;
+            let outH = currentMode === 'banner' ? 1440 : 720;
 
             canvas.width = outW;
             canvas.height = outH;
 
-            // 1. Draw Background
+            // 1. Draw Background (Color OR Image)
             if (uploadedBgImage) {
-                // Draw image with cover logic
+                const fit = bgFitInput.value;
                 const imgRatio = uploadedBgImage.width / uploadedBgImage.height;
                 const canvasRatio = outW / outH;
                 let sx, sy, sw, sh;
-                if (imgRatio > canvasRatio) {
-                    sh = uploadedBgImage.height;
-                    sw = sh * canvasRatio;
-                    sx = (uploadedBgImage.width - sw) / 2;
-                    sy = 0;
+
+                if (fit === 'contain') {
+                    // Draw background fill (black or base color) then contain image
+                    ctx.fillStyle = bgColorInput.value;
+                    ctx.fillRect(0, 0, outW, outH);
+                    
+                    if (imgRatio > canvasRatio) {
+                        sw = uploadedBgImage.width;
+                        sh = sw / imgRatio;
+                        sx = 0; sy = (uploadedBgImage.height - sh) / 2;
+                        const drawW = outW;
+                        const drawH = outW / imgRatio;
+                        ctx.drawImage(uploadedBgImage, sx, sy, sw, sh, 0, (outH - drawH)/2, drawW, drawH);
+                    } else {
+                        sh = uploadedBgImage.height;
+                        sw = sh * imgRatio;
+                        sy = 0; sx = (uploadedBgImage.width - sw) / 2;
+                        const drawH = outH;
+                        const drawW = outH * imgRatio;
+                        ctx.drawImage(uploadedBgImage, sx, sy, sw, sh, (outW - drawW)/2, 0, drawW, drawH);
+                    }
+                } else if (fit === 'blur') {
+                    // Draw blurred cover fill
+                    ctx.save();
+                    ctx.filter = 'blur(20px)';
+                    drawCoverImage(ctx, uploadedBgImage, outW, outH);
+                    ctx.restore();
+                    // Draw contained image on top
+                    if (imgRatio > canvasRatio) {
+                        const drawH = outH;
+                        const drawW = outH * imgRatio;
+                        ctx.drawImage(uploadedBgImage, (outW - drawW)/2, 0, drawW, drawH);
+                    } else {
+                        const drawW = outW;
+                        const drawH = outW / imgRatio;
+                        ctx.drawImage(uploadedBgImage, 0, (outH - drawH)/2, drawW, drawH);
+                    }
                 } else {
-                    sw = uploadedBgImage.width;
-                    sh = sw / canvasRatio;
-                    sx = 0;
-                    sy = (uploadedBgImage.height - sh) / 2;
+                    // Cover (Default)
+                    drawCoverImage(ctx, uploadedBgImage, outW, outH);
                 }
-                ctx.drawImage(uploadedBgImage, sx, sy, sw, sh, 0, 0, outW, outH);
             } else {
-                // Draw default gradient
+                // Solid Gradient based on color picker
                 const grad = ctx.createLinearGradient(0, 0, outW, outH);
-                grad.addColorStop(0, '#0b1a33');
-                grad.addColorStop(1, '#1d4ed8');
+                grad.addColorStop(0, '#0b1a33'); // Navy
+                grad.addColorStop(1, bgColorInput.value);
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, outW, outH);
             }
 
-            // 2. Draw Text
-            const headline = inputHeadline.value || 'YOUR NEXT BIG IDEA';
-            const subtitle = inputSubtitle.value || 'NEW VIDEO';
+            // 2. Draw Text (Only if toggled ON)
+            if (textToggle.checked) {
+                const headline = "YOUR NEXT BIG IDEA"; // Static since input removed
+                const subtitle = "NEW VIDEO";
 
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            
-            // Scale font size based on output width
-            // Base font for 1280 width is ~80px. Scale accordingly.
-            const scale = outW / 1280;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                const scale = outW / 1280;
 
-            // Headline
-            ctx.font = `800 ${80 * scale}px 'Plus Jakarta Sans', sans-serif`;
-            ctx.fillStyle = '#ffffff';
-            ctx.shadowColor = 'rgba(0,0,0,0.7)';
-            ctx.shadowBlur = 10 * scale;
-            ctx.shadowOffsetX = 3 * scale;
-            ctx.shadowOffsetY = 3 * scale;
-            
-            // Wrap headline if too long (simple approach)
-            const maxWidth = outW * 0.9;
-            let words = headline.split(' ');
-            let lines = [];
-            let currentLine = words[0];
-            for (let i = 1; i < words.length; i++) {
-                let word = words[i];
-                let width = ctx.measureText(currentLine + " " + word).width;
-                if (width < maxWidth) {
-                    currentLine += " " + word;
-                } else {
-                    lines.push(currentLine);
-                    currentLine = word;
+                // Headline
+                ctx.font = `800 ${80 * scale}px 'Plus Jakarta Sans', sans-serif`;
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = 'rgba(0,0,0,0.7)';
+                ctx.shadowBlur = 10 * scale;
+                ctx.shadowOffsetX = 3 * scale;
+                ctx.shadowOffsetY = 3 * scale;
+                
+                // Simple wrap for static text
+                const maxWidth = outW * 0.9;
+                let words = headline.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+                for (let i = 1; i < words.length; i++) {
+                    let word = words[i];
+                    let width = ctx.measureText(currentLine + " " + word).width;
+                    if (width < maxWidth) {
+                        currentLine += " " + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
                 }
+                lines.push(currentLine);
+
+                const lineHeight = 90 * scale;
+                const startY = (outH / 2) - ((lines.length - 1) * lineHeight) / 2 - (30 * scale);
+
+                lines.forEach((line, index) => {
+                    ctx.fillText(line, outW / 2, startY + (index * lineHeight));
+                });
+
+                // Subtitle
+                ctx.font = `600 ${30 * scale}px 'Inter', sans-serif`;
+                ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                ctx.shadowBlur = 6 * scale;
+                ctx.fillText(subtitle, outW / 2, startY + (lines.length * lineHeight) + (20 * scale));
             }
-            lines.push(currentLine);
-
-            const lineHeight = 90 * scale;
-            const startY = (outH / 2) - ((lines.length - 1) * lineHeight) / 2 - (30 * scale);
-
-            lines.forEach((line, index) => {
-                ctx.fillText(line, outW / 2, startY + (index * lineHeight));
-            });
-
-            // Subtitle
-            ctx.font = `600 ${30 * scale}px 'Inter', sans-serif`;
-            ctx.fillStyle = 'rgba(255,255,255,0.9)';
-            ctx.shadowBlur = 6 * scale;
-            ctx.fillText(subtitle, outW / 2, startY + (lines.length * lineHeight) + (20 * scale));
 
             // Export
+            const format = exportFormatInput.value;
+            const ext = format === 'image/jpeg' ? 'jpg' : 'png';
             const link = document.createElement('a');
-            link.download = `youtube-${currentMode}-design.jpg`;
-            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.download = `youtube-${currentMode}-design.${ext}`;
+            link.href = canvas.toDataURL(format, 0.95);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
 
-            showNotification('Your design is ready to download.');
+            showNotification('Design exported successfully.');
         });
+
+        // Helper for drawing cover image
+        function drawCoverImage(ctx, img, w, h) {
+            const imgRatio = img.width / img.height;
+            const canvasRatio = w / h;
+            let sx, sy, sw, sh;
+            if (imgRatio > canvasRatio) {
+                sh = img.height;
+                sw = sh * canvasRatio;
+                sx = (img.width - sw) / 2;
+                sy = 0;
+            } else {
+                sw = img.width;
+                sh = sw / canvasRatio;
+                sx = 0;
+                sy = (img.height - sh) / 2;
+            }
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+        }
 
         // Reset tool
         resetToolBtn.addEventListener('click', function() {
-            inputHeadline.value = 'YOUR NEXT BIG IDEA';
-            inputSubtitle.value = 'NEW VIDEO';
-            previewHeadline.textContent = 'YOUR NEXT BIG IDEA';
-            previewSubtitle.textContent = 'NEW VIDEO';
-
             uploadedBgImage = null;
             canvasBgImg.src = '';
             canvasBgImg.style.display = 'none';
             canvasBgDiv.style.display = 'block';
             
             bgUpload.value = '';
+            bgColorInput.value = '#1d4ed8';
+            canvasBgDiv.style.background = 'linear-gradient(135deg, #0b1a33 0%, #1d4ed8 100%)';
+            bgFitInput.value = 'cover';
+            bgFitInput.dispatchEvent(new Event('change'));
             
-            showNotification('Design reset.');
+            textToggle.checked = false;
+            textOverlay.classList.add('hidden');
+            
+            exportFormatInput.value = 'image/jpeg';
+            
+            showNotification('Design reset to default.');
         });
 
         function showNotification(message, type) {
