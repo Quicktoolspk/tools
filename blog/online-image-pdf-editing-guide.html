@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>10 Useful Online Image and PDF Editing Tasks You Can Do for Free | QuickToolsPK</title>
+    <meta name="description" content="Learn how to convert photos to black and white, resize images for social media, add text and borders, prepare passport photos, adjust colors and rotate PDF pages online.">
+    <meta name="keywords" content="online image and PDF editing tools, convert image to pure black and white online, black and white picture converter, social media image resizer, add text to image online, add border to photo online free, passport size photo maker, social image resizer, increase the color intensity of an image, PDF rotator, resize image for Twitter">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/online-image-pdf-editing-guide.html">
+
+    <meta property="og:title" content="10 Useful Online Image and PDF Editing Tasks You Can Do for Free">
+    <meta property="og:description" content="Learn how to convert photos to black and white, resize images for social media, add text and borders, prepare passport photos, adjust colors and rotate PDF pages online.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quicktoolspk.com/blog/online-image-pdf-editing-guide.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="10 Useful Online Image and PDF Editing Tasks You Can Do for Free">
+    <meta name="twitter:description" content="A complete guide to 10 practical image and PDF editing tasks using free online tools.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+        .article-content a:hover { color: var(--primary); }
+        
+        code {
+            background: var(--bg-alt); padding: 0.1rem 0.4rem; border-radius: 4px;
+            font-family: monospace; font-size: 0.9em; color: var(--primary-dark);
+        }
+
+        /* Featured Image */
+        .img-large {
+            width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm); background-color: var(--bg);
+            aspect-ratio: 16/9; object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem; color: var(--text-subtle); text-align: center;
+            margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic;
+        }
+
+        /* ============================================================
+           CTA TOOL BANNER
+           ============================================================ */
+        .tool-cta-banner {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 1.5rem; margin: 1.5rem 0; position: relative;
+            overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem; text-decoration: none; transition: transform var(--t-fast);
+            box-shadow: var(--shadow-md);
+        }
+        .tool-cta-banner:hover { transform: translateY(-2px); }
+        .tool-cta-banner .stars { opacity: 0.3; }
+        .tool-cta-text { position: relative; z-index: 2; color: #fff; flex: 1; min-width: 200px;}
+        .tool-cta-text h4 { color: #fff; font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .tool-cta-text p { color: #a9b8ce; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+        .tool-cta-btn {
+            position: relative; z-index: 2; background: rgba(255,255,255,0.15);
+            color: #fff; padding: 0.6rem 1.2rem; border-radius: var(--r-full);
+            font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.3);
+            white-space: nowrap; display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 1.5rem 0;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-alt); font-weight: 700; color: var(--navy);
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem; background: var(--primary-soft);
+            border-left: 4px solid var(--primary); border-radius: var(--r-sm);
+            margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { margin-bottom: 0.75rem; }
+        .sidebar-list li:last-child { margin-bottom: 0; }
+        .sidebar-list a {
+            display: flex; align-items: center; gap: 0.6rem;
+            text-decoration: none; color: var(--text);
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.6rem 0.8rem; border-radius: var(--r-sm);
+            background: var(--bg); border: 1px solid var(--border);
+            transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+        }
+        .sidebar-list a:hover {
+            background: var(--primary-soft); border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+        .sidebar-list i { color: var(--primary); width: 1.2em; text-align: center; }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .tool-cta-banner { flex-direction: column; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Image & PDF Guides</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Image & PDF Guides</span>
+                        <h1>How to Edit Images and PDFs Online: 10 Practical Tools for Everyday Tasks</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Updated: November 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min read</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+
+                        <!-- ============ ONLY IMAGE: FEATURED IMAGE ============ -->
+                        <img src="../assets/images/blog/28.jpg"
+                             alt="Online image and PDF editing examples"
+                             class="img-large">
+                       
+
+                        <p>Whether you are preparing social media graphics, improving personal photos, creating promotional images, or correcting a PDF document, small editing tasks can take more time than expected.</p>
+
+                        <p>An image may need a black-and-white effect. A social media post may have the wrong dimensions. You might want to add a headline, create a clean border, increase color intensity, or prepare a photograph for an application. Even a simple PDF can become difficult to use when its pages appear sideways.</p>
+
+                        <p>The good news is that many everyday editing tasks do not require expensive desktop software. An online image editor or PDF tool can help you make specific changes directly in your browser.</p>
+
+                        <p>This guide explains 10 practical editing tasks, how to approach each one, what to check before downloading, and which QuickToolsPK tools can help.</p>
+
+                        <h2>1. Convert an Image to Pure Black and White Online</h2>
+                        <p>A black-and-white picture can give a photograph a classic appearance, emphasize texture, and create a consistent visual style. It is also useful for posters, portfolios, presentations, and creative projects.</p>
+                        <p>However, there is an important difference between a grayscale photograph and a strictly black-and-white image.</p>
+
+                        <h3>Grayscale vs. pure black and white: What is the difference?</h3>
+                        <p>People often use the phrases black and white and grayscale interchangeably, but they do not always describe the same result.</p>
+                        <ul>
+                            <li><strong>Grayscale:</strong> Uses multiple shades between black and white. It preserves gradual changes in lighting, shadows, and detail.</li>
+                            <li><strong>Strict two-tone black and white:</strong> Uses only black and white pixels, without intermediate gray shades.</li>
+                        </ul>
+                        <p>For example, a grayscale portrait can preserve the subtle shadows on someone's face. A strict two-tone version may turn those areas into solid black or white shapes.</p>
+                        <p>For most photographs, grayscale is the better option because it maintains more visual detail. Strict two-tone conversion is more suitable for silhouettes, certain illustrations, and graphic effects.</p>
+
+                        <h3>How to convert a picture to black and white online</h3>
+                        <p>You can use a black and white picture converter to create a monochrome version without manually editing every color.</p>
+                        <p>A simple workflow is:</p>
+                        <ol>
+                            <li>Choose a clear JPG, PNG, or WEBP image.</li>
+                            <li>Open the <a href="https://www.quicktoolspk.com/black-and-white-image.html">QuickToolsPK Black and White Image Converter</a>.</li>
+                            <li>Upload your photograph.</li>
+                            <li>Select an available conversion style.</li>
+                            <li>Preview the result and check the contrast.</li>
+                            <li>Download the converted image.</li>
+                        </ol>
+                        <p>The QuickToolsPK tool currently offers Classic Grayscale, High Contrast, and Soft Monochrome styles. These options provide different grayscale appearances; they should not be confused with a guaranteed strict two-color threshold conversion.</p>
+
+                        <h3>When should you use a black-and-white picture converter?</h3>
+                        <p>Black-and-white conversion can be useful for:</p>
+                        <ul>
+                            <li><strong>Portrait photography:</strong> Emphasize facial expressions, lighting, and shadows.</li>
+                            <li><strong>Street photography:</strong> Draw attention to composition and everyday scenes.</li>
+                            <li><strong>Product photography:</strong> Create a minimalist or editorial appearance.</li>
+                            <li><strong>Architecture:</strong> Highlight lines, patterns, and building structures.</li>
+                            <li><strong>Creative graphics:</strong> Make posters, collages, and presentation visuals more consistent.</li>
+                        </ul>
+                        <p>One useful tip: do not automatically increase contrast to the maximum. Excessive contrast can remove detail from dark hair, clothing, and bright areas. Review the image at its intended display size before downloading.</p>
+
+                        <!-- CTA Banner -->
+                        <a href="https://www.quicktoolspk.com/black-and-white-image.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Black and White Converter</h4>
+                                <p>Convert an image to black and white online for free.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>2. Resize Images for Social Media</h2>
+                        <p>An image that looks perfect on your computer may not fit properly on Instagram, Facebook, LinkedIn, TikTok, Pinterest, or another platform.</p>
+                        <p>Different placements use different aspect ratios. A square post, a vertical Story, and a wide banner are not interchangeable. Uploading the same image everywhere without checking its dimensions can result in cropped text, missing product details, or poorly positioned subjects.</p>
+
+                        <h3>Why use a social media image resizer?</h3>
+                        <p>A social media image resizer helps prepare different versions of an original image for different placements.</p>
+                        <p>Instead of rebuilding the same graphic from scratch, you can start with one high-quality image and adapt it to the required dimensions.</p>
+                        <p>This is particularly useful for:</p>
+                        <ul>
+                            <li>Small businesses preparing promotional graphics.</li>
+                            <li>Social media managers handling multiple accounts.</li>
+                            <li>Designers creating campaign variations.</li>
+                            <li>Online stores preparing product images.</li>
+                            <li>Content creators publishing across several platforms.</li>
+                        </ul>
+                        <p>The QuickToolsPK Social Media Image Resizer supports multiple platform selections, custom dimensions, and different fitting modes. Its listed presets include Instagram, Facebook, YouTube, TikTok, LinkedIn, X, and Pinterest.</p>
+
+                        <h3>Common social media image dimensions</h3>
+                        <p>The following are useful working dimensions for common placements. Platform specifications can change, so verify the current requirements before publishing.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Platform and placement</th><th>Example dimensions</th><th>Aspect ratio</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Instagram square post</td><td>1080 × 1080 px</td><td>1:1</td></tr>
+                                    <tr><td>Instagram portrait post</td><td>1080 × 1350 px</td><td>4:5</td></tr>
+                                    <tr><td>Instagram Story or Reel</td><td>1080 × 1920 px</td><td>9:16</td></tr>
+                                    <tr><td>Facebook Page cover</td><td>851 × 315 px</td><td>About 2.7:1</td></tr>
+                                    <tr><td>LinkedIn landscape post</td><td>1200 × 627 px</td><td>About 1.91:1</td></tr>
+                                    <tr><td>LinkedIn profile banner</td><td>1584 × 396 px</td><td>4:1</td></tr>
+                                    <tr><td>X profile header</td><td>1500 × 500 px</td><td>3:1</td></tr>
+                                    <tr><td>YouTube thumbnail</td><td>1280 × 720 px</td><td>16:9</td></tr>
+                                    <tr><td>Pinterest standard Pin</td><td>1000 × 1500 px</td><td>2:3</td></tr>
+                                    <tr><td>TikTok vertical creative</td><td>1080 × 1920 px</td><td>9:16</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>These are practical reference sizes, not a guarantee that every placement will display the entire image identically on every device.</p>
+
+                        <h3>How to resize one image for multiple social platforms</h3>
+                        <ol>
+                            <li>Start with the highest-quality original image available.</li>
+                            <li>Open the <a href="https://www.quicktoolspk.com/social-media-image-resizer.html">QuickToolsPK Social Media Image Resizer</a>.</li>
+                            <li>Upload your image.</li>
+                            <li>Select the platforms and placements you need.</li>
+                            <li>Choose the appropriate resize mode.</li>
+                            <li>Preview each output separately.</li>
+                            <li>Download the versions and check them before publishing.</li>
+                        </ol>
+                        <div class="callout">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Important:</strong> Resizing, cropping, and stretching are different operations. Resizing changes dimensions. Cropping removes parts of the image. Stretching distorts faces/products. Fitting keeps the whole image but may add empty space. For most branded graphics, preserving proportions is a good starting point.</span>
+                        </div>
+
+                        <a href="https://www.quicktoolspk.com/social-media-image-resizer.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Social Media Image Resizer</h4>
+                                <p>Prepare images for Instagram, Facebook, YouTube, TikTok, and more.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>3. Add Text to an Image Online</h2>
+                        <p>Sometimes an image needs more than a visual. It needs a headline, product name, quotation, announcement, price, or short message.</p>
+                        <p>Adding text directly to a picture is a simple way to turn an ordinary photograph into a more informative graphic.</p>
+
+                        <h3>What can you create with an online image text editor?</h3>
+                        <p>An add-text-to-image tool can help you create different types of visuals:</p>
+                        <ul>
+                            <li>Social media announcements.</li>
+                            <li>Promotional graphics and discount posts.</li>
+                            <li>Product images with names or prices.</li>
+                            <li>Quote graphics.</li>
+                            <li>Blog feature images.</li>
+                            <li>Event invitations.</li>
+                            <li>Educational visuals and simple instructions.</li>
+                        </ul>
+                        <p>For example, a business could add a short promotional headline to a product photograph. A content creator could place a title over a landscape image to prepare a social media post.</p>
+
+                        <h3>How to add text to an image online</h3>
+                        <p>You do not need to rebuild an entire design to add a simple message.</p>
+                        <ol>
+                            <li>Open the <a href="https://www.quicktoolspk.com/add-text-to-image.html">QuickToolsPK Add Text to Image tool</a>.</li>
+                            <li>Upload a JPG, PNG, or WEBP image.</li>
+                            <li>Enter your headline, caption, or message.</li>
+                            <li>Select an appropriate font size and text color.</li>
+                            <li>Choose the alignment and placement.</li>
+                            <li>Preview the design.</li>
+                            <li>Download the edited image.</li>
+                        </ol>
+                        <p>The current tool provides text input, small, medium, and large size options, text color, alignment, and top, center, and bottom placement controls.</p>
+
+                        <h3>How to make text readable on a photograph</h3>
+                        <p>The biggest challenge when adding text to an image is readability. A beautiful font will not help if the words disappear into the background.</p>
+                        <p>Use these practical design principles:</p>
+                        <ul>
+                            <li><strong>Choose contrasting colors.</strong> White text often works well on dark backgrounds, while black text can be effective on light backgrounds.</li>
+                            <li><strong>Keep the message short.</strong> A clear headline is usually easier to understand than several lines of small text.</li>
+                            <li><strong>Create visual hierarchy.</strong> Make the main headline more prominent than supporting information.</li>
+                            <li><strong>Protect the subject.</strong> Avoid covering faces, product details, or important parts of the photograph.</li>
+                            <li><strong>Check the final dimensions.</strong> Text that looks readable on a large desktop preview may become too small on a mobile screen.</li>
+                        </ul>
+                        <p>For professional-looking graphics, focus on one main message rather than filling every available space.</p>
+
+                        <a href="https://www.quicktoolspk.com/add-text-to-image.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Add Text to Image Tool</h4>
+                                <p>Add headlines, captions, or announcements to your photos.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>4. Add a Border to a Photo Online for Free</h2>
+                        <p>A photograph does not always need a complicated design treatment. Sometimes, a simple border is enough to make it look more organized and polished.</p>
+                        <p>A border can separate an image from its background, create a framed appearance, or help multiple pictures follow a consistent visual style.</p>
+
+                        <h3>How to add a border to a photo online</h3>
+                        <p>An online border tool can help you customize the outline around an image.</p>
+                        <p>A basic workflow looks like this:</p>
+                        <ol>
+                            <li>Open the <a href="https://www.quicktoolspk.com/image-borders-padding.html">QuickToolsPK Image Borders and Padding tool</a>.</li>
+                            <li>Upload your image.</li>
+                            <li>Choose the border thickness.</li>
+                            <li>Select a suitable border color.</li>
+                            <li>Adjust the padding if you also need extra space.</li>
+                            <li>Preview the result.</li>
+                            <li>Download the edited image.</li>
+                        </ol>
+                        <p>The current QuickToolsPK page provides border thickness and color settings, along with padding size and background controls.</p>
+
+                        <h3>Image border vs. image padding</h3>
+                        <p>These two terms are related, but they serve different purposes.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Feature</th><th>What it does</th><th>Best use</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Border</td><td>Creates a visible outline around an image</td><td>Framed photos and defined edges</td></tr>
+                                    <tr><td>Padding</td><td>Adds extra space around image content</td><td>White space and balanced layouts</td></tr>
+                                    <tr><td>Both</td><td>Combines an outline with extra space</td><td>Product images and consistent graphics</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>For example, if you want a photograph to have a thin black outline, use a border. If you want more white space around the photograph, use padding.</p>
+
+                        <h3>Which border color and thickness should you choose?</h3>
+                        <p>The best choice depends on the photograph and where you plan to use it.</p>
+                        <ul>
+                            <li><strong>White border:</strong> A clean, minimal appearance.</li>
+                            <li><strong>Black border:</strong> A stronger, more traditional frame.</li>
+                            <li><strong>Gray border:</strong> A subtle separation without too much contrast.</li>
+                            <li><strong>Brand color:</strong> Useful for maintaining a consistent business identity.</li>
+                        </ul>
+                        <p>Start with a subtle border and moderate padding. A thick frame can distract from the actual image, especially when the photograph already has a strong composition.</p>
+                        <p>Also remember that adding padding may increase the final canvas dimensions. If you need an exact output size, check the dimensions after editing.</p>
+
+                        <a href="https://www.quicktoolspk.com/image-borders-padding.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Image Border Tool</h4>
+                                <p>Add borders and padding to your photos online for free.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>5. Create a Passport Size Photo Online</h2>
+                        <p>A photograph may look suitable for an application but still be rejected because its dimensions, framing, background, or file specifications do not meet the relevant requirements.</p>
+                        <p>A passport size photo maker can help prepare an image for a particular application. However, selecting the correct dimensions is only one part of the process.</p>
+
+                        <h3>What is the correct passport photo size in the USA?</h3>
+                        <p>For a standard printed US passport photograph, the commonly required size is:</p>
+                          <img src="../assets/images/blog/28.1.jpg" 
+                             alt="US passport photo size example"
+                             class="img-small">
+
+                             <br> </br>  
+                        <p><strong>2 × 2 inches (51 × 51 mm)</strong> with the head height between 1 inch and 1 3/8 inches (25 mm) and the eye height between 1 1/8 inches and 1 3/8 inches (28 mm).</p>
+                        <p>These measurements are for printed photographs. Digital applications may specify pixel dimensions, accepted file formats, and maximum file size. For example, the US Department of State currently requires a digital
+                        <p>Other countries and application types may use different measurements. A UK passport photo, for example, commonly uses 35 × 45 mm, while a Canadian passport photo uses 50 × 70 mm.</p>
+                        <p>Digital application requirements can also differ from printed photo dimensions. An online application may specify pixel dimensions, accepted file formats, and maximum file size.</p>
+                        <p>Never assume that one passport photo size works for every country or application.</p>
+
+                        <h3>How to make a passport size photo online</h3>
+                        <ol>
+                            <li>Open the <a href="https://www.quicktoolspk.com/passport-size-photo-maker.html">QuickToolsPK Passport Size Photo Maker</a>.</li>
+                            <li>Select a clear, recent photograph.</li>
+                            <li>Choose the required size or enter custom dimensions if available.</li>
+                            <li>Review the face position and overall framing.</li>
+                            <li>Check the background and image quality.</li>
+                            <li>Download the prepared image if the available options support your requirements.</li>
+                        </ol>
+                        <p>The QuickToolsPK tool lists common size examples, including the US 2 × 2 inch printed format, and provides custom width and height controls.</p>
+
+                        <div class="callout warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Important US passport photo editing rules:</strong> The US Department of State requires passport photographs to meet specific composition and quality rules. Its guidance also says that passport photos should not be digitally changed or retouched. Resizing a photo does not automatically make it acceptable. Do not digitally alter the background, remove objects, retouch facial features, or apply filters when the official rules prohibit those changes. Before submitting a photograph, review the latest instructions from the <a href="https://travel.state.gov/content/travel/en/passports/how-apply/photos.html" target="_blank" rel="noopener" style="text-decoration:underline;">US Department of State's passport photo guidance</a>. A photo maker is a preparation aid, not an official approval service.</span>
+                        </div>
+
+                        <a href="https://www.quicktoolspk.com/passport-size-photo-maker.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Passport Size Photo Maker</h4>
+                                <p>Prepare your photo for passport applications with the correct dimensions.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>6. Increase the Color Intensity of an Image</h2>
+                        <p>Sometimes a photograph looks dull even when its composition is good. The colors may appear faded, the lighting may be too dark, or the overall image may lack contrast.</p>
+                        <p>Increasing color intensity can make an image look more vivid, but the key is to improve its appearance without making it unnatural.</p>
+
+                        <h3>What does color intensity mean in image editing?</h3>
+                        <p>Color intensity is commonly adjusted through saturation.</p>
+                        <p>Saturation controls how vivid or muted the colors appear. Increasing saturation makes colors stronger, while reducing it creates a softer or more muted look.</p>
+                        <p>However, saturation is not the same as brightness or contrast.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Setting</th><th>What it changes</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Brightness</td><td>Overall lightness or darkness</td></tr>
+                                    <tr><td>Contrast</td><td>Difference between light and dark areas</td></tr>
+                                    <tr><td>Saturation</td><td>Intensity of colors</td></tr>
+                                    <tr><td>Warmth</td><td>Overall warm or cool color appearance</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Understanding these settings helps you choose the right adjustment instead of applying random edits.</p>
+
+                        <h3>How to increase color intensity online</h3>
+                        <ol>
+                            <li>Open the <a href="https://www.quicktoolspk.com/adjust-image-colors.html">QuickToolsPK Adjust Image Colors tool</a>.</li>
+                            <li>Upload your JPG, PNG, or WEBP image.</li>
+                            <li>Adjust saturation to make colors more vivid.</li>
+                            <li>Change brightness if the image is too dark or too bright.</li>
+                            <li>Fine-tune contrast to improve separation between light and dark areas.</li>
+                            <li>Adjust warmth if the image looks too cool or too warm.</li>
+                            <li>Compare the edited version with the original.</li>
+                            <li>Download the final image.</li>
+                        </ol>
+                        <p>The tool currently provides brightness, contrast, saturation, and warmth controls.</p>
+
+                        <h3>How to make colors look more natural</h3>
+                        <p>Increasing saturation too much can create problems.</p>
+                        <p>Skin tones may become unnaturally orange or red. Green backgrounds can become overly bright, and product colors may no longer represent the real item.</p>
+                        <p>For better results:</p>
+                        <ul>
+                            <li>Make small adjustments instead of moving every setting to the maximum.</li>
+                            <li>Check skin tones carefully when editing portraits.</li>
+                            <li>Preserve accurate product colors for online stores.</li>
+                            <li>Avoid losing details in bright highlights and dark shadows.</li>
+                            <li>Compare the edited image with the original before downloading.</li>
+                        </ul>
+                        <p>For ecommerce photography, accuracy is particularly important. An edited product image should still represent the actual product.</p>
+
+                        <a href="https://www.quicktoolspk.com/adjust-image-colors.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Adjust Image Colors Tool</h4>
+                                <p>Increase saturation, adjust brightness, and fine-tune contrast.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>7. Rotate a PDF Online With a PDF Rotator</h2>
+                        <p>PDF documents are easy to share, but scanned pages and converted documents do not always have the correct orientation.</p>
+                        <p>A page may appear sideways, upside down, or rotated differently from the other pages. This can make a document uncomfortable to read, especially when it contains several pages.</p>
+                        <p>A PDF rotator can correct page orientation without requiring you to recreate the document.</p>
+
+                        <h3>How to rotate a PDF online</h3>
+                        <ol>
+                            <li>Open the <a href="https://www.quicktoolspk.com/pdf-rotate.html">QuickToolsPK PDF Rotator</a>.</li>
+                            <li>Select or drag and drop your PDF file.</li>
+                            <li>Choose 90°, 180°, or 270°.</li>
+                            <li>Apply the rotation.</li>
+                            <li>Review the result.</li>
+                            <li>Download the rotated PDF.</li>
+                        </ol>
+                        <p>The current QuickToolsPK PDF Rotator supports PDF files up to 100 MB and provides the three rotation options. Its current operation applies the selected rotation to all pages in the document.</p>
+
+                        <h3>What if only one page needs to be rotated?</h3>
+                        <p>Sometimes, most pages are already correct, but one scanned page is sideways.</p>
+                        <p>In that situation, rotating the entire document may create more problems. You should first separate the page that needs correction.</p>
+                        <p>A practical workflow is:</p>
+                        <ul>
+                            <li>Split the PDF into smaller documents or individual pages.</li>
+                            <li>Rotate the affected page or separate document.</li>
+                            <li>Review its orientation.</li>
+                            <li>Recombine the pages if needed.</li>
+                        </ul>
+                        <p>You can explore the <a href="https://www.quicktoolspk.com/index.html">QuickToolsPK PDF tools</a> to find the relevant PDF operations.</p>
+
+                        <h3>Does rotating a PDF reduce its quality?</h3>
+                        <p>Rotating a PDF page is different from taking a screenshot and creating a new image of the document.</p>
+                        <p>The QuickToolsPK PDF Rotator applies rotation at the document structure level. Its page states that text and images remain unchanged during rotation.</p>
+                        <p>After downloading, open the file in a PDF reader and check that the text, images, and page order are correct.</p>
+
+                        <a href="https://www.quicktoolspk.com/pdf-rotate.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the PDF Rotator</h4>
+                                <p>Fix sideways pages and correct PDF orientation online.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>8. Resize an Image for Twitter (X)</h2>
+                        <p>A graphic designed for a square Instagram post may not fit properly in an X post or profile header.</p>
+                        <p>The reason is simple: different placements use different dimensions and aspect ratios. If you upload an image without checking its framing, important text or parts of the subject may be cropped.</p>
+
+                        <h3>What image size should you use for X?</h3>
+                        <p>Here are useful dimensions available in the QuickToolsPK X Image Resizer:</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>X placement</th><th>Example dimensions</th><th>Aspect ratio</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Profile header / banner</td><td>1500 × 500 px</td><td>3:1</td></tr>
+                                    <tr><td>Landscape post</td><td>1600 × 900 px</td><td>16:9</td></tr>
+                                    <tr><td>Square post</td><td>1080 × 1080 px</td><td>1:1</td></tr>
+                                    <tr><td>Portrait post</td><td>1080 × 1350 px</td><td>4:5</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>These are working dimensions offered or referenced by the tool. X can display and crop images differently depending on the placement and interface, so preview the final post before publishing.</p>
+
+                        <h3>How to resize an image for Twitter online</h3>
+                        <ol>
+                            <li>Visit the <a href="https://www.quicktoolspk.com/x-twitter-image-resizer.html">QuickToolsPK X (Twitter) Image Resizer</a>.</li>
+                            <li>Upload your image.</li>
+                            <li>Select Header, Landscape Post, Square Post, or Portrait Post.</li>
+                            <li>Choose Crop to Fill or Fit Image.</li>
+                            <li>Review the framing.</li>
+                            <li>Download the resized image.</li>
+                            <li>Check the result in the X post composer before publishing.</li>
+                        </ol>
+
+                        <h3>Crop to fill or fit image: Which option is better?</h3>
+                        <ul>
+                            <li><strong>Crop to Fill:</strong> The image covers the entire target canvas, but some content around the edges may disappear.</li>
+                            <li><strong>Fit Image:</strong> The complete original image remains visible within the selected dimensions. Depending on the proportions, empty space may appear around it.</li>
+                        </ul>
+                        <p>For a photograph where the entire subject matters, fitting is often a safer starting point. For a background image that needs to cover the full canvas, cropping may be more suitable.</p>
+                        <p>For X headers, keep important text, faces, and logos away from the edges. The profile picture can overlap part of the header, and different screens may display the banner differently.</p>
+
+                        <a href="https://www.quicktoolspk.com/x-twitter-image-resizer.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the X (Twitter) Image Resizer</h4>
+                                <p>Prepare your images for X headers, posts, and profile banners.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>9. Choose the Right Tool for Your Image Editing Task</h2>
+                        <p>Not every image editing task needs the same solution. Using the wrong tool can create unnecessary work or change the image in ways you did not intend.</p>
+                        <p>Here is a quick reference to help you choose.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Your goal</th><th>Suitable tool</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Remove color from a photograph</td><td>Black and White Converter</td></tr>
+                                    <tr><td>Prepare images for multiple platforms</td><td>Social Media Image Resizer</td></tr>
+                                    <tr><td>Place a headline or caption on a picture</td><td>Add Text to Image</td></tr>
+                                    <tr><td>Create an outline around a photo</td><td>Borders and Padding</td></tr>
+                                    <tr><td>Prepare a photo for an application</td><td>Passport Size Photo Maker</td></tr>
+                                    <tr><td>Make colors more vivid</td><td>Adjust Image Colors</td></tr>
+                                    <tr><td>Prepare an X header or post</td><td>X Image Resizer</td></tr>
+                                    <tr><td>Correct sideways PDF pages</td><td>PDF Rotator</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>A good workflow starts with the original file, uses the specific tool needed for the task, and checks the exported result.</p>
+
+                        <h2>10. Tips for Better Image and PDF Editing Results</h2>
+                        <p>Even when an online editor is simple to use, the quality of the final result depends on your source file and editing decisions.</p>
+
+                        <h3>Start with the original file</h3>
+                        <p>Whenever possible, use the highest-quality original photograph or document. Repeatedly editing and exporting the same compressed image can reduce quality over time.</p>
+                        <p>Keep an untouched copy so you can return to the original if necessary.</p>
+
+                        <h3>Understand dimensions and aspect ratios</h3>
+                        <p>Pixel dimensions describe an image's width and height. Aspect ratio describes the relationship between those dimensions.</p>
+                        <p>For example, a 1080 × 1080 image is square, while a 1080 × 1920 image is vertical.</p>
+                        <p>Choosing the correct ratio before editing can help avoid unnecessary cropping.</p>
+
+                        <h3>Preview before downloading</h3>
+                        <p>Always review the finished result. Check that:</p>
+                        <ul>
+                            <li>Faces and important subjects remain visible.</li>
+                            <li>Text is readable.</li>
+                            <li>Logos are not cut off.</li>
+                            <li>Colors look natural.</li>
+                            <li>Borders and padding are balanced.</li>
+                            <li>The document pages have the correct orientation.</li>
+                            <li>The downloaded file opens correctly.</li>
+                        </ul>
+
+                        <h3>Choose the right output format</h3>
+                        <p>Different formats are useful for different types of content.</p>
+                        <ul>
+                            <li><strong>JPG:</strong> Often suitable for photographs and general-purpose images.</li>
+                            <li><strong>PNG:</strong> Useful for graphics, sharp edges, and images that need transparency.</li>
+                            <li><strong>WEBP:</strong> Commonly used for web images where file size and quality matter.</li>
+                        </ul>
+                        <p>The correct choice depends on the editor's supported export formats and the platform where the image will be used.</p>
+
+                        <h3>Check privacy before using online tools</h3>
+                        <p>If you are editing personal photographs, identification images, or confidential documents, understand how the tool processes your files.</p>
+                        <p>QuickToolsPK states that its tools process files locally in the browser rather than uploading them to its servers. Its PDF Rotator also describes local processing on its tool page.</p>
+                        <p>For sensitive documents, you should still review the site's privacy information and verify the behavior of the particular tool you use.</p>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. How can I convert an image to black and white online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Upload your photograph to a black-and-white image converter, select an available grayscale style, preview the result, and download the converted image. For natural-looking photographs, grayscale usually preserves more detail than a strict two-tone effect.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. What is the difference between a black-and-white picture and a grayscale image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">A grayscale image contains multiple shades of gray between black and white. A strict two-tone image uses only black and white pixels without gray shades.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. How can I resize an image for multiple social media platforms?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Use a social media image resizer that provides platform presets or custom dimensions. Select the placements you need, review the cropping and proportions, and download each version.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. How do I add text to an image online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Upload your picture to an image text editor, enter your message, select the text size and color, choose its placement, and download the final design. Keep the text short and readable.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. How can I add a white border to a photo?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Use an image border tool, upload your photograph, select the border thickness, and choose white as the border color. Preview the result before downloading.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Can I create a US passport photo online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">You can prepare an image using the required 2 × 2 inch printed photo dimensions, but correct dimensions do not guarantee acceptance. Follow the US Department of State's composition and editing requirements. In particular, do not digitally alter a passport photo when the official rules prohibit it.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. How do I increase the color intensity of an image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Increase the saturation setting in an image editor. Make gradual adjustments and check skin tones and product colors to avoid an unnatural result.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Can I rotate a PDF without converting it into images?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. A PDF rotator can change the orientation of PDF pages without requiring you to convert the pages into separate image files.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>9. How do I resize an image for an X header?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">A common working size for an X profile header is 1500 × 500 pixels. Use an X image resizer, select the header preset, adjust the framing, and check the result on desktop and mobile.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>10. Does resizing an image improve its quality?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Resizing changes the dimensions, not the original amount of image detail. Enlarging a small or blurry image cannot restore information that was never captured. Start with a high-resolution original whenever possible.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>11. Should I crop or fit an image when resizing?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Crop when you want the image to fill the entire target area. Fit when preserving the complete image is more important, even if it leaves empty space around the subject.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>12. Are online image and PDF editing tools suitable for beginners?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Many browser-based tools are designed for simple tasks such as resizing, adding text, changing colors, creating borders, and rotating documents. Beginners should still preview the result and check the output requirements before using the file.</div>
+                            </details>
+                        </div>
+
+                        <h2>Edit Images and PDFs With QuickToolsPK</h2>
+                        <p>You do not need a complicated editing workflow for every small task. Whether you want to convert a photograph to black and white, resize a graphic for social media, add a border, prepare an application photo, or rotate a PDF, choosing the right tool can make the process easier.</p>
+                        <p>QuickToolsPK brings together image and PDF utilities in one place, with browser-based workflows for common editing tasks.</p>
+                        <p>Explore the tools below and choose the one that matches your project:</p>
+
+                    </div>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Tools Mentioned</h2>
+                        <p>All tools are free, browser-based, and do not upload your files to a server.</p>
+                        <div class="related-grid">
+                            <a href="https://www.quicktoolspk.com/black-and-white-image.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-adjust"></i></div>
+                                <h4>Black and White Converter</h4>
+                                <p>Convert photos to grayscale or high-contrast black and white.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/social-media-image-resizer.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-share-alt"></i></div>
+                                <h4>Social Media Image Resizer</h4>
+                                <p>Resize images for Instagram, Facebook, X, and more.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/add-text-to-image.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-font"></i></div>
+                                <h4>Add Text to Image</h4>
+                                <p>Add headlines, captions, or announcements to your photos.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/image-borders-padding.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-border-all"></i></div>
+                                <h4>Image Borders & Padding</h4>
+                                <p>Add borders and padding to your photos online.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/passport-size-photo-maker.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-id-card"></i></div>
+                                <h4>Passport Size Photo Maker</h4>
+                                <p>Prepare photos for passport applications with exact dimensions.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/adjust-image-colors.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-palette"></i></div>
+                                <h4>Adjust Image Colors</h4>
+                                <p>Adjust brightness, contrast, saturation, and warmth.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/pdf-rotate.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-sync-alt"></i></div>
+                                <h4>PDF Rotator</h4>
+                                <p>Fix sideways pages and correct PDF orientation online.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/x-twitter-image-resizer.html" class="related-card">
+                                <div class="related-card-icon"><i class="fab fa-twitter"></i></div>
+                                <h4>X Image Resizer</h4>
+                                <p>Prepare images for X headers, posts, and profile banners.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">A practical guide to 10 useful image and PDF editing tasks using free online tools.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Image & PDF Guides</p>
+                            <p><strong>Tags:</strong> Image Editing, PDF Tools, Social Media Resizer, Black and White Converter, Passport Photo, PDF Rotator</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Quick Links</h3>
+                        <ul class="sidebar-list">
+                            <li><a href="https://www.quicktoolspk.com/black-and-white-image.html"><i class="fas fa-adjust"></i> Black & White Converter</a></li>
+                            <li><a href="https://www.quicktoolspk.com/social-media-image-resizer.html"><i class="fas fa-share-alt"></i> Social Media Resizer</a></li>
+                            <li><a href="https://www.quicktoolspk.com/add-text-to-image.html"><i class="fas fa-font"></i> Add Text to Image</a></li>
+                            <li><a href="https://www.quicktoolspk.com/image-borders-padding.html"><i class="fas fa-border-all"></i> Image Borders & Padding</a></li>
+                            <li><a href="https://www.quicktoolspk.com/passport-size-photo-maker.html"><i class="fas fa-id-card"></i> Passport Photo Maker</a></li>
+                            <li><a href="https://www.quicktoolspk.com/adjust-image-colors.html"><i class="fas fa-palette"></i> Adjust Image Colors</a></li>
+                            <li><a href="https://www.quicktoolspk.com/pdf-rotate.html"><i class="fas fa-sync-alt"></i> PDF Rotator</a></li>
+                            <li><a href="https://www.quicktoolspk.com/x-twitter-image-resizer.html"><i class="fab fa-twitter"></i> X Image Resizer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Editorial note</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">This article is a supporting guide. Each tool page remains the main destination for performing the specific task. Always verify current platform requirements and official passport rules before publishing.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
