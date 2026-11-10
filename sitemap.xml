@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+    <!-- ============================================================
+         HOME & MAIN PAGES
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/index.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/about.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/contact.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- ============================================================
+         IMAGE TOOLS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/img-compress.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/img-resizer.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/img-fmt-converter.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/social-media-image-resizer.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/add-text-to-image.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/youtube-thumbnail-banner-maker.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ============================================================
+         PDF TOOLS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/JPG-to-PDF-Converter.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG INDEX
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/blog/index.html</loc>
+        <lastmod>2026-11-10</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — CELEBRITY NEWS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/did-patrick-stewart-die.html</loc>
+        <lastmod>2026-10-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — BRAND GUIDES
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/what-is-victorias-secret.html</loc>
+        <lastmod>2026-10-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — GAMING NEWS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/zelda-ocarina-of-time-remake-2026.html</loc>
+        <lastmod>2026-11-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — FOOTBALL NEWS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/pakhtakor-vs-al-nassr-afc-champions-league-2026.html</loc>
+        <lastmod>2026-11-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/le-havre-vs-psg-live-score.html</loc>
+        <lastmod>2026-10-30</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/aek-athens-vs-real-madrid-2026.html</loc>
+        <lastmod>2026-11-04</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — BREAKING NEWS / AVIATION
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/florida-learjet-60-crash-nathalia-gadelha-updates/</loc>
+        <lastmod>2026-11-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- ============================================================
+         BLOG ARTICLES — US ELECTIONS
+         ============================================================ -->
+    <url>
+        <loc>https://quicktoolspk.com/blog/updates/2026-midterm-election-results.html</loc>
+        <lastmod>2026-11-04</lastmod>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+</urlset>

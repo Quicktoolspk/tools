@@ -1,0 +1,285 @@
+# ============================================================
+# robots.txt for QuickToolsPK
+# https://quicktoolspk.com/robots.txt
+# Last updated: November 2026
+# ============================================================
+
+# ------------------------------------------------------------
+# DEFAULT: Allow all well-behaved crawlers
+# ------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# ------------------------------------------------------------
+# BLOCK: Admin, backend, private and sensitive areas
+# ------------------------------------------------------------
+Disallow: /admin/
+Disallow: /administrator/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /login/
+Disallow: /signin/
+Disallow: /register/
+Disallow: /account/
+Disallow: /dashboard/
+Disallow: /private/
+Disallow: /internal/
+Disallow: /cgi-bin/
+Disallow: /includes/
+Disallow: /config/
+Disallow: /backup/
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /data/
+Disallow: /api/
+Disallow: /api/v1/
+Disallow: /api/v2/
+Disallow: /dev/
+Disallow: /staging/
+Disallow: /test/
+Disallow: /beta/
+
+# ------------------------------------------------------------
+# BLOCK: Search results and filtered pages (crawl traps)
+# ------------------------------------------------------------
+Disallow: /search
+Disallow: /search?
+Disallow: /*?s=
+Disallow: /*?search=
+Disallow: /*?q=
+Disallow: /*?filter=
+Disallow: /*?sort=
+Disallow: /*?order=
+Disallow: /*?ref=
+Disallow: /*?utm_
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+Disallow: /*?sessionid=
+Disallow: /*?cart=
+Disallow: /*?checkout=
+
+# ------------------------------------------------------------
+# BLOCK: File types that should not be indexed
+# ------------------------------------------------------------
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.pdf$
+Disallow: /*.zip$
+Disallow: /*.exe$
+Disallow: /*.docx$
+Disallow: /*.xlsx$
+Disallow: /*.pptx$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.sql$
+Disallow: /*.env$
+
+# Keep sitemap accessible (exception above)
+Allow: /sitemap.xml
+Allow: /sitemap_index.xml
+Allow: /sitemap-*.xml
+
+# ------------------------------------------------------------
+# ALLOW: Assets needed for rendering (CSS, JS, images)
+# Google needs these to render pages correctly
+# ------------------------------------------------------------
+Allow: /assets/
+Allow: /images/
+Allow: /img/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+Allow: /uploads/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.ico$
+
+# ------------------------------------------------------------
+# SPECIFIC: Googlebot
+# ------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /blog/
+Allow: /tools/
+Crawl-delay: 1
+
+# ------------------------------------------------------------
+# SPECIFIC: Googlebot-Image (allow all images for Image Search)
+# ------------------------------------------------------------
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+Disallow: /admin/
+Disallow: /private/
+
+# ------------------------------------------------------------
+# SPECIFIC: Bingbot
+# ------------------------------------------------------------
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# ------------------------------------------------------------
+# SPECIFIC: Google AdsBot (must be allowed for ads landing pages)
+# ------------------------------------------------------------
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# ------------------------------------------------------------
+# SPECIFIC: Yandex
+# ------------------------------------------------------------
+User-agent: Yandex
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /search
+Crawl-delay: 2
+
+# ------------------------------------------------------------
+# SPECIFIC: DuckDuckBot
+# ------------------------------------------------------------
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# ------------------------------------------------------------
+# SPECIFIC: Baiduspider
+# ------------------------------------------------------------
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Crawl-delay: 2
+
+# ------------------------------------------------------------
+# SPECIFIC: AI crawlers — block by default (content protection)
+# Remove the Disallow lines if you WANT AI training on your content
+# ------------------------------------------------------------
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# ------------------------------------------------------------
+# SPECIFIC: Bad bots / scrapers (block)
+# ------------------------------------------------------------
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: WebZIP
+Disallow: /
+
+User-agent: Wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+# ------------------------------------------------------------
+# SITEMAPS
+# Replace with your actual sitemap URL(s) once published
+# ------------------------------------------------------------
+Sitemap: https://quicktoolspk.com/sitemap.xml
+# Sitemap: https://quicktoolspk.com/sitemap_index.xml
+# Sitemap: https://quicktoolspk.com/blog/sitemap.xml
+
+# ============================================================
+# END OF robots.txt
+# ============================================================
