@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Online Photo Editor: Change Background Color to White | QuickToolsPK</title>
+    <meta name="description" content="Learn how to change a photo background to white online. Follow simple editing tips for product photos, profile pictures and cleaner image backgrounds.">
+    <meta name="keywords" content="online photo editor change background color to white, change photo background to white online, online white background photo editor, change image background color online, photo background changer, make photo background white, white background image editor, change background to white without Photoshop">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/change-photo-background-to-white-online.html">
+
+    <meta property="og:title" content="How to Change a Photo Background to White Online">
+    <meta property="og:description" content="Learn how to change image background color online, improve subject edges, and prepare professional-looking pictures for websites, online stores and everyday designs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quicktoolspk.com/blog/change-photo-background-to-white-online.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Change a Photo Background to White Online">
+    <meta name="twitter:description" content="Follow simple editing tips for product photos, profile pictures and cleaner image backgrounds.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (Used on dark UI elements)
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; font-weight: 500;}
+        .article-content a:hover { color: var(--primary); }
+
+        /* Featured Image (only image) */
+        .img-large {
+            width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm); background-color: var(--bg);
+            aspect-ratio: 16/9; object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem; color: var(--text-subtle); text-align: center;
+            margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic;
+        }
+
+        /* ============================================================
+           CTA TOOL BANNER (Replaces inline image)
+           ============================================================ */
+        .tool-cta-banner {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 1.5rem; margin: 1.5rem 0; position: relative;
+            overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem; text-decoration: none; transition: transform var(--t-fast);
+            box-shadow: var(--shadow-md);
+        }
+        .tool-cta-banner:hover { transform: translateY(-2px); }
+        .tool-cta-banner .stars { opacity: 0.3; }
+        .tool-cta-text { position: relative; z-index: 2; color: #fff; flex: 1; min-width: 200px;}
+        .tool-cta-text h4 { color: #fff; font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .tool-cta-text p { color: #a9b8ce; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+        .tool-cta-btn {
+            position: relative; z-index: 2; background: rgba(255,255,255,0.15);
+            color: #fff; padding: 0.6rem 1.2rem; border-radius: var(--r-full);
+            font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.3);
+            white-space: nowrap; display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 1.5rem 0;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-alt); font-weight: 700; color: var(--navy);
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem; background: var(--primary-soft);
+            border-left: 4px solid var(--primary); border-radius: var(--r-sm);
+            margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .tool-cta-banner { flex-direction: column; text-align: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Image Editing Guides</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Image Editing Guides</span>
+                        <h1>How to Change a Photo Background to White Online</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Updated: November 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+
+                        <!-- ============ ONLY IMAGE: FEATURED IMAGE ============ -->
+                        <img src="../assets/images/blog/26.jpg" 
+                             alt="Before and after example of changing a photo background to white online"
+                             class="img-large">
+                        
+
+                        <p>A distracting photo background can make an otherwise good picture look unprofessional. Whether you are preparing a product image for an online store, updating a profile picture, or creating a clean visual for your website, a plain white background can make the main subject stand out.</p>
+
+                        <p>You do not always need advanced photo-editing software to make this change. An online photo editor can help you choose a new background colour and create a cleaner-looking image.</p>
+
+                        <p>In this guide, you will learn how to change a photo background to white online, what to check before downloading your edited picture, and how to avoid common background-editing mistakes.</p>
+
+                        <h2>How to Change a Photo Background to White Online</h2>
+                        <p>You can use the <a href="https://www.quicktoolspk.com/change-image-background-color.html">QuickToolsPK Change Image Background Color tool</a> to work with an image and choose a new background colour.</p>
+
+                        <p>Follow these general steps:</p>
+                        <ol>
+                            <li><strong>Open the online photo editor:</strong> Visit the QuickToolsPK Change Image Background Color tool.</li>
+                            <li><strong>Upload your image:</strong> Select the photo you want to edit. The current page lists JPG, PNG and WEBP support, with a maximum file size of 20 MB.</li>
+                            <li><strong>Choose the background colour:</strong> Use the available colour controls to select white. If the custom HEX field is available, use <code>#FFFFFF</code> for pure white.</li>
+                            <li><strong>Review the result:</strong> Check the edges around the subject, especially hair, clothing, accessories and shadows.</li>
+                            <li><strong>Make adjustments:</strong> If the editor provides background selection or refinement controls, use them to improve areas that do not look natural.</li>
+                            <li><strong>Download your image:</strong> Use the download option after checking the preview.</li>
+                        </ol>
+
+                        <p>The tool page documents image upload, background colour selection, a custom HEX field and image download. The exact selection and refinement options should be checked in the live interface before publishing claims about automatic background removal or manual masking.</p>
+
+                        <!-- ============ CTA TOOL BANNER (Replaces inline image) ============ -->
+                        <a href="https://www.quicktoolspk.com/change-image-background-color.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the QuickToolsPK Tool</h4>
+                                <p>Change the background colour of an image and review the result instantly.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>Why Should You Change a Photo Background to White?</h2>
+                        <p>White is one of the most useful background colours in photography and graphic design. It creates a simple visual space that helps viewers focus on the main subject.</p>
+                        <p>Here are some common reasons to use a white background.</p>
+
+                        <h3>1. Create cleaner product photos</h3>
+                        <p>Online stores often use plain backgrounds to present products clearly. A white background can help customers focus on the product rather than objects or colours behind it.</p>
+                        <p>For example, you might use a white background for:</p>
+                        <ul>
+                            <li>Shoes and clothing.</li>
+                            <li>Watches and jewellery.</li>
+                            <li>Beauty and skincare products.</li>
+                            <li>Electronics and accessories.</li>
+                            <li>Home decoration products.</li>
+                            <li>Small business catalogue images.</li>
+                        </ul>
+                        <p>For e-commerce, consistency matters. If several product photos use different background colours, the product catalogue may look less organised. A consistent background can create a more unified appearance.</p>
+
+                        <h3>2. Improve profile pictures</h3>
+                        <p>A simple white background can work well for professional profile images, team introductions, business websites and personal portfolios.</p>
+                        <p>It is especially useful when the original picture contains a busy room, furniture or other distracting objects.</p>
+                        <p>However, a clean background alone does not make a picture suitable for an official identity document. Always check the relevant authority's photo rules.</p>
+
+                        <h3>3. Prepare images for websites and presentations</h3>
+                        <p>A white background can make an image easier to place in a website layout, presentation, brochure or promotional design.</p>
+                        <p>It can also help when you need to combine images from different sources into one consistent visual style.</p>
+
+                        <h3>4. Create simple marketplace images</h3>
+                        <p>Online sellers often prepare product images for different marketplaces and shopping platforms. A plain white background may be useful for catalogue presentation, but each marketplace has its own image requirements.</p>
+                        <p>Before uploading, check the platform's current rules for image background, dimensions, borders, text and product visibility.</p>
+
+                        <h2>What Makes a Good White Background Photo?</h2>
+                        <p>Choosing white as a background colour is only one part of the editing process. A good result should also look natural.</p>
+                        <p>Consider these details before downloading your image.</p>
+
+                        <h3>Pure white versus off-white</h3>
+                        <p>Pure white is represented by the HEX colour <code>#FFFFFF</code>. It is useful when you need a bright, neutral background.</p>
+                        <p>Off-white is slightly warmer or softer. It may work better for editorial designs, portraits and images where pure white feels too harsh.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Background</th><th>HEX example</th><th>Common use</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Pure white</td><td><code>#FFFFFF</code></td><td>Product images and clean layouts</td></tr>
+                                    <tr><td>Soft white</td><td><code>#FAFAFA</code></td><td>Minimalist designs</td></tr>
+                                    <tr><td>Warm off-white</td><td><code>#F8F7F2</code></td><td>Editorial and lifestyle visuals</td></tr>
+                                    <tr><td>Light grey</td><td><code>#F2F2F2</code></td><td>Subtle contrast</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><em>These are design examples, not official document-photo standards.</em></p>
+
+                        <h3>Clean subject edges</h3>
+                        <p>Pay close attention to the outline of your subject. Hair, fur, transparent glass, lace and thin accessories can be difficult to separate from a complicated background.</p>
+                        <p>Zoom in and inspect:</p>
+                        <ul>
+                            <li>Hair strands around the head.</li>
+                            <li>The edges of sleeves and clothing.</li>
+                            <li>Glass bottles and transparent objects.</li>
+                            <li>Small jewellery details.</li>
+                            <li>Shadows around the subject.</li>
+                            <li>Any leftover colour from the original background.</li>
+                        </ul>
+                        <p>If you notice a white halo, missing hair or a rough outline, the image may need further refinement.</p>
+
+                        <h3>Natural lighting and shadows</h3>
+                        <p>A completely white background can sometimes make an image look artificial if the subject has strong shadows or coloured reflections from the original scene.</p>
+                        <p>For a natural result, the lighting on the subject should look consistent with the new background. Avoid making the background so bright that the subject's edges disappear.</p>
+
+                        <h2>How to Make a Product Photo Background White</h2>
+                        <p>Product photography is one of the most common uses for a white background.</p>
+                        <p>Imagine you have a photograph of a perfume bottle on a wooden table. The table and room behind it may distract viewers from the product. A white background can create a simpler presentation.</p>
+                        <p>Use this practical approach:</p>
+                        <ol>
+                            <li>Choose a sharp, well-lit product image.</li>
+                            <li>Upload it to the online background colour editor.</li>
+                            <li>Select the background area using the available controls.</li>
+                            <li>Choose white using the colour picker.</li>
+                            <li>Review the bottle's edges, cap and transparent areas.</li>
+                            <li>Check that the product's original colour and appearance remain accurate.</li>
+                            <li>Download the result and inspect it at full size.</li>
+                        </ol>
+                        <div class="callout">
+                            <i class="fas fa-lightbulb"></i>
+                            <span><strong>Useful tip:</strong> Do not remove important product details while editing. For example, a transparent perfume bottle may need its natural edges and reflections preserved so customers can understand what the product actually looks like.</span>
+                        </div>
+
+                        <h2>How to Change a Photo Background to White Without Photoshop</h2>
+                        <p>Photoshop is a powerful editing application, but it may be more than a beginner needs for a simple background colour change.</p>
+                        <p>An online image editor can be a practical alternative when you want to make a straightforward adjustment.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Editing method</th><th>Suitable for</th><th>Considerations</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Online background colour editor</td><td>Simple colour changes</td><td>Depends on available selection features</td></tr>
+                                    <tr><td>Professional desktop software</td><td>Detailed editing and masking</td><td>Requires more editing knowledge</td></tr>
+                                    <tr><td>Mobile photo editor</td><td>Quick edits on a phone</td><td>Controls vary by application</td></tr>
+                                    <tr><td>Manual selection tools</td><td>Complex edges and detailed objects</td><td>Can take more time</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>USA: White Background Photos for Online Stores and Professional Use</h2>
+                        <p>In the United States, white-background product photography is useful for many online businesses, including independent stores, small brands and e-commerce sellers.</p>
+                        <p>A clean background can help maintain a consistent product catalogue across a website. It is also useful for product presentations, promotional graphics and business portfolios.</p>
+
+                        <h3>Is a digitally edited white background acceptable for a US passport photo?</h3>
+                        <div class="callout danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Important distinction:</strong> The U.S. Department of State requires passport photos to have a plain white or off-white background without shadows, textures or objects. However, it also instructs applicants to submit an original, unedited photo and says not to change the image using photo-editing software, phone apps or filters. <strong>Do not assume that changing an existing photo's background to white will make it acceptable for a US passport application.</strong></span>
+                        </div>
+                        <p>For official passport or visa photographs, check the latest instructions from the relevant government authority and take the photo according to those rules.</p>
+
+                        <h2>China: White Background Product Photos and Visa Photo Considerations</h2>
+                        <p>China is another relevant market for white-background photography, particularly for product catalogues, online retail and commercial image preparation.</p>
+                        <p>Businesses selling products online may use consistent white-background images to present products clearly across listings and promotional materials.</p>
+
+                        <h3>White background for China visa photographs</h3>
+                        <p>China-related visa photo requirements should be checked against the specific instructions provided by the relevant Chinese embassy or consulate.</p>
+                        <p>A published Chinese consular photo specification document describes a white or close-to-white background with no borders around the image. It also includes measurements and other photo requirements.</p>
+                        <div class="callout warning">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Do not assume that a photo edited with an online background changer will automatically meet visa requirements. Background colour is only one part of the specification. Dimensions, image quality, head position, lighting and other details may also matter.</span>
+                        </div>
+
+                        <h2>Common Mistakes When Changing a Photo Background to White</h2>
+                        <p>A white background may look simple, but poor editing can make the final image look unnatural. Avoid these common mistakes.</p>
+                        <ul>
+                            <li><strong>Removing parts of the subject:</strong> An inaccurate selection may remove hair, clothing edges, product handles or other small details.</li>
+                            <li><strong>Leaving the original background visible:</strong> Small patches of the old background can remain around the subject.</li>
+                            <li><strong>Making the subject look too bright:</strong> If the subject has light-coloured clothing, it may blend into the background.</li>
+                            <li><strong>Ignoring shadows:</strong> A background may be white while the original shadow remains dark or uneven.</li>
+                            <li><strong>Changing the product's real appearance:</strong> Do not unintentionally change the product's colour, shape or details.</li>
+                            <li><strong>Using an edited image for official documents without checking the rules.</strong></li>
+                        </ul>
+
+                        <h2>What Image Format Should You Download?</h2>
+                        <p>The right image format depends on how you plan to use the final picture.</p>
+                        
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Format</th><th>Useful for</th><th>Important detail</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>JPG / JPEG</td><td>Product photos, website images and everyday use</td><td>Does not support transparency</td></tr>
+                                    <tr><td>PNG</td><td>Graphics and images that need transparency</td><td>Can have larger file sizes</td></tr>
+                                    <tr><td>WEBP</td><td>Website images and web publishing</td><td>Check compatibility with your destination</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>Tips for Better Background Editing Results</h2>
+                        <p>Before you edit your next photo, keep these practical tips in mind:</p>
+                        <ul>
+                            <li>Start with a clear, high-resolution original image.</li>
+                            <li>Use good lighting when taking the original photo.</li>
+                            <li>Avoid photographs where the subject and background have nearly identical colours.</li>
+                            <li>Check the edges around hair, fabric and transparent objects.</li>
+                            <li>Keep product colours and details accurate.</li>
+                            <li>Use consistent background colours across related product images.</li>
+                            <li>Review the exported file at full size.</li>
+                            <li>Keep a copy of the original photograph.</li>
+                        </ul>
+                        <p>The quality of the final result depends on the original image and how accurately the subject can be separated from its surroundings.</p>
+
+                        <h2>Change Your Image Background with QuickToolsPK</h2>
+                        <p>You do not need to make every background edit complicated. For everyday image preparation, an online photo editor can help you work with different background colours and create a cleaner visual.</p>
+                        
+                        <p>With the <a href="https://www.quicktoolspk.com/change-image-background-color.html">QuickToolsPK Change Image Background Color tool</a>, you can upload a supported image, choose a background colour using the available controls, preview the result and download the edited image.</p>
+
+                        <p>Whether you are preparing a product picture, a website graphic or a personal design, take a moment to review the final image before using it.</p>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. How can I change a photo background to white online?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Open an online background colour editor, upload your image, select the background using the available controls, choose white and review the result before downloading.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. How do I make a picture background pure white?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Choose the pure white colour value <code>#FFFFFF</code> in an editor that supports custom HEX colours. Make sure the original background is properly selected so the subject remains visible.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Can I change an image background to white without Photoshop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. You can use an online image editor for supported background colour changes without needing desktop photo-editing software.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Can I change a JPG background to white?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes, a JPG image can be used with a compatible background colour editor. The final result depends on the editor's selection features and the original photograph.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. Can I use a white background photo for an online store?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. White backgrounds can create consistent product catalogue images. However, check the marketplace's current image requirements before uploading.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Can I use an edited white background photo for a US passport?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Not necessarily. The U.S. Department of State requires an original, unedited passport photograph and prohibits digital background changes. Check the official requirements before submitting a photo.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. What background colour is required for a China visa photo?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Follow the exact photo specifications from the relevant Chinese embassy or consulate. A published Chinese consular specification describes a white or close-to-white background, but other requirements also apply.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Does changing the background reduce image quality?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">It can affect the final appearance, particularly around detailed edges. The export format and image-processing method can also affect the final quality.</div>
+                            </details>
+                        </div>
+
+                    </div>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>Explore other useful image tools to help prepare your photos for websites, online stores, and presentations.</p>
+                        <div class="related-grid">
+                            <a href="/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress"></i></div>
+                                <h4>Image Compressor</h4>
+                                <p>Compress your edited images to reduce file size for faster uploading.</p>
+                            </a>
+                            <a href="/img-resizer.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                <h4>Image Resizer</h4>
+                                <p>Resize your product photos to fit specific marketplace dimensions.</p>
+                            </a>
+                            <a href="/img-fmt-converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <h4>Image Format Converter</h4>
+                                <p>Convert your images between JPG, PNG, and WEBP formats easily.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">A practical tutorial on how to use an online editor to change image backgrounds to white for various use cases.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Image Editing Guides</p>
+                            <p><strong>Tags:</strong> White Background, Photo Editor, Product Photography, Passport Photo, E-commerce</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Key takeaways</h3>
+                        <ul style="font-size:0.9rem;color:var(--text-muted);padding-left:1.1rem;margin:0;">
+                            <li style="margin-bottom:0.5rem;">Use <code>#FFFFFF</code> for pure white backgrounds.</li>
+                            <li style="margin-bottom:0.5rem;">Check subject edges (hair, glass) for a natural result.</li>
+                            <li style="margin-bottom:0.5rem;">Do not use digitally altered photos for official US passports.</li>
+                            <li>Use JPG for standard use, PNG for transparency.</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Editorial note</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">Always check official government or marketplace guidelines regarding photo requirements. A white background does not guarantee compliance with official documents.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
