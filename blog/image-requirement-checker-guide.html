@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Image Requirement Checker: Check Size, Format & Dimensions Online | QuickToolsPK</title>
+    <meta name="description" content="Check image dimensions, file size, format, and aspect ratio before uploading. Learn how to fix common image requirement errors with free online tools.">
+    <meta name="keywords" content="image requirement checker, image requirements checker online, check image dimensions online, check image size before uploading, image file size checker, image format checker, check image aspect ratio, photo upload requirements, image dimensions checker, check photo size online, online image specification checker">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/image-requirement-checker-guide.html">
+
+    <meta property="og:title" content="Image Requirement Checker: Check Size, Format & Dimensions Online">
+    <meta property="og:description" content="Check image dimensions, file size, format, and aspect ratio before uploading. Learn how to fix common image requirement errors with free online tools.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quicktoolspk.com/blog/image-requirement-checker-guide.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Image Requirement Checker: Check Size, Format & Dimensions Online">
+    <meta name="twitter:description" content="Check image dimensions, file size, format, and aspect ratio before uploading. Learn how to fix common image requirement errors.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (Used on dark sections)
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+        .article-content a:hover { color: var(--primary); }
+        
+        code {
+            background: var(--bg-alt); padding: 0.1rem 0.4rem; border-radius: 4px;
+            font-family: monospace; font-size: 0.9em; color: var(--primary-dark);
+        }
+
+        /* Featured Image */
+        .img-large {
+            width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm); background-color: var(--bg);
+            aspect-ratio: 16/9; object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem; color: var(--text-subtle); text-align: center;
+            margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic;
+        }
+
+        /* ============================================================
+           DARK SECTION STYLES
+           ============================================================ */
+        .dark-section {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 2rem 1.5rem; margin: 2rem 0; position: relative;
+            overflow: hidden; color: #fff;
+        }
+        .dark-section .stars { opacity: 0.4; }
+        .dark-section h2, .dark-section h3 { color: #fff; border-bottom-color: rgba(255,255,255,0.1); }
+        .dark-section p, .dark-section li { color: #c7d3e6; }
+        .dark-section strong { color: #fff; }
+        .dark-section a { color: #6ee7b7; text-decoration: underline; }
+        .dark-section a:hover { color: #fff; }
+        .dark-section code { background: rgba(255,255,255,0.15); color: #6ee7b7; }
+        
+        .dark-section .table-wrap {
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+        }
+        .dark-section table { color: #fff; }
+        .dark-section th {
+            background: rgba(255,255,255,0.1); color: #fff;
+            border-bottom-color: rgba(255,255,255,0.15);
+        }
+        .dark-section td {
+            border-bottom-color: rgba(255,255,255,0.1); color: #e2e8f0;
+        }
+        .dark-section tr:hover td { background: rgba(255,255,255,0.05); }
+
+        /* ============================================================
+           CTA TOOL BANNER
+           ============================================================ */
+        .tool-cta-banner {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 1.5rem; margin: 1.5rem 0; position: relative;
+            overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem; text-decoration: none; transition: transform var(--t-fast);
+            box-shadow: var(--shadow-md);
+        }
+        .tool-cta-banner:hover { transform: translateY(-2px); }
+        .tool-cta-banner .stars { opacity: 0.3; }
+        .tool-cta-text { position: relative; z-index: 2; color: #fff; flex: 1; min-width: 200px;}
+        .tool-cta-text h4 { color: #fff; font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .tool-cta-text p { color: #a9b8ce; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+        .tool-cta-btn {
+            position: relative; z-index: 2; background: rgba(255,255,255,0.15);
+            color: #fff; padding: 0.6rem 1.2rem; border-radius: var(--r-full);
+            font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.3);
+            white-space: nowrap; display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 1.5rem 0;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-alt); font-weight: 700; color: var(--navy);
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem; background: var(--primary-soft);
+            border-left: 4px solid var(--primary); border-radius: var(--r-sm);
+            margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { margin-bottom: 0.75rem; }
+        .sidebar-list li:last-child { margin-bottom: 0; }
+        .sidebar-list a {
+            display: flex; align-items: center; gap: 0.6rem;
+            text-decoration: none; color: var(--text);
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.6rem 0.8rem; border-radius: var(--r-sm);
+            background: var(--bg); border: 1px solid var(--border);
+            transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+        }
+        .sidebar-list a:hover {
+            background: var(--primary-soft); border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+        .sidebar-list i { color: var(--primary); width: 1.2em; text-align: center; }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .tool-cta-banner { flex-direction: column; text-align: center; }
+            .dark-section { padding: 1.5rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Image Editing Guides</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Image Editing Guides</span>
+                        <h1>How to Check Image Requirements Before Uploading a Photo Online</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Updated: November 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min read</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+
+                        <!-- ============ ONLY IMAGE: FEATURED IMAGE ============ -->
+                         <img src="../assets/images/blog/29.jpg" 
+                             alt="Online image requirement checker for dimensions and file size"
+                             class="img-large">
+                       
+
+                        <p>Have you ever tried uploading a photo to a website, online application, or profile page, only to receive an error saying the image is too large, the dimensions are incorrect, or the file format is not supported?</p>
+
+                        <p>These problems are common because different websites have different image requirements. One website may accept a JPG image under 2 MB, while another may require a PNG file with specific dimensions. Social media platforms, ecommerce websites, online forms, and job application portals can all have different upload rules.</p>
+
+                        <p>The easiest way to avoid unnecessary upload errors is to check your image before submitting it.</p>
+
+                        <p>An online image requirement checker helps you compare an image's technical properties with the specifications provided by the website or service. Instead of guessing whether your photo is suitable, you can check its dimensions, file size, format, and aspect ratio first.</p>
+
+                        <p>In this guide, you will learn how image requirements work, how to check a photo online, how to fix common problems, and how to prepare images for different types of uploads.</p>
+
+                        <!-- ============ DARK SECTION 1: WHAT IS ============ -->
+                        <div class="dark-section sky-bg">
+                            <div class="stars"></div>
+                            <h2 style="margin-top: 0;">What Is an Image Requirement Checker?</h2>
+                            <p>An image requirement checker is an online tool that examines an image and compares its technical properties with a set of requirements.</p>
+                            <p>These requirements usually come from the website, application, or platform where you want to upload the image.</p>
+                            <p>For example, a website might ask you to provide an image that:</p>
+                            <ul>
+                                <li>Has a minimum width of 800 pixels.</li>
+                                <li>Has a minimum height of 600 pixels.</li>
+                                <li>Is no larger than 2 MB.</li>
+                                <li>Uses JPG or PNG format.</li>
+                                <li>Has a specific aspect ratio, such as 1:1 or 16:9.</li>
+                            </ul>
+                            <p>An image requirement checker helps you determine whether your selected file meets those conditions.</p>
+                            
+                            <h3>Why should you check image requirements before uploading?</h3>
+                            <p>Checking your image first can save time and help you avoid repeated upload attempts.</p>
+                            <p>Consider a situation where you are completing an online application. You select a photograph, upload it, and receive an error because the file exceeds the maximum size.</p>
+                            <p>You compress the image and try again, but another error appears because the dimensions are too small.</p>
+                            <p>This happens because file size and image dimensions are separate properties. Fixing one does not necessarily fix the other.</p>
+                            <p>Checking all the relevant requirements before uploading helps you identify the actual problem instead of making unnecessary changes.</p>
+                        </div>
+
+                        <h2>How to Check Image Requirements Online</h2>
+                        <p>You can check an image using QuickToolsPK's online Image Requirement Checker. It allows you to upload an image, enter the specifications provided by your destination website, and review the results.</p>
+
+                        <h3>Step 1: Select your image</h3>
+                        <p>Open the <a href="https://www.quicktoolspk.com/image-requirement-checker.html">QuickToolsPK Image Requirement Checker</a>.</p>
+                        <p>Choose the image you want to inspect. The tool accepts JPG, PNG, and WEBP files up to 20 MB.</p>
+                        <p>Whenever possible, start with the original image rather than a screenshot or an already edited copy.</p>
+
+                        <h3>Step 2: Enter the required image dimensions</h3>
+                        <p>Check the instructions provided by the website where you plan to upload your image.</p>
+                        <p>Enter the minimum width and minimum height in pixels.</p>
+                        <p>For example, if a website requires an image of at least 800 × 600 pixels, enter:</p>
+                        <ul>
+                            <li>Minimum width: 800 px</li>
+                            <li>Minimum height: 600 px</li>
+                        </ul>
+                        <p>Be careful to distinguish between minimum dimensions and exact dimensions. A requirement of at least 800 × 600 pixels does not mean that an image must be exactly 800 × 600 pixels.</p>
+
+                        <h3>Step 3: Set the maximum file size</h3>
+                        <p>If the destination website has a file size limit, enter that value in the maximum file size field.</p>
+                        <p>For example, if the maximum allowed size is 2 MB, enter 2.</p>
+                        <p>An image can have the correct dimensions and still exceed the allowed file size. This is why you should check both properties separately.</p>
+
+                        <h3>Step 4: Select the required format</h3>
+                        <p>Choose the file format accepted by your destination website.</p>
+                        <p>Common options include:</p>
+                        <ul>
+                            <li>JPG or JPEG</li>
+                            <li>PNG</li>
+                            <li>WEBP</li>
+                        </ul>
+                        <p>Do not assume that every website accepts all three formats. Follow the instructions provided by the receiving website.</p>
+
+                        <h3>Step 5: Enter the aspect ratio if required</h3>
+                        <p>If the website specifies an aspect ratio, enter it in the optional aspect ratio field.</p>
+                        <p>Examples include:</p>
+                        <ul>
+                            <li>1:1 for square images.</li>
+                            <li>4:3 for many traditional image layouts.</li>
+                            <li>16:9 for widescreen images.</li>
+                            <li>4:5 for portrait-oriented social media graphics.</li>
+                        </ul>
+                        <p>If no aspect ratio is specified, you can leave this field blank.</p>
+
+                        <h3>Step 6: Run the requirement check</h3>
+                        <p>Select the check requirements option and review the results.</p>
+                        <p>The checker displays individual statuses for:</p>
+                        <ul>
+                            <li>Dimensions</li>
+                            <li>File size</li>
+                            <li>Format</li>
+                            <li>Aspect ratio</li>
+                        </ul>
+                        <p>If one of the requirements does not match, you can identify the specific property that needs attention.</p>
+
+                        <!-- CTA Banner -->
+                        <a href="https://www.quicktoolspk.com/image-requirement-checker.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the Image Requirement Checker</h4>
+                                <p>Check your image's dimensions, file size, and format before uploading.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>4 Important Image Requirements You Should Understand</h2>
+                        <p>Before uploading a photo, it helps to understand what each requirement actually means. These four properties are commonly responsible for image upload errors.</p>
+
+                        <h3>1. Image Dimensions: Width and Height in Pixels</h3>
+                        <p>Image dimensions describe how wide and tall a digital image is.</p>
+                        <p>They are usually measured in pixels, written as width × height.</p>
+                        <p>For example:</p>
+
+                        <!-- DARK TABLE SECTION -->
+                        <div class="dark-section sky-bg" style="padding: 1.5rem;">
+                            <div class="stars"></div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr><th>Image dimensions</th><th>Description</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>400 × 400 px</td><td>Small square image</td></tr>
+                                        <tr><td>800 × 600 px</td><td>Landscape image</td></tr>
+                                        <tr><td>1080 × 1080 px</td><td>Square image</td></tr>
+                                        <tr><td>1200 × 800 px</td><td>Landscape image</td></tr>
+                                        <tr><td>1920 × 1080 px</td><td>Full HD landscape image</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>Some websites specify minimum dimensions, while others require exact width and height values.</p>
+                        <p>If a website requires a minimum width of 800 pixels, an image with a width of 1200 pixels may meet that particular condition. However, it must still satisfy the other requirements.</p>
+                        <p>Important: Increasing the pixel dimensions of a small image does not restore missing detail. Upscaling can make an image larger, but it cannot recreate the original information that was never captured.</p>
+
+                        <h3>2. Image File Size: Why Does It Matter?</h3>
+                        <p>File size refers to the amount of storage space an image uses.</p>
+                        <p>It is commonly measured in:</p>
+                        <ul>
+                            <li>KB (kilobytes)</li>
+                            <li>MB (megabytes)</li>
+                        </ul>
+                        <p>Websites often set maximum file size limits to reduce storage usage and improve upload performance.</p>
+                        <p>For example, a form may accept images up to 2 MB. If your photograph is 3.5 MB, you may need to compress it before submitting it.</p>
+                        <p>However, reducing file size is not the same as reducing image dimensions.</p>
+                        <p>A high-resolution image can have a relatively small file size depending on its format and compression settings. Similarly, a lower-resolution PNG image can still be larger than expected.</p>
+
+                        <h3>3. Image Format: JPG, PNG, or WEBP?</h3>
+                        <p>The image format determines how the image is stored and how its visual information is encoded.</p>
+
+                        <!-- DARK TABLE SECTION -->
+                        <div class="dark-section sky-bg" style="padding: 1.5rem;">
+                            <div class="stars"></div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr><th>Format</th><th>Common use</th><th>Important consideration</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>JPG / JPEG</td><td>Photographs and general images</td><td>Uses lossy compression</td></tr>
+                                        <tr><td>PNG</td><td>Graphics, logos, and transparency</td><td>Often larger for photographs</td></tr>
+                                        <tr><td>WEBP</td><td>Web images and optimized graphics</td><td>Destination compatibility must be checked</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>For example, an online application may only accept JPG files. Uploading a PNG image could result in an error even if the image has the correct dimensions and file size.</p>
+                        <p>Also, changing a filename from <code>photo.png</code> to <code>photo.jpg</code> does not actually convert the image. You need to use an image format converter.</p>
+
+                        <h3>4. Aspect Ratio: Does Your Image Have the Correct Shape?</h3>
+                        <p>Aspect ratio describes the proportional relationship between an image's width and height.</p>
+                        <p>It is usually written as two numbers separated by a colon.</p>
+                        <p>Common aspect ratios include:</p>
+
+                        <!-- DARK TABLE SECTION -->
+                        <div class="dark-section sky-bg" style="padding: 1.5rem;">
+                            <div class="stars"></div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr><th>Aspect ratio</th><th>Shape</th><th>Common use</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1:1</td><td>Square</td><td>Profile pictures and square posts</td></tr>
+                                        <tr><td>4:3</td><td>Traditional landscape</td><td>General photography</td></tr>
+                                        <tr><td>16:9</td><td>Widescreen</td><td>Video thumbnails and banners</td></tr>
+                                        <tr><td>4:5</td><td>Portrait</td><td>Vertical social media posts</td></tr>
+                                        <tr><td>3:2</td><td>Landscape</td><td>Photography</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <p>An image can have enough pixels but still have the wrong proportions.</p>
+                        <p>For example, a 1600 × 900 image has a 16:9 ratio. If a destination requires a square image, you may need to crop it rather than simply reduce its dimensions.</p>
+                        <p>Avoid stretching images to force a particular aspect ratio. Stretching can make faces, products, and other subjects look distorted.</p>
+
+                        <h2>Common Situations Where an Image Requirement Checker Is Useful</h2>
+                        <p>Image specifications are not limited to professional designers. Everyday users, students, job seekers, website owners, and businesses often need to prepare images before uploading them.</p>
+
+                        <h3>1. Online Applications and Forms</h3>
+                        <p>Online applications may ask for a photograph, signature, scanned image, or supporting document.</p>
+                        <p>The instructions can include requirements for:</p>
+                        <ul>
+                            <li>Minimum or exact image dimensions.</li>
+                            <li>Maximum file size.</li>
+                            <li>Accepted file formats.</li>
+                            <li>Required aspect ratio.</li>
+                        </ul>
+                        <p>Before uploading, read the application's instructions carefully and enter the relevant specifications into the checker.</p>
+                        <p>Passing the technical checks does not guarantee that an application will accept the image. Some applications also have rules about background, content, image quality, or the way the photograph must be taken.</p>
+
+                        <h3>2. Job Applications and Professional Profiles</h3>
+                        <p>Job application portals may request a profile picture or other image files.</p>
+                        <p>A photograph that looks good on your computer may not meet the portal's file size or dimension limits.</p>
+                        <p>You can check the image first, then decide whether it needs resizing, compression, or format conversion.</p>
+                        <p>For professional profiles, also consider the visual quality and framing. A technically valid image should still look clear and appropriate.</p>
+
+                        <h3>3. Ecommerce Product Images</h3>
+                        <p>Online stores and marketplaces often have image specifications for product listings.</p>
+                        <p>A seller may need to prepare:</p>
+                        <ul>
+                            <li>Main product photographs.</li>
+                            <li>Additional product views.</li>
+                            <li>Square listing images.</li>
+                            <li>Product thumbnails.</li>
+                            <li>Images with a specific background or composition.</li>
+                        </ul>
+                        <p>Checking dimensions, format, and file size before uploading can help create a more consistent product catalog.</p>
+                        <p>Remember that each marketplace has its own image rules. Use the current requirements provided by the specific platform rather than assuming one standard applies everywhere.</p>
+
+                        <h3>4. Social Media Images</h3>
+                        <p>Social media platforms use different image placements, dimensions, and aspect ratios.</p>
+                        <p>For example, a square image may work for one placement, while a vertical graphic is better suited to another.</p>
+                        <p>An image requirement checker can help you compare your file's dimensions and aspect ratio with the specifications you enter.</p>
+                        <p>It does not automatically guarantee that an image will display perfectly on every platform, because cropping and display behavior can vary by placement and device.</p>
+
+                        <h3>5. Website and Blog Images</h3>
+                        <p>Website owners often upload images to content management systems, blog posts, and landing pages.</p>
+                        <p>A website may restrict the maximum upload size or support only certain file formats.</p>
+                        <p>Checking an image before uploading can help identify files that need compression or conversion.</p>
+                        <p>For blog images, also consider the space where the image will appear. A wide feature image and a square thumbnail may require different dimensions.</p>
+
+                        <h2>What to Do If Your Image Does Not Meet the Requirements</h2>
+                        <p>Finding a failed requirement is only the first step. The next step is choosing the correct solution.</p>
+                        <p>The right fix depends on which property is causing the problem.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Problem</th><th>Recommended solution</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Image width is too small</td><td>Resize if the original contains enough detail</td></tr>
+                                    <tr><td>Image height is too small</td><td>Resize or use a suitable crop</td></tr>
+                                    <tr><td>File size exceeds the limit</td><td>Compress the image</td></tr>
+                                    <tr><td>File format is unsupported</td><td>Convert to an accepted format</td></tr>
+                                    <tr><td>Aspect ratio is incorrect</td><td>Crop or adjust the canvas</td></tr>
+                                    <tr><td>Exact dimensions are required</td><td>Crop or resize to the specified dimensions</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>How to resize an image that is too small</h3>
+                        <p>If your image does not meet the minimum width or height, you may need to resize it.</p>
+                        <p>Open the <a href="https://www.quicktoolspk.com/img-resizer.html">QuickToolsPK Image Resizer</a>, upload your image, and choose the required dimensions.</p>
+                        <p>However, enlarging a low-resolution image may reduce its apparent sharpness. If the original image is very small, using a higher-resolution source is usually better.</p>
+
+                        <h3>How to reduce an image that is too large</h3>
+                        <p>If the file exceeds the destination's maximum size, image compression may help.</p>
+                        <p>The <a href="https://www.quicktoolspk.com/img-compress.html">QuickToolsPK Image Compressor</a> can help reduce image file size.</p>
+                        <p>Try to maintain a reasonable balance between compression and visual quality. An image that meets the size limit but looks blurry may still be unsuitable.</p>
+
+                        <h3>How to convert an image to another format</h3>
+                        <p>If your image uses an unsupported format, convert it to one that the destination accepts.</p>
+                        <p>Use the <a href="https://www.quicktoolspk.com/img-fmt-converter.html">QuickToolsPK Image Format Converter</a> to convert between supported formats.</p>
+                        <p>Always check the resulting file format rather than relying on its filename extension.</p>
+
+                        <h3>How to correct an aspect ratio</h3>
+                        <p>If your image has the wrong proportions, cropping is often the better solution.</p>
+                        <p>For example, converting a 16:9 landscape image into a 1:1 square image may require removing some of the content around the edges.</p>
+                        <p>Check the crop preview carefully to make sure that important details remain visible.</p>
+
+                        <h2>Image Requirement Checker vs. Image Compressor vs. Image Resizer</h2>
+                        <p>These tools may sound similar, but they solve different problems.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Tool</th><th>Main purpose</th><th>When to use it</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Image Requirement Checker</td><td>Checks image properties against specified requirements</td><td>Before uploading an image</td></tr>
+                                    <tr><td>Image Compressor</td><td>Reduces image file size</td><td>When a file exceeds a size limit</td></tr>
+                                    <tr><td>Image Resizer</td><td>Changes image width and height</td><td>When dimensions are incorrect</td></tr>
+                                    <tr><td>Image Format Converter</td><td>Changes the actual image format</td><td>When a destination does not accept your current format</td></tr>
+                                    <tr><td>Image Cropper</td><td>Removes unwanted areas or changes proportions</td><td>When the aspect ratio is incorrect</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>An image requirement checker evaluates the file. A compressor, resizer, converter, or cropper changes it.</p>
+                        <p>That distinction is important because checking an image does not automatically fix it.</p>
+                        <p>A practical workflow is to check the original image, identify the failed requirement, use the appropriate editing tool, and then check the exported image again.</p>
+
+                        <h2>Best Practices for Checking Image Specifications</h2>
+                        <p>A few simple habits can help you avoid common image upload problems.</p>
+
+                        <h3>Read the destination's instructions first</h3>
+                        <p>Do not assume that every website uses the same image specifications. Use the actual instructions from the website, application, or platform where you plan to upload the file.</p>
+
+                        <h3>Check exact dimensions versus minimum dimensions</h3>
+                        <p>These requirements are different.</p>
+                        <ul>
+                            <li><strong>Minimum dimensions:</strong> The image must be at least the specified width and height.</li>
+                            <li><strong>Exact dimensions:</strong> The image must match the specified width and height.</li>
+                        </ul>
+                        <p>Entering minimum values when exact values are required can produce a misleading result.</p>
+
+                        <h3>Check file size separately</h3>
+                        <p>A file that meets the dimension requirements can still exceed the upload limit.</p>
+                        <p>Always check file size separately instead of assuming that a smaller image will automatically meet every requirement.</p>
+
+                        <h3>Keep an original copy</h3>
+                        <p>Before compressing, cropping, resizing, or converting an image, save an untouched original.</p>
+                        <p>This gives you a way to return to the original if the edited version loses quality or does not meet the destination's requirements.</p>
+
+                        <h3>Check the final exported image</h3>
+                        <p>Do not assume that an image still meets all requirements after editing.</p>
+                        <p>Cropping may change dimensions and aspect ratio. Converting formats may change file size. Compression may reduce the file size but also affect image quality.</p>
+                        <p>Run the checker again on the final exported file before uploading it.</p>
+
+                        <h3>Remember that technical checks are not content approval</h3>
+                        <p>A photo can meet the dimensions, file size, format, and aspect ratio requirements but still be rejected by a website.</p>
+                        <p>The destination may also check the image's content, background, visual quality, or other rules that are not included in a technical image checker.</p>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. What is an image requirement checker?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">An image requirement checker is an online tool that compares an image's technical properties with specified requirements, such as width, height, file size, format, and aspect ratio.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. How can I check image requirements online for free?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Open an online image requirement checker, upload your image, enter the specifications provided by your destination website, and review the individual check results.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Can I check image dimensions without downloading software?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. A browser-based image checker can read the pixel dimensions of a supported image and compare them with the values you enter.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Why does my image pass the file size check but fail the dimension check?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">File size and dimensions measure different things. An image can be small enough in MB but still have insufficient width or height in pixels.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. What image formats should I use for online uploads?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">JPG, PNG, and WEBP are common formats, but the accepted options depend on the destination website. Always check its instructions before converting your image.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Does changing a JPG file extension convert a PNG image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Renaming <code>photo.png</code> to <code>photo.jpg</code> changes only the filename. It does not change the underlying image format. Use a genuine image format converter.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. Can I check whether an image meets exact dimensions?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">You can check exact dimensions when the tool and its comparison settings support exact width and height rules. QuickToolsPK's current checker provides minimum width and minimum height fields, so do not treat those fields as an exact-dimension validator.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Can an image requirement checker automatically fix my image?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">QuickToolsPK's Image Requirement Checker is designed to check image properties against requirements. If an image fails, you can use a separate resizing, compression, cropping, or conversion tool to make the necessary changes.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>9. Does passing an image requirement check guarantee that a website will accept my photo?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. A checker only verifies the technical requirements it supports and the values you enter. A website may also have rules about image content, background, quality, or other conditions.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>10. What is the difference between image resolution and image dimensions?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Image dimensions describe the width and height in pixels. Resolution can refer to pixel dimensions in digital contexts, or pixel density such as pixels per inch (PPI) in print contexts. Check which meaning the destination's instructions use.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>11. Can I check an image before uploading it to a job application?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. If the application provides technical specifications, enter the relevant dimensions, maximum file size, format, and aspect ratio into an image requirement checker before submitting your photograph.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>12. Is an image requirement checker the same as an image compressor?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. An image requirement checker evaluates an image against specified rules. An image compressor reduces file size. You may need both tools if your image exceeds a file size limit.</div>
+                            </details>
+                        </div>
+
+                        <h2>Check Your Image Requirements Before Uploading</h2>
+                        <p>An image upload error can be frustrating, especially when you are working with an application, website, product listing, or important submission.</p>
+                        <p>Instead of repeatedly uploading the same file and guessing what needs to change, check its technical properties first.</p>
+                        <p>With QuickToolsPK's Image Requirement Checker, you can compare your image's dimensions, file size, format, and aspect ratio with the specifications you enter.</p>
+                        <p>If something does not match, use the appropriate image tool to resize, compress, crop, or convert the file. Then check the updated version again.</p>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <a href="https://www.quicktoolspk.com/image-requirement-checker.html" class="tool-cta-banner sky-bg" style="display:inline-flex; max-width: 500px; width: 100%; margin: 0 auto; text-align: left;">
+                                <div class="stars"></div>
+                                <div class="tool-cta-text">
+                                    <h4>Ready to check your image?</h4>
+                                    <p>Open QuickToolsPK Image Requirement Checker.</p>
+                                </div>
+                                <div class="tool-cta-btn">
+                                    Open Tool <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>All tools are free, browser-based, and do not upload your files to a server.</p>
+                        <div class="related-grid">
+                            <a href="https://www.quicktoolspk.com/image-requirement-checker.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-check-circle"></i></div>
+                                <h4>Image Requirement Checker</h4>
+                                <p>Check image dimensions, file size, format, and aspect ratio against your destination's rules.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-resizer.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                <h4>Image Resizer</h4>
+                                <p>Change image width and height to meet exact or minimum dimensions.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress"></i></div>
+                                <h4>Image Compressor</h4>
+                                <p>Reduce image file size if it exceeds the destination's upload limit.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-fmt-converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <h4>Image Format Converter</h4>
+                                <p>Convert images between JPG, PNG, and WEBP if the destination requires a specific format.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">A practical guide to checking image requirements before uploading to websites, applications, and platforms.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Image Editing Guides</p>
+                            <p><strong>Tags:</strong> Image Requirement Checker, Image Dimensions, File Size, Format, Aspect Ratio</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Quick Links</h3>
+                        <ul class="sidebar-list">
+                            <li><a href="https://www.quicktoolspk.com/image-requirement-checker.html"><i class="fas fa-check-circle"></i> Image Requirement Checker</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-compress.html"><i class="fas fa-compress"></i> Image Compressor</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Editorial note</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">Technical checks do not guarantee acceptance. Always follow the destination website's full rules for image content, background, and quality.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>Why iPhone Photos Won't Open or Upload: Convert HEIC to JPG | QuickToolsPK</title>
+    <meta name="description" content="iPhone photos won't open or upload? Learn why HEIC files cause compatibility issues and how to convert HEIC to JPG on Windows, Mac, and online.">
+    <meta name="keywords" content="HEIC to JPG, iPhone photos won't open, HEIC file not supported, convert HEIC to JPG online, HEIC to JPG converter, iPhone photos won't upload, open HEIC files on Windows, convert iPhone photos to JPG, HEIC to JPEG, HEIC image compatibility, why are iPhone photos HEIC, HEIC vs JPG, iPhone photo format">
+    <link rel="canonical" href="https://quicktoolspk.com/blog/iphone-photos-wont-open-heic-to-jpg.html">
+
+    <meta property="og:title" content="Why iPhone Photos Won't Open or Upload: Convert HEIC to JPG">
+    <meta property="og:description" content="iPhone photos won't open or upload? Learn why HEIC files cause compatibility issues and how to convert HEIC to JPG on Windows, Mac, and online.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://quicktoolspk.com/blog/iphone-photos-wont-open-heic-to-jpg.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Why iPhone Photos Won't Open or Upload: Convert HEIC to JPG">
+    <meta name="twitter:description" content="Learn why HEIC files cause compatibility issues and how to convert them to JPG.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (Used on dark sections)
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
+        .article-content a:hover { color: var(--primary); }
+        
+        code {
+            background: var(--bg-alt); padding: 0.1rem 0.4rem; border-radius: 4px;
+            font-family: monospace; font-size: 0.9em; color: var(--primary-dark);
+        }
+
+        /* Featured Image */
+        .img-large {
+            width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm); background-color: var(--bg);
+            aspect-ratio: 16/9; object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem; color: var(--text-subtle); text-align: center;
+            margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic;
+        }
+
+        /* ============================================================
+           DARK SECTION STYLES
+           ============================================================ */
+        .dark-section {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 2rem 1.5rem; margin: 2rem 0; position: relative;
+            overflow: hidden; color: #fff;
+        }
+        .dark-section .stars { opacity: 0.4; }
+        .dark-section h2, .dark-section h3 { color: #fff; border-bottom-color: rgba(255,255,255,0.1); }
+        .dark-section p, .dark-section li { color: #c7d3e6; }
+        .dark-section strong { color: #fff; }
+        .dark-section a { color: #6ee7b7; text-decoration: underline; }
+        .dark-section a:hover { color: #fff; }
+        .dark-section code { background: rgba(255,255,255,0.15); color: #6ee7b7; }
+        
+        .dark-section .table-wrap {
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+        }
+        .dark-section table { color: #fff; }
+        .dark-section th {
+            background: rgba(255,255,255,0.1); color: #fff;
+            border-bottom-color: rgba(255,255,255,0.15);
+        }
+        .dark-section td {
+            border-bottom-color: rgba(255,255,255,0.1); color: #e2e8f0;
+        }
+        .dark-section tr:hover td { background: rgba(255,255,255,0.05); }
+
+        /* ============================================================
+           CTA TOOL BANNER
+           ============================================================ */
+        .tool-cta-banner {
+            background: var(--gradient-navy); border-radius: var(--r-md);
+            padding: 1.5rem; margin: 1.5rem 0; position: relative;
+            overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 1rem; text-decoration: none; transition: transform var(--t-fast);
+            box-shadow: var(--shadow-md);
+        }
+        .tool-cta-banner:hover { transform: translateY(-2px); }
+        .tool-cta-banner .stars { opacity: 0.3; }
+        .tool-cta-text { position: relative; z-index: 2; color: #fff; flex: 1; min-width: 200px;}
+        .tool-cta-text h4 { color: #fff; font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .tool-cta-text p { color: #a9b8ce; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+        .tool-cta-btn {
+            position: relative; z-index: 2; background: rgba(255,255,255,0.15);
+            color: #fff; padding: 0.6rem 1.2rem; border-radius: var(--r-full);
+            font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.3);
+            white-space: nowrap; display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto; margin: 1.5rem 0;
+            border-radius: var(--r-md); border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th {
+            background: var(--bg-alt); font-weight: 700; color: var(--navy);
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem; background: var(--primary-soft);
+            border-left: 4px solid var(--primary); border-radius: var(--r-sm);
+            margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { margin-bottom: 0.75rem; }
+        .sidebar-list li:last-child { margin-bottom: 0; }
+        .sidebar-list a {
+            display: flex; align-items: center; gap: 0.6rem;
+            text-decoration: none; color: var(--text);
+            font-size: 0.9rem; font-weight: 500;
+            padding: 0.6rem 0.8rem; border-radius: var(--r-sm);
+            background: var(--bg); border: 1px solid var(--border);
+            transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+        }
+        .sidebar-list a:hover {
+            background: var(--primary-soft); border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+        .sidebar-list i { color: var(--primary); width: 1.2em; text-align: center; }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .tool-cta-banner { flex-direction: column; text-align: center; }
+            .dark-section { padding: 1.5rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Image Format Guides</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Image Format Guides</span>
+                        <h1>Why Your iPhone Photos Won't Open or Upload: How to Convert HEIC to JPG</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Updated: November 2026</span>
+                            <span><i class="far fa-clock"></i> 9 min read</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+
+                        <!-- ============ ONLY IMAGE: FEATURED IMAGE ============ -->
+                         <img src="../assets/images/blog/30.jpg" 
+                             alt="iPhone photo compatibility problem when transferring HEIC images to a computer"
+                             class="img-large">
+                        
+
+                        <p>Have you ever transferred photos from your iPhone to a Windows computer, only to discover that some images will not open? Or tried uploading a picture to a website and received an error saying the file format is not supported?</p>
+
+                        <p>You might assume the photograph is damaged, but the problem could be its file format.</p>
+
+                        <p>Many iPhones save photographs in HEIC format. This format helps reduce storage space while maintaining good image quality. However, not every website, application, image editor, or older computer supports HEIC files.</p>
+
+                        <p>This can become frustrating when you need to submit a photograph for an online application, attach an image to an email, upload product photos to an online store, or share pictures with someone using a different device.</p>
+
+                        <p>Fortunately, you do not need to take the photograph again. In many situations, converting the HEIC image into JPG is enough to solve the compatibility problem.</p>
+
+                        <p>In this guide, you will learn why iPhone photos use HEIC, why some devices cannot open them, how to convert HEIC to JPG, and how to avoid common image upload problems.</p>
+
+                        <!-- ============ DARK SECTION 1: WHAT IS HEIC ============ -->
+                        <div class="dark-section sky-bg">
+                            <div class="stars"></div>
+                            <h2 style="margin-top: 0;">What Is HEIC and Why Does Your iPhone Use It?</h2>
+                            <p>HEIC stands for High Efficiency Image Container. It is an image container format commonly associated with Apple's use of the High Efficiency Image File Format (HEIF).</p>
+                            <p>Apple introduced HEIF support with iOS 11. It uses modern image compression technology to store photographs efficiently while retaining visual quality.</p>
+                            <p>In simple terms, HEIC helps your iPhone store photographs using less space than traditional JPEG files in many situations.</p>
+                            <p>This is useful when you take hundreds or thousands of photographs and want to save storage space.</p>
+
+                            <h3>HEIC vs. JPG: What Is the Difference?</h3>
+                            <p>Both HEIC and JPG can store digital photographs, but they use different encoding methods and have different compatibility characteristics.</p>
+
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr><th>Feature</th><th>HEIC / HEIF</th><th>JPG / JPEG</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Full name</td><td>High Efficiency Image Container / Format</td><td>Joint Photographic Experts Group</td></tr>
+                                        <tr><td>Compression</td><td>Modern, efficient compression</td><td>Widely supported lossy compression</td></tr>
+                                        <tr><td>File size</td><td>Often smaller at comparable visual quality</td><td>Often larger at comparable visual quality</td></tr>
+                                        <tr><td>Compatibility</td><td>Depends on device, OS and software</td><td>Very widely supported</td></tr>
+                                        <tr><td>Common use</td><td>iPhone and Apple device photographs</td><td>Websites, email, applications, general sharing</td></tr>
+                                        <tr><td>Transparency</td><td>Depends on HEIF content and implementation</td><td>Not supported</td></tr>
+                                        <tr><td>Best use</td><td>Efficient photo storage</td><td>Broad compatibility and sharing</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p><strong>Which format should you choose?</strong></p>
+                            <p>Choose HEIC when you want efficient photo storage and your devices and applications support it.</p>
+                            <p>Choose JPG when you need a photograph that is more likely to work with websites, older software, online forms, and different operating systems.</p>
+                            <p>JPG is not automatically better quality. The best format depends on what you want to do with the photograph.</p>
+                        </div>
+
+                        <h2>Why Won't Your iPhone Photos Open on Windows?</h2>
+                        <p>One common problem occurs when someone transfers photographs from an iPhone to a Windows computer.</p>
+                        <p>You open File Explorer, locate the photograph, and double-click it. Instead of displaying the image, Windows may show a message asking you to install an extension or stating that the file type cannot be viewed.</p>
+                        <p>This happens because HEIC support depends on the software and codecs available on the computer.</p>
+                        <p>Microsoft documents that Windows users may need the HEIF Image Extensions to open HEIF photographs. HEVC support is a separate issue relevant to certain videos and media workflows.</p>
+
+                        <h3>Common reasons Windows cannot open HEIC files</h3>
+                        <ol>
+                            <li><strong>Missing HEIF support:</strong> Your Windows installation may not have the necessary image extension installed.</li>
+                            <li><strong>Older software:</strong> An older image viewer or editing application may not recognize HEIC files.</li>
+                            <li><strong>Unsupported application:</strong> Some applications accept JPG and PNG but do not support HEIC uploads or editing.</li>
+                            <li><strong>File transfer compatibility:</strong> A photograph transferred from an iPhone may retain its original HEIC format instead of being converted to JPG.</li>
+                        </ol>
+
+                        <h3>How to fix HEIC photos that won't open on Windows</h3>
+                        <p>You have two main options.</p>
+                        <p><strong>Option 1: Install HEIF support</strong><br>If you regularly work with HEIC photographs, installing Microsoft's HEIF Image Extensions may allow compatible Windows applications to open them. Follow Microsoft's current instructions and check the requirements for your Windows version.</p>
+                        <p><strong>Option 2: Convert HEIC to JPG</strong><br>If you only need to open, share, edit, or upload a particular photograph, converting it to JPG can be a simpler solution. JPG is supported by a much wider range of applications and devices.</p>
+                        <p>You can use QuickToolsPK's <a href="https://www.quicktoolspk.com/heic-to-jpg.html">HEIC to JPG Converter</a> to convert an image directly in your browser.</p>
+
+                        <!-- CTA Banner -->
+                        <a href="https://www.quicktoolspk.com/heic-to-jpg.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Try the HEIC to JPG Converter</h4>
+                                <p>Convert iPhone photos directly in your browser.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>Why Do Websites Reject iPhone HEIC Photos?</h2>
+                        <p>Another common situation occurs when you try to upload an iPhone photograph to a website.</p>
+                        <p>You select the image, click upload, and receive an error such as:</p>
+                        <ul>
+                            <li>Unsupported image format.</li>
+                            <li>Invalid file type.</li>
+                            <li>Please upload a JPG or PNG image.</li>
+                            <li>This file format is not accepted.</li>
+                            <li>Unable to process the selected image.</li>
+                        </ul>
+                        <p>The problem may not be the photograph itself. The website might simply not support HEIC.</p>
+
+                        <h3>1. Online application forms</h3>
+                        <p>Some online forms accept only specific image formats. For example, an application may request a JPG photograph under a particular file size. If your iPhone saves the original photograph as HEIC, the website may reject it.</p>
+                        <p>Converting the image to JPG can help meet the format requirement, but you must still follow the application's dimensions, file size, and content rules.</p>
+
+                        <h3>2. Job application websites</h3>
+                        <p>Some recruitment websites allow applicants to upload profile photographs, resumes, or supporting images. If the upload system does not recognize HEIC, converting the photograph into JPG may solve the format issue.</p>
+
+                        <h3>3. Ecommerce websites</h3>
+                        <p>Online stores and marketplaces often specify image formats and dimensions for product listings. A seller using an iPhone to photograph products may need to convert HEIC images before uploading them to a platform that accepts only JPG or PNG.</p>
+
+                        <h3>4. Email attachments and file sharing</h3>
+                        <p>JPG photographs are generally easier to share with people using different devices and applications.</p>
+                        <p>Although some sharing services automatically convert HEIC images, the behavior depends on the method and settings used. If you want a predictable format for an attachment, converting the photograph to JPG before sending it can help.</p>
+
+                        <div class="callout">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Important:</strong> Converting the format does not automatically fix every upload error. A website may also reject an image because its file size or dimensions exceed the permitted limits.</span>
+                        </div>
+
+                        <h2>How to Convert HEIC to JPG Online for Free</h2>
+                        <p>If your photograph is in HEIC format and the receiving website requires JPG, you can convert it using an online image converter.</p>
+                        <p>QuickToolsPK provides a dedicated HEIC to JPG tool that supports HEIC and HEIF files up to 20 MB. The conversion, preview, and download process takes place in your browser.</p>
+
+                        <h3>Step 1: Open the HEIC to JPG converter</h3>
+                        <p>Visit the <a href="https://www.quicktoolspk.com/heic-to-jpg.html">QuickToolsPK HEIC to JPG Converter</a>. You will find an upload area where you can select your HEIC or HEIF photograph.</p>
+
+                        <h3>Step 2: Select your iPhone photograph</h3>
+                        <p>Click the Select HEIC File option and choose the photograph you want to convert. You can also drag and drop a supported file into the upload area. The current tool supports HEIC and HEIF files up to 20 MB.</p>
+
+                        <h3>Step 3: Convert the photograph</h3>
+                        <p>After selecting your file, click Convert to JPG. The tool processes the image and creates a JPG version.</p>
+
+                        <h3>Step 4: Preview the converted image</h3>
+                        <p>Before downloading, compare the converted photograph with the original. Check the following:</p>
+                        <ul>
+                            <li>Does the image look correct?</li>
+                            <li>Are the colors and details preserved?</li>
+                            <li>Is the photograph displayed in the correct orientation?</li>
+                            <li>Is the converted image suitable for your intended use?</li>
+                        </ul>
+
+                        <h3>Step 5: Download your JPG image</h3>
+                        <p>Once you are satisfied with the preview, click Download JPG. Your converted image will be saved to your device.</p>
+
+                        <a href="https://www.quicktoolspk.com/heic-to-jpg.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Convert your iPhone photos now</h4>
+                                <p>Convert supported HEIC and HEIF photographs into JPG format without installing desktop software.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>How to Change iPhone Camera Settings to Save Photos as JPG</h2>
+                        <p>If you frequently transfer photographs to Windows computers or upload them to websites that do not support HEIC, you may prefer to capture future photos in a more compatible format.</p>
+                        <p>Apple provides a camera setting called Most Compatible on supported devices.</p>
+                        <p>When selected, new photographs are saved in JPEG format instead of HEIF, and videos use H.264 instead of HEVC.</p>
+
+                        <h3>Follow these steps on your iPhone</h3>
+                        <ol>
+                            <li>Open the Settings app on your iPhone.</li>
+                            <li>Scroll down and select Camera.</li>
+                            <li>Tap Formats.</li>
+                            <li>Choose Most Compatible.</li>
+                        </ol>
+                        <p>Your iPhone will use JPEG for new photographs when this option is available.</p>
+                        <p>Apple notes that the setting may vary depending on the device and software. It also explains that HEIF and HEVC media can be automatically converted to more compatible formats during certain sharing and transfer methods.</p>
+
+                        <h3>Should you switch from High Efficiency to Most Compatible?</h3>
+                        <p>It depends on how you use your photographs.</p>
+                        
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Your situation</th><th>Suggested setting</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>You mainly use Apple devices</td><td>High Efficiency</td></tr>
+                                    <tr><td>You regularly share images with Windows users</td><td>Most Compatible</td></tr>
+                                    <tr><td>You upload photographs to websites that require JPG</td><td>Most Compatible</td></tr>
+                                    <tr><td>You want to save storage space</td><td>High Efficiency</td></tr>
+                                    <tr><td>You frequently edit photos in older software</td><td>Most Compatible may help</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>You do not have to change the setting permanently. You can continue taking photographs in HEIC and convert only the images that need wider compatibility.</p>
+                        <p>This approach lets you keep the storage benefits of HEIC while using JPG when necessary.</p>
+
+                        <h2>How to Convert HEIC Photos on Mac Without an Online Tool</h2>
+                        <p>If you use a Mac, you may not need an online converter for occasional HEIC conversions.</p>
+                        <p>Apple's Photos and Preview applications support exporting compatible HEIF images into formats such as JPEG and PNG.</p>
+
+                        <h3>Convert HEIC to JPG using Preview</h3>
+                        <ol>
+                            <li>Locate the HEIC photograph in Finder.</li>
+                            <li>Open the image in Preview.</li>
+                            <li>Select File from the menu.</li>
+                            <li>Choose Export.</li>
+                            <li>Select JPEG as the output format.</li>
+                            <li>Adjust the quality if the option is available.</li>
+                            <li>Choose a destination and save the image.</li>
+                        </ol>
+                        <p>Your exported file will be a JPG image.</p>
+
+                        <h3>Convert HEIC to JPG using Photos</h3>
+                        <p>If your photograph is stored in the Photos app:</p>
+                        <ol>
+                            <li>Open Photos.</li>
+                            <li>Select the photograph.</li>
+                            <li>Choose File and then Export.</li>
+                            <li>Select Export Photo.</li>
+                            <li>Choose JPEG as the photo format.</li>
+                            <li>Select your export settings and save the file.</li>
+                        </ol>
+                        <p>This is useful when you want to convert a few photographs without installing another application.</p>
+
+                        <h2>Why Is Your Converted JPG File Larger Than the Original HEIC?</h2>
+                        <p>You may notice that your converted JPG photograph takes up more storage space than the original HEIC file.</p>
+                        
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>File</th><th>Illustrative size</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Original HEIC</td><td>1.4 MB</td></tr>
+                                    <tr><td>Converted JPG</td><td>2.1 MB</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><em>Illustrative example only. Actual file sizes depend on the photograph, dimensions, and export settings.</em></p>
+
+                        <p>This does not necessarily mean that something went wrong.</p>
+                        <p>HEIC often achieves smaller file sizes than JPEG at comparable visual quality because of its more efficient compression technology.</p>
+                        <p>When you convert a HEIC image into JPG, the new file may become larger.</p>
+
+                        <h3>How to reduce the size of a converted JPG</h3>
+                        <p>If the converted photograph is too large for a website or email attachment, you can compress it.</p>
+                        <ol>
+                            <li>Convert your HEIC image into JPG.</li>
+                            <li>Open the <a href="https://www.quicktoolspk.com/img-compress.html">QuickToolsPK JPG Compressor</a>.</li>
+                            <li>Upload the converted JPG photograph.</li>
+                            <li>Adjust the quality slider.</li>
+                            <li>Preview the compressed image.</li>
+                            <li>Compare its size and appearance.</li>
+                            <li>Download the compressed version.</li>
+                        </ol>
+                        <p>The QuickToolsPK JPG Compressor offers a quality control between 40% and 100%, along with a side-by-side preview of the original and compressed versions.</p>
+
+                        <h3>How much should you compress a JPG?</h3>
+                        <p>There is no universal quality setting that works for every image.</p>
+                        <p>A photograph with detailed textures may need a higher quality setting, while a simple image may tolerate more compression.</p>
+                        <p>A useful approach is to start with a moderate setting, preview the result, and adjust it until the file meets the upload limit without looking noticeably degraded.</p>
+                        <p>Avoid repeatedly compressing the same image. Whenever possible, work from the original or highest-quality version.</p>
+
+                        <a href="https://www.quicktoolspk.com/img-compress.html" class="tool-cta-banner sky-bg">
+                            <div class="stars"></div>
+                            <div class="tool-cta-text">
+                                <h4>Compress a JPG Image Online</h4>
+                                <p>Reduce file size while maintaining visual quality.</p>
+                            </div>
+                            <div class="tool-cta-btn">
+                                Open Tool <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+
+                        <h2>What If Your Converted Image Still Cannot Be Uploaded?</h2>
+                        <p>Converting HEIC to JPG solves the file format problem, but it does not guarantee that every website will accept the image.</p>
+                        <p>If your JPG still fails to upload, check these additional properties.</p>
+
+                        <h3>1. Check the image dimensions</h3>
+                        <p>Some websites require minimum or exact image dimensions. For example, a form may require an image of at least 600 × 600 pixels.</p>
+                        <p>You can inspect the dimensions using an image information tool or resize the image if necessary.</p>
+                        <p><a href="https://www.quicktoolspk.com/img-resizer.html">Use the QuickToolsPK Image Resizer</a>.</p>
+
+                        <h3>2. Check the maximum file size</h3>
+                        <p>A website may reject a JPG that exceeds its upload limit. For example, a form might accept files up to 2 MB.</p>
+                        <p>Use an image compressor to reduce the file size while preserving sufficient visual quality.</p>
+
+                        <h3>3. Check the required image format</h3>
+                        <p>Some platforms accept JPG and PNG but do not accept WEBP. Others may support additional formats.</p>
+                        <p>Read the upload instructions before converting the image. Do not assume JPG is accepted everywhere.</p>
+
+                        <h3>4. Check the aspect ratio</h3>
+                        <p>A photograph may have enough pixels but the wrong shape. A square profile image, portrait photograph, and landscape banner all use different proportions.</p>
+                        <p>If the website requires a particular aspect ratio, you may need to crop the photograph before uploading.</p>
+
+                        <h3>5. Check the photograph itself</h3>
+                        <p>Some applications require specific photo backgrounds, framing, lighting, or content. Changing the file format will not correct those issues.</p>
+                        <p>For official documents, follow the receiving authority's instructions rather than relying only on a format converter.</p>
+
+                        <h2>HEIC to JPG vs. HEIC to PNG: Which Should You Choose?</h2>
+                        <p>JPG and PNG are both widely used image formats, but they serve different purposes.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Feature</th><th>JPG</th><th>PNG</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Best for</td><td>Photographs</td><td>Graphics and images needing transparency</td></tr>
+                                    <tr><td>File size</td><td>Often smaller for photos</td><td>Often larger for photos</td></tr>
+                                    <tr><td>Transparency</td><td>No</td><td>Yes</td></tr>
+                                    <tr><td>Compression</td><td>Lossy</td><td>Lossless compression</td></tr>
+                                    <tr><td>Website compatibility</td><td>Very broad</td><td>Very broad</td></tr>
+                                    <tr><td>Typical use</td><td>Photo uploads and sharing</td><td>Logos, icons, screenshots and graphics</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>For ordinary iPhone photographs, JPG is usually the practical choice when compatibility is the priority.</p>
+                        <p>PNG is more suitable when you need transparency or are working with graphics where preserving sharp edges is important.</p>
+                        <p>Keep in mind that converting a photograph to PNG does not automatically improve its original quality.</p>
+
+                        <h2>Is It Safe to Convert iPhone Photos Online?</h2>
+                        <p>Before using an online image converter, consider how it handles your files.</p>
+                        <p>This is especially important if your photographs contain personal information, private family moments, business documents, or other sensitive content.</p>
+                        <p>QuickToolsPK states that its HEIC to JPG converter processes files locally in your browser and does not upload them to a server.</p>
+                        <p>That means the conversion is designed to happen on your device rather than through a remote upload workflow.</p>
+                        <p>For sensitive images, it is still sensible to:</p>
+                        <ul>
+                            <li>Use the official website address.</li>
+                            <li>Avoid uploading files to unfamiliar websites.</li>
+                            <li>Read the site's privacy policy.</li>
+                            <li>Keep private images on trusted devices.</li>
+                            <li>Check the downloaded file before sharing it.</li>
+                        </ul>
+                        <p>Also remember that browser-based processing uses your device's available memory and processing power. Very large images may take longer or fail on devices with limited resources.</p>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. Why are my iPhone photos in HEIC format?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Apple uses HEIF/HEIC to store photographs efficiently. It can provide smaller files than JPEG at comparable visual quality, helping save storage space.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. How do I open HEIC files on Windows?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">You can install the HEIF Image Extensions from Microsoft for compatible Windows applications. Alternatively, convert the HEIC photograph into JPG using an image converter.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. How can I convert HEIC to JPG for free?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Upload your HEIC photograph to a compatible converter, select JPG as the output format, preview the converted image, and download it. QuickToolsPK offers a free browser-based HEIC to JPG converter.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Does converting HEIC to JPG reduce image quality?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">JPG uses lossy compression, so conversion can change some image data. The visual difference depends on the conversion quality setting. QuickToolsPK states that its converter uses a high-quality setting of 0.9.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. Why is my JPG larger than my original HEIC file?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">HEIC generally uses more efficient compression. When converted to JPG, the photograph may take up more storage space, depending on the image and export settings.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Can I convert multiple HEIC photos at once?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">QuickToolsPK's current HEIC to JPG page describes selecting and converting a HEIC file, with a Convert Another option. It does not advertise batch conversion. For multiple images, check whether your preferred desktop application offers batch export.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. Can I convert HEIC to JPG on an iPhone?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">You can use a compatible browser-based converter or export a photograph through an application that supports JPEG output. You can also select Most Compatible in the camera settings for future photographs, where available.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Can I convert HEIC to JPG without losing the original file?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. A converter can create a separate JPG download while leaving your original HEIC file unchanged. Keep the original until you have checked the converted photograph.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>9. Is HEIC better than JPG?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">HEIC can provide more efficient compression, while JPG offers broader compatibility. Neither format is best for every situation.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>10. Does renaming a HEIC file to JPG convert it?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Changing a filename extension does not change the actual image encoding. You need to export or convert the photograph into a genuine JPG file.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>11. Can I upload HEIC photos to websites?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Some websites support HEIC, but many still specify JPG or PNG. Check the accepted formats before uploading. If HEIC is unsupported, convert the photograph to an accepted format.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>12. Can converting HEIC to JPG fix every upload error?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. Conversion can fix an unsupported-format problem, but websites may also reject images because of file size, dimensions, aspect ratio, or content requirements.</div>
+                            </details>
+                        </div>
+
+                        <h2>Final Thoughts: Make Your iPhone Photos Easier to Share</h2>
+                        <p>HEIC is a useful format for saving iPhone photographs efficiently, but compatibility can become a problem when sharing images with Windows users, uploading files to websites, or working with older applications.</p>
+                        <p>The solution is not necessarily to stop using HEIC.</p>
+                        <p>Instead, use the format that suits the situation. Keep HEIC for efficient storage, and convert photographs to JPG when a website, application, or recipient requires broader compatibility.</p>
+                        <p>If you have an iPhone photo that will not open or upload, start by checking its format. If it is HEIC, convert it to JPG, review the result, and check the destination's file size and dimension requirements.</p>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <a href="https://www.quicktoolspk.com/heic-to-jpg.html" class="tool-cta-banner sky-bg" style="display:inline-flex; max-width: 500px; width: 100%; margin: 0 auto; text-align: left;">
+                                <div class="stars"></div>
+                                <div class="tool-cta-text">
+                                    <h4>Ready to convert your iPhone photograph?</h4>
+                                    <p>Convert supported HEIC and HEIF photos into JPG format directly in your browser.</p>
+                                </div>
+                                <div class="tool-cta-btn">
+                                    Open Tool <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>All tools are free, browser-based, and do not upload your files to a server.</p>
+                        <div class="related-grid">
+                            <a href="https://www.quicktoolspk.com/heic-to-jpg.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-file-image"></i></div>
+                                <h4>HEIC to JPG Converter</h4>
+                                <p>Convert iPhone HEIC and HEIF photos to JPG directly in your browser.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress"></i></div>
+                                <h4>JPG Compressor</h4>
+                                <p>Reduce the file size of converted JPG photos for faster uploads.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-fmt-converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <h4>Image Format Converter</h4>
+                                <p>Convert JPG, PNG, WEBP, and GIF between supported formats.</p>
+                            </a>
+                            <a href="https://www.quicktoolspk.com/img-resizer.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                                <h4>Image Resizer</h4>
+                                <p>Resize photos to meet the dimensions required by websites and forms.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">A problem-solving guide explaining why iPhone HEIC photos cause compatibility issues and how to convert them to JPG.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Image Format Guides</p>
+                            <p><strong>Tags:</strong> HEIC to JPG, iPhone Photos, Windows Compatibility, Image Format, Convert Photos</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Quick Links</h3>
+                        <ul class="sidebar-list">
+                            <li><a href="https://www.quicktoolspk.com/heic-to-jpg.html"><i class="fas fa-file-image"></i> HEIC to JPG Converter</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-compress.html"><i class="fas fa-compress"></i> JPG Compressor</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-fmt-converter.html"><i class="fas fa-exchange-alt"></i> Image Format Converter</a></li>
+                            <li><a href="https://www.quicktoolspk.com/img-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Editorial note</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin:0;">This article is a supporting guide. For iPhone HEIC files, use the dedicated HEIC to JPG converter. For other formats, use the Image Format Converter. Always check file size and dimensions after conversion.</p>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation completed successfully.</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
