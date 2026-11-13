@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>FAA Nationwide Ground Stop Explained: Why All US Flights Were Halted | QuickToolsPK</title>
+    <meta name="description" content="The FAA issued a rare nationwide ground stop halting all US departing flights due to an air traffic control communication outage. Learn why it happened, how airborne planes are handled, and what passengers should do next.">
+    <meta name="keywords" content="FAA nationwide ground stop, FAA ground stop, all flights grounded, flights grounded today, what is a ground stop, air traffic control outage, US flights grounded, airline delays and cancellations">
+    <link rel="canonical" href="https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html">
+
+    <meta property="og:title" content="FAA Nationwide Ground Stop Explained: Why All US Flights Were Halted">
+    <meta property="og:description" content="Learn why the FAA issued a rare nationwide ground stop on November 13, 2026, how airborne planes are handled, and what passengers should do next.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAA Nationwide Ground Stop Explained: Why All US Flights Were Halted">
+    <meta name="twitter:description" content="The FAA issued a rare nationwide ground stop on November 13, 2026.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS (Same as previous page)
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* Reading Progress */
+        .reading-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: var(--gradient-brand); z-index: 2000;
+            transition: width 0.1s linear; box-shadow: 0 0 8px rgba(37,99,235,0.5);
+        }
+
+        /* Floating Icons */
+        .floating-bg-icons {
+            position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+        }
+        .float-icon {
+            position: absolute; color: var(--primary); opacity: 0.04;
+            animation: floatAround 20s linear infinite;
+        }
+        .float-icon.i1 { top: 15%; left: 5%; font-size: 4rem; animation-duration: 25s; }
+        .float-icon.i2 { top: 60%; right: 5%; font-size: 6rem; animation-duration: 30s; animation-delay: -5s; }
+        .float-icon.i3 { top: 35%; left: 85%; font-size: 3rem; animation-duration: 18s; animation-delay: -10s; }
+        .float-icon.i4 { top: 80%; left: 10%; font-size: 5rem; animation-duration: 22s; animation-delay: -15s; }
+        @keyframes floatAround {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Sky & Dark Backgrounds */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: radial-gradient(1px 1px at 10% 20%, #fff, transparent), radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent), radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent), radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent), radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent), radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat; background-size: 200px 200px;
+            animation: starsMove 20s linear infinite; opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: radial-gradient(1px 1px at 20% 30%, #fff, transparent), radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px; animation: starsMove 40s linear infinite reverse; opacity: 0.4;
+        }
+        @keyframes starsMove { 0% { transform: translateY(0); } 100% { transform: translateY(-200px); } }
+        .radar-sweep {
+            position: absolute; top: 50%; right: -10%; transform: translateY(-50%);
+            width: 400px; height: 400px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(37,99,235,0.15) 45deg, transparent 90deg);
+            animation: spin 4s linear infinite; pointer-events: none; z-index: 1;
+        }
+        @keyframes spin { 100% { transform: translateY(-50%) rotate(360deg); } }
+
+        /* Header */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82); backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: var(--gradient-brand); color: #fff; box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5); transition: transform var(--t-med); flex-shrink: 0; }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link { display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500; color: var(--text); text-decoration: none; border-radius: var(--r-full); transition: color var(--t-fast), background var(--t-fast); white-space: nowrap; }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta { display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem; padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff; text-decoration: none; border-radius: var(--r-full); background: var(--gradient-navy); box-shadow: var(--shadow-sm); transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--navy); cursor: pointer; place-items: center; transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0; }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* Page Layout */
+        .page-main { flex: 1; background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%); padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem); }
+        .article-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 2.5rem; align-items: start; }
+        @media (max-width: 992px) { .article-layout { grid-template-columns: 1fr; } .sidebar { order: 2; } .floating-bg-icons { display: none; } }
+
+        .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        .article-header { margin-bottom: 2rem; }
+        .category-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.75rem; border-radius: var(--r-full); margin-bottom: 1rem; }
+        .article-header h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; line-height: 1.1; }
+        .article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+        .status-badge { background: var(--danger-soft); color: var(--danger); padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 0.35rem; }
+        .status-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--danger); animation: pulse 1.4s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+        .article-content { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow-sm); }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem; }
+        .article-content h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt); scroll-margin-top: 100px; }
+        .article-content h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--navy); scroll-margin-top: 100px; }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content blockquote { border-left: 4px solid var(--primary); background: var(--bg); padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 var(--r-sm) var(--r-sm) 0; font-style: italic; color: var(--text-muted); }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; }
+        .article-content a:hover { color: var(--primary); }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: var(--r-md); border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-alt); font-weight: 700; color: var(--navy); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout { display: flex; align-items: flex-start; gap: 0.8rem; padding: 1rem 1.25rem; background: var(--primary-soft); border-left: 4px solid var(--primary); border-radius: var(--r-sm); margin: 1.5rem 0; font-size: 0.95rem; color: var(--navy-soft); line-height: 1.6; }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.success { background: var(--success-soft); border-left-color: var(--success); }
+        .callout.success i { color: var(--success); }
+
+        /* Featured Image */
+        .featured-image { width: 100%; border-radius: var(--r-md); margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); background-color: var(--bg); aspect-ratio: 16/9; object-fit: cover; }
+        .image-caption { font-size: 0.8rem; color: var(--text-subtle); text-align: center; margin-top: -1rem; margin-bottom: 1.5rem; font-style: italic; }
+
+        /* Alert Banner */
+        .alert-banner { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1.1rem 1.25rem; background: linear-gradient(135deg, #fef2f2 0%, #fef6f6 100%); border: 1px solid #fecaca; border-left: 4px solid var(--danger); border-radius: var(--r-md); margin-bottom: 1.5rem; }
+        .alert-banner-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--danger); color: #fff; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; }
+        .alert-banner-body { flex: 1; min-width: 0; }
+        .alert-banner-label { font-size: 0.7rem; font-weight: 800; color: var(--danger); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem; }
+        .alert-banner-label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--danger); animation: pulse 1.4s infinite; }
+        .alert-banner-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.98rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem; }
+        .alert-banner-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* Table of Contents */
+        .toc-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); padding: 1.25rem 1.5rem; margin: 1.5rem 0 2rem; }
+        .toc-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+        .toc-header-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--primary-soft); color: var(--primary-dark); display: grid; place-items: center; font-size: 0.9rem; }
+        .toc-header-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+        .toc-toggle { margin-left: auto; background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.5rem; border-radius: 6px; transition: background var(--t-fast), color var(--t-fast); }
+        .toc-toggle:hover { background: var(--primary-soft); color: var(--primary-dark); }
+        .toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+        .toc-list.is-collapsed { display: none; }
+        .toc-list a { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.4rem 0.6rem; color: var(--text-muted); font-size: 0.9rem; text-decoration: none; border-radius: 6px; border-left: 2px solid transparent; transition: all var(--t-fast); }
+        .toc-list a:hover, .toc-list a.is-active { color: var(--primary-dark); background: var(--primary-soft); border-left-color: var(--primary); }
+        .toc-list a.is-active { font-weight: 600; }
+        .toc-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--text-subtle); min-width: 22px; }
+
+        /* Share Buttons */
+        .share-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding: 1rem 0; margin: 1.5rem 0 0.5rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .share-bar-label { font-size: 0.85rem; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 0.4rem; }
+        .share-btn { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: #fff; text-decoration: none; font-size: 1rem; transition: transform var(--t-fast), box-shadow var(--t-fast); }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .share-btn.facebook { background: #1877f2; } .share-btn.twitter { background: #0b1a33; }
+        .share-btn.linkedin { background: #0a66c2; } .share-btn.whatsapp { background: #25d366; }
+        .share-btn.email { background: var(--text-muted); } .share-btn.copy { background: var(--primary); cursor: pointer; border: none; }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); margin: 2rem 0 1rem; }
+        .author-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--gradient-brand); color: #fff; display: grid; place-items: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; flex-shrink: 0; box-shadow: var(--shadow-brand); }
+        .author-info { flex: 1; min-width: 0; }
+        .author-label { font-size: 0.7rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+        .author-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+        .author-bio { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* ============================================================
+           DARK LIVE FLIGHT STATUS BOARD
+           ============================================================ */
+        .flight-board-container { margin: 2rem 0; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid #1e293b; }
+        .flight-board-header { background: #0f172a; padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; }
+        .flight-board-title { color: #f8fafc; font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem; }
+        .flight-board-title i { color: var(--danger); animation: pulse 1.4s infinite; }
+        .flight-board-time { color: #64748b; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; }
+        .flight-board-body { background: #0b1121; padding: 0.5rem 0; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; }
+        .flight-row { display: grid; grid-template-columns: 80px 1fr 100px; padding: 0.6rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.03); color: #cbd5e1; transition: background 0.2s; }
+        .flight-row:hover { background: rgba(255,255,255,0.02); }
+        .flight-row:last-child { border-bottom: none; }
+        .flight-time { color: #64748b; }
+        .flight-dest { color: #f8fafc; display: flex; align-items: center; gap: 0.5rem; }
+        .flight-dest i { font-size: 0.7rem; color: #475569; }
+        .flight-status { text-align: right; font-weight: 700; letter-spacing: 0.05em; }
+        .flight-status.delayed { color: #fbbf24; }
+        .flight-status.cancelled { color: #f87171; text-shadow: 0 0 8px rgba(248,113,113,0.4); }
+        .flight-status.ontime { color: #4ade80; }
+        .board-footer { background: #0f172a; padding: 0.5rem 1.25rem; text-align: center; color: #475569; font-size: 0.75rem; font-family: 'Share Tech Mono', monospace; border-top: 1px solid #1e293b; }
+
+        /* ============================================================
+           DARK KEY FACTS SECTION
+           ============================================================ */
+        .dark-facts-section { background: var(--gradient-navy); border-radius: var(--r-md); padding: 2rem; margin: 2rem 0; color: #fff; position: relative; overflow: hidden; }
+        .dark-facts-section .stars { opacity: 0.3; }
+        .dark-facts-section h2 { color: #fff; border-bottom: 2px solid rgba(255,255,255,0.1); margin-top: 0; padding-bottom: 0.75rem; }
+        .dark-facts-section .table-wrap { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
+        .dark-facts-section table { color: #fff; }
+        .dark-facts-section th { background: rgba(255,255,255,0.1); color: #fff; border-bottom-color: rgba(255,255,255,0.2); }
+        .dark-facts-section td { border-bottom-color: rgba(255,255,255,0.1); color: #e2e8f0; }
+
+        /* ============================================================
+           FIXED NEWSLETTER BANNER UI
+           ============================================================ */
+        .newsletter-banner { position: relative; overflow: hidden; background: linear-gradient(135deg, #0b1a33 0%, #1e3a8a 100%); border-radius: var(--r-lg); padding: 3rem 1.75rem; margin: 2.5rem 0 1rem; color: #fff; text-align: center; box-shadow: var(--shadow-lg); }
+        .newsletter-plane { position: absolute; top: 20%; left: -50px; font-size: 3rem; color: rgba(255,255,255,0.05); animation: flyPlane 15s linear infinite; pointer-events: none; }
+        @keyframes flyPlane { 0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(120vw) translateY(-50px) rotate(5deg); opacity: 0; } }
+        .newsletter-inner { position: relative; z-index: 2; }
+        .newsletter-icon { width: 60px; height: 60px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); display: grid; place-items: center; margin: 0 auto 1.25rem; font-size: 1.5rem; color: #fff; box-shadow: 0 0 20px rgba(37,99,235,0.3); }
+        .article-content .newsletter-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .article-content .newsletter-desc { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1.5rem; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .newsletter-form { display: flex; gap: 0.5rem; max-width: 460px; margin: 0 auto; position: relative; }
+        .newsletter-input { flex: 1; min-width: 0; padding: 0.85rem 1.25rem; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--r-full); background: rgba(0,0,0,0.2); color: #fff; font-family: inherit; font-size: 0.95rem; transition: border-color var(--t-fast), background var(--t-fast); }
+        .newsletter-input::placeholder { color: #94a3b8; }
+        .newsletter-input:focus { outline: none; border-color: #60a5fa; background: rgba(0,0,0,0.4); }
+        .newsletter-btn { padding: 0.85rem 1.5rem; border: none; border-radius: var(--r-full); background: var(--primary); color: #fff; font-family: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background var(--t-fast), transform var(--t-fast); white-space: nowrap; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+        .newsletter-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .article-content .newsletter-disclaimer { font-size: 0.75rem; color: #94a3b8; margin-top: 1rem; }
+        @media (max-width: 500px) { .newsletter-form { flex-direction: column; } .newsletter-btn { justify-content: center; } }
+
+        /* Related Articles */
+        .related-articles { margin-top: 2.5rem; }
+        .section-header { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.25rem; }
+        .section-header-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--primary-soft); color: var(--primary-dark); display: grid; place-items: center; font-size: 1rem; }
+        .section-header h2 { font-size: 1.3rem; margin: 0; padding: 0; border: none; }
+        .related-articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+        .related-article-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; text-decoration: none; color: var(--text); box-shadow: var(--shadow-xs); transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med); }
+        .related-article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #bfd4f7; }
+        .related-article-image { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--bg-alt); }
+        .related-article-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
+        .related-article-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: var(--r-full); margin-bottom: 0.65rem; width: fit-content; }
+        .related-article-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 0.5rem; }
+        .related-article-excerpt { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; margin: 0 0 1rem; flex: 1; }
+        .related-article-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-subtle); margin-top: auto; }
+        .related-article-meta i { font-size: 0.7rem; }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; position: sticky; top: 92px; }
+        @media (max-width: 992px) { .sidebar { position: static; } }
+        .sidebar-widget { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs); }
+        .sidebar-widget h3 { font-size: 1rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt); }
+        .sidebar-toc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+        .sidebar-toc-list a { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.45rem 0.6rem; color: var(--text-muted); font-size: 0.85rem; text-decoration: none; border-radius: 6px; border-left: 2px solid transparent; transition: all var(--t-fast); line-height: 1.4; }
+        .sidebar-toc-list a:hover, .sidebar-toc-list a.is-active { color: var(--primary-dark); background: var(--primary-soft); border-left-color: var(--primary); }
+
+        /* Related Tools */
+        .related-tools-section { margin-top: 2.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; box-shadow: var(--shadow-sm); }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .related-card { display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); padding: 1.25rem; text-decoration: none; color: var(--text); transition: transform var(--t-fast), box-shadow var(--t-fast); }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7; }
+        .related-card-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--primary-soft); color: var(--primary-dark); display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem; }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
+        .faq-item[open] { border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs); }
+        .faq-item summary { list-style: none; cursor: pointer; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron { width: 18px; height: 18px; color: var(--text-subtle); transition: transform var(--t-med), color var(--t-med); }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer { padding: 0 1.25rem 1.25rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* Footer */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 3rem; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2; }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; } .footer-col--legal { grid-column: 1 / -1; } .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; } }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav { position: fixed; top: 72px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem; transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med); max-height: calc(100vh - 72px); overflow-y: auto; }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .share-bar { justify-content: center; }
+            .flight-row { grid-template-columns: 60px 1fr 80px; font-size: 0.75rem; padding: 0.6rem 0.75rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- Background Floating Icons -->
+    <div class="floating-bg-icons" aria-hidden="true">
+        <i class="fas fa-plane float-icon i1"></i>
+        <i class="fas fa-plane-departure float-icon i2"></i>
+        <i class="fas fa-suitcase-rolling float-icon i3"></i>
+        <i class="fas fa-satellite-dish float-icon i4"></i>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-main">
+        <div class="container">
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Travel &amp; Aviation News</span>
+            </nav>
+
+            <div class="article-layout">
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Travel &amp; Aviation News</span>
+                        <h1>FAA Nationwide Ground Stop: Why All US Flights Were Grounded and How It Affects Travelers</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Last updated: November 13, 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                            <span class="status-badge">Breaking News</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+                        <div class="alert-banner">
+                            <div class="alert-banner-icon"><i class="fas fa-plane-slash"></i></div>
+                            <div class="alert-banner-body">
+                                <div class="alert-banner-label">Breaking News</div>
+                                <div class="alert-banner-title">Nationwide ground stop issued by the FAA</div>
+                                <p class="alert-banner-text">A major telecommunications outage forced the FAA to halt all departing US flights on November 13, 2026. Here is what you need to know.</p>
+                            </div>
+                        </div>
+
+                        <img src="../../assets/images/blog/35.jpg"  alt="Commercial airplanes parked on an airport tarmac near an air traffic control tower during a nationwide FAA ground stop." class="featured-image">
+                        <p class="image-caption">The November 13, 2026 ground stop halted all US departing flights. (Illustrative image)</p>
+
+                        <p>When the Federal Aviation Administration (FAA) halts air traffic across the entire United States, millions of travelers feel the ripple effects within minutes. On Friday, November 13, 2026, the FAA issued an extremely rare nationwide ground stop, ordering all departing flights at US airports to remain on the ground until further notice due to "extraordinary circumstances and for reasons of safety."</p>
+
+                        <div class="callout success">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Direct Answer:</strong> A nationwide FAA ground stop is an emergency air traffic control measure that prevents any aircraft from taking off across the United States. The November 13, 2026 ground stop was triggered by a major telecommunications and frequency outage affecting all 22 regional Air Route Traffic Control Centers, making it only the third nationwide grounding in modern US aviation history.</span>
+                        </div>
+
+                        <p>Whether you are currently stuck at an airport terminal or trying to understand how national airspace safety works, this guide breaks down the exact cause of the November 2026 outage, what happens to planes already in the sky, and how to protect your travel plans.</p>
+
+                        <!-- DARK LIVE FLIGHT BOARD -->
+                        <div class="flight-board-container">
+                            <div class="flight-board-header">
+                                <div class="flight-board-title"><i class="fas fa-circle"></i> LIVE AIRSPACE STATUS</div>
+                                <div class="flight-board-time">13 NOV 2026 · 20:54 UTC</div>
+                            </div>
+                            <div class="flight-board-body">
+                                <div class="flight-row">
+                                    <div class="flight-time">ALL</div>
+                                    <div class="flight-dest"><i class="fas fa-ban"></i> US Departures</div>
+                                    <div class="flight-status cancelled">GROUND STOP</div>
+                                </div>
+                                <div class="flight-row">
+                                    <div class="flight-time">INT'L</div>
+                                    <div class="flight-dest"><i class="fas fa-globe"></i> Inbound Flights</div>
+                                    <div class="flight-status delayed">CASE-BY-CASE</div>
+                                </div>
+                                <div class="flight-row">
+                                    <div class="flight-time">AIRBORNE</div>
+                                    <div class="flight-dest"><i class="fas fa-plane"></i> 4,042 Flights</div>
+                                    <div class="flight-status ontime">LANDING SAFELY</div>
+                                </div>
+                            </div>
+                            <div class="board-footer">
+                                * Based on FAA advisory data issued on Nov 13, 2026.
+                            </div>
+                        </div>
+
+                        <!-- DARK KEY FACTS SECTION -->
+                        <div class="dark-facts-section sky-bg">
+                            <div class="stars"></div>
+                            <div class="radar-sweep"></div>
+                            <div style="position: relative; z-index: 2;">
+                                <h2>Ground Stop Key Facts</h2>
+                                <div class="table-wrap">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Detail</th>
+                                                <th>Information</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Event</td><td>Nationwide Ground Stop (3rd in US History)</td></tr>
+                                            <tr><td>Date Issued</td><td>November 13, 2026</td></tr>
+                                            <tr><td>Root Cause</td><td>Telecommunications outage at 22 ARTCCs</td></tr>
+                                            <tr><td>Flights Airborne</td><td>4,042 at time of order</td></tr>
+                                            <tr><td>Total Impact</td><td>Nearly 7,000 delays/cancellations</td></tr>
+                                            <tr><td>Cyberattack?</td><td>No evidence, per DHS</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLE OF CONTENTS -->
+                        <nav class="toc-card" aria-label="Table of contents">
+                            <div class="toc-header">
+                                <div class="toc-header-icon"><i class="fas fa-list-ul"></i></div>
+                                <span class="toc-header-title">What's in this article</span>
+                                <button class="toc-toggle" id="tocToggle" aria-expanded="true">
+                                    <span>Hide</span>
+                                    <i class="fas fa-chevron-up" id="tocToggleIcon"></i>
+                                </button>
+                            </div>
+                            <ol class="toc-list" id="tocList">
+                                <li><a href="#what-happened"><span class="toc-num">01</span> What Happened on Nov 13?</a></li>
+                                <li><a href="#what-means"><span class="toc-num">02</span> What Does a Ground Stop Mean?</a></li>
+                                <li><a href="#history"><span class="toc-num">03</span> How Often Has This Happened?</a></li>
+                                <li><a href="#ripple-effect"><span class="toc-num">04</span> Why Delays Last for Days</a></li>
+                                <li><a href="#traveler-action"><span class="toc-num">05</span> What Travelers Should Do</a></li>
+                                <li><a href="#faq"><span class="toc-num">06</span> Frequently Asked Questions</a></li>
+                            </ol>
+                        </nav>
+
+                        <h2 id="what-happened">What Happened During the November 13, 2026 FAA Ground Stop?</h2>
+                        <p>Shortly before 4:00 p.m. ET (20:54 UTC) on November 13, 2026, the FAA’s Air Traffic Control System Command Center posted an urgent advisory on its National Airspace System Status website:</p>
+                        <blockquote>
+                            "By order of the Federal Aviation Command Center all airports are ground stopped. All departing traffic should remain ground stopped until further notice. Inbound international flights will be managed on a case by case basis."
+                        </blockquote>
+                        <p>Moments before the nationwide order went into effect, localized ground stops had already been placed on Chicago’s O'Hare International Airport and Midway International Airport due to equipment failures.</p>
+
+                        <h3>The Root Cause: Air Route Traffic Control Center Outage</h3>
+                        <p>US Secretary of Transportation Sean Duffy confirmed that the stoppage was caused by a widespread communication issue impacting all <strong>Air Route Traffic Control Centers (ARTCCs)</strong>.</p>
+                        <ul>
+                            <li><strong>What ARTCCs do:</strong> The United States relies on 22 regional ARTCC facilities spaced across the country. While airport towers manage takeoffs and landings, ARTCC controllers guide aircraft during the high-altitude "cruise" phase of their flights between cities.</li>
+                            <li><strong>No evidence of a cyberattack:</strong> Department of Homeland Security Director Markwayne Mullin stated in a press briefing that preliminary investigations pointed strictly to a technical telecommunications and frequency outage rather than a coordinated cyberattack or "nefarious" threat.</li>
+                        </ul>
+                        <p>At the exact moment the order was issued, aviation tracking platform Flightradar24 recorded <strong>4,042 flights airborne</strong> and destined for US airports. By the end of the day, nearly 7,000 flights across the country faced delays or cancellations.</p>
+
+                        <!-- Optional In-article Image 1 Placeholder -->
+                        <div class="callout">
+                            <i class="fas fa-network-wired"></i>
+                            <span><strong>How it works:</strong> Regional Air Route Traffic Control Centers (ARTCCs) manage high-altitude flights between local airport terminals. When their communication fails, planes cannot safely be passed from one sector to another.</span>
+                        </div>
+
+                        <h2 id="what-means">What Does a "Ground Stop" Actually Mean?</h2>
+                        <p>Many travelers confuse a <strong>ground stop</strong> with a <strong>ground delay program</strong> or a complete <strong>airspace closure</strong>. Understanding the difference helps clarify why some planes keep flying while others sit at the gate.</p>
+                        <ol>
+                            <li><strong>Ground Stop (Complete Departure Halt):</strong> The FAA prohibits planes destined for a specific airport—or all airports nationwide—from taking off. Planes already in the air are <strong>not</strong> forced to land immediately at the nearest field unless there is a security threat; instead, they safely continue to their destinations under controller guidance.</li>
+                            <li><strong>Ground Delay Program (Traffic Metering):</strong> Rather than stopping all takeoffs, the FAA assigns delayed departure times to flights so planes arrive at a congested or weather-affected airport at a slower, manageable pace.</li>
+                            <li><strong>Airspace Closure (Total Evacuation):</strong> Reserved for extreme national security emergencies, an airspace closure orders all airborne planes to land immediately and clears the skies completely (as seen on September 11, 2001).</li>
+                        </ol>
+
+                        <h2 id="history">How Often Has the FAA Grounded All US Flights?</h2>
+                        <p>A nationwide ground stop is one of the rarest events in commercial aviation. The November 2026 stoppage is only the <strong>third time</strong> in modern history that the FAA has halted all departing flights nationwide:</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Date</th><th>Event / Trigger</th><th>Scope & Impact</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>September 11, 2001</strong></td>
+                                        <td>Terrorist attacks in New York and Washington, D.C.</td>
+                                        <td>Complete US airspace closure. All airborne flights were diverted or ordered to land immediately; departures halted for two days.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>January 11, 2023</strong></td>
+                                        <td>Failure of the FAA's NOTAM (Notice to Air Missions) pilot alert system</td>
+                                        <td>Nationwide departure pause lasting roughly 90 minutes to two hours. Triggered over 10,000 flight delays and 1,300+ cancellations.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>November 13, 2026</strong></td>
+                                        <td>Telecommunications outage across all 22 Air Route Traffic Control Centers</td>
+                                        <td>Nationwide departure halt for all US airports; inbound international flights managed case-by-case. Nearly 7,000 initial delays and cancellations.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-subtle); font-style: italic;">(Note: In July 2024, major carriers like Delta, American, and United issued a global ground stop, though that was caused by a third-party CrowdStrike/Microsoft IT outage rather than an FAA air traffic control mandate.)</p>
+
+                        <h2 id="ripple-effect">Why Ground Stops Cause Ripple Effects for Days</h2>
+                        <p>Even after FAA technicians restore communication systems and lift a ground stop, airports do not return to normal immediately. Aviation operates like a tightly connected chain:</p>
+                        <ul>
+                            <li><strong>Aircraft Misalignment:</strong> If a plane scheduled to fly from Chicago to Miami is grounded for three hours, its subsequent flights from Miami to Dallas and Dallas to Seattle are automatically delayed or canceled.</li>
+                            <li><strong>Crew Duty Limits:</strong> Pilots and flight attendants are strictly governed by federal safety laws limiting how many hours they can work in a single shift. Prolonged tarmac or gate delays often cause crews to "time out," forcing airlines to cancel flights until replacement crews arrive.</li>
+                            <li><strong>Gate Congestion:</strong> When departing planes cannot leave their gates, arriving flights have nowhere to park, creating gridlock on airport taxiways.</li>
+                        </ul>
+
+                        <h2 id="traveler-action">What Travelers Should Do During a Nationwide Ground Stop</h2>
+                        <p>If you are caught in an airport during an FAA ground stop, taking quick, organized steps can help you get rebooked ahead of the crowd:</p>
+                        <ol>
+                            <li><strong>Check the Official FAA Status Page:</strong> Visit <a href="https://nasstatus.faa.gov/" target="_blank" rel="noopener">nasstatus.faa.gov</a> for real-time updates on whether your departure or arrival airport is under an active ground stop or ground delay.</li>
+                            <li><strong>Use the Airline App While Calling Support:</strong> Do not rely solely on the gate agent line. Open your airline's mobile app to check for automatic rebooking options while simultaneously calling the airline's customer service number (or international support line, which often has shorter wait times).</li>
+                            <li><strong>Know Your Refund Rights:</strong> Under US Department of Transportation rules, if your flight is canceled—or significantly delayed and you choose not to travel—you are entitled to a <strong>full cash refund</strong> to your original payment method, even if you bought a non-refundable ticket. You do not have to accept travel vouchers.</li>
+                            <li><strong>Ask About Hotel and Meal Vouchers (With Realistic Expectations):</strong> Because an FAA system outage is classified as an air traffic control issue outside an airline's direct control, carriers are not legally required to pay for hotels. However, many major airlines still issue meal vouchers or partner hotel discounts during widespread disruptions if you ask politely.</li>
+                            <li><strong>Keep Digital Copies of Your Documents:</strong> Save screenshots of your boarding pass, flight delay notifications, and receipts for meals or hotels. If you booked your trip with a travel rewards credit card, trip delay insurance may reimburse your out-of-pocket expenses once a delay passes 6 to 12 hours. <em>(Tip: If you need to combine multiple expense receipts or boarding pass images into a single clean document for an insurance claim, you can use a browser-based <a href="/JPG-to-PDF-Converter.html">JPG to PDF converter</a> or <a href="/img-compress.html">compress or resize claim photos</a> on QuickToolsPK to organize your files quickly.)</em></li>
+                        </ol>
+
+                        <h2>Quick Summary</h2>
+                        <ul>
+                            <li><strong>What happened:</strong> On November 13, 2026, the FAA grounded all departing flights across the United States due to a telecommunications outage affecting all 22 Air Route Traffic Control Centers.</li>
+                            <li><strong>Airborne flights:</strong> Planes already in the air (over 4,000 at the time of the order) continued flying safely to their destinations, while inbound international flights were managed case-by-case.</li>
+                            <li><strong>Historical rarity:</strong> This marks only the third nationwide FAA ground stop in modern US history, following 9/11 (2001) and the NOTAM system failure (January 2023).</li>
+                            <li><strong>Passenger action:</strong> Monitor the FAA's National Airspace System website, rebook immediately via your airline's app, and know that canceled flights qualify for full cash refunds regardless of ticket type.</li>
+                        </ul>
+
+                        <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. Are planes forced to land immediately during an FAA ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. During a standard ground stop, planes already airborne are allowed to continue safely to their scheduled destinations. Only aircraft that have not yet taken off are held on the ground. Immediate emergency diversions only occur during a full airspace closure.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. How long does a nationwide FAA ground stop usually last?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Most localized ground stops last between 30 minutes and two hours. Nationwide ground stops depend entirely on how fast technicians resolve the underlying technical failure—for example, the January 2023 NOTAM outage lasted under two hours, whereas residual airline delays lasted into the following day.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Are international flights into the US canceled during a ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Not automatically. During the November 2026 ground stop, the FAA stated that inbound international flights already en route to the United States would be managed on a <strong>case-by-case basis</strong>. However, international flights that have not yet departed from foreign airports for the US may be held at their origin gates.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Was the November 2026 FAA ground stop caused by a cyberattack?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">According to Department of Homeland Security Director Markwayne Mullin, preliminary investigations found no indication of a cyberattack or malicious interference. Officials attributed the stoppage to a technical telecommunications and frequency outage.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. Can I get a refund if my flight is delayed because of an FAA ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">If your airline cancels your flight, you are legally entitled to a full refund if you choose not to rebook. If your flight is delayed—even due to an FAA air traffic control issue—you are also entitled to a refund if the delay is "significant" (generally 3+ hours for domestic flights or 6+ hours for international flights) and you decide not to travel.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Where can I check live FAA airport ground stop updates?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">You can check real-time ground stops, ground delay programs, and airport closures directly on the official FAA National Airspace System Status portal at <strong>nasstatus.faa.gov</strong>.</div>
+                            </details>
+                        </div>
+
+                        <h2>Conclusion</h2>
+                        <p>A nationwide FAA ground stop is a stark reminder of how heavily modern air travel relies on seamless communication between ground control centers and aircraft in the sky. While sitting through an indefinite delay at the terminal is frustrating, ground stops exist to ensure air traffic controllers never operate blind when critical communication frequencies fail. If your travel plans are affected, stay off the terminal customer service lines when possible, use your airline's mobile app to secure the earliest rebooking, and keep your receipts organized in case you qualify for travel insurance or airline compensation.</p>
+
+                        <p style="font-style: italic; color: var(--text-subtle); margin-top: 2rem;">This article reflects reporting available on November 13, 2026. It should be updated as the FAA issues new advisories and airlines confirm changes to their schedules.</p>
+
+                        <!-- SHARE BAR -->
+                        <div class="share-bar">
+                            <span class="share-bar-label"><i class="fas fa-share-alt"></i> Share this article:</span>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html" target="_blank" rel="noopener" class="share-btn facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/intent/tweet?url=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html&text=FAA%20Nationwide%20Ground%20Stop%20Explained%3A%20Why%20All%20US%20Flights%20Were%20Halted" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/?text=FAA%20Nationwide%20Ground%20Stop%20Explained%20https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html" target="_blank" rel="noopener" class="share-btn whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:?subject=FAA%20Nationwide%20Ground%20Stop%20Explained&body=Read%20more%3A%20https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-explained.html" class="share-btn email" aria-label="Share via email"><i class="fas fa-envelope"></i></a>
+                            <button class="share-btn copy" id="copyLinkBtn" aria-label="Copy link"><i class="fas fa-link"></i></button>
+                        </div>
+
+                        <!-- AUTHOR BOX -->
+                        <div class="author-box">
+                            <div class="author-avatar" aria-hidden="true">Q</div>
+                            <div class="author-info">
+                                <div class="author-label">Written by</div>
+                                <div class="author-name">QuickToolsPK News Team</div>
+                                <p class="author-bio">Covering breaking news, travel updates and practical guides for readers in the United States and around the world. This article is based on verified reporting from November 13, 2026.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEWSLETTER CTA -->
+                        <div class="newsletter-banner">
+                            <i class="fas fa-plane newsletter-plane"></i>
+                            <div class="newsletter-inner">
+                                <div class="newsletter-icon"><i class="fas fa-bell"></i></div>
+                                <h3 class="newsletter-title">Get updates on major travel news</h3>
+                                <p class="newsletter-desc">Subscribe to receive alerts on flight disruptions, ground stops and other breaking news that affects travelers.</p>
+                                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (Demo only — connect to your email service.)');">
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email address">
+                                    <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                                </form>
+                                <p class="newsletter-disclaimer">No spam. Unsubscribe at any time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELATED ARTICLES -->
+                    <section class="related-articles reveal" aria-label="Related articles">
+                        <div class="section-header">
+                            <div class="section-header-icon"><i class="fas fa-newspaper"></i></div>
+                            <h2>Related articles</h2>
+                        </div>
+                        <div class="related-articles-grid">
+                            <a href="/blog/updates/trump-administration-veterans-loan-changes/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="VA home loan changes" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">News</span>
+                                    <h3 class="related-article-title">Trump Administration Veterans Loan Changes: What VA Borrowers Need to Know</h3>
+                                    <p class="related-article-excerpt">VASP shutdown, payment increases and the new Partial Claim Program explained for veterans.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Oct 30, 2026 · <i class="far fa-clock"></i> 7 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/le-havre-vs-psg-2026-live-score/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Le Havre vs PSG live score" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">Sports</span>
+                                    <h3 class="related-article-title">Le Havre vs PSG: Live Score, Goals, Lineups &amp; Match Updates</h3>
+                                    <p class="related-article-excerpt">Live coverage of the Ligue 1 Matchday 9 fixture at Stade CMA CGM Océane.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Oct 30, 2026 · <i class="far fa-clock"></i> 6 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/what-is-victorias-secret/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Victoria's Secret brand guide" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">Brand Guide</span>
+                                    <h3 class="related-article-title">What Is Victoria's Secret? Brand History, Products &amp; What It's Known For</h3>
+                                    <p class="related-article-excerpt">A complete brand guide to Victoria's Secret, PINK and the fashion show legacy.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Nov 2026 · <i class="far fa-clock"></i> 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>If you need to compress screenshots of your boarding pass, convert documents or resize travel photos for your blog, these free tools may help.</p>
+                        <div class="related-grid">
+                            <a href="/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress-alt"></i></div>
+                                <h4>Image Compressor</h4>
+                                <p>Reduce the size of travel photos and screenshots for faster sharing.</p>
+                            </a>
+                            <a href="/JPG-to-PDF-Converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-file-pdf"></i></div>
+                                <h4>JPG to PDF Converter</h4>
+                                <p>Convert booking screenshots and receipts into a single PDF file.</p>
+                            </a>
+                            <a href="/img-fmt-converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <h4>Image Format Converter</h4>
+                                <p>Convert travel images between JPG, PNG and WebP for web use.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <div class="sidebar-widget">
+                        <h3><i class="fas fa-list-ul" style="color: var(--primary); margin-right: 0.4rem;"></i> On this page</h3>
+                        <ul class="sidebar-toc-list" id="sidebarToc">
+                            <li><a href="#what-happened"><span class="toc-num">01</span> What Happened</a></li>
+                            <li><a href="#what-means"><span class="toc-num">02</span> What it Means</a></li>
+                            <li><a href="#history"><span class="toc-num">03</span> Historical Rarity</a></li>
+                            <li><a href="#ripple-effect"><span class="toc-num">04</span> Ripple Effects</a></li>
+                            <li><a href="#traveler-action"><span class="toc-num">05</span> Traveler Action</a></li>
+                            <li><a href="#faq"><span class="toc-num">06</span> FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">This is a breaking-news explainer based on reporting from AP, Reuters, CBS News, Flightradar24, and official FAA sources as of November 13, 2026.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Travel &amp; Aviation News</p>
+                            <p><strong>Focus keyword:</strong> FAA nationwide ground stop</p>
+                            <p><strong>Tags:</strong> FAA Ground Stop, Aviation News, Air Travel Tips, Flight Delays, US Airports</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Official resources</h3>
+                        <div style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.75rem;">
+                            <a href="https://nasstatus.faa.gov/" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> FAA Airspace Status
+                            </a>
+                            <a href="https://www.transportation.gov/airconsumer" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> DOT Refund Rules
+                            </a>
+                            <a href="https://www.flightradar24.com/" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> Flightradar24
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite" style="position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(150%); background: var(--navy); color: #fff; padding: 0.85rem 1.25rem; border-radius: 999px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; z-index: 3000; transition: transform 0.32s cubic-bezier(0.22,0.61,0.36,1);">
+        <i class="fas fa-check-circle" style="color: #10b981;"></i>
+        <span id="toast-message">Link copied to clipboard!</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reading Progress Bar ===== */
+        const progressBar = document.getElementById('readingProgress');
+        const articleContent = document.querySelector('.article-content');
+        let progressTicking = false;
+        function updateProgress() {
+            if (!articleContent) return;
+            const rect = articleContent.getBoundingClientRect();
+            const articleTop = rect.top + window.scrollY;
+            const articleHeight = rect.height;
+            const scrolled = window.scrollY - articleTop + window.innerHeight * 0.3;
+            const total = articleHeight - window.innerHeight * 0.7;
+            let pct = (scrolled / total) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            progressBar.style.width = pct + '%';
+            progressTicking = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (!progressTicking) {
+                window.requestAnimationFrame(updateProgress);
+                progressTicking = true;
+            }
+        }, { passive: true });
+        updateProgress();
+
+        /* ===== TOC Toggle ===== */
+        const tocToggle = document.getElementById('tocToggle');
+        const tocList = document.getElementById('tocList');
+        const tocToggleIcon = document.getElementById('tocToggleIcon');
+        if (tocToggle && tocList) {
+            tocToggle.addEventListener('click', function () {
+                const collapsed = tocList.classList.toggle('is-collapsed');
+                tocToggle.setAttribute('aria-expanded', String(!collapsed));
+                tocToggle.querySelector('span').textContent = collapsed ? 'Show' : 'Hide';
+                tocToggleIcon.className = collapsed ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+            });
+        }
+
+        /* ===== Active TOC Highlight ===== */
+        const tocLinks = document.querySelectorAll('#tocList a, #sidebarToc a');
+        const headings = Array.from(document.querySelectorAll('.article-content h2[id]'));
+        function highlightTOC() {
+            let current = '';
+            const offset = 130;
+            for (const h of headings) {
+                if (h.getBoundingClientRect().top <= offset) {
+                    current = h.id;
+                }
+            }
+            tocLinks.forEach(link => {
+                link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', highlightTOC, { passive: true });
+        highlightTOC();
+
+        /* ===== Copy Link ===== */
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const toast = document.getElementById('toast');
+        let toastTimeout;
+        function showToast(msg) {
+            document.getElementById('toast-message').textContent = msg;
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(150%)';
+            }, 2500);
+        }
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', async function () {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    showToast('Link copied to clipboard!');
+                } catch (err) {
+                    showToast('Could not copy — please copy the URL manually.');
+                }
+            });
+        }
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
