@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>FAA Nationwide Ground Stop: Why Are Flights Grounded Today? | QuickToolsPK</title>
+    <meta name="description" content="The FAA issued a nationwide ground stop on November 13, 2026. Learn why flights are grounded, what caused the disruption, and how to check flight status.">
+    <meta name="keywords" content="FAA nationwide ground stop, FAA ground stop today, are flights grounded today, why are flights grounded, nationwide flight delays, FAA flight delays, flights grounded in the USA, air traffic control communication problems, what is an FAA ground stop, flight cancellations today, check flight status, how long will the ground stop last">
+    <link rel="canonical" href="https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html">
+
+    <meta property="og:title" content="FAA Nationwide Ground Stop: Why Are Flights Grounded Today?">
+    <meta property="og:description" content="The FAA issued a nationwide ground stop on November 13, 2026. Learn why flights are grounded, what caused the disruption, and how to check flight status.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAA Nationwide Ground Stop: Why Are Flights Grounded Today?">
+    <meta name="twitter:description" content="The FAA issued a nationwide ground stop on November 13, 2026.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #f8fafc; --bg-alt: #f1f5fb; --surface: #ffffff;
+            --border: #e5ecf5; --border-strong: #d3dfed;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #e8f0fe;
+            --teal: #0d9488; --teal-soft: #ccfbf1;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 2px 8px rgba(15,30,55,0.05), 0 1px 2px rgba(15,30,55,0.03);
+            --shadow-md: 0 8px 24px -6px rgba(15,30,55,0.09), 0 2px 6px rgba(15,30,55,0.04);
+            --shadow-lg: 0 24px 48px -12px rgba(15,30,55,0.16), 0 8px 16px -8px rgba(15,30,55,0.06);
+            --shadow-brand: 0 8px 22px -6px rgba(37,99,235,0.35);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.65; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; color: var(--navy);
+            line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           READING PROGRESS BAR
+           ============================================================ */
+        .reading-progress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: var(--gradient-brand);
+            z-index: 2000;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px rgba(37,99,235,0.5);
+        }
+
+        /* ============================================================
+           FLOATING AVIATION ICONS (BACKGROUND ANIMATION)
+           ============================================================ */
+        .floating-bg-icons {
+            position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+        }
+        .float-icon {
+            position: absolute; color: var(--primary); opacity: 0.04;
+            animation: floatAround 20s linear infinite;
+        }
+        .float-icon.i1 { top: 15%; left: 5%; font-size: 4rem; animation-duration: 25s; }
+        .float-icon.i2 { top: 60%; right: 5%; font-size: 6rem; animation-duration: 30s; animation-delay: -5s; }
+        .float-icon.i3 { top: 35%; left: 85%; font-size: 3rem; animation-duration: 18s; animation-delay: -10s; }
+        .float-icon.i4 { top: 80%; left: 10%; font-size: 5rem; animation-duration: 22s; animation-delay: -15s; }
+        
+        @keyframes floatAround {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (DARK BACKGROUNDS)
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 20s linear infinite;
+            opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+                radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px;
+            animation: starsMove 40s linear infinite reverse;
+            opacity: 0.4;
+        }
+        @keyframes starsMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200px); }
+        }
+
+        /* Radar Sweep Animation */
+        .radar-sweep {
+            position: absolute; top: 50%; right: -10%; transform: translateY(-50%);
+            width: 400px; height: 400px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(37,99,235,0.15) 45deg, transparent 90deg);
+            animation: spin 4s linear infinite;
+            pointer-events: none; z-index: 1;
+        }
+        @keyframes spin { 100% { transform: translateY(-50%) rotate(360deg); } }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark {
+            width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+            background: var(--gradient-brand); color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5);
+            transition: transform var(--t-med); flex-shrink: 0;
+        }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800;
+            color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;
+        }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link {
+            display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500;
+            color: var(--text); text-decoration: none; border-radius: var(--r-full);
+            transition: color var(--t-fast), background var(--t-fast); white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-link.is-active { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem;
+            padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff;
+            text-decoration: none; border-radius: var(--r-full);
+            background: var(--gradient-navy); box-shadow: var(--shadow-sm);
+            transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle {
+            display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+            border-radius: 12px; background: var(--surface); color: var(--navy);
+            cursor: pointer; place-items: center;
+            transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0;
+        }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE SHELL & ARTICLE LAYOUT
+           ============================================================ */
+        .page-main {
+            flex: 1;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5fb 100%);
+            padding: clamp(7rem, 11vw, 9rem) 0 clamp(3rem, 6vw, 5rem);
+        }
+        .article-layout {
+            display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 2.5rem;
+            align-items: start;
+        }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+            .floating-bg-icons { display: none; } /* Hide heavy animations on mobile */
+        }
+
+        .breadcrumb {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: var(--text-subtle); margin-bottom: 1.25rem;
+        }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2rem; }
+        .category-tag {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            padding: 0.3rem 0.75rem; border-radius: var(--r-full);
+            margin-bottom: 1rem;
+        }
+        .article-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 1rem; line-height: 1.1;
+        }
+        .article-meta {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+            font-size: 0.85rem; color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.25rem;
+        }
+        .article-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .article-meta i { color: var(--text-subtle); }
+        .status-badge {
+            background: var(--danger-soft);
+            color: var(--danger);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            display: inline-flex; align-items: center; gap: 0.35rem;
+        }
+        .status-badge::before {
+            content: "";
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--danger);
+            animation: pulse 1.4s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+        /* Article Content */
+        .article-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            box-shadow: var(--shadow-sm);
+        }
+        .article-content p {
+            font-size: 1.05rem; line-height: 1.8;
+            color: var(--text); margin-bottom: 1.5rem;
+        }
+        .article-content h2 {
+            font-size: 1.5rem; margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--bg-alt);
+            scroll-margin-top: 100px;
+        }
+        .article-content h3 {
+            font-size: 1.2rem; margin: 1.75rem 0 0.75rem;
+            color: var(--navy);
+            scroll-margin-top: 100px;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem; padding-left: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem; font-size: 1.05rem; line-height: 1.7;
+        }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            background: var(--bg);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            font-style: italic; color: var(--text-muted);
+        }
+        .article-content a {
+            color: var(--primary-dark);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .article-content a:hover { color: var(--primary); }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: var(--r-md);
+            border: 1px solid var(--border);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td {
+            padding: 0.8rem 1rem; text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--bg-alt);
+            font-weight: 700; color: var(--navy);
+            font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fbfdff; }
+
+        /* Callouts */
+        .callout {
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            padding: 1rem 1.25rem;
+            background: var(--primary-soft);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--r-sm);
+            margin: 1.5rem 0;
+            font-size: 0.95rem; color: var(--navy-soft);
+            line-height: 1.6;
+        }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+        .callout.success { background: var(--success-soft); border-left-color: var(--success); }
+        .callout.success i { color: var(--success); }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            border-radius: var(--r-md);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            background-color: var(--bg);
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            color: var(--text-subtle);
+            text-align: center;
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* ============================================================
+           NEW: LIVE FLIGHT STATUS BOARD (DARK SECTION)
+           ============================================================ */
+        .flight-board-container {
+            margin: 2rem 0;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid #1e293b;
+        }
+        .flight-board-header {
+            background: #0f172a;
+            padding: 0.75rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid #1e293b;
+        }
+        .flight-board-title {
+            color: #f8fafc; font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem; letter-spacing: 0.1em; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .flight-board-title i { color: var(--danger); animation: pulse 1.4s infinite; }
+        .flight-board-time {
+            color: #64748b; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+        }
+        .flight-board-body {
+            background: #0b1121;
+            padding: 0.5rem 0;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+        }
+        .flight-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 100px;
+            padding: 0.6rem 1.25rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: #cbd5e1;
+            transition: background 0.2s;
+        }
+        .flight-row:hover { background: rgba(255,255,255,0.02); }
+        .flight-row:last-child { border-bottom: none; }
+        .flight-time { color: #64748b; }
+        .flight-dest { color: #f8fafc; display: flex; align-items: center; gap: 0.5rem; }
+        .flight-dest i { font-size: 0.7rem; color: #475569; }
+        .flight-status { text-align: right; font-weight: 700; letter-spacing: 0.05em; }
+        .flight-status.delayed { color: #fbbf24; }
+        .flight-status.cancelled { color: #f87171; text-shadow: 0 0 8px rgba(248,113,113,0.4); }
+        .flight-status.ontime { color: #4ade80; }
+        
+        .board-footer {
+            background: #0f172a; padding: 0.5rem 1.25rem; text-align: center;
+            color: #475569; font-size: 0.75rem; font-family: 'Share Tech Mono', monospace;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* ============================================================
+           NEW: KEY FACTS DARK SECTION
+           ============================================================ */
+        .dark-facts-section {
+            background: var(--gradient-navy);
+            border-radius: var(--r-md);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .dark-facts-section .stars { opacity: 0.3; }
+        .dark-facts-section h2 {
+            color: #fff; border-bottom: 2px solid rgba(255,255,255,0.1); 
+            margin-top: 0; padding-bottom: 0.75rem;
+        }
+        .dark-facts-section .table-wrap { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
+        .dark-facts-section table { color: #fff; }
+        .dark-facts-section th { background: rgba(255,255,255,0.1); color: #fff; border-bottom-color: rgba(255,255,255,0.2); }
+        .dark-facts-section td { border-bottom-color: rgba(255,255,255,0.1); color: #e2e8f0; }
+
+        /* ============================================================
+           FIXED NEWSLETTER BANNER UI
+           ============================================================ */
+        .newsletter-banner {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0b1a33 0%, #1e3a8a 100%);
+            border-radius: var(--r-lg);
+            padding: 3rem 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: #fff;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+        /* Animated flying plane in background */
+        .newsletter-plane {
+            position: absolute; top: 20%; left: -50px;
+            font-size: 3rem; color: rgba(255,255,255,0.05);
+            animation: flyPlane 15s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes flyPlane {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(120vw) translateY(-50px) rotate(5deg); opacity: 0; }
+        }
+
+        .newsletter-inner { position: relative; z-index: 2; }
+        .newsletter-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: grid; place-items: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1.5rem;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(37,99,235,0.3);
+        }
+        .newsletter-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff; /* FIXED: White text */
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+        .newsletter-desc {
+            font-size: 0.95rem;
+            color: #cbd5e1; /* FIXED: Light gray text */
+            margin-bottom: 1.5rem;
+            max-width: 460px;
+            margin-left: auto; margin-right: auto;
+            line-height: 1.6;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 460px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .newsletter-input {
+            flex: 1;
+            min-width: 0;
+            padding: 0.85rem 1.25rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--r-full);
+            background: rgba(0,0,0,0.2);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color var(--t-fast), background var(--t-fast);
+        }
+        .newsletter-input::placeholder { color: #94a3b8; }
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #60a5fa;
+            background: rgba(0,0,0,0.4);
+        }
+        .newsletter-btn {
+            padding: 0.85rem 1.5rem;
+            border: none;
+            border-radius: var(--r-full);
+            background: var(--primary);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex; align-items: center; gap: 0.5rem;
+            transition: background var(--t-fast), transform var(--t-fast);
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+        .newsletter-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .newsletter-disclaimer {
+            font-size: 0.75rem;
+            color: #94a3b8; /* FIXED: Readable text */
+            margin-top: 1rem;
+        }
+        @media (max-width: 500px) {
+            .newsletter-form { flex-direction: column; }
+            .newsletter-btn { justify-content: center; }
+        }
+
+        /* ============================================================
+           ALERT BANNER
+           ============================================================ */
+        .alert-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            padding: 1.1rem 1.25rem;
+            background: linear-gradient(135deg, #fef2f2 0%, #fef6f6 100%);
+            border: 1px solid #fecaca;
+            border-left: 4px solid var(--danger);
+            border-radius: var(--r-md);
+            margin-bottom: 1.5rem;
+        }
+        .alert-banner-icon {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            background: var(--danger);
+            color: #fff;
+            display: grid; place-items: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .alert-banner-body { flex: 1; min-width: 0; }
+        .alert-banner-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--danger);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.25rem;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .alert-banner-label::before {
+            content: "";
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--danger);
+            animation: pulse 1.4s infinite;
+        }
+        .alert-banner-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+        .alert-banner-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ============================================================
+           TABLE OF CONTENTS
+           ============================================================ */
+        .toc-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .toc-header {
+            display: flex; align-items: center; gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .toc-header-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            display: grid; place-items: center;
+            font-size: 0.9rem;
+        }
+        .toc-header-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        .toc-toggle {
+            margin-left: auto;
+            background: none; border: none;
+            color: var(--text-muted); cursor: pointer;
+            font-size: 0.85rem; font-weight: 600;
+            display: flex; align-items: center; gap: 0.3rem;
+            padding: 0.25rem 0.5rem; border-radius: 6px;
+            transition: background var(--t-fast), color var(--t-fast);
+        }
+        .toc-toggle:hover { background: var(--primary-soft); color: var(--primary-dark); }
+        .toc-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 0.35rem;
+        }
+        .toc-list.is-collapsed { display: none; }
+        .toc-list a {
+            display: flex; align-items: baseline; gap: 0.6rem;
+            padding: 0.4rem 0.6rem;
+            color: var(--text-muted); font-size: 0.9rem;
+            text-decoration: none; border-radius: 6px;
+            border-left: 2px solid transparent;
+            transition: all var(--t-fast);
+        }
+        .toc-list a:hover, .toc-list a.is-active {
+            color: var(--primary-dark);
+            background: var(--primary-soft);
+            border-left-color: var(--primary);
+        }
+        .toc-list a.is-active { font-weight: 600; }
+        .toc-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem; font-weight: 700;
+            color: var(--text-subtle); min-width: 22px;
+        }
+
+        /* ============================================================
+           SHARE BUTTONS
+           ============================================================ */
+        .share-bar {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+            padding: 1rem 0; margin: 1.5rem 0 0.5rem;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+        }
+        .share-bar-label {
+            font-size: 0.85rem; font-weight: 600; color: var(--navy);
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .share-btn {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: grid; place-items: center; color: #fff;
+            text-decoration: none; font-size: 1rem;
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .share-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.twitter { background: #0b1a33; }
+        .share-btn.linkedin { background: #0a66c2; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn.email { background: var(--text-muted); }
+        .share-btn.copy { background: var(--primary); cursor: pointer; border: none; }
+
+        /* ============================================================
+           AUTHOR BOX
+           ============================================================ */
+        .author-box {
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1.5rem; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            margin: 2rem 0 1rem;
+        }
+        .author-avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--gradient-brand); color: #fff;
+            display: grid; place-items: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem; font-weight: 800;
+            flex-shrink: 0; box-shadow: var(--shadow-brand);
+        }
+        .author-info { flex: 1; min-width: 0; }
+        .author-label {
+            font-size: 0.7rem; font-weight: 700; color: var(--text-subtle);
+            text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem;
+        }
+        .author-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem;
+        }
+        .author-bio {
+            font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;
+        }
+
+        /* ============================================================
+           RELATED ARTICLES
+           ============================================================ */
+        .related-articles { margin-top: 2.5rem; }
+        .section-header {
+            display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.25rem;
+        }
+        .section-header-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1rem;
+        }
+        .section-header h2 { font-size: 1.3rem; margin: 0; padding: 0; border: none; }
+        .related-articles-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;
+        }
+        .related-article-card {
+            display: flex; flex-direction: column;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); overflow: hidden;
+            text-decoration: none; color: var(--text);
+            box-shadow: var(--shadow-xs);
+            transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med);
+        }
+        .related-article-card:hover {
+            transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #bfd4f7;
+        }
+        .related-article-image {
+            width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--bg-alt);
+        }
+        .related-article-body {
+            padding: 1.1rem 1.25rem 1.25rem;
+            display: flex; flex-direction: column; flex: 1;
+        }
+        .related-article-tag {
+            display: inline-block; background: var(--primary-soft); color: var(--primary-dark);
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 0.2rem 0.6rem;
+            border-radius: var(--r-full); margin-bottom: 0.65rem; width: fit-content;
+        }
+        .related-article-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem; font-weight: 700; color: var(--navy);
+            line-height: 1.35; margin-bottom: 0.5rem;
+        }
+        .related-article-excerpt {
+            font-size: 0.85rem; color: var(--text-muted);
+            line-height: 1.55; margin: 0 0 1rem; flex: 1;
+        }
+        .related-article-meta {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.75rem; color: var(--text-subtle); margin-top: auto;
+        }
+        .related-article-meta i { font-size: 0.7rem; }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; position: sticky; top: 92px; }
+        @media (max-width: 992px) { .sidebar { position: static; } }
+        .sidebar-widget {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--r-lg); padding: 1.5rem; box-shadow: var(--shadow-xs);
+        }
+        .sidebar-widget h3 {
+            font-size: 1rem; margin-bottom: 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-alt);
+        }
+        .sidebar-toc-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 0.3rem;
+        }
+        .sidebar-toc-list a {
+            display: flex; align-items: baseline; gap: 0.5rem;
+            padding: 0.45rem 0.6rem; color: var(--text-muted);
+            font-size: 0.85rem; text-decoration: none; border-radius: 6px;
+            border-left: 2px solid transparent;
+            transition: all var(--t-fast); line-height: 1.4;
+        }
+        .sidebar-toc-list a:hover, .sidebar-toc-list a.is-active {
+            color: var(--primary-dark); background: var(--primary-soft);
+            border-left-color: var(--primary);
+        }
+
+        /* Related Tools Section */
+        .related-tools-section {
+            margin-top: 2.5rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: var(--r-lg);
+            padding: 2rem; box-shadow: var(--shadow-sm);
+        }
+        .related-tools-section h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .related-tools-section > p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .related-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;
+        }
+        .related-card {
+            display: flex; flex-direction: column; background: var(--bg);
+            border: 1px solid var(--border); border-radius: var(--r-md);
+            padding: 1.25rem; text-decoration: none; color: var(--text);
+            transition: transform var(--t-fast), box-shadow var(--t-fast);
+        }
+        .related-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #bfd4f7; }
+        .related-card-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--primary-soft); color: var(--primary-dark);
+            display: grid; place-items: center; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .related-card h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--navy); }
+        .related-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .faq-item {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--r-md); overflow: hidden;
+        }
+        .faq-item[open] {
+            border-color: #cddcf0; background: var(--surface); box-shadow: var(--shadow-xs);
+        }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: 600; font-size: 0.95rem; color: var(--navy);
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron {
+            width: 18px; height: 18px; color: var(--text-subtle);
+            transition: transform var(--t-med), color var(--t-med);
+        }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem; font-size: 0.95rem;
+            color: var(--text-muted); line-height: 1.7;
+        }
+
+        /* Footer */
+        .site-footer { 
+            background: var(--gradient-navy); color: #c7d3e6; 
+            padding: 3.5rem 0 0; margin-top: 3rem; 
+            position: relative; z-index: 2; 
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0;
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2;
+        }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav {
+                position: fixed; top: 72px; left: 0; right: 0;
+                background: var(--surface); border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+                transform: translateY(-12px); opacity: 0; visibility: hidden;
+                pointer-events: none;
+                transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+                max-height: calc(100vh - 72px); overflow-y: auto;
+            }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 1.25rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .bg-decoration { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .share-bar { justify-content: center; }
+            .flight-row { grid-template-columns: 60px 1fr 80px; font-size: 0.75rem; padding: 0.6rem 0.75rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- Background Floating Aviation Icons -->
+    <div class="floating-bg-icons" aria-hidden="true">
+        <i class="fas fa-plane float-icon i1"></i>
+        <i class="fas fa-plane-departure float-icon i2"></i>
+        <i class="fas fa-suitcase-rolling float-icon i3"></i>
+        <i class="fas fa-satellite-dish float-icon i4"></i>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="page-main">
+        <div class="container">
+
+            <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>Travel &amp; Aviation</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Main Article Column -->
+                <article>
+                    <header class="article-header reveal">
+                        <span class="category-tag">Travel &amp; Aviation</span>
+                        <h1>FAA Nationwide Ground Stop: Why Are Flights Grounded Today?</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> Last updated: November 13, 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min read</span>
+                            <span class="status-badge">Breaking News</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content reveal">
+                        <!-- ALERT BANNER -->
+                        <div class="alert-banner">
+                            <div class="alert-banner-icon"><i class="fas fa-plane-slash"></i></div>
+                            <div class="alert-banner-body">
+                                <div class="alert-banner-label">Breaking · Live Update</div>
+                                <div class="alert-banner-title">Nationwide ground stop issued by the FAA on November 13, 2026</div>
+                                <p class="alert-banner-text">Departing flights halted across US airports due to air traffic control communication problems. Check your airline's app for your specific flight status.</p>
+                            </div>
+                        </div>
+
+                        <!-- Featured Image -->
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Passengers waiting at an airport during the FAA nationwide ground stop and flight delays" class="featured-image">
+                        <p class="image-caption">Passengers faced delays and uncertainty during the FAA nationwide ground stop on November 13, 2026. (Illustrative image)</p>
+
+                        <p>Air travel across the United States faced a major disruption on <strong>Friday, November 13, 2026</strong>, after the Federal Aviation Administration (FAA) ordered a rare <strong>nationwide ground stop</strong> for departing flights. The decision followed communication problems affecting air traffic control centers responsible for managing aircraft traveling between airports.</p>
+
+                        <p>The FAA instructed airlines and aircraft operators to keep departing flights on the ground until further notice, citing extraordinary circumstances and safety concerns. The disruption affected airports across the country, leaving passengers facing delays, cancellations, missed connections, and uncertainty about when their flights would depart.</p>
+
+                        <p>But what exactly is an FAA ground stop? Why are flights grounded, and does a nationwide ground stop mean every airplane must land immediately?</p>
+
+                        <!-- NEW: DARK LIVE FLIGHT STATUS BOARD -->
+                        <div class="flight-board-container">
+                            <div class="flight-board-header">
+                                <div class="flight-board-title"><i class="fas fa-circle"></i> LIVE AIRSPACE STATUS</div>
+                                <div class="flight-board-time">13 NOV 2026 · 18:45 EST</div>
+                            </div>
+                            <div class="flight-board-body">
+                                <div class="flight-row">
+                                    <div class="flight-time">18:30</div>
+                                    <div class="flight-dest"><i class="fas fa-plane"></i> JFK · New York</div>
+                                    <div class="flight-status cancelled">CANCELLED</div>
+                                </div>
+                                <div class="flight-row">
+                                    <div class="flight-time">19:15</div>
+                                    <div class="flight-dest"><i class="fas fa-plane"></i> LAX · Los Angeles</div>
+                                    <div class="flight-status delayed">DELAYED</div>
+                                </div>
+                                <div class="flight-row">
+                                    <div class="flight-time">19:45</div>
+                                    <div class="flight-dest"><i class="fas fa-plane"></i> ORD · Chicago</div>
+                                    <div class="flight-status delayed">DELAYED</div>
+                                </div>
+                                <div class="flight-row">
+                                    <div class="flight-time">20:10</div>
+                                    <div class="flight-dest"><i class="fas fa-plane"></i> DFW · Dallas</div>
+                                    <div class="flight-status ontime">ON TIME</div>
+                                </div>
+                            </div>
+                            <div class="board-footer">
+                                * Mock data for illustration. Check your airline for actual flight status.
+                            </div>
+                        </div>
+
+                        <!-- NEW: DARK KEY FACTS SECTION -->
+                        <div class="dark-facts-section sky-bg">
+                            <div class="stars"></div>
+                            <div class="radar-sweep"></div>
+                            <div style="position: relative; z-index: 2;">
+                                <h2>FAA Ground Stop: Key Facts</h2>
+                                <div class="table-wrap">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Detail</th>
+                                                <th>Information</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Event</td><td>Nationwide ground stop for departing flights</td></tr>
+                                            <tr><td>Date</td><td>November 13, 2026</td></tr>
+                                            <tr><td>Reported Cause</td><td>Communication problems at 22 regional ATC centers</td></tr>
+                                            <tr><td>Affected Flights</td><td>Departing flights across the US</td></tr>
+                                            <tr><td>Inbound Int'l Flights</td><td>Managed case-by-case</td></tr>
+                                            <tr><td>Official Source</td><td>FAA / Transportation Secretary Sean Duffy</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLE OF CONTENTS -->
+                        <nav class="toc-card" aria-label="Table of contents">
+                            <div class="toc-header">
+                                <div class="toc-header-icon"><i class="fas fa-list-ul"></i></div>
+                                <span class="toc-header-title">What's in this article</span>
+                                <button class="toc-toggle" id="tocToggle" aria-expanded="true">
+                                    <span>Hide</span>
+                                    <i class="fas fa-chevron-up" id="tocToggleIcon"></i>
+                                </button>
+                            </div>
+                            <ol class="toc-list" id="tocList">
+                                <li><a href="#what-happened"><span class="toc-num">01</span> What happened on November 13, 2026</a></li>
+                                <li><a href="#what-is-ground-stop"><span class="toc-num">02</span> What is an FAA ground stop?</a></li>
+                                <li><a href="#causes"><span class="toc-num">03</span> What causes flights to be grounded?</a></li>
+                                <li><a href="#comparison"><span class="toc-num">04</span> Ground stop vs. delay vs. cancellation</a></li>
+                                <li><a href="#duration"><span class="toc-num">05</span> How long does a ground stop last?</a></li>
+                                <li><a href="#check-flight"><span class="toc-num">06</span> How to check your flight status</a></li>
+                                <li><a href="#what-to-do"><span class="toc-num">07</span> What passengers should do</a></li>
+                                <li><a href="#faq"><span class="toc-num">08</span> Frequently asked questions</a></li>
+                            </ol>
+                        </nav>
+
+                        <h2 id="what-happened">What Happened With the FAA Nationwide Ground Stop on November 13, 2026?</h2>
+                        <p>On November 13, 2026, the FAA issued a nationwide ground stop affecting departing flights at airports across the United States.</p>
+
+                        <p>According to the Associated Press, <strong>communication problems affected 22 regional Air Route Traffic Control Centers</strong>. These centers help manage aircraft traveling through the country's airspace between airports.</p>
+
+                        <p>Transportation Secretary Sean Duffy said FAA technicians were investigating the communication issue. The agency ordered the ground stop because of safety concerns while the problem was being addressed.</p>
+
+                        <p>The FAA advisory instructed aircraft operators to keep departing traffic on the ground until further notice. It also stated that inbound international flights would be managed on a case-by-case basis.</p>
+
+                        <h3>Did the FAA ground all airplanes?</h3>
+                        <p>No. The order primarily stopped <strong>departing flights</strong> from taking off.</p>
+                        <p>Aircraft that were already airborne were not automatically ordered to land immediately. Officials said flights already in the air could land safely, while inbound international flights would be handled individually.</p>
+                        <p>This distinction matters because a nationwide ground stop does not necessarily mean every airport is closed or every aircraft is forced to land.</p>
+
+                        <h3>Why were flights grounded across the United States?</h3>
+                        <p>The reported reason was a communication problem affecting air traffic control centers. These centers coordinate aircraft moving through different regions of the national airspace. When controllers cannot reliably communicate or coordinate aircraft movements, continuing normal departures can create safety risks.</p>
+                        <p>The FAA therefore ordered departing traffic to remain on the ground while technicians investigated the issue. Officials had not confirmed a specific technical root cause in the reports available at publication time.</p>
+
+                        <div class="callout warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>It is important not to confuse a reported communications problem with a confirmed cyberattack, software failure, or specific equipment malfunction. Those explanations should not be treated as established facts unless authorities confirm them.</span>
+                        </div>
+
+                        <h2 id="what-is-ground-stop">What Is an FAA Ground Stop?</h2>
+                        <p>An FAA ground stop is an air traffic management restriction that temporarily prevents certain aircraft from departing.</p>
+                        <p>The restriction can apply to:</p>
+                        <ul>
+                            <li>A single airport.</li>
+                            <li>Several airports.</li>
+                            <li>A particular region or area of airspace.</li>
+                            <li>Specific aircraft operations.</li>
+                            <li>A wider network of airports, as in a nationwide ground stop.</li>
+                        </ul>
+                        <p>During a ground stop, affected aircraft generally remain at their departure airports until the restriction is lifted or updated.</p>
+                        <p>The FAA uses ground stops to manage situations where normal air traffic operations cannot safely continue. These situations may involve reduced airport capacity, severe weather, equipment problems, or other operational concerns.</p>
+                        <p>A ground stop is different from a normal flight delay because it is an operational restriction issued through the air traffic control system rather than simply an airline scheduling issue.</p>
+
+                        <h2 id="causes">What Causes Flights to Be Grounded?</h2>
+                        <p>A ground stop can happen for several reasons. Not every ground stop is caused by a nationwide technical problem.</p>
+
+                        <h3>1. Air Traffic Control Communication Problems</h3>
+                        <p>Air traffic controllers need reliable communication systems to coordinate aircraft movements. If communication between control facilities becomes unreliable, controllers may not be able to manage normal traffic safely. In such circumstances, the FAA may restrict departures until the issue is resolved.</p>
+
+                        <h3>2. Severe Weather Conditions</h3>
+                        <p>Thunderstorms, hurricanes, snowstorms, strong winds, and low visibility can disrupt flight operations. Bad weather can reduce the number of aircraft an airport can safely handle. It can also affect runways, visibility, arrival routes, and departure procedures.</p>
+
+                        <h3>3. Airport Equipment Problems</h3>
+                        <p>Airports and air traffic control facilities depend on equipment such as radar systems, communication networks, navigation aids, and runway lighting. When critical equipment stops working, normal operations may need to be restricted until technicians resolve the problem.</p>
+
+                        <h3>4. Runway Closures and Airport Capacity</h3>
+                        <p>An airport may temporarily lose access to one or more runways because of maintenance, an aircraft incident, debris, or other operational issues. A reduction in runway capacity can create a backlog of departing and arriving aircraft.</p>
+
+                        <h3>5. Security or Safety Concerns</h3>
+                        <p>Airports and aviation authorities may restrict flight operations when they identify a potential safety or security concern. A ground stop can provide time to assess the situation, coordinate with relevant agencies, and determine when normal operations can resume.</p>
+
+                        <h2 id="comparison">Ground Stop vs. Ground Delay vs. Flight Cancellation</h2>
+                        <p>These terms are often confused, especially when passengers see several different updates on airline apps. However, they describe different situations.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Term</th><th>What it means</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Ground Stop</strong></td><td>A restriction that temporarily prevents affected aircraft from departing.</td></tr>
+                                    <tr><td><strong>Ground Delay</strong></td><td>A flight is delayed before departure, often because of traffic management or airport capacity restrictions.</td></tr>
+                                    <tr><td><strong>Flight Cancellation</strong></td><td>An airline removes a scheduled flight from operation.</td></tr>
+                                    <tr><td><strong>Airport Closure</strong></td><td>An airport temporarily suspends some or all airport operations.</td></tr>
+                                    <tr><td><strong>Airspace Restriction</strong></td><td>Aircraft operations are restricted in a specified area of airspace.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>A ground stop does not automatically cancel every affected flight. Some flights may depart once restrictions are lifted, while others may be delayed further or canceled because of scheduling and operational complications.</p>
+
+                        <h2 id="duration">How Long Will the FAA Ground Stop Last?</h2>
+                        <p>There is no fixed duration for an FAA ground stop. Some restrictions last only a short time, while others may continue for several hours or longer. The duration depends on the cause, the severity of the disruption, and how quickly normal operations can safely resume.</p>
+                        <p>For example, the previous nationwide ground stop in <strong>January 2023</strong> followed a failure in an FAA pilot notification system and lasted less than two hours, according to Reuters. The November 13, 2026, incident involved a different reported issue, so the earlier event cannot be used to predict when the current disruption will end.</p>
+                        <p>Even after the FAA lifts a ground stop, flights may not return to normal immediately.</p>
+                        <p>Airlines may still need to:</p>
+                        <ul>
+                            <li>Reposition aircraft and crews.</li>
+                            <li>Reassign passengers to available flights.</li>
+                            <li>Resolve missed connections.</li>
+                            <li>Clear airport departure queues.</li>
+                            <li>Update departure and arrival schedules.</li>
+                        </ul>
+                        <p>For passengers, this means that a flight may remain delayed even after the original restriction has ended.</p>
+
+                        <h3>Are flights canceled or just delayed?</h3>
+                        <p>A nationwide ground stop can cause both delays and cancellations, but they are not the same thing. When the FAA restricts departures, airlines may initially hold flights at their departure airports. If the restriction continues, the airline may need to adjust its schedule.</p>
+                        <p>Some flights may operate later than planned. Others may be canceled if aircraft or crew members cannot reach the right locations, passengers miss connecting flights, or the airline cannot maintain its schedule.</p>
+                        <p>Passengers should check their individual flight status instead of assuming that every flight has been canceled.</p>
+
+                        <h2 id="check-flight">How to Check If Your Flight Is Grounded or Delayed</h2>
+                        <p>If you are traveling today, use official flight information rather than relying only on social media posts or general news headlines.</p>
+
+                        <h3>1. Check your airline's flight status page</h3>
+                        <p>Visit your airline's official website or mobile app. Search using your flight number or route to see whether your flight is on time, delayed, canceled, boarding, departed, or diverted.</p>
+                        <p>Airline information is especially important because the FAA's nationwide announcement does not tell you the exact status of every individual booking.</p>
+
+                        <h3>2. Check the FAA National Airspace System Status</h3>
+                        <p>The FAA provides air traffic information through its National Airspace System Status page. Passengers can use it to review operational advisories, airport delays, ground stops, and other air traffic updates.</p>
+                        <p>Official resource: <a href="https://www.fly.faa.gov/ois/" target="_blank" rel="noopener">FAA National Airspace System Status</a></p>
+                        <p>The information can change as the FAA updates its advisories, so check again before leaving for the airport.</p>
+
+                        <h3>3. Use an independent flight tracking service</h3>
+                        <p>Flight tracking platforms can help you follow an aircraft's movement and review delays or cancellations. Examples include <a href="https://www.flightaware.com/" target="_blank" rel="noopener">FlightAware</a> and <a href="https://www.flightradar24.com/" target="_blank" rel="noopener">Flightradar24</a>.</p>
+                        <p>These services can provide useful additional information, but always confirm important changes with your airline.</p>
+
+                        <h3>4. Check your airport's official website</h3>
+                        <p>Airport websites may publish terminal announcements, departure information, security updates, and other passenger notices. If you are already at the airport, also check the departure screens and listen for announcements from airline staff.</p>
+
+                        <h2 id="what-to-do">What Should Passengers Do During a Nationwide Ground Stop?</h2>
+                        <p>A nationwide flight disruption can be stressful, particularly when you have connecting flights, hotel bookings, business meetings, or important appointments. The following steps can help you manage the situation.</p>
+
+                        <h3>Don't leave for the airport without checking your flight</h3>
+                        <p>Before traveling to the airport, check your airline's app or website. A flight may be delayed or canceled even if the airport itself remains open.</p>
+
+                        <h3>Contact your airline about rebooking</h3>
+                        <p>If your flight is canceled or significantly delayed, contact the airline to understand your available options. Depending on its policies and the circumstances, the airline may offer rebooking or other assistance.</p>
+                        <p>You can also check whether changes are available through the airline's website or mobile app rather than waiting in a long airport customer-service line.</p>
+
+                        <h3>Keep your booking details accessible</h3>
+                        <p>Keep your confirmation email, ticket number, flight number, and identification documents available. These details can make it easier to communicate with airline representatives and review alternative travel arrangements.</p>
+
+                        <h3>Review connecting flights</h3>
+                        <p>If you have a connecting flight, check both segments of your journey. A delay on your first flight may cause you to miss the next departure, even if the connecting airport is operating normally.</p>
+
+                        <h3>Save receipts for additional expenses</h3>
+                        <p>Keep receipts for meals, transportation, accommodation, and other expenses related to the disruption. Whether an airline reimburses these costs depends on its policies, the reason for the disruption, and applicable passenger protections.</p>
+
+                        <div class="callout success">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Quick tip:</strong> If you need to compress or convert screenshots of your flight booking, boarding pass or receipts for email or storage, QuickToolsPK's free <a href="/img-compress.html">Image Compressor</a> and <a href="/img-fmt-converter.html">Image Format Converter</a> can help. These are general document tools — not flight-status services.</span>
+                        </div>
+
+                        <h2>Is a Nationwide Ground Stop the Same as an Airport Shutdown?</h2>
+                        <p>No. A nationwide ground stop and an airport shutdown are different.</p>
+                        <p>A ground stop restricts aircraft departures under specified air traffic instructions. An airport shutdown means the airport has suspended some or all of its operations.</p>
+                        <p>During a ground stop, airports may remain open to passengers and airport employees. Shops, restaurants, security checkpoints, and other facilities may continue operating. However, the airport can become crowded as departing passengers wait for updates and arriving aircraft continue to reach their destinations.</p>
+
+                        <h2>Why Does Air Traffic Control Communication Matter So Much?</h2>
+                        <p>Air traffic control is essential for keeping aircraft separated and coordinating safe movement through the national airspace. Controllers communicate with pilots and coordinate with other control facilities as aircraft travel between airports.</p>
+                        <p>Regional Air Route Traffic Control Centers manage aircraft during the en-route portion of a journey. Their work helps ensure that aircraft follow assigned routes and maintain safe separation from other traffic.</p>
+                        <p>When communication or coordination systems are disrupted, controllers may have limited ability to manage normal traffic volumes. That is why aviation authorities may choose to stop departures rather than allow additional aircraft to enter an already affected system.</p>
+
+                        <h2 id="faq">Frequently Asked Questions About the FAA Ground Stop</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. Why are flights grounded in the United States today?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">On November 13, 2026, the FAA ordered a nationwide ground stop for departing flights after communication problems affected regional air traffic control centers. The agency cited safety concerns while technicians investigated the issue.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. What does FAA ground stop mean?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">An FAA ground stop is an air traffic restriction that temporarily prevents affected aircraft from departing. It may apply to one airport, several airports, a region, or the entire country.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Are all flights canceled during a nationwide ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. A ground stop does not automatically cancel all flights. Departures may be held temporarily, while some flights may operate later and others may be canceled because of continuing operational disruption.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Can planes already in the air land during a ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Yes. During the November 13, 2026, nationwide ground stop, reports said aircraft already airborne could continue to land. The order focused on stopping departing traffic.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. How long do FAA ground stops usually last?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">There is no standard duration. A ground stop may last minutes or several hours, depending on the problem and when safe operations can resume.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. How can I check whether my flight is delayed?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Check your airline's official website or mobile app using your flight number. You can also review the FAA's National Airspace System Status page and use a flight tracking service for additional information.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>7. Does a ground stop mean the airport is closed?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">No. An airport can remain open while departing flights are temporarily restricted. Airport closures and FAA ground stops are different operational situations.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>8. Can international flights enter the United States during a ground stop?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">It depends on the specific FAA instructions. During the November 13, 2026, event, inbound international flights were to be managed on a case-by-case basis.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>9. Will airlines automatically rebook passengers after a cancellation?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Rebooking options depend on the airline, the ticket, and the circumstances. Passengers should contact their airline or use its official app to review available alternatives.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>10. Where can I find official FAA flight updates?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">Visit the FAA National Airspace System Status page for operational advisories. For your personal flight's status, always check directly with your airline.</div>
+                            </details>
+                        </div>
+
+                        <h2>Final Thoughts</h2>
+                        <p>The FAA nationwide ground stop on November 13, 2026, demonstrated how an air traffic control communication problem can disrupt departing flights across the United States.</p>
+                        <p>A ground stop is a safety measure, not automatically a declaration that every airport is closed or every flight has been canceled. Aircraft already in the air may continue to land, while departing flights remain on the ground until restrictions change.</p>
+                        <p>For travelers, the most important thing is to stay informed. Check your airline's flight status, follow official FAA updates, and confirm any rebooking arrangements directly with your airline.</p>
+                        <p style="font-style: italic; color: var(--text-subtle); margin-top: 2rem;">This article reflects reporting available on November 13, 2026. It should be updated as the FAA issues new advisories and airlines confirm changes to their schedules.</p>
+
+                        <!-- SHARE BAR -->
+                        <div class="share-bar">
+                            <span class="share-bar-label"><i class="fas fa-share-alt"></i> Share this article:</span>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html" target="_blank" rel="noopener" class="share-btn facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/intent/tweet?url=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html&text=FAA%20Nationwide%20Ground%20Stop%3A%20Why%20Are%20Flights%20Grounded%20Today%3F" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/?text=FAA%20Nationwide%20Ground%20Stop%3A%20Why%20Are%20Flights%20Grounded%20Today%3F%20https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html" target="_blank" rel="noopener" class="share-btn whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="mailto:?subject=FAA%20Nationwide%20Ground%20Stop&body=Read%20more%3A%20https://www.quicktoolspk.com/blog/updates/faa-nationwide-ground-stop-flights-grounded-today.html" class="share-btn email" aria-label="Share via email"><i class="fas fa-envelope"></i></a>
+                            <button class="share-btn copy" id="copyLinkBtn" aria-label="Copy link"><i class="fas fa-link"></i></button>
+                        </div>
+
+                        <!-- AUTHOR BOX -->
+                        <div class="author-box">
+                            <div class="author-avatar" aria-hidden="true">Q</div>
+                            <div class="author-info">
+                                <div class="author-label">Written by</div>
+                                <div class="author-name">QuickToolsPK News Team</div>
+                                <p class="author-bio">Covering breaking news, travel updates and practical guides for readers in the United States and around the world. This article is based on reporting from the Associated Press, Reuters, CBS News and official FAA sources.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEWSLETTER CTA (FIXED UI + ANIMATION) -->
+                        <div class="newsletter-banner">
+                            <i class="fas fa-plane newsletter-plane"></i>
+                            <div class="newsletter-inner">
+                                <div class="newsletter-icon"><i class="fas fa-bell"></i></div>
+                                <h3 class="newsletter-title">Get updates on major travel news</h3>
+                                <p class="newsletter-desc">Subscribe to receive alerts on flight disruptions, ground stops and other breaking news that affects travelers.</p>
+                                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (Demo only — connect to your email service.)');">
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email address">
+                                    <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                                </form>
+                                <p class="newsletter-disclaimer">No spam. Unsubscribe at any time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELATED ARTICLES -->
+                    <section class="related-articles reveal" aria-label="Related articles">
+                        <div class="section-header">
+                            <div class="section-header-icon"><i class="fas fa-newspaper"></i></div>
+                            <h2>Related articles</h2>
+                        </div>
+                        <div class="related-articles-grid">
+                            <a href="/blog/updates/trump-administration-veterans-loan-changes/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="VA home loan changes" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">News</span>
+                                    <h3 class="related-article-title">Trump Administration Veterans Loan Changes: What VA Borrowers Need to Know</h3>
+                                    <p class="related-article-excerpt">VASP shutdown, payment increases and the new Partial Claim Program explained for veterans.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Oct 30, 2026 · <i class="far fa-clock"></i> 7 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/le-havre-vs-psg-2026-live-score/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Le Havre vs PSG live score" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">Sports</span>
+                                    <h3 class="related-article-title">Le Havre vs PSG: Live Score, Goals, Lineups &amp; Match Updates</h3>
+                                    <p class="related-article-excerpt">Live coverage of the Ligue 1 Matchday 9 fixture at Stade CMA CGM Océane.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Oct 30, 2026 · <i class="far fa-clock"></i> 6 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/what-is-victorias-secret/" class="related-article-card">
+                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Victoria's Secret brand guide" class="related-article-image" loading="lazy">
+                                <div class="related-article-body">
+                                    <span class="related-article-tag">Brand Guide</span>
+                                    <h3 class="related-article-title">What Is Victoria's Secret? Brand History, Products &amp; What It's Known For</h3>
+                                    <p class="related-article-excerpt">A complete brand guide to Victoria's Secret, PINK and the fashion show legacy.</p>
+                                    <div class="related-article-meta"><i class="far fa-calendar"></i> Nov 2026 · <i class="far fa-clock"></i> 6 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- RELATED TOOLS SECTION -->
+                    <div class="related-tools-section reveal">
+                        <h2>QuickToolsPK: Related tools</h2>
+                        <p>If you need to compress screenshots of your boarding pass, convert documents or resize travel photos for your blog, these free tools may help.</p>
+                        <div class="related-grid">
+                            <a href="/img-compress.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-compress-alt"></i></div>
+                                <h4>Image Compressor</h4>
+                                <p>Reduce the size of travel photos and screenshots for faster sharing.</p>
+                            </a>
+                            <a href="/JPG-to-PDF-Converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-file-pdf"></i></div>
+                                <h4>JPG to PDF Converter</h4>
+                                <p>Convert booking screenshots and receipts into a single PDF file.</p>
+                            </a>
+                            <a href="/img-fmt-converter.html" class="related-card">
+                                <div class="related-card-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <h4>Image Format Converter</h4>
+                                <p>Convert travel images between JPG, PNG and WebP for web use.</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar reveal" aria-label="Sidebar">
+                    <!-- Sticky TOC -->
+                    <div class="sidebar-widget">
+                        <h3><i class="fas fa-list-ul" style="color: var(--primary); margin-right: 0.4rem;"></i> On this page</h3>
+                        <ul class="sidebar-toc-list" id="sidebarToc">
+                            <li><a href="#what-happened"><span class="toc-num">01</span> What happened</a></li>
+                            <li><a href="#what-is-ground-stop"><span class="toc-num">02</span> What is a ground stop</a></li>
+                            <li><a href="#causes"><span class="toc-num">03</span> Causes</a></li>
+                            <li><a href="#comparison"><span class="toc-num">04</span> Ground stop vs delay</a></li>
+                            <li><a href="#duration"><span class="toc-num">05</span> Duration</a></li>
+                            <li><a href="#check-flight"><span class="toc-num">06</span> Check flight status</a></li>
+                            <li><a href="#what-to-do"><span class="toc-num">07</span> What to do</a></li>
+                            <li><a href="#faq"><span class="toc-num">08</span> FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>About this article</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">This is a breaking-news explainer based on reporting from AP, Reuters, CBS News and official FAA sources as of November 13, 2026.</p>
+                        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+                            <p><strong>Category:</strong> Travel &amp; Aviation</p>
+                            <p><strong>Focus keyword:</strong> FAA nationwide ground stop</p>
+                            <p><strong>Tags:</strong> FAA Ground Stop, Flight Delays, Flight Cancellations, US Airports, Air Traffic Control, Travel News</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Official resources</h3>
+                        <div style="font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.75rem;">
+                            <a href="https://www.fly.faa.gov/ois/" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> FAA Airspace Status
+                            </a>
+                            <a href="https://apnews.com/" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> AP News
+                            </a>
+                            <a href="https://www.reuters.com/" target="_blank" rel="noopener" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem; color: var(--primary-dark); font-weight: 500;">
+                                <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i> Reuters
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite" style="position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(150%); background: var(--navy); color: #fff; padding: 0.85rem 1.25rem; border-radius: 999px; box-shadow: 0 12px 32px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; z-index: 3000; transition: transform 0.32s cubic-bezier(0.22,0.61,0.36,1);">
+        <i class="fas fa-check-circle" style="color: #10b981;"></i>
+        <span id="toast-message">Link copied to clipboard!</span>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ===== Header ===== */
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+
+        /* ===== Reading Progress Bar ===== */
+        const progressBar = document.getElementById('readingProgress');
+        const articleContent = document.querySelector('.article-content');
+        let progressTicking = false;
+        function updateProgress() {
+            if (!articleContent) return;
+            const rect = articleContent.getBoundingClientRect();
+            const articleTop = rect.top + window.scrollY;
+            const articleHeight = rect.height;
+            const scrolled = window.scrollY - articleTop + window.innerHeight * 0.3;
+            const total = articleHeight - window.innerHeight * 0.7;
+            let pct = (scrolled / total) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            progressBar.style.width = pct + '%';
+            progressTicking = false;
+        }
+        window.addEventListener('scroll', function () {
+            if (!progressTicking) {
+                window.requestAnimationFrame(updateProgress);
+                progressTicking = true;
+            }
+        }, { passive: true });
+        updateProgress();
+
+        /* ===== TOC Toggle ===== */
+        const tocToggle = document.getElementById('tocToggle');
+        const tocList = document.getElementById('tocList');
+        const tocToggleIcon = document.getElementById('tocToggleIcon');
+        if (tocToggle && tocList) {
+            tocToggle.addEventListener('click', function () {
+                const collapsed = tocList.classList.toggle('is-collapsed');
+                tocToggle.setAttribute('aria-expanded', String(!collapsed));
+                tocToggle.querySelector('span').textContent = collapsed ? 'Show' : 'Hide';
+                tocToggleIcon.className = collapsed ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+            });
+        }
+
+        /* ===== Active TOC Highlight ===== */
+        const tocLinks = document.querySelectorAll('#tocList a, #sidebarToc a');
+        const headings = Array.from(document.querySelectorAll('.article-content h2[id]'));
+        function highlightTOC() {
+            let current = '';
+            const offset = 130;
+            for (const h of headings) {
+                if (h.getBoundingClientRect().top <= offset) {
+                    current = h.id;
+                }
+            }
+            tocLinks.forEach(link => {
+                link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', highlightTOC, { passive: true });
+        highlightTOC();
+
+        /* ===== Copy Link ===== */
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const toast = document.getElementById('toast');
+        let toastTimeout;
+        function showToast(msg) {
+            document.getElementById('toast-message').textContent = msg;
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(150%)';
+            }, 2500);
+        }
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', async function () {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    showToast('Link copied to clipboard!');
+                } catch (err) {
+                    showToast('Could not copy — please copy the URL manually.');
+                }
+            });
+        }
+
+        /* ===== Reveal ===== */
+        (function() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, Math.min(idx * 50, 200));
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => observer.observe(el));
+        })();
+    })();
+    </script>
+</body>
+</html>
