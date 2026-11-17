@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>NSA Down? NSA Net Network Outage Explained (Nov. 17, 2026) | QuickToolsPK</title>
+    <meta name="description" content="Is the NSA down? CNN reports an outage affecting NSA Net, the agency's classified internal communications network. Here's what is known so far.">
+    <meta name="keywords" content="nsa down, nsa network down, nsa net, nsa communications, national security agency, what is the nsa, nsa news, nsa net down, nsa network outage, is nsa down">
+    <link rel="canonical" href="https://www.quicktoolspk.com/blog/updates/nsa-network-down-nsa-net-outage-november-2026.html">
+
+    <meta property="og:title" content="NSA Down? NSA Net Network Outage Explained">
+    <meta property="og:description" content="The National Security Agency is investigating an outage affecting NSA Net, its highly classified internal communications network.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.quicktoolspk.com/blog/updates/nsa-network-down-nsa-net-outage-november-2026.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS
+           ============================================================ */
+        :root {
+            --navy: #0b1a33; --navy-soft: #1e2a44;
+            --text: #1f2a3d; --text-muted: #5b6b83; --text-subtle: #8494ab;
+            --bg: #fcfcfd; --bg-alt: #f4f6f9; --surface: #ffffff;
+            --border: #e2e8f0; --border-strong: #cbd5e1;
+            --primary: #2563eb; --primary-dark: #1d4ed8; --primary-soft: #eff6ff;
+            --danger: #dc2626; --danger-soft: #fef2f2;
+            --success: #059669; --success-soft: #ecfdf5;
+            --warning: #d97706; --warning-soft: #fffbeb;
+            --gradient-brand: linear-gradient(135deg, #2563eb 0%, #0ea5e9 60%, #0d9488 100%);
+            --gradient-navy: linear-gradient(135deg, #0b1a33 0%, #16304f 100%);
+            --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-full: 999px;
+            --shadow-xs: 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-sm: 0 1px 3px rgba(15,30,55,0.06), 0 1px 2px rgba(15,30,55,0.04);
+            --shadow-md: 0 10px 30px -5px rgba(15,30,55,0.08), 0 4px 10px -4px rgba(15,30,55,0.04);
+            --shadow-lg: 0 30px 60px -12px rgba(15,30,55,0.12), 0 12px 24px -10px rgba(15,30,55,0.06);
+            --ease: cubic-bezier(0.22,0.61,0.36,1);
+            --t-fast: 0.18s var(--ease);
+            --t-med: 0.32s var(--ease);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.7; font-size: 16px;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+            color: var(--navy); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700;
+        }
+        a { color: inherit; }
+        img, svg { display: block; max-width: 100%; }
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2.5rem); position: relative; z-index: 2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+        .icon {
+            width: 1.25em; height: 1.25em; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; fill: none;
+            flex-shrink: 0; display: inline-block; vertical-align: middle;
+        }
+
+        /* ============================================================
+           SKY ANIMATIONS (For Footer)
+           ============================================================ */
+        .sky-bg { position: relative; overflow: hidden; }
+        .stars {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background-image: radial-gradient(1px 1px at 10% 20%, #fff, transparent), radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.8), transparent), radial-gradient(1.5px 1.5px at 50% 40%, #fff, transparent), radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6), transparent), radial-gradient(1.5px 1.5px at 90% 10%, #fff, transparent), radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7), transparent);
+            background-repeat: repeat; background-size: 200px 200px;
+            animation: starsMove 20s linear infinite; opacity: 0.6;
+        }
+        .stars::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: radial-gradient(1px 1px at 20% 30%, #fff, transparent), radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,0.8), transparent);
+            background-size: 300px 300px; animation: starsMove 40s linear infinite reverse; opacity: 0.4;
+        }
+        @keyframes starsMove { 0% { transform: translateY(0); } 100% { transform: translateY(-200px); } }
+
+        /* ============================================================
+           HEADER (Original Sticky Glass Nav)
+           ============================================================ */
+        .site-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(255,255,255,0.82); backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border-bottom: 1px solid rgba(229,236,245,0.9);
+            transition: box-shadow var(--t-med), background var(--t-med);
+        }
+        .site-header.is-scrolled { box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.94); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.85rem 0; position: relative; z-index: 2; max-width: 1200px; }
+        .brand { display: inline-flex; align-items: center; gap: 0.8rem; text-decoration: none; flex-shrink: 0; min-width: 0; }
+        .brand-mark { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: var(--gradient-brand); color: #fff; box-shadow: 0 6px 16px -6px rgba(37,99,235,0.5); transition: transform var(--t-med); flex-shrink: 0; }
+        .brand:hover .brand-mark { transform: rotate(-6deg) scale(1.04); }
+        .brand-mark .icon { width: 24px; height: 24px; }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.15; min-width: 0; }
+        .brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap; }
+        .brand-tag { font-size: 0.72rem; font-weight: 500; color: var(--text-subtle); margin-top: 2px; white-space: nowrap; }
+
+        .primary-nav { display: flex; align-items: center; min-width: 0; }
+        .nav-list { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+        .nav-link { display: inline-block; padding: 0.5rem 0.8rem; font-size: 0.9rem; font-weight: 500; color: var(--text); text-decoration: none; border-radius: var(--r-full); transition: color var(--t-fast), background var(--t-fast); white-space: nowrap; }
+        .nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+        .nav-cta { display: inline-flex; align-items: center; gap: 0.45rem; margin-left: 0.4rem; padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 600; color: #fff; text-decoration: none; border-radius: var(--r-full); background: var(--gradient-navy); box-shadow: var(--shadow-sm); transition: transform var(--t-fast), box-shadow var(--t-fast); white-space: nowrap; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .nav-cta .icon { width: 16px; height: 16px; }
+        .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--navy); cursor: pointer; place-items: center; transition: background var(--t-fast), border-color var(--t-fast); flex-shrink: 0; }
+        .menu-toggle:hover { background: var(--primary-soft); border-color: #bfd4f7; }
+        .menu-toggle .icon { width: 22px; height: 22px; }
+
+        /* ============================================================
+           PAGE LAYOUT (Editorial Single Column + Sidebar)
+           ============================================================ */
+        .page-main { flex: 1; padding: clamp(4rem, 8vw, 6rem) 0 clamp(4rem, 8vw, 6rem); background: var(--bg); }
+        
+        .article-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 4rem; align-items: start; }
+        @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; gap: 3rem; } .sidebar { order: 2; } }
+
+        .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-subtle); margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--primary-dark); }
+        .breadcrumb .sep { color: var(--text-subtle); }
+
+        /* Article Header */
+        .article-header { margin-bottom: 2.5rem; }
+        .category-tag { display: inline-block; background: var(--navy); color: #fff; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.35rem 0.9rem; border-radius: 4px; margin-bottom: 1.25rem; }
+        .article-header h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1.25rem; line-height: 1.15; color: var(--navy); }
+        .article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 1.25rem; }
+        .article-meta span { display: flex; align-items: center; gap: 0.45rem; }
+        .article-meta i { color: var(--text-subtle); font-size: 0.8rem; }
+        .status-badge { background: var(--danger-soft); color: var(--danger); padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .status-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--danger); animation: pulse 1.4s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Article Content */
+        .article-content { background: transparent; padding: 0; }
+        .article-content p { font-size: 1.1rem; line-height: 1.85; color: var(--text); margin-bottom: 1.75rem; }
+        .article-content h2 { font-size: 1.75rem; margin: 3rem 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border); color: var(--navy); }
+        .article-content h3 { font-size: 1.3rem; margin: 2rem 0 0.75rem; color: var(--navy); font-family: 'Plus Jakarta Sans', sans-serif; }
+        .article-content ul, .article-content ol { margin-bottom: 1.75rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.6rem; font-size: 1.05rem; line-height: 1.8; }
+        .article-content strong { font-weight: 700; color: var(--navy); }
+        .article-content blockquote { border-left: 4px solid var(--primary); background: var(--bg-alt); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 var(--r-sm) var(--r-sm) 0; font-style: italic; color: var(--text-muted); font-size: 1.05rem; }
+        .article-content a { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+        .article-content a:hover { color: var(--primary); }
+
+        /* Featured Image */
+        .featured-image { width: 100%; border-radius: var(--r-md); margin-bottom: 1rem; box-shadow: var(--shadow-md); background-color: var(--bg-alt); aspect-ratio: 16/9; object-fit: cover; }
+        .image-caption { font-size: 0.8rem; color: var(--text-subtle); margin-bottom: 2.5rem; font-style: italic; text-align: center; }
+
+        /* Callouts */
+        .callout { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.5rem; background: var(--bg-alt); border-left: 4px solid var(--primary); border-radius: var(--r-sm); margin: 2rem 0; font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+        .callout i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+        .callout.warning { background: var(--warning-soft); border-left-color: var(--warning); }
+        .callout.warning i { color: var(--warning); }
+        .callout.success { background: var(--success-soft); border-left-color: var(--success); }
+        .callout.success i { color: var(--success); }
+        .callout.danger { background: var(--danger-soft); border-left-color: var(--danger); }
+        .callout.danger i { color: var(--danger); }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; margin: 2rem 0; border-radius: var(--r-md); border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-alt); font-weight: 700; color: var(--navy); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fafbfc; }
+
+        /* New Editorial CTA */
+        .newsletter-cta { background: var(--navy); border-radius: var(--r-lg); padding: 3rem 2.5rem; margin: 3rem 0; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .newsletter-cta::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 40%, rgba(37,99,235,0.15) 0%, transparent 60%); pointer-events: none; }
+        .newsletter-inner { position: relative; z-index: 2; max-width: 500px; margin: 0 auto; }
+        .newsletter-icon { width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); display: grid; place-items: center; margin: 0 auto 1.5rem; font-size: 1.4rem; color: #fff; }
+        .newsletter-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .newsletter-desc { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 2rem; line-height: 1.6; }
+        .newsletter-form { display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto; }
+        .newsletter-input { flex: 1; min-width: 0; padding: 0.85rem 1.25rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; background: rgba(255,255,255,0.1); color: #fff; font-family: inherit; font-size: 0.9rem; transition: border-color var(--t-fast), background var(--t-fast); }
+        .newsletter-input::placeholder { color: #94a3b8; }
+        .newsletter-input:focus { outline: none; border-color: var(--primary); background: rgba(255,255,255,0.15); }
+        .newsletter-btn { padding: 0.85rem 1.75rem; border: none; border-radius: 50px; background: var(--primary); color: #fff; font-family: inherit; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background var(--t-fast), transform var(--t-fast); white-space: nowrap; }
+        .newsletter-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .newsletter-note { font-size: 0.75rem; color: #94a3b8; margin-top: 1rem; }
+        @media (max-width: 500px) { .newsletter-form { flex-direction: column; } .newsletter-cta { padding: 2rem 1.5rem; } }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1.25rem; padding: 1.75rem 2rem; background: var(--bg-alt); border-radius: var(--r-lg); margin: 3rem 0; border: 1px solid var(--border); }
+        .author-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; font-weight: 800; flex-shrink: 0; }
+        .author-info { flex: 1; }
+        .author-label { font-size: 0.7rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+        .author-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem; }
+        .author-bio { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+        @media (max-width: 600px) { .author-box { flex-direction: column; text-align: center; } }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+        .faq-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--r-sm); overflow: hidden; }
+        .faq-item[open] { background: var(--surface); box-shadow: var(--shadow-sm); }
+        .faq-item summary { list-style: none; cursor: pointer; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--primary-dark); }
+        .faq-chevron { width: 18px; height: 18px; color: var(--text-subtle); transition: transform var(--t-med); }
+        .faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--primary); }
+        .faq-answer { padding: 0 1.25rem 1.25rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* Related Articles */
+        .related-articles { margin-top: 4rem; }
+        .section-header { margin-bottom: 1.5rem; }
+        .section-header h2 { font-size: 1.5rem; margin: 0; padding: 0; border: none; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .related-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm); transition: transform var(--t-fast), box-shadow var(--t-fast); }
+        .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .related-image { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--bg-alt); }
+        .related-body { padding: 1.25rem; }
+        .related-tag { display: inline-block; background: var(--bg-alt); color: var(--text-muted); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.5rem; border-radius: 3px; margin-bottom: 0.6rem; }
+        .related-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 0.5rem; }
+        .related-meta { font-size: 0.75rem; color: var(--text-subtle); }
+
+        /* Sidebar */
+        .sidebar { position: sticky; top: 100px; }
+        .sidebar-widget { margin-bottom: 2rem; }
+        .sidebar-widget h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { margin-bottom: 0.5rem; }
+        .sidebar-list a { display: block; padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; border-left: 2px solid transparent; padding-left: 0.75rem; transition: all var(--t-fast); }
+        .sidebar-list a:hover { color: var(--primary-dark); border-left-color: var(--primary); background: var(--bg-alt); }
+
+        /* ============================================================
+           FOOTER (Original Full Dark Footer)
+           ============================================================ */
+        .site-footer { background: var(--gradient-navy); color: #c7d3e6; padding: 3.5rem 0 0; margin-top: 3rem; position: relative; z-index: 2; }
+        .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.75rem; position: relative; z-index: 2; max-width: 1200px; }
+        .footer-brand .brand-mark { background: rgba(255,255,255,0.1); box-shadow: none; border: 1px solid rgba(255,255,255,0.12); }
+        .footer-brand .brand-name { color: #fff; }
+        .footer-brand .brand-tag { color: #8fa3c0; }
+        .footer-about { margin-top: 1.1rem; font-size: 0.9rem; line-height: 1.7; color: #a9b8ce; max-width: 330px; }
+        .footer-col h4 { color: #fff; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.01em; margin-bottom: 1rem; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+        .footer-col a { font-size: 0.88rem; color: #a9b8ce; text-decoration: none; transition: color var(--t-fast), padding-left var(--t-fast); }
+        .footer-col a:hover { color: #fff; padding-left: 3px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.4rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; font-size: 0.82rem; color: #8fa3c0; position: relative; z-index: 2; max-width: 1200px; }
+        .footer-bottom a { color: #c7d3e6; text-decoration: none; }
+        .footer-bottom a:hover { color: #fff; }
+        .footer-legal { display: flex; flex-wrap: wrap; gap: 1.1rem; list-style: none; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; } .footer-col--legal { grid-column: 1 / -1; } .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; } }
+        @media (max-width: 860px) {
+            .menu-toggle { display: grid; }
+            .primary-nav { position: fixed; top: 72px; left: 0; right: 0; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-lg); padding: 0.75rem clamp(1rem, 4vw, 2rem) 1.25rem; transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med); max-height: calc(100vh - 72px); overflow-y: auto; }
+            .primary-nav.is-open { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
+            .nav-list { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+            .nav-link { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; font-size: 0.98rem; }
+            .nav-cta { margin: 0.5rem 0 0; justify-content: center; width: 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-brand { grid-column: 1 / -1; }
+            .footer-col--legal { grid-column: 1 / -1; }
+            .footer-col--legal ul { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+            .header-inner { padding: 0.75rem 0; }
+            .article-header h1 { font-size: 1.75rem; }
+            .article-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .article-content h2 { font-size: 1.4rem; }
+        }
+        @media (max-width: 600px) {
+            .article-content { padding: 0; }
+            .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+            .footer-brand { grid-column: auto; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { justify-content: center; }
+            .brand-tag { display: none; }
+            .article-header h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER (Original Nav Style) -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner container">
+            <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <span class="brand-text">
+                    <span class="brand-name">QuickToolsPK</span>
+                    <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">
+                <svg class="icon" id="menuIconOpen" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                <svg class="icon" id="menuIconClose" viewBox="0 0 24 24" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+
+            <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+                <ul class="nav-list">
+                    <li><a class="nav-link" href="/index.html">Home</a></li>
+                    <li><a class="nav-link" href="/index.html#tools">All Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#image-tools">Image Tools</a></li>
+                    <li><a class="nav-link" href="/index.html#more-tools">PDF Tools</a></li>
+                    <li><a class="nav-link" href="/about.html">About</a></li>
+                    <li><a class="nav-link" href="/contact.html">Contact</a></li>
+                    <li>
+                        <a class="nav-cta" href="/blog/index.html">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            Blog
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT (Editorial Layout) -->
+    <main class="page-main">
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/index.html">Blog</a>
+                <span class="sep">/</span>
+                <span>US News / Technology</span>
+            </nav>
+
+            <div class="article-layout">
+                <!-- Article Column -->
+                <article>
+                    <header class="article-header">
+                        <span class="category-tag">Breaking News</span>
+                        <h1>NSA Net Down: What Happened to the National Security Agency's Classified Network?</h1>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar-alt"></i> November 17, 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                            <span class="status-badge">Developing</span>
+                        </div>
+                    </header>
+
+                    <div class="article-content">
+                        <div class="callout danger" style="margin-top: 0;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Important Clarification:</strong> This is a reported outage affecting an internal classified network (NSA Net). It is <strong>not</strong> confirmation that the public internet, all NSA systems, or the agency's public website are down.</span>
+                        </div>
+
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Illustration of a classified communications network outage affecting NSA Net" class="featured-image">
+                        <p class="image-caption">CNN reported an outage affecting the NSA's internal classified communications network on November 17, 2026. (Illustrative image)</p>
+
+                        <p>The National Security Agency (NSA) is investigating an outage affecting its highly classified internal communications network, known as <strong>NSA Net</strong>, according to a CNN report published on Tuesday, November 17, 2026.</p>
+
+                        <p>The network is used by NSA employees to communicate and exchange classified information internally. Multiple people familiar with the situation told CNN that the system was down, while the agency worked to understand the extent of the disruption.</p>
+
+                        <p>The report also said there was no evidence of a cyberattack at the time. As the agency assessed the situation, it introduced staggered arrival times for personnel.</p>
+
+                        <p>The news quickly generated searches such as "NSA down," "NSA network down," and "is NSA down." However, there is an important distinction: <strong>this is a reported outage affecting an internal classified network, not confirmation that the public internet, all NSA systems, or the agency's public website are down.</strong></p>
+
+                        <h2>NSA Network Down: Quick Facts</h2>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Detail</th><th>Latest Reported Information</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Incident</td><td>NSA Net communications outage</td></tr>
+                                    <tr><td>Date Reported</td><td>November 17, 2026</td></tr>
+                                    <tr><td>Agency</td><td>U.S. National Security Agency</td></tr>
+                                    <tr><td>Affected System</td><td>NSA Net</td></tr>
+                                    <tr><td>Network Purpose</td><td>Internal classified communications</td></tr>
+                                    <tr><td>Initial Reporting</td><td>CNN (citing multiple sources)</td></tr>
+                                    <tr><td>Cyberattack Evidence</td><td>No evidence reported at the time</td></tr>
+                                    <tr><td>Employee Arrangements</td><td>Staggered arrival times reported</td></tr>
+                                    <tr><td>Cause</td><td>Not publicly established</td></tr>
+                                    <tr><td>Duration</td><td>Not confirmed</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>What Happened to NSA Net on November 17, 2026?</h2>
+                        <p>The incident became public after CNN reported that the National Security Agency's highly classified internal network had gone down.</p>
+                        <p>According to CNN, the system is known as NSA Net and allows employees to communicate classified information within the agency. The report cited multiple people familiar with the matter. CNN's initial coverage said six people had confirmed the disruption. Reuters separately reported the story, citing CNN's reporting and five people familiar with the matter.</p>
+                        <p>The agency was working to determine the scope of the problem. Meanwhile, personnel were reportedly given staggered arrival times as officials assessed the disruption.</p>
+
+                        <h3>Why Is the NSA Network Outage Making Headlines?</h3>
+                        <p>The NSA handles sensitive intelligence and cybersecurity responsibilities for the United States. An outage involving its internal communications system naturally raises questions about how employees exchange classified information and how the agency manages operations during technical disruptions.</p>
+                        <p>The incident is also being reported amid several other technology disruptions affecting U.S. organizations in recent days. But the timing does not prove that these incidents share a common cause. No verified evidence currently connects the NSA Net outage to the other reported disruptions.</p>
+
+                        <h2>What Is NSA Net?</h2>
+                        <p>NSA Net is the name used in the CNN reporting for the highly classified internal network that National Security Agency employees use to communicate classified information.</p>
+                        <p>In simple terms, it is an internal communications system for the agency rather than a public-facing website or ordinary consumer internet service. The network's reported purpose is to help personnel exchange sensitive information within the organization.</p>
+                        
+                        <div class="callout warning">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Do not confuse NSA Net with:</strong><br>
+                            • The public NSA website.<br>
+                            • A regular home or office internet connection.<br>
+                            • Public Wi-Fi or mobile phone networks.<br>
+                            • A general outage affecting every U.S. government communications system.<br>
+                            • The entire U.S. intelligence community.</span>
+                        </div>
+
+                        <h2>What Is the NSA (National Security Agency)?</h2>
+                        <p>The <strong>National Security Agency</strong>, commonly called the NSA, is a U.S. intelligence agency with responsibilities involving foreign signals intelligence and cybersecurity.</p>
+                        <p>According to its official mission information, the agency provides foreign signals intelligence to U.S. policymakers and military forces. It also works on cybersecurity products and services intended to help protect national security systems.</p>
+                        <p>Its major areas of responsibility include:</p>
+                        <ul>
+                            <li><strong>Signals Intelligence (SIGINT):</strong> Collecting and analyzing information from electronic signals and communications systems.</li>
+                            <li><strong>Cybersecurity:</strong> Preventing and addressing cyber threats affecting U.S. national security systems.</li>
+                            <li><strong>Secure Communications:</strong> Protecting sensitive information requires secure communication systems and appropriate safeguards.</li>
+                        </ul>
+
+                        <h2>Is NSA Down or Is Only NSA Net Affected?</h2>
+                        <p>The phrase "NSA down" can mean different things, which is why it is important to understand exactly what the current reports describe. The reported incident concerns NSA Net, the agency's internal classified communications network. It does not automatically mean the entire National Security Agency is offline.</p>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Search Phrase</th><th>What the Available Reporting Confirms</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>NSA down</td><td>An internal NSA communications network is reportedly down</td></tr>
+                                    <tr><td>NSA network down</td><td>NSA Net is the affected network identified in the report</td></tr>
+                                    <tr><td>NSA Net down</td><td>The classified internal communications system is reportedly experiencing an outage</td></tr>
+                                    <tr><td>NSA website down</td><td>Not established by the NSA Net outage reports</td></tr>
+                                    <tr><td>NSA internet down</td><td>Not established; NSA Net is not described as public internet service</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>Is the NSA Network Outage a Cyberattack?</h2>
+                        <p>As of the initial November 17 reporting, sources cited by CNN said there was <strong>no evidence</strong> that the outage resulted from a cyberattack. That does not establish the exact cause.</p>
+                        <p>A network outage can have several possible explanations, including hardware failure, software problems, network configuration errors, power disruptions, or maintenance issues. These are general possibilities, not confirmed explanations for the NSA incident.</p>
+                        <div class="callout danger">
+                            <i class="fas fa-shield-alt"></i>
+                            <span><strong>Important:</strong> No evidence of a cyberattack is not the same as proof that a cyberattack was impossible. The cause should remain described as unknown until reliable confirmation becomes available.</span>
+                        </div>
+
+                        <h2>Did the Outage Affect U.S. National Security Communications?</h2>
+                        <p>A disruption to an internal classified communications network could create operational challenges for employees who rely on it to exchange sensitive information.</p>
+                        <p>However, CNN's reporting also included information from a current and a former U.S. official about alternative communication arrangements. According to those officials, the outage at NSA Net would <strong>not</strong> prevent the delivery of urgent intelligence to President Donald Trump while he was traveling in Asia. They described multiple redundancies and backup networks that the government could use for secure communications.</p>
+                        <p>This suggests that alternative arrangements were available for certain critical communications, but it does not establish that every affected NSA workflow continued without disruption.</p>
+
+                        <h2>Why Did the NSA Introduce Staggered Employee Arrivals?</h2>
+                        <p>CNN reported that the agency had introduced staggered arrival times for personnel while working to understand the extent of the network problem.</p>
+                        <p>Staggered arrivals mean employees are asked to report at different times rather than arriving together. This can be used as an operational arrangement when an organization is managing an unusual situation.</p>
+                        <p>However, the initial reports did not provide a detailed explanation of why this measure was selected or exactly how it related to the network outage. It would therefore be inaccurate to claim that the measure was specifically intended to prevent a cyberattack, manage a building emergency, or address a confirmed security threat.</p>
+
+                        <h2>What Is Still Unknown About the NSA Net Outage?</h2>
+                        <p>Although the incident has been reported by major news organizations, several important questions remain unanswered.</p>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>Question</th><th>Current Status</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>What caused the outage?</td><td>Not publicly confirmed</td></tr>
+                                    <tr><td>When did NSA Net first go offline?</td><td>Exact time not confirmed</td></tr>
+                                    <tr><td>How many employees were affected?</td><td>Not established</td></tr>
+                                    <tr><td>Was classified information exposed?</td><td>No such exposure established in the reports reviewed</td></tr>
+                                    <tr><td>When will the network return?</td><td>No confirmed restoration time</td></tr>
+                                    <tr><td>Has the agency issued a detailed explanation?</td><td>Not included in the initial reporting</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>Frequently Asked Questions (FAQs)</h2>
+                        <div class="faq-list">
+                            <details class="faq-item">
+                                <summary>1. Is the NSA down today?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">On November 17, 2026, CNN reported that NSA Net, the National Security Agency's internal classified communications network, was down. This does not establish that every NSA system or public service is unavailable.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>2. What is NSA Net?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">NSA Net is the name used in the reporting for the highly classified network that NSA employees use to communicate classified information internally.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>3. Was the NSA network hacked?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">There was no evidence of a cyberattack according to sources cited by CNN. The cause of the outage remained unknown.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>4. Is the NSA public website down?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">The NSA Net outage does not confirm that the public NSA website is down. These are separate systems, and the initial reporting did not establish a public website outage.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>5. Did the NSA outage affect the U.S. president?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">CNN reported that current and former U.S. officials described backup networks and other secure communication options that could be used to deliver urgent intelligence to the president. The outage was not reported as preventing those communications.</div>
+                            </details>
+                            <details class="faq-item">
+                                <summary>6. Does NSA Net affect normal internet users?<svg class="icon faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+                                <div class="faq-answer">The reported outage concerns an internal classified communications network. It is not evidence of a disruption to ordinary home internet, mobile networks, or public internet services.</div>
+                            </details>
+                        </div>
+
+                        <h2>Conclusion</h2>
+                        <p>The NSA Net outage reported on November 17, 2026, has raised questions about the reliability of classified communications infrastructure at one of the United States' major intelligence agencies.</p>
+                        <p>CNN reported that the highly classified internal network used by NSA employees was down, while the agency worked to determine the scope of the disruption. Sources also said there was no evidence of a cyberattack at the time.</p>
+                        <p>Officials described alternative secure communication arrangements for urgent intelligence, but the complete operational impact, technical cause, and restoration timeline were not publicly established in the initial reports.</p>
+                        <p style="font-style: italic; color: var(--text-subtle); margin-top: 2rem;">This article reflects reporting available on November 17, 2026. The outage status can change, so this article should be updated when new confirmation becomes available.</p>
+
+                        <!-- Author Box -->
+                        <div class="author-box">
+                            <div class="author-avatar">Q</div>
+                            <div class="author-info">
+                                <div class="author-label">Written by</div>
+                                <div class="author-name">QuickToolsPK News Team</div>
+                                <p class="author-bio">Covering breaking news, cybersecurity, and technology updates for readers in the United States and around the world. This article is based on verified reporting from November 17, 2026.</p>
+                            </div>
+                        </div>
+
+                        <!-- Editorial Newsletter CTA -->
+                        <div class="newsletter-cta">
+                            <div class="newsletter-inner">
+                                <div class="newsletter-icon"><i class="fas fa-envelope-open-text"></i></div>
+                                <h3 class="newsletter-title">Stay Informed</h3>
+                                <p class="newsletter-desc">Get breaking news and important updates delivered to your inbox. No spam, ever.</p>
+                                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! (Demo only)');">
+                                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email address">
+                                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                                </form>
+                                <p class="newsletter-note">Unsubscribe at any time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Articles -->
+                    <section class="related-articles">
+                        <div class="section-header">
+                            <h2>Related Articles</h2>
+                        </div>
+                        <div class="related-grid">
+                            <a href="/blog/updates/faa-nationwide-ground-stop-explained.html" class="related-card">
+                                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="FAA Ground Stop" class="related-image" loading="lazy">
+                                <div class="related-body">
+                                    <span class="related-tag">Travel News</span>
+                                    <h3 class="related-title">FAA Nationwide Ground Stop Explained: Why All US Flights Were Halted</h3>
+                                    <div class="related-meta">Nov 13, 2026 · 8 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/new-orleans-cruise-ship-tanker-collision-american-heritage.html" class="related-card">
+                                <img src="https://images.unsplash.com/photo-1598468149735-4695c9bb5320?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="New Orleans Boat Crash" class="related-image" loading="lazy">
+                                <div class="related-body">
+                                    <span class="related-tag">Breaking News</span>
+                                    <h3 class="related-title">New Orleans Cruise Ship Crash: Tanker Collides With American Heritage</h3>
+                                    <div class="related-meta">Nov 13, 2026 · 7 min read</div>
+                                </div>
+                            </a>
+                            <a href="/blog/updates/national-weather-service-outage-explained.html" class="related-card">
+                                <img src="https://images.unsplash.com/photo-1598468149735-4695c9bb5320?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="NWS Outage" class="related-image" loading="lazy">
+                                <div class="related-body">
+                                    <span class="related-tag">Weather & Tech</span>
+                                    <h3 class="related-title">National Weather Service Outage Explained: Why NWS Websites Froze</h3>
+                                    <div class="related-meta">Nov 13, 2026 · 7 min read</div>
+                                </div>
+                            </a>
+                        </div>
+                    </section>
+                </article>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-widget">
+                        <h3>In This Article</h3>
+                        <ul class="sidebar-list">
+                            <li><a href="#">What Happened</a></li>
+                            <li><a href="#">What is NSA Net?</a></li>
+                            <li><a href="#">Is it a Cyberattack?</a></li>
+                            <li><a href="#">What is Still Unknown?</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>About</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">This is a breaking-news explainer based on reporting from CNN and Reuters as of November 17, 2026.</p>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Official Sources</h3>
+                        <ul class="sidebar-list">
+                            <li><a href="https://www.nsa.gov/" target="_blank" rel="noopener">National Security Agency (NSA)</a></li>
+                            <li><a href="https://www.cnn.com/" target="_blank" rel="noopener">CNN</a></li>
+                            <li><a href="https://www.reuters.com/" target="_blank" rel="noopener">Reuters</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER (Original Full Dark Footer) -->
+    <footer class="site-footer sky-bg">
+        <div class="stars"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="/index.html" class="brand" aria-label="QuickToolsPK home">
+                        <span class="brand-mark" aria-hidden="true">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span class="brand-text">
+                            <span class="brand-name">QuickToolsPK</span>
+                            <span class="brand-tag">Free Online Tools for Everyday Tasks</span>
+                        </span>
+                    </a>
+                    <p class="footer-about">Fast, private, and free image and PDF tools that work right in your browser. No accounts, no uploads, no clutter.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/img-compress.html">Image Compressor</a></li>
+                        <li><a href="/img-resizer.html">Image Resizer</a></li>
+                        <li><a href="/img-fmt-converter.html">Image Format Converter</a></li>
+                        <li><a href="/JPG-to-PDF-Converter.html">JPG to PDF Converter</a></li>
+                        <li><a href="/social-media-image-resizer.html">Social Media Image Resizer</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Popular Categories</h4>
+                    <ul>
+                        <li><a href="/index.html#image-tools">Image Tools</a></li>
+                        <li><a href="/index.html#more-tools">PDF Tools</a></li>
+                        <li><a href="/index.html#image-tools">Converters</a></li>
+                        <li><a href="/img-compress.html">Compressors</a></li>
+                        <li><a href="/blog/index.html" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/updates.html">Updates</a></li>
+                        <li><a href="/index.html#faq">FAQ</a></li>
+                        <li><a href="/index.html#faq">How It Works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col footer-col--legal">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2024 QuickToolsPK. All rights reserved.</span>
+                <ul class="footer-legal" aria-label="Legal links">
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+        const siteHeader = document.getElementById('siteHeader');
+        const menuToggle = document.getElementById('menuToggle');
+        const primaryNav = document.getElementById('primaryNav');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        let ticking = false;
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(function () {
+                    siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function setMenu(open) {
+            primaryNav.classList.toggle('is-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuIconOpen.style.display = open ? 'none' : 'block';
+            menuIconClose.style.display = open ? 'block' : 'none';
+        }
+        menuToggle.addEventListener('click', function () { setMenu(!primaryNav.classList.contains('is-open')); });
+        primaryNav.addEventListener('click', function (e) {
+            if (e.target.closest('a') && window.innerWidth <= 860) setMenu(false);
+        });
+        document.addEventListener('click', function (e) {
+            if (!primaryNav.contains(e.target) && !menuToggle.contains(e.target) && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) { setMenu(false); menuToggle.focus(); }
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 860 && primaryNav.classList.contains('is-open')) setMenu(false);
+        });
+    })();
+    </script>
+</body>
+</html>
